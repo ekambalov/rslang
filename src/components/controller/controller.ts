@@ -1,18 +1,18 @@
 import Store from '../model/store';
-import appViewer from '../view/appViewer';
+import AppViewer from '../view/appViewer';
 
 class Controller {
     store: Store;
 
-    viewer: appViewer;
+    viewer: AppViewer;
 
-    constructor(store: Store, viewer: appViewer) {
+    constructor(store: Store, viewer: AppViewer) {
         this.store = store;
         this.viewer = viewer;
     }
 
     init() {
-        // init will be here
+        new AppViewer().start();
     }
 }
 
