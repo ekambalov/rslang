@@ -1,5 +1,6 @@
 import { IComponent } from '../../../InterfaseComponent';
-import './slider.css';
+import './slider.scss';
+import { createDiv, createText } from '../../../../../utils/HTMLBuilder';
 
 class Slider implements IComponent {
     currentSlide(e: Event): void {
@@ -15,11 +16,8 @@ class Slider implements IComponent {
     }
 
     start(): HTMLDivElement {
-        const wrapper = document.createElement('div') as HTMLDivElement;
-        wrapper.classList.add('header__textBlock_wrapper');
-
-        const slider = document.createElement('div') as HTMLDivElement;
-        slider.classList.add('header__textBlock_slider');
+        const wrapper = createDiv(['header__textBlock_wrapper']);
+        const slider = createDiv(['header__textBlock_slider']);
 
         const txtSlider = [
             'Теперь учить английский язык легко и увлекательно! Играйте в мини-игры и учите запоминайте слова.Повторяйте их каждый день для закрепления результата',
@@ -27,13 +25,10 @@ class Slider implements IComponent {
             'Для изучения слов и закрепления запоминания в приложении есть 2 игры: "Спринт"  и "Аудиовызов". Они  помогут Вам в игровой форме «прокачать» словарный запас.',
             'Весь прогресс обучения можно посмотреть в статистике, где представлены данные как за текущий день, так и за весь период обучения.',
         ];
-        const sliderDots = document.createElement('div') as HTMLDivElement;
-        sliderDots.classList.add('slider-dots');
+        const sliderDots = createDiv(['slider']);
 
         for (let i = 0; i < txtSlider.length; i += 1) {
-            const itemSlider = document.createElement('h4') as HTMLHeadingElement;
-            itemSlider.classList.add('item');
-            itemSlider.innerHTML = txtSlider[i];
+            const itemSlider = createText(txtSlider[i], 'h4', ['item']);
             slider.append(itemSlider);
             itemSlider.style.display = i === 0 ? 'block' : 'none';
 
