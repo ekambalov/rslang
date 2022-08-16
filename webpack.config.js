@@ -27,6 +27,9 @@ const baseConfig = {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: 'asset/resource',
             },
+            {   test: /\.(woff|woff2|eot|ttf|otf)$/,
+                type: 'asset/resource',
+            },
             {
                 test: /\.(ts|js)?$/,
                 exclude: /node_modules/,

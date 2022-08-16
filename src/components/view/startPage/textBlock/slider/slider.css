@@ -1,0 +1,78 @@
+/* Собственно сам слайдер */
+.header__textBlock_slider{
+    width: 100%;
+   min-height: 150px;
+    margin-bottom: 20px;
+}
+
+.item {     
+        font-family: 'Junegull';
+        font-size: 18px;
+        font-weight: 100; 
+        letter-spacing: 0.5px;
+        text-shadow: 1px 3px 1px rgb(10, 10, 10);
+        text-transform: none;
+        text-align: center;
+        line-height: 30px;
+    
+}
+/* Кружочки */
+.slider-dots {
+    text-align: center;
+}
+.slider-dots_item{
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    margin: 0 3px;
+    background-color: #ddd;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+.active,
+.slider-dots_item:hover {
+    background-color: rgb(206, 245, 35);
+}
+@media screen and (min-width: 1400px) {
+    .header__textBlock_slider { 
+        min-height: 250px;
+       }
+      .item {     
+         font-size: 28px;
+         line-height: 40px;
+       }
+}
+@media screen and (max-width: 1500px) {
+    .header__textBlock_slider { 
+        min-height: 200px;
+       }
+      .item {     
+         font-size: 20px;
+         line-height: 35px;
+       }
+   
+  }
+  @media screen and (max-width: 1280px) {
+
+        .item {     
+         font-size: 18px;
+         line-height: 30px;
+       }
+  }
+  @media screen and (max-width: 1060px) {
+
+          .item {     
+         font-size: 18px;
+         line-height: 25px;
+       }
+  }
+  @media screen and (max-width: 955px) {
+    .header__textBlock_slider { 
+        min-height: 150px;
+       }
+    .item {     
+        font-size: 16px;
+        line-height: 20px;
+      }
+  }
