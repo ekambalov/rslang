@@ -215,7 +215,11 @@ h1 {
 }
 
 @media screen and (max-width: 1060px) {
-
+ 
+    .teamPage__cards {
+      padding: 10px;
+    }
+  
   h1 {
     font-size: 70px;
   }

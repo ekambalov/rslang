@@ -1,5 +1,6 @@
 import { IComponent } from '../../InterfaseComponent';
 import { createDiv } from '../../../../utils/HTMLBuilder';
+import showTeamPage from '../../../controller/actionButton/showTeamPages';
 
 class MobileImgBlock implements IComponent {
     start(): HTMLDivElement {
@@ -22,6 +23,7 @@ class MobileImgBlock implements IComponent {
 
         const autorsImgBlock = createDiv(['header__mobileImgBlock_autor']);
         autorsImgBlock.innerHTML = 'об авторах';
+        autorsImgBlock.addEventListener('click', showTeamPage);
 
         mobileImgBlock.append(
             bookImgBlock,
