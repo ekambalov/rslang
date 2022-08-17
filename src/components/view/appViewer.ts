@@ -1,5 +1,6 @@
 import Header from './startPage/header';
 import { IComponentBody } from './InterfaseComponent';
+import listener from '../controller/listenerEvent';
 
 class AppViewer implements IComponentBody {
     start(): HTMLBodyElement {
@@ -7,6 +8,7 @@ class AppViewer implements IComponentBody {
         body.classList.add('body');
         const header = new Header();
         body.prepend(header.start());
+        body.addEventListener('click', listener);
         return body;
     }
 }

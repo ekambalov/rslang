@@ -5,8 +5,8 @@ const anchorGitHub = ['https://github.com/nikimix', 'https://github.com/SmSka202
 const name = ['Никита', 'Светлана', 'Ягор'];
 const work = ['frontend developer', 'frontend developer', 'frontend developer'];
 const avatar = [
-    '../../../../assets/img/avatar35.png',
-    '../../../../assets/img/avatar21.png',
+    '../../../../assets/img/avatar32.png',
+    '../../../../assets/img/avatar25.png',
     '../../../../assets/img/avatar34.png',
 ];
 const avatarHover = [
