@@ -30,6 +30,7 @@
     min-height: 100vh;
     padding: 20px;
     transition: all .5s;
+    z-index: 3;
 
      .header__navigation_icon {
      width: 40px;
@@ -69,9 +70,7 @@
   }
    
     @media screen and (max-width: 650px) {
-      .header__navigation_ul {
-      display: none;
-    }
+     
     .header__infoAutorise_login {
       font-size: 20px;      
     }
