@@ -1,6 +1,6 @@
-import { IComponent } from '../../../InterfaseComponent';
+import { IComponent } from '../../../../Interfase-component';
 import './slider.scss';
-import { createDiv, createText } from '../../../../../utils/HTMLBuilder';
+import { createDiv, createText } from '../../../../../../utils/HTML-Builder';
 
 class Slider implements IComponent {
     currentSlide(e: Event): void {
@@ -16,8 +16,8 @@ class Slider implements IComponent {
     }
 
     start(): HTMLDivElement {
-        const wrapper = createDiv(['header__textBlock_wrapper']);
-        const slider = createDiv(['header__textBlock_slider']);
+        const wrapper = createDiv(['main__textBlock_wrapper']);
+        const slider = createDiv(['main__textBlock_slider']);
 
         const txtSlider = [
             'Теперь учить английский язык легко и увлекательно! Играйте в мини-игры и учите запоминайте слова.Повторяйте их каждый день для закрепления результата',

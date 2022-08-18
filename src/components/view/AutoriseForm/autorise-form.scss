@@ -1,0 +1,146 @@
+
+.main__formBlock {
+  width: 350px;
+  height: 605px;  
+  background-image: url('../../../assets/img/phone2.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.formBlock__form {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 45px 255px 15px 35px;
+  grid-template-rows: 125px 30px 30px 50px 30px 50px 25px 50px 10px 50px 5px;
+}
+.formBlock__form_txt {
+  grid-area: 2 / 2 / 3 / 4;
+  text-align: center;
+  color: rgb(66, 6, 85);
+  font-family: 'Junegull';
+  font-size: 20px;    
+  letter-spacing: 1.5px;
+  transform: rotate(3deg);
+}
+.formBlock__form_label { 
+  color: rgb(58, 8, 73);
+  font-family: 'Junegull';
+  font-size: 14px;    
+  letter-spacing: 1.1px;
+  transform: rotate(3deg);
+  padding: 8px 25px;
+}
+.labelName {
+  grid-area: 3 / 2 / 4/ 3;
+}
+.labelPassword {
+  grid-area: 5 / 2 / 6/ 3;
+}
+.formBlock__form_input {
+  background-image: url('../../../assets/img/input2.png');
+  background-size: 100% 100%; 
+  background-repeat: no-repeat;
+  height: 50px;
+  border: none;
+  padding-left: 20px; 
+  font-family: 'Junegull';
+  font-size: 12px; 
+  outline:none; 
+  pointer-events: visible;
+  transform: rotate(3deg) translate(5px);
+}
+.inputName {
+  grid-area: 4 / 2 / 5/ 3;
+}
+.inputPassword {
+  grid-area: 6 / 2 / 7/ 3;
+  transform: rotate(3deg) translate(2px);
+}
+.formBlock__form_btn {
+  transform: rotate(3deg) translate(2px); 
+  background-size: 100% 100%; 
+  background-repeat: no-repeat;
+  height: 50px;
+  border: none;
+  padding: 5px auto; 
+  font-family: 'Junegull';
+  font-size: 14px; 
+  outline: none;   
+  
+}
+.openBtn {
+  grid-area: 8 / 2 / 9/ 3;  
+  transform: rotate(3deg) translate(-2px);
+  background-image: url('../../../assets/img/btnForm2.png');  
+
+  &:hover {
+    transform: scale(.95) rotate(3deg) translate(-2px);
+    color: white;
+    background-image: url('../../../assets/img/btnForm.png');
+    text-shadow: 1px 2px 1px rgb(10, 10, 10);
+  }
+}
+.registrBtn {
+  grid-area: 10 / 2 / 11/ 3;  
+  color: white;
+  transform: rotate(3deg) translate(-4px);
+  background-image: url('../../../assets/img/btnForm1.png');
+  text-shadow: 1px 2px 1px rgb(10, 10, 10);
+
+  &:hover {
+    transform: scale(.95) rotate(3deg) translate(-3px);   
+    background-image: url('../../../assets/img/btnForm.png'); 
+   
+  }
+}
+.returnBtn {    
+  width: 150px;
+  height: 41px;
+  transform: rotate(3deg) translate(-3px);
+  background-image: url('../../../assets/img/btn.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  margin: 15px auto 50px;
+  border: none;
+  font-family: 'Comic Book';
+  font-size: 20px;
+  background-color: transparent;
+  cursor: pointer;  
+
+  &:hover {
+    transform: rotate(3deg) translate(-3px) scale(.95);
+    color: rgb(241, 72, 72);
+  }
+}
+
+@media screen and (min-width: 1400px) {
+.main__formBlock {
+    width: 525px;
+    height: 817px;
+}
+  .formBlock__form {    
+    grid-template-columns: 58px 390px 25px 52px;
+    grid-template-rows: 125px 50px 50px 70px 50px 70px 30px 70px 20px 70px 25px;
+  }
+  .formBlock__form_txt {
+    font-size: 30px;    
+}
+.formBlock__form_label {
+   font-size: 20px;
+}
+.formBlock__form_input {
+  height: 70px;
+}
+.inputName {
+  transform: translate(13px) rotate(3deg);
+}
+.inputPassword {
+   transform: rotate(3deg) translate(6px);
+}
+.formBlock__form_btn {
+   height: 70px;
+   font-size: 18px;
+}
+}

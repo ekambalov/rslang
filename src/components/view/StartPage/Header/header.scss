@@ -1,0 +1,80 @@
+.header {
+    padding: 20px 50px 0;
+    width: 100%;  
+    background-color: rgb(119, 17, 222);    
+    font-family: 'Comic Book';
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header__icon_menu {
+    width: 80px;   
+    transition: all .5s;
+    cursor: pointer;
+  }
+ 
+  .header__infoAutorise_login {
+    font-size: 40px;
+    color:gold;
+  }
+  .header__navigation.active {
+    top:0;
+    left: 0;
+  }
+  .header__navigation {  
+    background-color: rgb(33, 4, 71);
+    position: fixed;
+    width: 250px;
+    top:0;
+    left: -250px;
+    min-height: 100vh;
+    padding: 20px;
+    transition: all .5s;
+
+     .header__navigation_icon {
+     width: 50px;
+     float: right;
+     &:hover {
+      cursor: pointer;
+     }
+    }
+   
+  }
+  
+  .header__navigation_ul {
+    width: 100%;
+    list-style:circle;   
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    gap: 25px;
+  }
+  
+  .header__navigation_a {
+    font-family: 'Junegull';
+    font-size: 16px;
+    font-weight: 200;
+    text-shadow: 1px 3px 1px rgb(10, 10, 10);
+  }
+  
+  .header__navigation_a:hover {
+    color: rgb(255, 243, 137);
+    cursor: pointer;
+  }
+       
+  @media screen and (min-width: 1400px) {  
+    .header__navigation_a {
+      font-size: 20px;
+    }
+  }
+   
+    @media screen and (max-width: 650px) {
+      .header__navigation_ul {
+      display: none;
+    }
+    .header__infoAutorise_login {
+      font-size: 20px;      
+    }
+   
+  }
+   

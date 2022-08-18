@@ -1,12 +1,9 @@
 .teamPage {
-  width: 100%;
-  min-height: 100vh;
+  width: 100%; 
   background-color: rgb(247, 246, 244);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  background-image: url('../../../assets/img/header.jpg');
+    background-image: url('../../../assets/img/header.jpg');
 }
 
 h2 {
@@ -16,7 +13,7 @@ h2 {
   font-weight: 400;
   font-size: 75px;
   text-align: center;
-  margin: 20px auto 0px;
+  margin: 0 auto 30px;
 }
 
 .teamPage__cards {
@@ -62,6 +59,13 @@ h2 {
   .cards_card1,
   .cards_card2 {
     width: 55%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .cards_card0,
+  .cards_card1,
+  .cards_card2 {
+    width: 85%;
   }
 }
 

@@ -13,3 +13,11 @@ export interface IComponentBtns {
 export interface IComponentBody {
     start: () => HTMLBodyElement;
 }
+export interface IComponentHead {
+    showMenu: () => void;
+    start: () => HTMLDivElement;
+}
+export interface IComponentNav {
+    closeMain: (e: Event) => void;
+    start: () => HTMLDivElement;
+}

@@ -3,11 +3,25 @@ export const createDiv = (classes: string[] = []): HTMLDivElement => {
     div.classList.add(...classes);
     return div;
 };
-export const createInput = (type: string, classes: string[] = []): HTMLInputElement => {
+export const createInput = (type: string, classes: string[] = [], id = ''): HTMLInputElement => {
     const input = document.createElement('input');
     input.classList.add(...classes);
     input.type = type;
+    input.id = id;
     return input;
+};
+export const createForm = (
+    method: string,
+    id: string,
+    classes: string[] = [],
+    autocomplete = 'off'
+): HTMLFormElement => {
+    const form = document.createElement('form');
+    form.classList.add(...classes);
+    form.method = method;
+    form.id = id;
+    form.autocomplete = autocomplete;
+    return form;
 };
 export const createSVG = (img: string, tag: string, classes: string[] = []): SVGSVGElement => {
     const namespace = 'http://www.w3.org/2000/svg';
@@ -27,9 +41,10 @@ export const createImg = (img: string, alt: string, classes: string[] = []): HTM
     return image;
 };
 
-export const createBtn = (name: string, classes: string[] = []): HTMLButtonElement => {
+export const createBtn = (name: string, classes: string[] = [], type = 'button'): HTMLButtonElement => {
     const btn = document.createElement('button');
     btn.textContent = name;
+    btn.type = type;
     btn.classList.add(...classes);
     return btn;
 };
@@ -45,6 +60,13 @@ export function createText(
     textBlock.classList.add(...classes);
     textBlock.textContent = text;
     return textBlock;
+}
+export function createLabel(text: string, forInput: string, classes: string[] = []): HTMLLabelElement {
+    const label = document.createElement('label');
+    label.classList.add(...classes);
+    label.textContent = text;
+    label.htmlFor = forInput;
+    return label;
 }
 export function createTable(headers: string[], tableClassName = 'table', classes: string[] = []): HTMLTableElement {
     const table = document.createElement('table');
