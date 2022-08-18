@@ -1,9 +1,8 @@
 import { IComponent } from '../../InterfaseComponent';
 // eslint-disable-next-line import/no-cycle
-import showTeamPage from '../../../controller/actionButton/showTeamPages';
 
 const navAnchor = ['Учебник', 'Аудиовызов', 'Спринт', 'Статистика', 'Авторы', 'Авторизация'];
-const actions = [showTeamPage, showTeamPage, showTeamPage, showTeamPage, showTeamPage, showTeamPage];
+const classItem = ['book', 'audioGame', 'sprint', 'statistic', 'teams', 'autorise'];
 
 class Navigation implements IComponent {
     start(): HTMLDivElement {
@@ -16,12 +15,12 @@ class Navigation implements IComponent {
         for (let i = 0; i < navAnchor.length; i += 1) {
             const navigationLI = document.createElement('li') as HTMLLIElement;
             navigationLI.classList.add('header__navigation_li');
+            navigationLI.classList.add(`${classItem[i]}`);
 
             const anchorNav = document.createElement('a') as HTMLAnchorElement;
             anchorNav.classList.add('header__navigation_a');
-            anchorNav.innerHTML = navAnchor[i];
-            anchorNav.addEventListener('click', actions[i]);
 
+            anchorNav.innerHTML = navAnchor[i];
             navigationLI.append(anchorNav);
             navigationUL.append(navigationLI);
         }

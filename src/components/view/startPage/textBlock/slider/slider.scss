@@ -21,7 +21,10 @@
 .slider-dots {
     text-align: center;
 }
-
+.slider {
+    display: flex;
+    justify-content: center;
+}
 .slider-dots_item {
     cursor: pointer;
     height: 20px;
@@ -86,4 +89,9 @@
         font-size: 16px;
         line-height: 20px;
     }
+}
+@media screen and (max-width: 955px) {
+    .header__textBlock_slider {
+    min-height: 100px;
+}
 }

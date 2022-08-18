@@ -1,0 +1,54 @@
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: aliceblue;
+    background-color:transparent;    
+    padding: 10px 20px;   
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+.footer__img_RS {
+    width: 70px;
+    height: 35px;   
+    transition: all .5s;       
+}
+
+.footer__img_GitHub {
+    width: 50px;
+    height: 35px; 
+    margin-right: 20px; 
+    transition: all .5s;  
+}
+
+.footer__img_RS:hover,
+.footer__img_GitHub:hover {
+    transform: scale(1.1);
+ }
+.footer__year {
+    font-weight: 500;
+    text-shadow: 1px 2px 1px rgb(10, 10, 10);
+}
+
+@media screen and (max-width: 1000px) {
+    .footer {
+       padding: 5px;
+    }    
+}
+@media screen and (max-width: 700px) {
+    .footer {
+        position: relative;
+        background-color: rgb(119, 17, 222)
+     } 
+}
+
+@media screen and (max-width: 400px) {
+    .footer__img_GitHub {        
+        margin-right: 7px; 
+    }
+    .footer__year {
+        display: none;
+    }
+}
