@@ -1,5 +1,5 @@
-import { createImg, createText, createAnchor } from '../../../../utils/HTMLBuilder';
-import { IComponentUl } from '../../InterfaseComponent';
+import { createImg, createText, createAnchor } from '../../../../utils/HTML-Builder';
+import { IComponentUl } from '../../Interfase-component';
 
 export const anchorGitHub = [
     'https://github.com/nikimix',

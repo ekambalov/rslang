@@ -1,8 +1,7 @@
-/* eslint-disable import/no-cycle */
 import './team.scss';
-import { IComponent } from '../InterfaseComponent';
-import { createDiv, createBtn, createText } from '../../../utils/HTMLBuilder';
-import CardTeam from './card/card';
+import { IComponent } from '../Interfase-component';
+import { createDiv, createBtn, createText } from '../../../utils/HTML-Builder';
+import CardTeam from './Card/card';
 
 class TeamPage implements IComponent {
     start(): HTMLDivElement {

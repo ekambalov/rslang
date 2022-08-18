@@ -1,7 +1,7 @@
 import './footer.scss';
-import { IComponent } from '../InterfaseComponent';
-import { createDiv, createAnchor, createImg, createText } from '../../../utils/HTMLBuilder';
-import { anchorGitHub } from '../aboutTeam/card/card';
+import { IComponent } from '../../Interfase-component';
+import { createDiv, createAnchor, createImg, createText } from '../../../../utils/HTML-Builder';
+import { anchorGitHub } from '../../AboutTeam/Card/card';
 
 const imgGithab = [
     '../../../assets/img/github2Jgor.png',

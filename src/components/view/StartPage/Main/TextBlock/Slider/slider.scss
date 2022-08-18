@@ -1,5 +1,5 @@
 /* Собственно сам слайдер */
-.header__textBlock_slider {
+.main__textBlock_slider {
     width: 100%;
     min-height: 150px;
     margin-bottom: 20px;
@@ -42,7 +42,7 @@
 }
 
 @media screen and (min-width: 1400px) {
-    .header__textBlock_slider {
+    .main__textBlock_slider {
         min-height: 250px;
     }
 
@@ -53,7 +53,7 @@
 }
 
 @media screen and (max-width: 1500px) {
-    .header__textBlock_slider {
+    .main__textBlock_slider {
         min-height: 200px;
     }
 
@@ -81,7 +81,7 @@
 }
 
 @media screen and (max-width: 955px) {
-    .header__textBlock_slider {
+    .main__textBlock_slider {
         min-height: 150px;
     }
 
@@ -91,7 +91,7 @@
     }
 }
 @media screen and (max-width: 955px) {
-    .header__textBlock_slider {
+    .main__textBlock_slider {
     min-height: 100px;
 }
 }
