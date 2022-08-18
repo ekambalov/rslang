@@ -90,3 +90,8 @@
         line-height: 20px;
     }
 }
+@media screen and (max-width: 955px) {
+    .header__textBlock_slider {
+    min-height: 100px;
+}
+}

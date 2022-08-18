@@ -1,7 +1,11 @@
-import { createImg, createText } from '../../../../utils/HTMLBuilder';
+import { createImg, createText, createAnchor } from '../../../../utils/HTMLBuilder';
 import { IComponentUl } from '../../InterfaseComponent';
 
-const anchorGitHub = ['https://github.com/nikimix', 'https://github.com/SmSka2021', 'https://github.com/ekambalov'];
+export const anchorGitHub = [
+    'https://github.com/nikimix',
+    'https://github.com/SmSka2021',
+    'https://github.com/ekambalov',
+];
 const name = ['Никита', 'Светлана', 'Ягор'];
 const work = ['frontend developer', 'frontend developer', 'frontend developer'];
 const avatar = [
@@ -34,10 +38,7 @@ class CardTeam implements IComponentUl {
             const namePerson = createText(`${name[i]}`, 'h3', ['cards__card_name']);
             const workPerson = createText(`${work[i]}`, 'h4', ['cards__card_work']);
 
-            const anchorNav = document.createElement('a') as HTMLAnchorElement;
-            anchorNav.classList.add('cards__card_link');
-            anchorNav.href = anchorGitHub[i];
-
+            const anchorNav = createAnchor(anchorGitHub[i], ['cards__card_link']);
             const imgGitHub = createImg('../../../../assets/img/github.png', 'logotip github', [
                 'cards__card_imgGitHub',
             ]);

@@ -79,3 +79,10 @@ export function createTableBody(
     });
     return body;
 }
+export const createAnchor = (href: string, classes: string[] = [], target = '_blank'): HTMLAnchorElement => {
+    const anchor = document.createElement('a') as HTMLAnchorElement;
+    anchor.href = href;
+    anchor.classList.add(...classes);
+    anchor.target = target;
+    return anchor;
+};
