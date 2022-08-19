@@ -14,16 +14,11 @@ export class Router {
     formAutorise = new FormBlock().start();
 
     showTeamPage(): void {
-        document.querySelector('.main')?.replaceWith?.(this.pageTeam);
+        document.querySelector('main')?.replaceWith?.(this.pageTeam);
     }
 
     showStartPage(): void {
-        if (document.querySelector('.teamPage')) {
-            document.querySelector('.teamPage')?.replaceWith?.(this.pageStart);
-        }
-        if (document.querySelector('.main__formBlock')) {
-            document.querySelector('.main__formBlock')?.replaceWith?.(this.mobileImgBlock);
-        }
+        document.querySelector('main')?.replaceWith?.(this.pageStart);
     }
 
     showFormAutorise(): void {
