@@ -9,8 +9,9 @@ class Header implements IComponentHead {
         navigationBlock.classList.toggle('active');
     }
 
-    start(): HTMLDivElement {
-        const header = createDiv(['header']);
+    start(): HTMLElement {
+        const header = document.createElement('header');
+        header.classList.add('footer');
         const logoMenu = createImg('../../../../assets/img/menu.png', 'iconMenu', ['header__icon_menu']);
         logoMenu.addEventListener('click', this.showMenu);
         logoMenu.addEventListener('mouseover', () => {

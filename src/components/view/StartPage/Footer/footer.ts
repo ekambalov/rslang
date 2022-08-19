@@ -9,9 +9,10 @@ const imgGithab = [
     '../../../assets/img/github2Sveta.png',
 ];
 
-class Footer implements IComponent {
-    start(): HTMLDivElement {
-        const footer = createDiv(['footer']);
+class Footer implements IComponent<HTMLElement> {
+    start(): HTMLElement {
+        const footer = document.createElement('footer');
+        footer.classList.add('footer');
 
         const anchorRS = createAnchor('https://rs.school/js/', ['footer__linkRS']);
         const imgLogo = createImg('../../../assets/img/logoRS3.png', 'logotip RS school', ['footer__img_RS']);

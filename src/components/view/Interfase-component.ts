@@ -1,5 +1,5 @@
-export interface IComponent {
-    start(): HTMLDivElement;
+export interface IComponent<T = HTMLDivElement> {
+    start(): T;
 }
 export interface IComponentUl {
     start(): HTMLUListElement;
@@ -15,7 +15,7 @@ export interface IComponentBody {
 }
 export interface IComponentHead {
     showMenu: () => void;
-    start: () => HTMLDivElement;
+    start: () => HTMLElement;
 }
 export interface IComponentNav {
     closeMain: (e: Event) => void;
