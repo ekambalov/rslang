@@ -1,7 +1,7 @@
 .main {
   padding: 0 20px;
   width: 100%; 
-  background-image: url('../../../../assets/img/header1.png');
+  // background-image: url('../img/header1.png');
   background-size: 100%;
   background-repeat: repeat-y;
   font-family: 'Comic Book';
@@ -30,7 +30,7 @@ h1 {
 .main__mobileImgBlock {
   width: 350px;
   height: 605px;
-  background-image: url('../../../../assets/img/phone2.png');
+  // background-image: url('../img/phone2.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   display: grid;
@@ -60,23 +60,23 @@ h1 {
 
 .main__mobileImgBlock_book {
   grid-area: 2 / 2 / 3 / 3;
-  background-image: url('../../../../assets/img/book.png');
+  // background-image: url('../img/book.png');
 }
 
 .main__mobileImgBlock_audio {
   grid-area: 2 / 4 / 3 / 6;
-  background-image: url('../../../../assets/img/audio.png');
+  // background-image: url('../img/audio.png');
   background-size: 60% 60%;
 }
 
 .main__mobileImgBlock_sprint {
   grid-area: 4 / 2 / 5 / 3;
-  background-image: url('../../../../assets/img/sprint2.png');
+  // background-image: url('../img/sprint2.png');
 }
 
 .main__mobileImgBlock_statictic {
   grid-area: 4 / 4 / 5 / 6;
-  background-image: url('../../../../assets/img/statistic.png');
+  // background-image: url('../img/statistic.png');
 }
 
 .main__mobileImgBlock_autorize,
@@ -97,13 +97,13 @@ h1 {
 
 .main__mobileImgBlock_autorize {
   grid-area: 6 / 2 / 7 / 5;
-  background-image: url('../../../../assets/img/autorize.png');
+  // background-image: url('../img/autorize.png');
 
 }
 
 .main__mobileImgBlock_autor {
   grid-area: 8 / 2 / 9 / 5;
-  background-image: url('../../../../assets/img/team2.png');
+  // background-image: url('../img/team2.png');
   transform: translate(-3px) rotate(3deg);
 }
 
@@ -208,7 +208,7 @@ h1 {
   .main{
    flex-direction: column;
    padding: 0;
-   background-image: url('../../../../assets/img/fonMinScreen2.png');
+  //  background-image: url('../img/fonMinScreen2.png');
   }
   .main__textBlock {
     width: 80%;
