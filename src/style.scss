@@ -1,0 +1,59 @@
+@import './assets/styles/header';
+@import './assets/styles/autorise-form';
+@import './assets/styles/main';
+@import './assets/styles/slider';
+@import './assets/styles/footer';
+@import './assets/styles/team';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Comic Book';
+}
+
+*::-webkit-scrollbar {
+  height: 12px;
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #080a14;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(15, 15, 107);
+  border-radius: 5px;
+  border: 3px solid orange;
+}
+
+@font-face {
+  font-family: 'Junegull';
+  src: url("./assets/fonts/junegull.ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Comic Book';
+  src: url("./assets/fonts/ComicBookFun-Regular.ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url("./assets/fonts/Inter-Bold.ttf");
+  font-weight: 700;
+}
+
+body {
+  color: #fff;
+  background-color: rgb(119, 17, 222);
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: 'Comic Book';
+  box-sizing: border-box;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

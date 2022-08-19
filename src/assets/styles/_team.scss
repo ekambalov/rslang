@@ -1,0 +1,133 @@
+.teamPage {
+  width: 100%; 
+  background-color: rgb(247, 246, 244);
+  display: flex;
+  flex-direction: column;
+    // background-image: url('../img/header.jpg');
+}
+
+h2 {
+  font-family: 'Comic Book';
+  text-shadow: 1px 3px 1px rgb(10, 10, 10);
+  color: gold;
+  font-weight: 400;
+  font-size: 75px;
+  text-align: center;
+  margin: 0 auto 30px;
+}
+
+.teamPage__cards {
+  width: 100%;
+  padding: 10px 100px;
+}
+
+@media screen and (max-width: 1000px) {
+  .teamPage__cards {
+    padding: 10px;
+  }
+
+  h2 {
+    font-size: 55px;
+  }
+
+}
+
+.cards {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.cards_card0,
+.cards_card1,
+.cards_card2 {
+  width: 25%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (max-width: 700px) {
+  .cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cards_card0,
+  .cards_card1,
+  .cards_card2 {
+    width: 55%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .cards_card0,
+  .cards_card1,
+  .cards_card2 {
+    width: 85%;
+  }
+}
+
+.cards_card0 {
+  // background-image: url('../img/fonCad3.png');
+}
+
+.cards_card1 {
+  // background-image: url('../img/fonCad2.png');
+}
+
+.cards_card2 {
+  // background-image: url('../img/fonCad4.png');
+}
+
+.cards__card_imgTeam {
+  margin: 20px auto;
+  height: 170px;
+}
+
+h3 {
+  font-family: 'Inter';
+  text-shadow: 1px 3px 1px rgb(10, 10, 10);
+  color: rgb(246, 237, 248);
+  font-weight: 400;
+  font-size: 25px;
+  margin: 20px auto;
+}
+
+.cards__card_work {
+  text-shadow: 1px 1px 1px rgb(10, 10, 10);
+  font-size: 18px;
+}
+
+@media screen and (max-width: 1000px) {
+  .cards__card_work {
+    font-size: 12px;
+  }
+}
+
+.cards__card_imgGitHub {
+  height: 50px;
+  margin: 20px auto 30px;
+
+  &:hover {
+    transform: scale(.95);
+  }
+}
+
+.teamPage__btn {
+  width: 217px;
+  height: 56px;
+  // background-image: url('../img/btn.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  margin: 20px auto 50px;
+  border: none;
+  font-size: 20px;
+  background-color: transparent;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(.95);
+  }
+}
