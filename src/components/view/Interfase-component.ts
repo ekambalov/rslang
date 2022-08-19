@@ -18,6 +18,6 @@ export interface IComponentHead {
     start: () => HTMLDivElement;
 }
 export interface IComponentNav {
-    closeMain: (e: Event) => void;
+    closeMenu: (e: Event) => void;
     start: () => HTMLDivElement;
 }

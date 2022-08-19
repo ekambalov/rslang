@@ -8,9 +8,11 @@ class FormBlock implements IComponent {
         const forma = createForm('post', 'formAutorize', ['formBlock__form']);
         const helloTxt = createText('Привет!', 'h5', ['formBlock__form_txt']);
 
-        const labelName = createLabel('Ваш email:', 'inputName', ['formBlock__form_label', 'labelName']);
-        const inputName = createInput('email', ['formBlock__form_input', 'inputName'], 'inputName');
-        inputName.focus();
+        const labelName = createLabel('Ваше имя:', 'inputName', ['formBlock__form_label', 'labelName']);
+        const inputName = createInput('text', ['formBlock__form_input', 'inputName'], 'inputName');
+
+        const labelEmail = createLabel('Ваш email:', 'inputEmail', ['formBlock__form_label', 'labelEmail']);
+        const inputEmail = createInput('email', ['formBlock__form_input', 'inputEmail'], 'inputEmail');
 
         const labelPassword = createLabel('Пароль:', 'inputPassword', ['formBlock__form_label', 'labelPassword']);
         const inputPassword = createInput('password', ['formBlock__form_input', 'inputPassword'], 'inputPassword');
@@ -19,7 +21,17 @@ class FormBlock implements IComponent {
         const buttonFormRegistr = createBtn('Регистрация', ['formBlock__form_btn', 'registrBtn'], 'submit');
         const buttonReturn = createBtn('return', ['returnBtn'], 'button');
 
-        forma.append(helloTxt, labelName, inputName, labelPassword, inputPassword, buttonFormOpen, buttonFormRegistr);
+        forma.append(
+            helloTxt,
+            labelName,
+            inputName,
+            labelEmail,
+            inputEmail,
+            labelPassword,
+            inputPassword,
+            buttonFormOpen,
+            buttonFormRegistr
+        );
         formBlock.append(forma, buttonReturn);
         return formBlock;
     }

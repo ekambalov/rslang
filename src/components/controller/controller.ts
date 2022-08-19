@@ -12,7 +12,7 @@ class Controller {
     }
 
     init() {
-        new AppViewer().start();
+        this.viewer.start();
     }
 }
 
