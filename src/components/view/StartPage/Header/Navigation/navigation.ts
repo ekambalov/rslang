@@ -5,7 +5,7 @@ const navAnchor = ['Главная', 'Учебник', 'Аудиовызов', '
 const classItem = ['houme', 'book', 'audioGame', 'sprint', 'statistic', 'teams'];
 
 class Navigation implements IComponentNav {
-    closeMain(e: Event): void {
+    closeMenu(e: Event): void {
         e.stopPropagation();
         (document.querySelector('.header__navigation') as HTMLDivElement).classList.toggle('active');
     }
@@ -21,7 +21,7 @@ class Navigation implements IComponentNav {
         closeMenu.addEventListener('mouseleave', () => {
             closeMenu.src = '../../../assets/img/closeMenu.png';
         });
-        closeMenu.addEventListener('click', this.closeMain);
+        closeMenu.addEventListener('click', this.closeMenu);
         const navigationUL = document.createElement('ul') as HTMLUListElement;
         navigationUL.classList.add('header__navigation_ul');
 
