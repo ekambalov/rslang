@@ -23,9 +23,9 @@ export default class Navigation extends BaseComponent {
     this.parent.appendChild(this.element);
   };
 
-  closeMenu(): void {
+  closeMenu = () => {
     this.element.classList.remove('open');
-  }
+  };
 
   openMenu = () => {
     this.element.classList.add('open');
