@@ -9,21 +9,21 @@
     background-color: rgb(119, 17, 222);
 }
 
-.footer__img_RS {
+/*.footer__link_img {
     width: 70px;
     height: 35px;   
     transition: all .5s;       
-}
+}*/
 
-.footer__img_GitHub {
-    width: 50px;
+.footer__link_img {
+    width: 60px;
     height: 35px; 
     margin-right: 20px; 
     transition: all .5s;  
 }
 
 .footer__img_RS:hover,
-.footer__img_GitHub:hover {
+.footer__link_img:hover {
     transform: scale(1.1);
  }
 .footer__year {

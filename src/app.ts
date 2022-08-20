@@ -2,6 +2,7 @@ import Services from './Service/service';
 import RouterService from './Service/router-service';
 import MenuService from './Service/menu-service';
 import MainPage from './Pages/Main/page';
+import SliderService from './Service/slider-service';
 
 class App {
   private services: Services;
@@ -10,6 +11,7 @@ class App {
     this.services = {
       menu: new MenuService(),
       router: new RouterService(),
+      slider: new SliderService(),
     };
   }
 

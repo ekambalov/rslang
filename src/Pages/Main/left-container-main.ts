@@ -1,16 +1,17 @@
 import BaseComponent from '../../Abstract/base-component';
 import Services from '../../Service/service';
-import LeftContainerMain from './left-container-main';
-import RightContainerMain from './right-container-main';
+import Slider from './slider';
 
-export default class Main extends BaseComponent {
+export default class LeftContainerMain extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
-    super('main', 'main');
+    super('div', 'main__left-container');
   }
 
   render = () => {
-    new LeftContainerMain(this.element, this.services).render();
-    new RightContainerMain(this.element, this.services).render();
+    const titleH1 = new BaseComponent('h1', 'title').element;
+    titleH1.innerHTML = 'RS Lang';
+    this.element.append(titleH1);
+    new Slider(this.element, this.services).render();
     this.parent.appendChild(this.element);
   };
 }
@@ -19,6 +20,7 @@ export default class Main extends BaseComponent {
 // import TextBlock from './text-Block';
 // import { createDiv } from '../../utils/HTML-Builder';
 // import MobileImgBlock from './mobile-img-block';
+
 // class Main implements IComponent {
 //     start(): HTMLDivElement {
 //         const main = createDiv(['main']);

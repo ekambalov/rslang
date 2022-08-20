@@ -24,6 +24,7 @@
         "no-debugger": "off",
         "no-console": 0,
         "class-methods-use-this": "off",
+        //"no-restricted-globals": ["error", "event"],
         "prettier/prettier": [
             "error",
             {

@@ -1,7 +1,7 @@
 .main {
   padding: 0 20px;
   width: 100%; 
-  // background-image: url('../img/header1.png');
+  background-image: url('./assets/img/header1.png');
   background-size: 100%;
   background-repeat: repeat-y;
   font-family: 'Comic Book';
@@ -11,7 +11,7 @@
   padding: 0 50px 0 0;
 }
 
-.main__textBlock {
+.main__left-container {
   width: 40%;
   padding: 0 20px;
 }
@@ -27,88 +27,99 @@ h1 {
 
 }
 
-.main__mobileImgBlock {
+.containerButton {
   width: 350px;
   height: 605px;
-  // background-image: url('../img/phone2.png');
+  background-image: url('./assets/img/phone2.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   display: grid;
   grid-template-columns: 35px 135px 10px 120px 15px 35px;
   grid-template-rows: 125px 120px 5px 120px 5px 60px 10px 60px;
 }
-
-.main__mobileImgBlock_book,
-.main__mobileImgBlock_audio,
-.main__mobileImgBlock_sprint,
-.main__mobileImgBlock_statictic {
-  background-size: 70% 70%;
-  background-repeat: no-repeat;
-  background-position: center;
+.button__link {
   color: rgb(66, 6, 85);
   font-family: 'Junegull';
   text-align: center;
+  text-decoration: none;
+}
+.button__link:hover {
+  color: rgb(85, 6, 19);
+}
+.containerButton__button_book,
+.containerButton__button_audio,
+.containerButton__button_sprint,
+.containerButton__button_statictic {
+  background-size: 70% 70%;
+  background-repeat: no-repeat;
+  background-position: center;  
   transition: all .3s;
+  border: none;
+  background-color:transparent;
+padding-bottom: 95px;
 }
 
-.main__mobileImgBlock_book:hover,
-.main__mobileImgBlock_audio:hover,
-.main__mobileImgBlock_sprint:hover,
-.main__mobileImgBlock_statictic:hover {
+.containerButton__button_book:hover,
+.containerButton__button_audio:hover,
+.containerButton__button_sprint:hover,
+.containerButton__button_statictic:hover {
   transform: scale(1.1);
 }
 
-.main__mobileImgBlock_book {
+.containerButton__button_book {
   grid-area: 2 / 2 / 3 / 3;
-  // background-image: url('../img/book.png');
+  background-image: url('./assets/img/book.png');
 }
 
-.main__mobileImgBlock_audio {
+.containerButton__button_audio {
   grid-area: 2 / 4 / 3 / 6;
-  // background-image: url('../img/audio.png');
+  background-image: url('./assets/img/audio.png');
   background-size: 60% 60%;
 }
 
-.main__mobileImgBlock_sprint {
+.containerButton__button_sprint {
   grid-area: 4 / 2 / 5 / 3;
-  // background-image: url('../img/sprint2.png');
+  background-image: url('./assets/img/sprint2.png');
 }
 
-.main__mobileImgBlock_statictic {
+.containerButton__button_statictic {
   grid-area: 4 / 4 / 5 / 6;
-  // background-image: url('../img/statistic.png');
+  background-image: url('./assets/img/statistic.png');
 }
 
-.main__mobileImgBlock_autorize,
-.main__mobileImgBlock_autor {
+.containerButton__button_autorize,
+.containerButton__button_autor {
   background-repeat: no-repeat;
   background-position: 95% 50%;
   background-size: 40px;
   border: 3px solid rgb(49, 3, 49);
   transform: rotate(3deg);
   border-radius: 10px;
-  color: white;
-  text-shadow: 2px 2px 2px rgb(10, 10, 10);
+  color: rgb(53, 4, 85);
+  text-shadow: 2px 2px 2px rgb(247, 243, 243);
   font-family: 'Junegull';
   text-align: center;
   padding-top: 15px;
   background-color: rgb(167, 146, 223);
 }
-
-.main__mobileImgBlock_autorize {
-  grid-area: 6 / 2 / 7 / 5;
-  // background-image: url('../img/autorize.png');
-
+.containerButton__button_autorize:hover .button__link,
+.containerButton__button_autor:hover .button__link {
+  color: white;
+  text-shadow: 2px 2px 2px rgb(34, 30, 30);
 }
 
-.main__mobileImgBlock_autor {
+.containerButton__button_autorize {
+  grid-area: 6 / 2 / 7 / 5;
+  background-image: url('./assets/img/autorize.png');
+
+}
+.containerButton__button_autor {
   grid-area: 8 / 2 / 9 / 5;
-  // background-image: url('../img/team2.png');
+  background-image: url('./assets/img/team2.png');
   transform: translate(-3px) rotate(3deg);
 }
-
-.main__mobileImgBlock_autorize:hover,
-.main__mobileImgBlock_autor:hover {
+.containerButton__button_autorize:hover,
+.containerButton__button_autor:hover {
   background-color: rgb(65, 12, 211);
   cursor: pointer;
 }
@@ -131,7 +142,7 @@ h1 {
 }
 @media screen and (min-width: 1400px) {
 
-  .main__mobileImgBlock {
+  .containerButton {
     width: 525px;
     height: 817px;
     display: grid;
@@ -145,16 +156,16 @@ h1 {
     grid-template-rows: 125px 50px 50px 70px 50px 70px 30px 70px 20px 70px 10px 70px 60px;
   }
 
-  .main__mobileImgBlock_autor {
+  .containerButton__button_autor {
     transform: translate(-2px) rotate(3deg);
   }
 
-  .main__mobileImgBlock_autorize {
+  .containerButton__button_autorize {
     transform: translate(3px) rotate(3deg);
   }
 
-  .main__mobileImgBlock_autorize,
-  .main__mobileImgBlock_autor {
+  .containerButton__button_autorize,
+  .containerButton__button_autor {
     padding-top: 30px;
   }
 

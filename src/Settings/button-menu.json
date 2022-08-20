@@ -1,0 +1,33 @@
+[
+   {
+    "content": "Учебник",
+    "clas": "containerButton__button_book",
+    "path": "/book"
+  },
+  {
+    "content": "Аудиовызов",
+    "clas": "containerButton__button_audio",
+    "path": "/audio-challenge"
+  },
+  {
+    "content": "Спринт",
+    "clas": "containerButton__button_sprint",
+    "path": "/sprint"
+  },
+  {
+    "content": "Статистика",
+    "clas": "containerButton__button_statictic",
+    "path": "/statistic"
+  },
+  {
+
+    "content": "Авторизация",
+    "clas": "containerButton__button_autorize",
+    "path": "/main"
+  },
+  {
+    "content": "Авторы",
+    "clas": "containerButton__button_autor",
+    "path": "/authors"
+  }
+]

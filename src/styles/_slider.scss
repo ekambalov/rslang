@@ -1,11 +1,10 @@
-/* Собственно сам слайдер */
-.main__textBlock_slider {
+.slider__text-container {
     width: 100%;
     min-height: 150px;
     margin-bottom: 20px;
+    
 }
-
-.item {
+.text-container__item {
     font-family: 'Junegull';
     font-size: 18px;
     font-weight: 100;
@@ -18,14 +17,11 @@
 }
 
 /* Кружочки */
-.slider-dots {
-    text-align: center;
-}
-.slider {
-    display: flex;
+.slider__dots-container {
+    display: flex;   
     justify-content: center;
 }
-.slider-dots_item {
+.dots-container__item {
     cursor: pointer;
     height: 20px;
     width: 20px;
@@ -36,28 +32,28 @@
     transition: background-color 0.6s ease;
 }
 
-.active,
-.slider-dots_item:hover {
+.activeDots,
+.dots-container__item:hover {
     background-color: rgb(206, 245, 35);
 }
 
 @media screen and (min-width: 1400px) {
-    .main__textBlock_slider {
+    .slider__text-container {
         min-height: 250px;
     }
 
-    .item {
+    .text-container__item {
         font-size: 28px;
         line-height: 40px;
     }
 }
 
 @media screen and (max-width: 1500px) {
-    .main__textBlock_slider {
+    .slider__text-container {
         min-height: 200px;
     }
 
-    .item {
+    .text-container__item {
         font-size: 20px;
         line-height: 35px;
     }
@@ -66,7 +62,7 @@
 
 @media screen and (max-width: 1280px) {
 
-    .item {
+    .text-container__item {
         font-size: 18px;
         line-height: 30px;
     }
@@ -74,24 +70,24 @@
 
 @media screen and (max-width: 1060px) {
 
-    .item {
+    .text-container__item {
         font-size: 18px;
         line-height: 25px;
     }
 }
 
 @media screen and (max-width: 955px) {
-    .main__textBlock_slider {
+    .slider__text-container {
         min-height: 150px;
     }
 
-    .item {
+    .text-container__item {
         font-size: 16px;
         line-height: 20px;
     }
 }
 @media screen and (max-width: 955px) {
-    .main__textBlock_slider {
+    .slider__text-container {
     min-height: 100px;
 }
 }

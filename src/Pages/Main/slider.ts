@@ -1,48 +1,48 @@
-// import { IComponent } from '../../Components/view/Interfase-component';
-// import './slider.scss';
-// import { createDiv, createText } from '../../utils/HTML-Builder';
+import BaseComponent from '../../Abstract/base-component';
+import sliderTextFile from '../../Settings/slider-text.json';
+import Services from '../../Service/service';
 
-// class Slider implements IComponent {
-//     currentSlide(e: Event): void {
-//         const slides = document.getElementsByClassName('item');
-//         const dots = document.getElementsByClassName('slider-dots_item');
-//         const slideIndex = (e.target as HTMLSpanElement).getAttribute('data-id') as string;
-//         for (let i = 0; i < slides.length; i += 1) {
-//             (slides[i] as HTMLHeadElement).style.display = 'none';
-//             dots[i].classList.remove('active');
-//         }
-//         dots[+slideIndex].classList.add('active');
-//         (slides[+slideIndex] as HTMLHeadElement).style.display = 'block';
-//     }
+export default class Slider extends BaseComponent {
+  constructor(private readonly parent: HTMLElement, private readonly services: Services) {
+    super('div', 'slider');
+  }
 
-//     start(): HTMLDivElement {
-//         const wrapper = createDiv(['main__textBlock_wrapper']);
-//         const slider = createDiv(['main__textBlock_slider']);
+  render = () => {
+    const sliderTextContainer = new BaseComponent('div', 'slider__text-container').element;
+    const sliderDotsContainer = new BaseComponent('div', 'slider__dots-container').element;
 
-//         const txtSlider = [
-//             'Теперь учить английский язык легко и увлекательно! Играйте в мини-игры и учите запоминайте слова.Повторяйте их каждый день для закрепления результата',
-//             'Электронный учебник состоит из шести разделов. В каждом разделе 30 страниц по 20 слов. Представлены перевод слова, тематическое изображение, а также произношение слова.',
-//             'Для изучения слов и закрепления запоминания в приложении есть 2 игры: "Спринт"  и "Аудиовызов". Они  помогут Вам в игровой форме «прокачать» словарный запас.',
-//             'Весь прогресс обучения можно посмотреть в статистике, где представлены данные как за текущий день, так и за весь период обучения.',
-//         ];
-//         const sliderDots = createDiv(['slider']);
+    for (let i = 0; i < sliderTextFile.length; i += 1) {
+      const itemSliderTxt = new BaseComponent('h4', 'text-container__item').element;
+      itemSliderTxt.innerHTML = sliderTextFile[i];
+      itemSliderTxt.style.display = i === 0 ? 'block' : 'none';
+      sliderTextContainer.appendChild(itemSliderTxt);
 
-//         for (let i = 0; i < txtSlider.length; i += 1) {
-//             const itemSlider = createText(txtSlider[i], 'h4', ['item']);
-//             slider.append(itemSlider);
-//             itemSlider.style.display = i === 0 ? 'block' : 'none';
+      const itemDots = new BaseComponent('span', 'dots-container__item').element;
+      itemDots.setAttribute('data-id', `${i}`);
+      if (i === 0) itemDots.classList.add('activeDots');
+      // this.services.slider.add('changing-slides', this.changingSlides(`${i}`));
+      itemDots.addEventListener('click', (e: Event) => {
+        const slideIndex = (e.target as HTMLElement).dataset.id as string;
+        console.log(slideIndex);
+        this.services.slider.changingSlides(slideIndex);
+      });
+      sliderDotsContainer.append(itemDots);
+    }
+    // this.services.slider.add('changing-slides', this.changingSlides();
+    // this.services.slider.add('changing-slides', this.changingSlides('t'));
+    this.element.append(sliderTextContainer, sliderDotsContainer);
+    this.parent.appendChild(this.element);
+  };
 
-//             const itemDots = document.createElement('span') as HTMLSpanElement;
-//             itemDots.classList.add('slider-dots_item');
-//             itemDots.setAttribute('data-id', `${i}`);
-//             if (i === 0) itemDots.classList.add('active');
-//             itemDots.addEventListener('click', this.currentSlide);
-//             sliderDots.append(itemDots);
-//         }
-
-//         wrapper.append(slider, sliderDots);
-//         return wrapper;
-//     }
-// }
-
-// export default Slider;
+  changingSlides = (slideIndex: string) => {
+    // const slideIndex = (e.target as HTMLElement).getAttribute('data-id') as string;
+    const slides = document.getElementsByClassName('item');
+    const dots = document.getElementsByClassName('slider__dots_item');
+    for (let i = 0; i < slides.length; i += 1) {
+      (slides[i] as HTMLHeadElement).style.display = 'none';
+      dots[i].classList.remove('activeDots');
+    }
+    dots[+slideIndex].classList.add('activeDots');
+    (slides[+slideIndex] as HTMLHeadElement).style.display = 'block';
+  };
+}
