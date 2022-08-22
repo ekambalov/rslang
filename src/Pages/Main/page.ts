@@ -9,13 +9,13 @@ export default class MainPage {
 
   render = () => {
     new Header(this.parent, this.services).render();
-    new Team(this.parent, this.services).render();
+    new Main(this.parent, this.services).render();
     new Footer(this.parent, this.services).render();
   };
 
   renderTeamPage = () => {
     new Header(this.parent, this.services).render();
-    new Main(this.parent, this.services).render();
+    new Team(this.parent, this.services).render();
     new Footer(this.parent, this.services).render();
   };
 }
