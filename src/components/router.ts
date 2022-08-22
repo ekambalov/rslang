@@ -14,22 +14,20 @@ export default class Router {
 
   constructor(private readonly root: HTMLElement, private readonly services: Services) {
     this.routes = [
-      { path: '/main', component: new MainPage(this.root, this.services) },
-      { path: '/authors', component: new TeamPage(this.root, this.services) },
+      { path: '#/main', component: new MainPage(this.root, this.services) },
+      { path: '#/authors', component: new TeamPage(this.root, this.services) },
     ];
   }
 
-  render(): void {
-    window.addEventListener('hashchange', this.rounting.bind(this));
-    window.addEventListener('load', this.rounting.bind(this));
-  }
+  render = (): void => {
+    window.addEventListener('hashchange', this.routing);
+    window.addEventListener('load', this.routing);
+  };
 
-  rounting(): void {
-    const path = document.location.hash.slice(1).toLowerCase() || '/about';
-    // if (path !== '/game') this.services.game.break();
-
+  routing = (): void => {
+    const path = document.location.hash.toLowerCase() || '#/main';
     this.services.router.setRouter(path);
-    const currentRount = this.routes.find((item) => item.path === path) || this.routes[0];
-    currentRount.component.render();
-  }
+    const currentRout = this.routes.find((item) => item.path === path) || this.routes[0];
+    currentRout.component.render();
+  };
 }

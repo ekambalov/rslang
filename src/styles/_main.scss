@@ -1,6 +1,6 @@
-.main {
+.main-pages {
   padding: 0 20px;
-  width: 100%; 
+  width: 100%;
   background-image: url('./assets/img/header1.png');
   background-size: 100%;
   background-repeat: repeat-y;
@@ -37,26 +37,29 @@ h1 {
   grid-template-columns: 35px 135px 10px 120px 15px 35px;
   grid-template-rows: 125px 120px 5px 120px 5px 60px 10px 60px;
 }
+
 .button__link {
   color: rgb(66, 6, 85);
   font-family: 'Junegull';
   text-align: center;
   text-decoration: none;
 }
+
 .button__link:hover {
   color: rgb(85, 6, 19);
 }
+
 .containerButton__button_book,
 .containerButton__button_audio,
 .containerButton__button_sprint,
 .containerButton__button_statictic {
   background-size: 70% 70%;
   background-repeat: no-repeat;
-  background-position: center;  
+  background-position: center;
   transition: all .3s;
   border: none;
-  background-color:transparent;
-padding-bottom: 95px;
+  background-color: transparent;
+  padding-bottom: 95px;
 }
 
 .containerButton__button_book:hover,
@@ -102,6 +105,7 @@ padding-bottom: 95px;
   padding-top: 15px;
   background-color: rgb(167, 146, 223);
 }
+
 .containerButton__button_autorize:hover .button__link,
 .containerButton__button_autor:hover .button__link {
   color: white;
@@ -113,11 +117,13 @@ padding-bottom: 95px;
   background-image: url('./assets/img/autorize.png');
 
 }
+
 .containerButton__button_autor {
   grid-area: 8 / 2 / 9 / 5;
   background-image: url('./assets/img/team2.png');
   transform: translate(-3px) rotate(3deg);
 }
+
 .containerButton__button_autorize:hover,
 .containerButton__button_autor:hover {
   background-color: rgb(65, 12, 211);
@@ -140,6 +146,7 @@ padding-bottom: 95px;
   }
 
 }
+
 @media screen and (min-width: 1400px) {
 
   .containerButton {
@@ -149,6 +156,7 @@ padding-bottom: 95px;
     grid-template-columns: 52px 202px 15px 180px 22px 52px;
     grid-template-rows: 150px 140px 20px 140px 30px 80px 30px 80px;
   }
+
   .main__formBlock {
     width: 525px;
     height: 817px;
@@ -177,6 +185,7 @@ padding-bottom: 95px;
     font-size: 20px;
   }
 }
+
 @media screen and (max-width: 1200px) {
 
   h1 {
@@ -198,11 +207,11 @@ padding-bottom: 95px;
 }
 
 @media screen and (max-width: 1060px) {
- 
-    .teamPage__cards {
-      padding: 10px;
-    }
-  
+
+  .teamPage__cards {
+    padding: 10px;
+  }
+
   h1 {
     font-size: 70px;
   }
@@ -214,32 +223,33 @@ padding-bottom: 95px;
     font-size: 60px;
   }
 }
+
 @media screen and (max-width: 650px) {
 
-  .main{
-   flex-direction: column;
-   padding: 0;
-  //  background-image: url('../img/fonMinScreen2.png');
+  .main {
+    flex-direction: column;
+    padding: 0;
+    //  background-image: url('../img/fonMinScreen2.png');
   }
+
   .main__textBlock {
     width: 80%;
     margin-bottom: 20px;
-  } 
+  }
 }
 
 @media screen and (max-width: 440px) {
   h1 {
     font-size: 40px;
   }
+
   .main__textBlock {
     width: 95%;
     margin-bottom: 20px;
-  } 
-  
+  }
+
   h4 {
     font-size: 10px;
   }
 
 }
- 
- 

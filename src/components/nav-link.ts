@@ -13,7 +13,6 @@ export default class NavLink extends BaseComponent {
     const link = new BaseComponent('a', 'nav-list__link').element;
     link.setAttribute('href', `#${path}`);
     link.textContent = `${content}`;
-
     this.element.appendChild(link);
     this.parent.appendChild(this.element);
 
@@ -32,5 +31,9 @@ export default class NavLink extends BaseComponent {
 
   removeActive(): void {
     this.element.classList.remove('active');
+    this.services.menu.dispath('close-menu');
+    this.services.menu.dispath('scroll-off');
+    if (document.querySelector('.owerflov'))
+      (document.querySelector('.owerflov') as HTMLElement).style.display = 'none';
   }
 }

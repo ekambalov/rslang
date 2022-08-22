@@ -1,8 +1,10 @@
 import Services from './Service/service';
 import RouterService from './Service/router-service';
 import MenuService from './Service/menu-service';
-import MainPage from './Pages/Main/page';
-import SliderService from './Service/slider-service';
+import BaseComponent from './Abstract/base-component';
+import Router from './components/router';
+import Header from './components/header';
+import Footer from './components/footer';
 
 class App {
   private services: Services;
@@ -11,12 +13,17 @@ class App {
     this.services = {
       menu: new MenuService(),
       router: new RouterService(),
-      slider: new SliderService(),
     };
   }
 
   render(): void {
-    new MainPage(this.root, this.services).render();
+    new Header(this.root, this.services).render();
+
+    const main = new BaseComponent('main').element;
+    this.root.appendChild(main);
+
+    new Router(main, this.services).render();
+    new Footer(this.root, this.services).render();
   }
 }
 

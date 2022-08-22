@@ -7,7 +7,6 @@ export default class ButtonCloseMenu extends BaseComponent<HTMLButtonElement> {
   }
 
   render = () => {
-    // this.element.innerHTML = '<img src="../assets/img/menu.png" class="btn__openMenu_icon" alt="">';
     this.element.addEventListener('click', this.service.menu.closeMenu);
     this.parent.appendChild(this.element);
   };

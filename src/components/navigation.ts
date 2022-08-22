@@ -6,8 +6,14 @@ import ButtonCloseMenu from './button-close-menu';
 import NavLink from './nav-link';
 
 export default class Navigation extends BaseComponent {
+  flagOverflow: boolean;
+
+  scrollFlag: boolean;
+
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
     super('nav', 'header__nav');
+    this.flagOverflow = false;
+    this.scrollFlag = false;
   }
 
   render = () => {
@@ -18,6 +24,7 @@ export default class Navigation extends BaseComponent {
 
     this.services.menu.add('close-menu', this.closeMenu);
     this.services.menu.add('open-menu', this.openMenu);
+    this.services.menu.add('scroll-off', this.scrollOff);
 
     this.element.appendChild(navList);
     this.parent.appendChild(this.element);
@@ -25,38 +32,51 @@ export default class Navigation extends BaseComponent {
 
   closeMenu = () => {
     this.element.classList.remove('open');
+    this.flagOverflow = !this.flagOverflow;
+    this.scrollFlag = !this.scrollFlag;
+    const owerflovElement: HTMLElement | null = document.querySelector('.owerflov');
+    if (this.flagOverflow && owerflovElement) {
+      this.owerflovAdd(owerflovElement);
+    } else {
+      this.owerflovRemove(owerflovElement as HTMLElement);
+    }
+    if (this.scrollFlag) {
+      this.scrollOn();
+    } else {
+      this.scrollOff();
+    }
   };
 
   openMenu = () => {
     this.element.classList.add('open');
+    this.flagOverflow = !this.flagOverflow;
+    const owerflovElement: HTMLElement | null = document.querySelector('.owerflov');
+    if (this.flagOverflow && owerflovElement) {
+      this.owerflovAdd(owerflovElement);
+    }
+    this.scrollFlag = !this.scrollFlag;
+    if (this.scrollFlag) {
+      this.scrollOn();
+    } else {
+      this.scrollOff();
+    }
   };
 
-  // start(): HTMLDivElement {
-  //   const navigation = createDiv(['header__navigation']);
-  //   const closeMenu = createImg('../../../assets/img/closeMenu.png', 'icon close menu', ['header__navigation_icon']);
-  //   closeMenu.addEventListener('mouseover', () => {
-  //     closeMenu.src = '../../../assets/img/closeMenu2.png';
-  //   });
-  //   closeMenu.addEventListener('mouseleave', () => {
-  //     closeMenu.src = '../../../assets/img/closeMenu.png';
-  //   });
-  //   closeMenu.addEventListener('click', this.closeMain);
-  //   const navigationUL = document.createElement('ul') as HTMLUListElement;
-  //   navigationUL.classList.add('header__navigation_ul');
+  owerflovAdd = (el: HTMLElement) => {
+    const elem = el;
+    elem.style.display = 'block';
+  };
 
-  //   for (let i = 0; i < navAnchor.length; i += 1) {
-  //     const navigationLI = document.createElement('li') as HTMLLIElement;
-  //     navigationLI.classList.add('header__navigation_li');
-  //     navigationLI.classList.add(`${classItem[i]}`);
+  owerflovRemove = (el: HTMLElement) => {
+    const elem = el;
+    elem.style.display = 'none';
+  };
 
-  //     const anchorNav = document.createElement('a') as HTMLAnchorElement;
-  //     anchorNav.classList.add('header__navigation_a');
+  scrollOff = () => {
+    document.body.style.overflow = '';
+  };
 
-  //     anchorNav.innerHTML = navAnchor[i];
-  //     navigationLI.append(anchorNav);
-  //     navigationUL.append(navigationLI);
-  //   }
-  //   navigation.append(closeMenu, navigationUL);
-  //   return navigation;
-  // }
+  scrollOn = () => {
+    document.body.style.overflow = 'hidden';
+  };
 }

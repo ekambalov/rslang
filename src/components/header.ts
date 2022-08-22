@@ -11,24 +11,8 @@ export default class Header extends BaseComponent {
   render = () => {
     new ButtonOpenMenu(this.element, this.services).render();
     new Navigation(this.element, this.services).render();
+    const owerflov = new BaseComponent('div', 'owerflov').element;
+    this.element.append(owerflov);
     this.parent.appendChild(this.element);
   };
-
-  // start(): HTMLDivElement {
-  //   const header = createDiv(['header']);
-  //   const logoMenu = createImg('../../../../assets/img/menu.png', 'iconMenu', ['header__icon_menu']);
-  //   logoMenu.addEventListener('click', this.showMenu);
-  //   logoMenu.addEventListener('mouseover', () => {
-  //     logoMenu.src = '../../../../assets/img/menu7.png';
-  //   });
-  //   logoMenu.addEventListener('mouseleave', () => {
-  //     logoMenu.src = '../../../../assets/img/menu.png';
-  //   });
-  //   const navigation = new Navigation().start();
-  //   const infoAutorise = createDiv(['header__infoAutorise']);
-  //   const autorise = createText('Login', 'p', ['header__infoAutorise_login']);
-  //   infoAutorise.append(autorise);
-  //   header.append(logoMenu, navigation, infoAutorise);
-  //   return header;
-  // }
 }
