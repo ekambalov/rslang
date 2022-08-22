@@ -6,14 +6,8 @@ import ButtonCloseMenu from './button-close-menu';
 import NavLink from './nav-link';
 
 export default class Navigation extends BaseComponent {
-  flagOverflow: boolean;
-
-  scrollFlag: boolean;
-
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
     super('nav', 'header__nav');
-    this.flagOverflow = false;
-    this.scrollFlag = false;
   }
 
   render = () => {
@@ -25,6 +19,7 @@ export default class Navigation extends BaseComponent {
     this.services.menu.add('close-menu', this.closeMenu);
     this.services.menu.add('open-menu', this.openMenu);
     this.services.menu.add('scroll-off', this.scrollOff);
+    this.services.menu.add('scroll-on', this.scrollOn);
 
     this.element.appendChild(navList);
     this.parent.appendChild(this.element);
@@ -32,44 +27,14 @@ export default class Navigation extends BaseComponent {
 
   closeMenu = () => {
     this.element.classList.remove('open');
-    this.flagOverflow = !this.flagOverflow;
-    this.scrollFlag = !this.scrollFlag;
-    const owerflovElement: HTMLElement | null = document.querySelector('.owerflov');
-    if (this.flagOverflow && owerflovElement) {
-      this.owerflovAdd(owerflovElement);
-    } else {
-      this.owerflovRemove(owerflovElement as HTMLElement);
-    }
-    if (this.scrollFlag) {
-      this.scrollOn();
-    } else {
-      this.scrollOff();
-    }
+    this.services.menu.removeDarkLayer();
+    this.scrollOn();
   };
 
   openMenu = () => {
     this.element.classList.add('open');
-    this.flagOverflow = !this.flagOverflow;
-    const owerflovElement: HTMLElement | null = document.querySelector('.owerflov');
-    if (this.flagOverflow && owerflovElement) {
-      this.owerflovAdd(owerflovElement);
-    }
-    this.scrollFlag = !this.scrollFlag;
-    if (this.scrollFlag) {
-      this.scrollOn();
-    } else {
-      this.scrollOff();
-    }
-  };
-
-  owerflovAdd = (el: HTMLElement) => {
-    const elem = el;
-    elem.style.display = 'block';
-  };
-
-  owerflovRemove = (el: HTMLElement) => {
-    const elem = el;
-    elem.style.display = 'none';
+    this.services.menu.showDarkLayer();
+    this.scrollOn();
   };
 
   scrollOff = () => {

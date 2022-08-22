@@ -6,7 +6,7 @@
 
 .slider__text-container {
     width: 100%;
-    min-height: 150px;
+    min-height: 170px;
     margin-bottom: 20px;
     overflow: hidden;
     position: relative;
@@ -63,7 +63,7 @@
 #slide1:checked~.slider__controls-container label:nth-of-type(2),
 #slide2:checked~.slider__controls-container label:nth-of-type(3),
 #slide3:checked~.slider__controls-container label:nth-of-type(4) {
-    background: #ddd;
+    background: rgb(219, 235, 4);
 }
 
 .text-container__item {

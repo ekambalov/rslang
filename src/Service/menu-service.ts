@@ -8,4 +8,16 @@ export default class MenuService extends Observer {
   closeMenu = () => {
     this.dispath('close-menu');
   };
+
+  openAutoriseForm = () => {
+    this.dispath('open-autorise');
+  };
+
+  showDarkLayer = () => {
+    this.dispath('show-dark-layer');
+  };
+
+  removeDarkLayer = () => {
+    this.dispath('remove-dark-layer');
+  };
 }

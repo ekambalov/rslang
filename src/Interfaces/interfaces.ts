@@ -12,3 +12,9 @@ export interface ILinkGitHub {
   imgWhite: string;
   imgBlack: string;
 }
+export interface IOptionsInput {
+  title: string;
+  type: string;
+  id: string;
+  name: string;
+}

@@ -1,0 +1,106 @@
+.header__btn_openAutorise {
+font-family: 'Comic Book';
+color: gold;
+font-size: 18px;
+border: none;
+background-color: transparent;
+cursor: pointer;
+}
+.header__btn_openAutorise:hover {
+  color: white;
+}
+.error {
+  border: 2px solid red;
+}
+.success {
+  border: 2px solid gold; 
+}
+.message-error {
+  color: red;
+  font-size: 12px;
+  margin-left: 25px;
+}
+.form {
+  width: 300px;
+  height: 420px;
+  background-image: url('./assets/img/form.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  display: none;
+} 
+.form__item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.form__title {
+  text-align: center;
+  color: rgb(66, 6, 85);
+  font-family: 'Junegull';
+  font-size: 20px;
+  letter-spacing: 1.5px; 
+  margin: 20px auto 7px;
+}
+.form__label {
+  color: rgb(58, 8, 73);
+  font-family: 'Junegull';
+  font-size: 14px;
+  letter-spacing: 1.1px;  
+  margin: 5px 0 5px 30px;
+}
+.form__input {
+  background-image: url('./assets/img/input2.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 40px;
+  width: 85%;
+  border: none;
+  padding-left: 30px;
+  font-family: 'Junegull';
+  font-size: 14px;
+  outline: none; 
+  margin: 0 auto;  
+}
+.form__btn_autorise, 
+.form__btn_enter {
+background-size: 100% 100%;
+background-repeat: no-repeat;
+height: 40px;
+width: 85%;
+border: none;
+padding: 5px auto;
+font-family: 'Junegull';
+font-size: 14px;
+outline: none;
+margin: 7px auto;
+text-align: center;
+position: relative;
+left: 50%;
+transform: translate(-50%, 0);
+}
+.form__btn_autorise {
+  color: white;
+  background-image: url('./assets/img/btnForm1.png');
+  text-shadow: 1px 2px 1px rgb(10, 10, 10);
+
+  &:hover {    
+    background-image: url('./assets/img/btnForm.png');
+  }
+}
+.form__btn_enter {
+   background-image: url('./assets/img/btnForm2.png');
+
+  &:hover {
+    color: white;
+    background-image: url('./assets/img/btnForm.png');
+    text-shadow: 1px 2px 1px rgb(10, 10, 10);
+  }
+}
