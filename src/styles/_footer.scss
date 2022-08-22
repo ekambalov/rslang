@@ -9,21 +9,21 @@
     background-color: rgb(119, 17, 222);
 }
 
-/*.footer__link_img {
-    width: 70px;
+.footer__link_imgRS {
+    width: 75px;
     height: 35px;   
     transition: all .5s;       
-}*/
+}
 
-.footer__link_img {
-    width: 60px;
+.footer__link_imgGitHub {
+    width: 50px;
     height: 35px; 
     margin-right: 20px; 
     transition: all .5s;  
 }
 
-.footer__img_RS:hover,
-.footer__link_img:hover {
+.footer__link_imgRS:hover,
+.footer__link_imgGitHub:hover {
     transform: scale(1.1);
  }
 .footer__year {
@@ -44,7 +44,7 @@
 }
 
 @media screen and (max-width: 400px) {
-    .footer__img_GitHub {        
+    .footer__link_imgGitHub {        
         margin-right: 7px; 
     }
     .footer__year {

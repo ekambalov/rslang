@@ -1,12 +1,12 @@
-.teamPage {
+.team-page{
   width: 100%; 
-  background-color: rgb(247, 246, 244);
-  display: flex;
+   display: flex;
   flex-direction: column;
-    // background-image: url('../img/header.jpg');
+  flex-grow: 1;
+  justify-content: space-around;
 }
 
-h2 {
+.teamPage__title{
   font-family: 'Comic Book';
   text-shadow: 1px 3px 1px rgb(10, 10, 10);
   color: gold;
@@ -16,32 +16,31 @@ h2 {
   margin: 0 auto 30px;
 }
 
-.teamPage__cards {
+.cards-team {
   width: 100%;
-  padding: 10px 100px;
+  padding: 10px;  
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 @media screen and (max-width: 1000px) {
-  .teamPage__cards {
+  .cards-team {
     padding: 10px;
   }
 
-  h2 {
+  .teamPage__title {
     font-size: 55px;
   }
 
 }
 
-.cards {
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-}
 
-.cards_card0,
-.cards_card1,
-.cards_card2 {
+
+.cards-team__card {
   width: 25%;
+  min-width: 250px;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   display: flex;
@@ -50,58 +49,80 @@ h2 {
 }
 
 @media screen and (max-width: 700px) {
-  .cards {
+  .cards-team {
     flex-direction: column;
     align-items: center;
   }
 
-  .cards_card0,
-  .cards_card1,
-  .cards_card2 {
+  .cards-team__card {
     width: 55%;
   }
 }
 @media screen and (max-width: 500px) {
-  .cards_card0,
-  .cards_card1,
-  .cards_card2 {
+  .cards-team__card {
     width: 85%;
   }
 }
 
-.cards_card0 {
-  // background-image: url('../img/fonCad3.png');
+.cards-team__card0 {
+   background-image: url('./assets/img/fonCad3.png');
 }
 
-.cards_card1 {
-  // background-image: url('../img/fonCad2.png');
+
+.cards-team__card1 {
+  background-image: url('./assets/img/fonCad2.png');
 }
 
-.cards_card2 {
-  // background-image: url('../img/fonCad4.png');
+.cards-team__card2 {
+  background-image: url('./assets/img/fonCad4.png');
 }
 
-.cards__card_imgTeam {
+.cards-team__card_avatar {
   margin: 20px auto;
-  height: 170px;
+  height: 265px;
+  width: 216px;  
+  background-size: cover;
+  background-position: center;
+  background-repeat:no-repeat;
+} 
+.avatar0 {
+  background-image: url("./assets/img/avatar32.png");
+
+  &:hover {
+    background-image: url("./assets/img/avatar3.png");
+  }
 }
 
-h3 {
+.avatar1 {
+  background-image: url("./assets/img/avatar25.png");
+
+  &:hover {
+    background-image: url("./assets/img/avatar2.png");
+  }
+}
+.avatar2 {
+  background-image: url("./assets/img/avatar34.png");
+
+  &:hover {
+    background-image: url("./assets/img/avatar01.png");
+  }
+}
+.cards-team__card_name-person {
   font-family: 'Inter';
   text-shadow: 1px 3px 1px rgb(10, 10, 10);
   color: rgb(246, 237, 248);
   font-weight: 400;
   font-size: 25px;
-  margin: 20px auto;
+  margin: 10px auto;
 }
 
-.cards__card_work {
+.cards-team__card_work {
   text-shadow: 1px 1px 1px rgb(10, 10, 10);
   font-size: 18px;
 }
 
 @media screen and (max-width: 1000px) {
-  .cards__card_work {
+  .cards-team__card_work {
     font-size: 12px;
   }
 }
@@ -115,10 +136,23 @@ h3 {
   }
 }
 
-.teamPage__btn {
+.cards-team__linkGithub_img{
+ 
+    
+    height: 60px; 
+    margin: 20px auto;
+    margin-right: 20px; 
+    transition: all .5s;  
+    &:hover {
+    transform: scale(1.1);
+    }
+}
+
+
+.teamPage__button_return {
   width: 217px;
   height: 56px;
-  // background-image: url('../img/btn.png');
+  background-image: url('./assets/img/btn.png');
   background-size: 100%;
   background-repeat: no-repeat;
   margin: 20px auto 50px;

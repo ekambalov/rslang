@@ -1,21 +1,21 @@
-// import './team.scss';
-// import { IComponent } from '../../Components/view/Interfase-component';
-// import { createDiv, createBtn, createText } from '../../utils/HTML-Builder';
-// import CardTeam from './card';
+import BaseComponent from '../../Abstract/base-component';
+import Services from '../../Service/service';
+import CardsTeam from './cards-team';
 
-// class TeamPage implements IComponent {
-//     start(): HTMLDivElement {
-//         const teamPage = createDiv(['teamPage']);
-//         const h2Txt = createText('Our Team', 'h2', ['teamPage__txt']);
-//         const btnReturn = createBtn('return', ['teamPage__btn']);
-//         const teamCards = createDiv(['teamPage__cards']);
+export default class Team extends BaseComponent {
+  constructor(private readonly parent: HTMLElement, private readonly services: Services) {
+    super('main', 'team-page');
+  }
 
-//         const cardsUlTeam = new CardTeam().start();
-//         teamCards.append(cardsUlTeam);
-//         teamPage.append(h2Txt, teamCards, btnReturn);
-
-//         return teamPage;
-//     }
-// }
-
-// export default TeamPage;
+  render = () => {
+    const h2Txt = new BaseComponent('h2', 'teamPage__title').element;
+    h2Txt.innerHTML = 'Our Team';
+    new CardsTeam(this.element, this.services).render();
+    const btnReturn = new BaseComponent('button', 'teamPage__button_return').element;
+    btnReturn.innerText = 'return';
+    btnReturn.setAttribute('type', 'button');
+    this.element.prepend(h2Txt, btnReturn);
+    this.element.append(btnReturn);
+    this.parent.append(this.element);
+  };
+}

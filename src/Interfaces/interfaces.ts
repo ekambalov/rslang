@@ -9,5 +9,6 @@ export interface ILinkButtonProps {
 }
 export interface ILinkGitHub {
   src: string;
-  img: string;
+  imgWhite: string;
+  imgBlack: string;
 }
