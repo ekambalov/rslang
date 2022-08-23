@@ -7,6 +7,7 @@ import Header from './components/header';
 import Footer from './components/footer';
 import FormService from './Service/form-service';
 import DataBaseServices from './Service/data-base-service';
+import TextbookService from './Service/textbook-service';
 
 class App {
   private services: Services;
@@ -17,6 +18,7 @@ class App {
       router: new RouterService(),
       form: new FormService(),
       dataBase: new DataBaseServices(),
+      textbook: new TextbookService(),
     };
   }
 

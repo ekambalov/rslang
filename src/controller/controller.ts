@@ -1,19 +1,19 @@
-import Store from '../model/store';
-import AppViewer from '../view/appViewer';
+// import Store from '../model/store';
+// import AppViewer from '../view/appViewer';
 
-class Controller {
-    store: Store;
+// class Controller {
+//   store: Store;
 
-    viewer: AppViewer;
+//   viewer: AppViewer;
 
-    constructor(store: Store, viewer: AppViewer) {
-        this.store = store;
-        this.viewer = viewer;
-    }
+//   constructor(store: Store, viewer: AppViewer) {
+//     this.store = store;
+//     this.viewer = viewer;
+//   }
 
-    init() {
-        this.viewer.start();
-    }
-}
+//   init() {
+//     this.viewer.start();
+//   }
+// }
 
-export default Controller;
+// export default Controller;
