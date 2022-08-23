@@ -28,7 +28,7 @@ export default class Navigation extends BaseComponent {
   closeMenu = () => {
     this.element.classList.remove('open');
     this.services.menu.removeDarkLayer();
-    this.scrollOn();
+    this.scrollOff();
   };
 
   openMenu = () => {
