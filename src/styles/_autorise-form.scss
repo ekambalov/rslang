@@ -1,4 +1,20 @@
-.header__btn_openAutorise {
+.form-container {
+  width: 350px;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color:transparent;
+  transform: translate(-50%, -50%);
+  z-index: 10; 
+  display: none; 
+}
+
+.header__btn_openAutorise,
+.header__btn_closeAutorise {
 font-family: 'Comic Book';
 color: gold;
 font-size: 18px;
@@ -6,19 +22,30 @@ border: none;
 background-color: transparent;
 cursor: pointer;
 }
+.header__btn_closeAutorise {
+  font-size: 20px;
+  border: 2px solid white;
+  border-radius: 50%;
+ margin: 0 0 5px 80%;
+  width: 35px;
+  height: 35px;
+  &:hover {
+    border: 2px solid gold;
+    color: white;
+  }
+  }
+
 .header__btn_openAutorise:hover {
   color: white;
 }
 .error {
   border: 2px solid red;
 }
-.success {
-  border: 2px solid gold; 
-}
 .message-error {
   color: red;
   font-size: 12px;
   margin-left: 25px;
+  font-family: 'Junegull';
 }
 .form {
   width: 300px;
@@ -29,12 +56,7 @@ cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  display: none;
+ 
 } 
 .form__item {
   display: flex;
@@ -76,15 +98,11 @@ background-repeat: no-repeat;
 height: 40px;
 width: 85%;
 border: none;
-padding: 5px auto;
 font-family: 'Junegull';
 font-size: 14px;
 outline: none;
 margin: 7px auto;
 text-align: center;
-position: relative;
-left: 50%;
-transform: translate(-50%, 0);
 }
 .form__btn_autorise {
   color: white;
@@ -103,4 +121,12 @@ transform: translate(-50%, 0);
     background-image: url('./assets/img/btnForm.png');
     text-shadow: 1px 2px 1px rgb(10, 10, 10);
   }
+}
+@media screen and (max-width: 360px) {
+  .form-container {
+    width: 280px;
+}
+.form {
+  width: 270px;
+}
 }

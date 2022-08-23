@@ -91,7 +91,7 @@ export default class DataBaseServices extends Observer {
 
   checkText(input: FormInput, val: string): void {
     const value = val.trim();
-    this.user[input.name] = '';
+    this.user.firstName = '';
 
     if (value.length === 0) {
       input.error('Поле не может быть пустым');
@@ -99,22 +99,26 @@ export default class DataBaseServices extends Observer {
     }
 
     if (value.length > 30) {
-      input.error('Поле не может превышать 30 символов');
+      input.error('Не более 30 символов');
+      return;
+    }
+    if (value.length < 3) {
+      input.error('Не менее 3 символов');
       return;
     }
 
     if (/^(\d|\s)+$/gi.test(value)) {
-      input.error('Поле не может состоять только из цифр');
+      input.error('Должны быть буквы');
       return;
     }
 
     const isSymbol = !/^[^~!@#$%*()—+=|:;"'`<>,.?/^]*(\w|\s|[а-я])+$/gi.test(value);
     if (isSymbol || /_/g.test(value)) {
-      input.error('Поле не может состоять из служебных символов');
+      input.error('Не могут бытьтолько служебные символы');
       return;
     }
 
-    this.user[input.name] = value;
+    this.user.firstName = value;
     input.success();
   }
 
@@ -128,20 +132,20 @@ export default class DataBaseServices extends Observer {
     }
 
     if (value.length > 30) {
-      input.error('Email не может превышать 30 символов');
+      input.error('Email не более 30 символов');
       return;
     }
 
     const index = value.lastIndexOf('@');
     if (index === -1) {
-      input.error('Email должно соответствовать стандарту RFC');
+      input.error('Email должно быть по стандарту RFC');
       return;
     }
 
     const leftPart = value.slice(0, index);
     const rightPart = value.slice(index + 1);
     if (leftPart.length === 0 || rightPart.length === 0) {
-      input.error('Email должно соответствовать стандарту RFC');
+      input.error('Email должно быть по стандарту RFC');
       return;
     }
 
@@ -152,7 +156,7 @@ export default class DataBaseServices extends Observer {
     const isValid = regLeft.test(leftPart) && (regRightOne.test(rightPart) || regRightSecond.test(rightPart));
 
     if (!isValid) {
-      input.error('Email должно соответствовать стандарту RFC');
+      input.error('Email должно быть по стандарту RFC');
       return;
     }
 

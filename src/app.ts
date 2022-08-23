@@ -5,6 +5,8 @@ import BaseComponent from './Abstract/base-component';
 import Router from './components/router';
 import Header from './components/header';
 import Footer from './components/footer';
+import FormService from './Service/form-service';
+import DataBaseServices from './Service/data-base-service';
 
 class App {
   private services: Services;
@@ -13,6 +15,8 @@ class App {
     this.services = {
       menu: new MenuService(),
       router: new RouterService(),
+      form: new FormService(),
+      dataBase: new DataBaseServices(),
     };
   }
 

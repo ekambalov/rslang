@@ -39,14 +39,17 @@ export class FormInput extends BaseComponent {
       <input class="form__input" type="${this.type}" id="${this.id}" name="${this.name}" autocomplete="off">
     `;
     this.messageElement = new BaseComponent('p', 'message-error').element;
-    this.messageElement.textContent = 'Here message about error';
+    this.messageElement.textContent = '';
     this.element.appendChild(this.messageElement);
     this.parent.appendChild(this.element);
 
     this.element.onchange = (e) => {
       const target = e.target as HTMLInputElement;
+      console.log(target.value, this);
       this.services.dataBase.checkInput(this, target.value);
     };
+    this.services.form.add('error-message', this.error);
+    this.services.form.add('remove-error-message', this.removeErrorMessage);
   }
 
   clear(): void {
@@ -56,7 +59,7 @@ export class FormInput extends BaseComponent {
 
   success(): void {
     this.clear();
-    this.element.classList.add('success');
+    this.removeErrorMessage();
   }
 
   error(message: string): void {
@@ -65,5 +68,13 @@ export class FormInput extends BaseComponent {
       this.messageElement.textContent = message;
     }
     this.element.classList.add('error');
+  }
+
+  removeErrorMessage(): void {
+    this.clear();
+    if (this.messageElement) {
+      this.messageElement.textContent = '';
+    }
+    this.element.classList.remove('error');
   }
 }

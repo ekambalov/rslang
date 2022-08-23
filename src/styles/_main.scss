@@ -157,13 +157,6 @@ h1 {
     grid-template-rows: 150px 140px 20px 140px 30px 80px 30px 80px;
   }
 
-  .main__formBlock {
-    width: 525px;
-    height: 817px;
-    grid-template-columns: 58px 390px 25px 52px;
-    grid-template-rows: 125px 50px 50px 70px 50px 70px 30px 70px 20px 70px 10px 70px 60px;
-  }
-
   .containerButton__button_autor {
     transform: translate(-2px) rotate(3deg);
   }
@@ -226,15 +219,15 @@ h1 {
 
 @media screen and (max-width: 650px) {
 
-  .main {
+  .main-pages{
     flex-direction: column;
     padding: 0;
-    //  background-image: url('../img/fonMinScreen2.png');
+    background-image: url('./assets/img/fonMinScreen2.png');
+    gap: 30px;
   }
-
-  .main__textBlock {
+  .main__left-container {
     width: 80%;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
   }
 }
 
@@ -243,7 +236,7 @@ h1 {
     font-size: 40px;
   }
 
-  .main__textBlock {
+  .main__left-container {
     width: 95%;
     margin-bottom: 20px;
   }

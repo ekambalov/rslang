@@ -3,8 +3,8 @@ import Services from '../Service/service';
 import ButtonOpenMenu from './button-open-menu';
 import Navigation from './navigation';
 import ButtonOpenAutorise from './button-open-autorise';
-import FormAutorise from './Form';
 import DarkLayer from './dark-layer';
+import FormAutorise from './autorise-form-modal';
 
 export default class Header extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
