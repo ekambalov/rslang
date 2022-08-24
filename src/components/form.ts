@@ -5,7 +5,7 @@ import { FormInput } from './form-Input';
 import Button from './button';
 
 const inputs: IOptionsInput[] = [
-  { title: 'Ваше имя:', type: 'text', id: 'firstName', name: 'firstName' },
+  { title: 'Ваше имя:', type: 'text', id: 'name', name: 'name' },
   { title: 'E-mail:', type: 'email', id: 'emal', name: 'email' },
   { title: 'Введите пароль:', type: 'password', id: 'password', name: 'password' },
 ];
@@ -21,9 +21,24 @@ export default class Form extends BaseComponent {
     inputs.forEach((input) => {
       new FormInput(this.element, this.services, input).render();
     });
-    new Button(this.element, this.services, 'form__btn_autorise', 'Авторизация', 'submit').render();
-    new Button(this.element, this.services, 'form__btn_enter', 'Войти', 'submit').render();
+    new Button(
+      this.element,
+      this.services,
+      'form__btn_autorise',
+      'Авторизация',
+      'button'
+      // this.services.dataBase.checkAllInput
+    ).render();
+    new Button(
+      this.element,
+      this.services,
+      'form__btn_enter',
+      'Войти',
+      'button'
+      // this.services.dataBase.checkAllInput
+    ).render();
     this.element.prepend(helloTxt);
     this.parent.appendChild(this.element);
+    // this.services.dataBase.add('scroll-on', this.scrollOn);
   }
 }

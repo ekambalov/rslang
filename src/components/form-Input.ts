@@ -45,7 +45,6 @@ export class FormInput extends BaseComponent {
 
     this.element.onchange = (e) => {
       const target = e.target as HTMLInputElement;
-      console.log(target.value, this);
       this.services.dataBase.checkInput(this, target.value);
     };
     this.services.form.add('error-message', this.error);

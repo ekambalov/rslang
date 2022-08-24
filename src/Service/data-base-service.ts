@@ -1,17 +1,17 @@
 import Observer from '../Abstract/observer';
 // eslint-disable-next-line import/no-cycle
 import { FormInput } from '../components/form-Input';
-import { UserModel } from '../Interfaces/user-model';
+import { IUser } from '../Interfaces/user-model';
+import { createUser } from '../model/api-user-autorise';
 
 export default class DataBaseServices extends Observer {
-  user: UserModel = {
-    firstName: '',
+  user: IUser = {
+    name: '',
     password: '',
     email: '',
-    isAutorise: false,
   };
 
-  isAutorise = false;
+  fullAllInput = false;
 
   // constructor() {
   //   super();
@@ -40,15 +40,6 @@ export default class DataBaseServices extends Observer {
         this.user.image = './assets/no-user.png';
       }
 
-      const user: UserModel | null = await getUser(this.user.email);
-      if (user) {
-        const userScore = user.score;
-        this.user.score = this.user.score < userScore ? userScore : this.user.score;
-        await updateUser(this.user);
-      } else {
-        await addUser(this.user);
-      }
-
       sessionStorage.setItem('match-match-game', this.user.email);
       this.dispath('account');
       this.isUser = true;
@@ -72,10 +63,12 @@ export default class DataBaseServices extends Observer {
   }
 */
   checkAllInput(): void {
-    if (this.user.firstName && this.user.password && this.user.email) {
-      this.dispath('check-all-input', 'true');
+    if (this.user.name && this.user.password && this.user.email) {
+      this.fullAllInput = true;
+      createUser(this.user);
     } else {
-      this.dispath('check-all-input', 'false');
+      this.fullAllInput = false;
+      console.log('Не все поля заполнены');
     }
   }
 
@@ -86,12 +79,34 @@ export default class DataBaseServices extends Observer {
     if (input.type === 'email') {
       this.checkEmail(input, value);
     }
+    if (input.type === 'password') {
+      this.checkPassword(input, value);
+    }
     this.checkAllInput();
   }
 
-  checkText(input: FormInput, val: string): void {
+  checkPassword = (input: FormInput, val: string): void => {
     const value = val.trim();
-    this.user.firstName = '';
+    this.user.password = '';
+    if (value.length === 0) {
+      input.error('Поле не может быть пустым');
+      return;
+    }
+    if (value.length > 30) {
+      input.error('Не более 30 символов');
+      return;
+    }
+    if (value.length < 8) {
+      input.error('Не менее 8 символов');
+      return;
+    }
+    this.user.password = value;
+    input.success();
+  };
+
+  checkText = (input: FormInput, val: string): void => {
+    const value = val.trim();
+    this.user.name = '';
 
     if (value.length === 0) {
       input.error('Поле не может быть пустым');
@@ -118,9 +133,9 @@ export default class DataBaseServices extends Observer {
       return;
     }
 
-    this.user.firstName = value;
+    this.user.name = value;
     input.success();
-  }
+  };
 
   checkEmail(input: FormInput, val: string): void {
     const value = val.trim();
