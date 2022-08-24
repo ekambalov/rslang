@@ -15,17 +15,18 @@ export default class FormAutorise extends BaseComponent {
       'header__btn_closeAutorise',
       'X',
       'button',
-      this.services.menu.closeAutoriseForm
+      this.services.form.closeAutoriseForm
     ).render();
     new Form(this.element, this.services).render();
-    this.services.menu.add('close-autorise', this.closeAutoriseForm);
-    this.services.menu.add('open-autorise', this.openAutoriseForm);
+    this.services.form.add('close-autorise', this.closeAutoriseForm);
+    this.services.form.add('open-autorise', this.openAutoriseForm);
     this.parent.appendChild(this.element);
   }
 
   openAutoriseForm = () => {
     this.element.style.display = 'block';
     this.services.menu.showDarkLayer();
+    this.services.form.clearInput();
   };
 
   closeAutoriseForm = () => {

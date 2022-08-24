@@ -2,8 +2,8 @@
 import { IUser, IUserGetToken } from '../Interfaces/user-model';
 import State from './state';
 
-// const base = 'https://rs-learn-words.herokuapp.com/'
-const base = 'https://react-learnwords-example.herokuapp.com/';
+const base = 'https://rs-learn-words.herokuapp.com/'
+// const base = 'https://app-learn-words.herokuapp.com/'; from Nikita
 
 export const getUserTokken = async (user: IUserGetToken): Promise<void> => {
   try {
@@ -18,7 +18,8 @@ export const getUserTokken = async (user: IUserGetToken): Promise<void> => {
     const content = await response.json();
     if(response.status === 200) {
       State.userInfoAutorise = content;
-      State.isAutorise = true;      
+      State.isAutorise = true;  
+      localStorage.setItem('state', JSON.stringify(State));
     }
     console.log(State);
   } catch (e) {
@@ -38,12 +39,8 @@ export const createUser = async (user: IUser): Promise<void> => {
     });
     const content = await response.json();
     State.userItem = content;
-    console.log(content, 'json');
-   const userTokken = {
-    'email': user.email,
-    'password': user.password
-   }
-   getUserTokken(userTokken);
+    console.log(content);
+   
   } catch (e) {
     console.log(e);
   }

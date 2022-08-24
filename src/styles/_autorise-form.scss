@@ -109,18 +109,22 @@ text-align: center;
   background-image: url('./assets/img/btnForm1.png');
   text-shadow: 1px 2px 1px rgb(10, 10, 10);
 
-  &:hover {    
+  &:hover,
+  &:disabled {    
     background-image: url('./assets/img/btnForm.png');
   }
 }
 .form__btn_enter {
    background-image: url('./assets/img/btnForm2.png');
 
-  &:hover {
+  &:hover,
+  &:disabled  {
     color: white;
     background-image: url('./assets/img/btnForm.png');
     text-shadow: 1px 2px 1px rgb(10, 10, 10);
   }
+
+  
 }
 @media screen and (max-width: 360px) {
   .form-container {
