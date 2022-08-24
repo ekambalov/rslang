@@ -1,10 +1,9 @@
 import BaseComponent from '../Abstract/base-component';
 import Services from '../Service/service';
-import ButtonOpenMenu from './button-open-menu';
 import Navigation from './navigation';
-import ButtonOpenAutorise from './button-open-autorise';
 import DarkLayer from './dark-layer';
 import FormAutorise from './autorise-form-modal';
+import ButtonWithCallback from './button-with-callback';
 
 export default class Header extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
@@ -12,10 +11,24 @@ export default class Header extends BaseComponent {
   }
 
   render = () => {
-    new ButtonOpenMenu(this.element, this.services).render();
+    new ButtonWithCallback(
+      this.element,
+      this.services,
+      'header__btn_openMenu',
+      '',
+      'button',
+      this.services.menu.openMenu
+    ).render();
     new Navigation(this.element, this.services).render();
     new DarkLayer(this.element, this.services).render();
-    new ButtonOpenAutorise(this.element, this.services).render();
+    new ButtonWithCallback(
+      this.element,
+      this.services,
+      'header__btn_openAutorise',
+      'Autorise',
+      'button',
+      this.services.menu.openAutoriseForm
+    ).render();
     new FormAutorise(this.element, this.services).render();
     this.parent.appendChild(this.element);
   };

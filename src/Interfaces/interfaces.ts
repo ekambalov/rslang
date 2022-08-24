@@ -1,3 +1,5 @@
+import { IUserID, IUserToken } from './user-model';
+
 export interface ILinkProps {
   content: string;
   path: string;
@@ -17,4 +19,12 @@ export interface IOptionsInput {
   type: string;
   id: string;
   name: string;
+}
+export interface ICallback {
+  (): void;
+}
+export interface IState {
+  userItem: IUserID;
+  isAutorise: boolean;
+  userInfoAutorise: IUserToken;
 }
