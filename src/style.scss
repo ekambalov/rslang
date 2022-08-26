@@ -4,6 +4,7 @@
 @import './styles/slider';
 @import './styles/footer';
 @import './styles/team';
+@import './styles/cart';
 
 * {
   margin: 0;
@@ -29,19 +30,19 @@
 
 @font-face {
   font-family: 'Junegull';
-  src: url("./assets/fonts/junegull.ttf");
+  src: url('./assets/fonts/junegull.ttf');
   font-weight: 400;
 }
 
 @font-face {
   font-family: 'Comic Book';
-  src: url("./assets/fonts/ComicBookFun-Regular.ttf");
+  src: url('./assets/fonts/ComicBookFun-Regular.ttf');
   font-weight: 400;
 }
 
 @font-face {
   font-family: 'Inter';
-  src: url("./assets/fonts/Inter-Bold.ttf");
+  src: url('./assets/fonts/Inter-Bold.ttf');
   font-weight: 700;
 }
 
