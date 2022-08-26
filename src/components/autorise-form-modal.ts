@@ -31,7 +31,7 @@ export default class FormAutorise extends BaseComponent {
   };
 
   closeAutoriseForm = () => {
-    this.element.style.display = 'none';
     this.services.menu.removeDarkLayer();
+    this.element.style.display = 'none';
   };
 }

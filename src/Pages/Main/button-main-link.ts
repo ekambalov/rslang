@@ -16,7 +16,9 @@ export default class ButtonLink extends BaseComponent {
     this.element.setAttribute('href', `#${path}`);
     this.element.classList.add(`${clas}`);
     this.element.textContent = `${content}`;
-
+    // if (this.element.textContent === 'Авторизация') {
+    //  this.element.addEventListener('click', this.services.form.openAutoriseForm);
+    // }
     this.parent.appendChild(this.element);
   };
 }

@@ -27,7 +27,7 @@ export default class Form extends BaseComponent {
       'form__btn_autorise',
       'Авторизация',
       'button'
-      // this.services.form.clickAutorise
+      //  this.services.form.clickAutorise
     ).render();
     new Button(
       this.element,

@@ -1,6 +1,6 @@
 import BaseComponent from '../Abstract/base-component';
 import Services from '../Service/service';
-import State from '../model/state';
+//  import State from '../model/state';
 
 export default class NameUser extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
@@ -8,17 +8,15 @@ export default class NameUser extends BaseComponent {
   }
 
   render = () => {
-    if (localStorage.getItem('state')) {
-      this.element.textContent = JSON.parse(localStorage.getItem('state') as string).userItem.name;
-    } else {
-      this.element.textContent = State.userInfoAutorise.name;
-    }
-    this.element.textContent = State.userItem.name;
+    this.element.textContent = localStorage.getItem('state')
+      ? JSON.parse(localStorage.getItem('state') as string).userItem.name
+      : '';
+
+    this.services.form.add('show-user-name', this.showNameUser);
     this.parent.appendChild(this.element);
-    // this.services.form.add('show-user-name', this.showNameUser);
   };
 
-  // showNameUser = () => {
-  //  this.element.innerHTML = `${name}`;
-  // };
+  showNameUser = () => {
+    this.element.innerHTML = this.services.form.user.name;
+  };
 }

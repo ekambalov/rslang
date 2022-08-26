@@ -1,4 +1,3 @@
-// github toshi4ka7
 interface Listener {
   name: string;
   callback: (...params: string[]) => void;

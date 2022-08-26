@@ -20,6 +20,7 @@ export default class FormService extends Observer {
   clickAutorise = () => {
     this.btnClickAutorise = true;
     this.btnClickEnter = false;
+    console.log(this.btnClickAutorise, this.btnClickEnter);
   };
 
   clickEnter = () => {
@@ -41,9 +42,9 @@ export default class FormService extends Observer {
     this.dispath('clear-form');
   };
 
-  //  showNameUser = () => {
-  //  this.dispath('show-user-name');
-  //  };
+  showNameUser = () => {
+    this.dispath('show-user-name');
+  };
 
   hideExitAutorise = () => {
     this.dispath('hide-exit-autorise');
@@ -87,25 +88,34 @@ export default class FormService extends Observer {
     this.user.email = '';
   }
 
-  async checkAllInput(): Promise<void> {
+  autoriseNewUser = async (): Promise<void> => {
+    this.disabledBtnAutorise();
+    await createUser(this.user);
+    const userTokken = {
+      email: this.user.email,
+      password: this.user.password,
+    };
+    await getUserTokken(userTokken);
+    this.clearInput();
+    this.closeAutoriseForm();
+    this.hideBtnAutorise();
+    this.showNameUser();
+    this.showExitAutorise();
+    this.clear();
+    this.btnClickAutorise = false;
+  };
+
+  checkAllInput = () => {
     if (this.user.name && this.user.password && this.user.email) {
       this.fullAllInput = true;
-      this.disabledBtnAutorise();
-      await createUser(this.user);
-      const userTokken = {
-        email: this.user.email,
-        password: this.user.password,
-      };
-      await getUserTokken(userTokken);
-      this.clearInput();
-      this.closeAutoriseForm();
-      this.hideBtnAutorise();
-      this.showExitAutorise();
+      if (!this.btnClickAutorise) {
+        this.autoriseNewUser();
+      }
     } else {
       this.fullAllInput = false;
       console.log('Не все поля заполнены');
     }
-  }
+  };
 
   checkInput(input: FormInput, value: string): void {
     if (input.type === 'text') {
