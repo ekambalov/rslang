@@ -6,12 +6,13 @@ import TextBookCart from '../../components/textbook-cart';
 
 export default class TextbookPage extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
-    super('section', 'texbook');
+    super('section', 'textbook');
   }
 
   render = () => {
     this.parent.innerHTML = ''; // clear the main section
-    const title = new BaseComponent<HTMLHeadElement>('h2', 'texbook__title').element;
+    this.element.innerHTML = ''; // clear the main section
+    const title = new BaseComponent<HTMLHeadElement>('h2', 'textbook__title').element;
     const settings = new BaseComponent('div', 'textbook__settings').element;
     settings.textContent = 'Settings';
     title.textContent = 'Учебник';
