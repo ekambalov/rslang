@@ -27,7 +27,7 @@ export default class Form extends BaseComponent {
       'form__btn_autorise',
       'Авторизация',
       'button'
-      // this.services.dataBase.checkAllInput
+      // this.services.form.clickAutorise
     ).render();
     new Button(
       this.element,
@@ -35,10 +35,9 @@ export default class Form extends BaseComponent {
       'form__btn_enter',
       'Войти',
       'button'
-      // this.services.dataBase.checkAllInput
+      // this.services.form.clickEnter
     ).render();
     this.element.prepend(helloTxt);
     this.parent.appendChild(this.element);
-    // this.services.dataBase.add('scroll-on', this.scrollOn);
   }
 }

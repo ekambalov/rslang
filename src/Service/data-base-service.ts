@@ -27,6 +27,15 @@ export default class DataBaseServices extends Observer {
         this.user.image = './assets/no-user.png';
       }
 
+      const user: UserModel | null = await getUser(this.user.email);
+      if (user) {
+        const userScore = user.score;
+        this.user.score = this.user.score < userScore ? userScore : this.user.score;
+        await updateUser(this.user);
+      } else {
+        await addUser(this.user);
+      }
+
       sessionStorage.setItem('match-match-game', this.user.email);
       this.dispath('account');
       this.isUser = true;
@@ -40,6 +49,13 @@ export default class DataBaseServices extends Observer {
     if (action === 'cancel') {
       document.location.hash = '#/score';
     }
+  }
+
+  clear(): void {
+    this.user.lastName = '';
+    this.user.firstName = '';
+    this.user.email = '';
+    this.user.image = '';
   }
 */
 }

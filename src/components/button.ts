@@ -18,11 +18,22 @@ export default class Button extends BaseComponent<HTMLButtonElement> {
     this.element.textContent = `${this.nameBtn}`;
     this.element.setAttribute('type', `${this.type}`);
     this.parent.appendChild(this.element);
+    (this.element as HTMLButtonElement).disabled = false;
     this.service.form.add('disabled-btn-autorise', this.disabledBtnAutorise);
-    // this.element.addEventListener('click', this.callback);
+    this.service.form.add('un-disabled-btn-autorise', this.unDisabledBtnAutorise);
+    if (this.element.textContent === `Авторизация`) {
+      this.element.addEventListener('click', this.service.form.clickAutorise);
+    }
+    if (this.element.textContent === `Войти`) {
+      this.element.addEventListener('click', this.service.form.clickEnter);
+    }
   };
 
   disabledBtnAutorise = () => {
-    this.element.setAttribute('disabled', 'true');
+    (this.element as HTMLButtonElement).disabled = true;
+  };
+
+  unDisabledBtnAutorise = () => {
+    (this.element as HTMLButtonElement).disabled = false;
   };
 }

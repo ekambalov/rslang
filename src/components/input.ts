@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import BaseComponent from '../Abstract/base-component';
 import Services from '../Service/service';
 
@@ -14,6 +15,7 @@ export default class Input extends BaseComponent<HTMLInputElement> {
   }
 
   render = () => {
+    console.log(this.id);
     this.element.setAttribute('type', `${this.type}`);
     this.element.setAttribute('id', `${this.id}`);
     this.element.setAttribute('name', `${this.name}`);
@@ -23,6 +25,6 @@ export default class Input extends BaseComponent<HTMLInputElement> {
   };
 
   clearInput = () => {
-    this.element.innerHTML = '';
+    (this.element as HTMLInputElement).value = '';
   };
 }

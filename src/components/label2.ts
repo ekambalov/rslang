@@ -1,21 +1,21 @@
 /* eslint-disable import/no-cycle */
 import BaseComponent from '../Abstract/base-component';
 import Services from '../Service/service';
-import { IOptionsInput } from '../Interfaces/interfaces';
 
-export default class Label extends BaseComponent<HTMLLabelElement> {
+export default class Label2 extends BaseComponent<HTMLHeadingElement> {
   constructor(
     private readonly parent: HTMLElement,
     private readonly service: Services,
     private readonly classes: string,
-    private readonly options: IOptionsInput
+    private readonly title: string,
+    private readonly type: string
   ) {
-    super('label', classes);
+    super('h6', classes);
   }
 
   render = () => {
-    this.element.textContent = `${this.options.title}`;
-    this.element.setAttribute('for', `${this.options.type}`);
+    this.element.innerHTML = `jyujuyk`;
+    // this.element.setAttribute('for', `${this.type}`);
     this.parent.appendChild(this.element);
   };
 }

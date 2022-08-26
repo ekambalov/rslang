@@ -9,7 +9,7 @@ import FormService from './Service/form-service';
 import DataBaseServices from './Service/data-base-service';
 
 class App {
-  services: Services;
+  private services: Services;
 
   constructor(private readonly root: HTMLElement) {
     this.services = {

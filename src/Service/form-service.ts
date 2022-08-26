@@ -11,7 +11,22 @@ export default class FormService extends Observer {
     email: '',
   };
 
+  btnClickAutorise = false;
+
+  btnClickEnter = false;
+
   fullAllInput = false;
+
+  clickAutorise = () => {
+    this.btnClickAutorise = true;
+    this.btnClickEnter = false;
+  };
+
+  clickEnter = () => {
+    this.btnClickAutorise = false;
+    this.btnClickEnter = true;
+    console.log(this.btnClickAutorise, this.btnClickEnter);
+  };
 
   openAutoriseForm = () => {
     this.dispath('open-autorise');
@@ -36,6 +51,10 @@ export default class FormService extends Observer {
 
   disabledBtnAutorise = () => {
     this.dispath('disabled-btn-autorise');
+  };
+
+  unDisabledBtnAutorise = () => {
+    this.dispath('un-disabled-btn-autorise');
   };
 
   showExitAutorise = () => {
@@ -78,7 +97,7 @@ export default class FormService extends Observer {
         password: this.user.password,
       };
       await getUserTokken(userTokken);
-      this.clearForm();
+      this.clearInput();
       this.closeAutoriseForm();
       this.hideBtnAutorise();
       this.showExitAutorise();
