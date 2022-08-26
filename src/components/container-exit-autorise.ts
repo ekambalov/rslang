@@ -30,5 +30,6 @@ export default class ContainerExitAutorise extends BaseComponent {
   hideExitAutorise = () => {
     this.element.style.display = 'none';
     this.services.form.showBtnAutorise();
+    localStorage.removeItem('state');
   };
 }

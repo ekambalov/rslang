@@ -17,6 +17,13 @@ export default class FormService extends Observer {
 
   fullAllInput = false;
 
+  loadWindow = () => {
+    if (localStorage.getItem('state')) {
+      this.showExitAutorise();
+      this.hideBtnAutorise();
+    }
+  };
+
   clickAutorise = () => {
     this.btnClickAutorise = true;
     this.btnClickEnter = false;
