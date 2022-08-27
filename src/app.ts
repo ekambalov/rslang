@@ -30,6 +30,7 @@ class App {
 
     new Router(main, this.services).render();
     new Footer(this.root, this.services).render();
+    window.addEventListener('load', this.services.form.loadWindow);
   }
 }
 

@@ -1,6 +1,7 @@
 import Observer from '../Abstract/observer';
+import { IRouterService } from '../interfaces/interfaces';
 
-export default class RouterService extends Observer {
+export default class RouterService extends Observer implements IRouterService {
   router?: string;
 
   setRouter(router: string): void {
