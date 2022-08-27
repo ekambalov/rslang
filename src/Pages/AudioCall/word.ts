@@ -1,46 +1,54 @@
 import BaseComponent from '../../Abstract/base-component';
 import Services from '../../Service/service';
+import ButtonAudio from './btn-audio';
 
 export default class WordContainer extends BaseComponent {
   private baseUrl = 'https://rs-learn-words.herokuapp.com/';
 
-  private btnPlayAudio?: HTMLElement;
+  private wordImg?: HTMLElement;
+
+  private wordText?: HTMLElement;
+
+  private wordTranscription?: HTMLElement;
 
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
     super('div', 'word-container');
 
-    this.services.audioCall.add('play-audio', this.playAudio);
-    this.services.audioCall.add('stop-audio', this.stopAudio);
+    this.services.audioCall.add('next-word', this.updateWordContainer);
   }
 
   render() {
-    const word = this.services.audioCall.getWord();
-    if (word) {
-      const wordImg = new BaseComponent<HTMLImageElement>('img', 'word-img').element;
-      wordImg.setAttribute('src', `${this.baseUrl}${word.image}`);
-      this.element.appendChild(wordImg);
+    const wordData = this.services.audioCall.getWord();
+    if (wordData) {
+      const img = new BaseComponent<HTMLImageElement>('img', 'word-img').element;
+      img.setAttribute('src', `${this.baseUrl}${wordData.image}`);
+      this.element.appendChild(img);
+      this.wordImg = img;
 
-      const btn = new BaseComponent<HTMLButtonElement>('button', 'btn-play-audio').element;
-      btn.addEventListener('click', this.services.audioCall.playAudio);
-      this.element.appendChild(btn);
-      this.btnPlayAudio = btn;
+      new ButtonAudio(this.element, this.services).render();
 
-      const wordText = new BaseComponent('p', 'word-text').element;
-      this.element.appendChild(wordText);
+      this.wordText = new BaseComponent('p', 'word-text').element;
+      this.wordText.textContent = wordData.word;
+      this.element.appendChild(this.wordText);
 
-      const wordTranscription = new BaseComponent('p', 'word-transcription').element;
-      wordTranscription.textContent = word.transcription;
-      this.element.appendChild(wordTranscription);
+      this.wordTranscription = new BaseComponent('p', 'word-transcription').element;
+      this.wordTranscription.textContent = wordData.transcription;
+      this.element.appendChild(this.wordTranscription);
 
       this.parent.appendChild(this.element);
     }
   }
 
-  playAudio = () => {
-    this.btnPlayAudio?.setAttribute('disabled', '');
-  };
-
-  stopAudio = () => {
-    this.btnPlayAudio?.removeAttribute('disabled');
-  };
+  updateWordContainer() {
+    const wordData = this.services.audioCall.getWord();
+    if (wordData) {
+      this.wordImg?.setAttribute('src', `${this.baseUrl}${wordData.image}`);
+      if (this.wordText) {
+        this.wordText.textContent = wordData.word;
+      }
+      if (this.wordTranscription) {
+        this.wordTranscription.textContent = wordData.transcription;
+      }
+    }
+  }
 }

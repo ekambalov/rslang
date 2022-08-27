@@ -1,6 +1,5 @@
 import Observer from '../Abstract/observer';
 import { IWord } from '../Interfaces/interfaces';
-import { getWords } from '../Models/data-base';
 
 export default class AudioСallService extends Observer {
   private baseUrl = 'https://rs-learn-words.herokuapp.com/';
