@@ -1,5 +1,6 @@
 import BaseComponent from '../Abstract/base-component';
 import { baseUrl } from '../model/getTextbook';
+import State from '../model/state';
 import Services from '../Service/service';
 
 export default class ButtonAudioTextbook extends BaseComponent<HTMLButtonElement> {
@@ -25,13 +26,13 @@ export default class ButtonAudioTextbook extends BaseComponent<HTMLButtonElement
 
   render = () => {
     this.element.addEventListener('click', () => {
-      if (this.isPlayed) {
+      if (State.textbook.isPlayed && this.element.classList.contains('cart__audio--play')) {
         this.stop();
       } else {
         this.start();
       }
     });
-    this.element.append(this.audio);
+    this.element.append(this.audio, this.audioMeaning, this.audioExample);
     this.parent.appendChild(this.element);
 
     this.audio.addEventListener('ended', () => {
@@ -45,19 +46,22 @@ export default class ButtonAudioTextbook extends BaseComponent<HTMLButtonElement
     });
   };
 
-  stop() {
-    this.audio.pause();
-    this.audioMeaning.pause();
-    this.audioExample.pause();
-    this.audio.currentTime = 0;
-    this.audioMeaning.currentTime = 0;
-    this.audio.currentTime = 0;
-    this.element.classList.remove('cart__audio--play');
-    this.isPlayed = false;
+  private stop() {
+    const audioItems = document.querySelectorAll('audio');
+    audioItems?.forEach((audio) => {
+      audio.pause();
+      const item = audio;
+      item.currentTime = 0;
+    });
+    document.querySelectorAll('.cart__audio')?.forEach((block) => {
+      block.classList.remove('cart__audio--play');
+    });
+    State.textbook.isPlayed = false;
   }
 
-  start() {
-    this.isPlayed = true;
+  private start() {
+    if (State.textbook.isPlayed) this.stop();
+    State.textbook.isPlayed = true;
     this.element.classList.add('cart__audio--play');
     this.audio.play();
   }

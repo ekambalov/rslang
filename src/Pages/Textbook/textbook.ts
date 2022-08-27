@@ -3,6 +3,7 @@ import BaseComponent from '../../Abstract/base-component';
 import { getWords } from '../../model/getTextbook';
 import Services from '../../Service/service';
 import TextBookCart from '../../components/textbook-cart';
+import TextBookSettings from '../../components/textbook-settings';
 
 export default class TextbookPage extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
@@ -14,11 +15,9 @@ export default class TextbookPage extends BaseComponent {
     this.element.innerHTML = ''; // clear the main section
     const title = new BaseComponent<HTMLHeadElement>('h2', 'textbook__title').element;
     const settings = new BaseComponent('div', 'textbook__settings').element;
-    settings.textContent = 'Settings';
+    new TextBookSettings(settings, this.services).render();
     title.textContent = 'Учебник';
     const carts = new BaseComponent('div', 'textbook__carts').element;
-
-    // this.services.textbook.add('get-words', this.getWords);
     this.getWords().then((words) => {
       words.forEach((word) => {
         new TextBookCart(carts, this.services, word).render();
@@ -28,10 +27,9 @@ export default class TextbookPage extends BaseComponent {
     this.parent.appendChild(this.element); // add our section to main
   };
 
-  getWords(page = 0, group = 0): Promise<Word[]> {
-    return getWords(page, group).then((res) => {
-      const result: Promise<Word[]> = res.json();
-      return result;
-    });
+  private async getWords(page = 0, group = 0): Promise<Word[]> {
+    const res = await getWords(page, group);
+    const result: Promise<Word[]> = res.json();
+    return result;
   }
 }

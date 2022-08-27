@@ -1,9 +1,9 @@
 class Store {
-    isAutirose: boolean;
+  isAutirose: boolean;
 
-    constructor() {
-        this.isAutirose = false;
-    }
+  constructor() {
+    this.isAutirose = false;
+  }
 }
 
 export default Store;
