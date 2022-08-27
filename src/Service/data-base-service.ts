@@ -1,6 +1,8 @@
 import Observer from '../Abstract/observer';
+import { IDataBaseServices } from '../Interfaces/interfaces';
 
-export default class DataBaseServices extends Observer {
+export default class DataBaseServices extends Observer implements IDataBaseServices {
+  isAutorise = false;
   // constructor() {
   //   super();
   //  this.session();

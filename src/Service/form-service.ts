@@ -1,10 +1,9 @@
-/* eslint-disable import/no-cycle */
 import Observer from '../Abstract/observer';
-import { FormInput } from '../components/form-Input';
 import { IUser, IUserToken } from '../Interfaces/user-model';
 import { createUser, getUserTokken, deleteUserServer } from '../model/api-user-autorise';
+import { IFormService, IFormInputConponent } from '../Interfaces/interfaces';
 
-export default class FormService extends Observer {
+export default class FormService extends Observer implements IFormService {
   user: IUser = {
     name: '',
     password: '',
@@ -172,7 +171,7 @@ export default class FormService extends Observer {
     return false;
   };
 
-  checkInput(input: FormInput, value: string): void {
+  checkInput(input: IFormInputConponent, value: string): void {
     if (input.type === 'text') {
       this.checkText(input, value);
     }
@@ -185,7 +184,7 @@ export default class FormService extends Observer {
     this.checkAllInput();
   }
 
-  checkPassword = (input: FormInput, val: string): void => {
+  checkPassword = (input: IFormInputConponent, val: string): void => {
     const value = val.trim();
     this.user.password = '';
     if (value.length === 0) {
@@ -204,7 +203,7 @@ export default class FormService extends Observer {
     input.success();
   };
 
-  checkText = (input: FormInput, val: string): void => {
+  checkText = (input: IFormInputConponent, val: string): void => {
     const value = val.trim();
     this.user.name = '';
 
@@ -236,7 +235,7 @@ export default class FormService extends Observer {
     input.success();
   };
 
-  checkEmail(input: FormInput, val: string): void {
+  checkEmail(input: IFormInputConponent, val: string): void {
     const value = val.trim();
     this.user.email = '';
 

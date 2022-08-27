@@ -1,7 +1,6 @@
-/* eslint-disable import/no-cycle */
 import BaseComponent from '../Abstract/base-component';
+import { IOptionsInput, IFormInputConponent } from '../Interfaces/interfaces';
 import Services from '../Service/service';
-import { IOptionsInput } from '../Interfaces/interfaces';
 
 export interface OptionsInput {
   title: string;
@@ -10,8 +9,8 @@ export interface OptionsInput {
   name: string;
 }
 
-export class FormInput extends BaseComponent {
-  private messageElement?: HTMLElement;
+export class FormInput extends BaseComponent implements IFormInputConponent {
+  messageElement?: HTMLElement;
 
   readonly type: string;
 
@@ -21,11 +20,7 @@ export class FormInput extends BaseComponent {
 
   readonly id: string;
 
-  constructor(
-    private readonly parent: HTMLElement,
-    private readonly services: Services,
-    private readonly options: IOptionsInput
-  ) {
+  constructor(readonly parent: HTMLElement, readonly services: Services, readonly options: IOptionsInput) {
     super('div', 'form__item');
     this.type = options.type;
     this.name = options.name;
