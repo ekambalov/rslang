@@ -2,6 +2,7 @@ import { Word } from '../Interfaces/word-model';
 import Services from '../Service/service';
 import BaseComponent from '../Abstract/base-component';
 import { baseUrl } from '../model/getTextbook';
+import ButtonAudioTextbook from './button-audio-textbook';
 
 export default class TextBookCart extends BaseComponent {
   constructor(
@@ -18,8 +19,9 @@ export default class TextBookCart extends BaseComponent {
     img.alt = this.wordData.word;
 
     const info = new BaseComponent('div', 'cart__info').element;
-    const word = new BaseComponent('p', 'cart__word').element as HTMLImageElement;
+    const word = new BaseComponent('p', 'cart__word').element;
     word.textContent = `${this.wordData.word} – ${this.wordData.transcription}`;
+    new ButtonAudioTextbook(word, this.services, this.wordData.audio).render();
     const translate = new BaseComponent('p', 'cart__translate').element;
     translate.textContent = this.wordData.wordTranslate;
     const textMeaning = new BaseComponent('p', 'cart__english').element;
