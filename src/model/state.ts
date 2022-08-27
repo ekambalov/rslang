@@ -17,6 +17,11 @@ const State: IState = localStorage.getItem('state')
         userId: '',
         name: '',
       },
+      textbook: {
+        isPlayed: false,
+        currentPage: 0,
+        currentLevel: 0,
+      },
     };
 
 export default State;
