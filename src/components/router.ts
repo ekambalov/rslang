@@ -1,9 +1,9 @@
 import MainPage from '../Pages/Main/page';
 import Services from '../Service/service';
 import TeamPage from '../Pages/AboutTeam/page';
+import TextbookPage from '../Pages/Textbook/textbook';
 
-type Page = MainPage | TeamPage;
-
+type Page = MainPage | TeamPage | TextbookPage;
 interface RoutesInterface {
   path: string;
   component: Page;
@@ -16,6 +16,7 @@ export default class Router {
     this.routes = [
       { path: '#/main', component: new MainPage(this.root, this.services) },
       { path: '#/authors', component: new TeamPage(this.root, this.services) },
+      { path: '#/book', component: new TextbookPage(this.root, this.services) },
     ];
   }
 
