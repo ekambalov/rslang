@@ -1,9 +1,22 @@
 import Observer from '../Abstract/observer';
 // eslint-disable-next-line import/no-cycle
 import { FormInput } from '../components/form-Input';
+import { IWord } from '../Interfaces/interfaces';
 import { UserModel } from '../Interfaces/user-model';
+import { getWords } from '../Models/data-base';
+import getRandomInteger from '../utils/utils';
 
 export default class DataBaseServices extends Observer {
+  firstPage = 0;
+
+  lastPage = 29;
+
+  amountWords = 0;
+
+  wordsData?: IWord[];
+
+  gamePath = '';
+
   user: UserModel = {
     firstName: '',
     password: '',
@@ -13,6 +26,16 @@ export default class DataBaseServices extends Observer {
 
   isAutorise = false;
 
+  getWordsByLevel = async (level: number) => {
+    const random = getRandomInteger(this.firstPage, this.lastPage);
+    const words = await getWords(level, random);
+    this.wordsData = words;
+    this.playSelectionGame();
+  };
+
+  playSelectionGame() {
+    document.location.href = this.gamePath;
+  }
   // constructor() {
   //   super();
   //  this.session();
@@ -30,7 +53,7 @@ export default class DataBaseServices extends Observer {
       }
     }
   }
-
+ 
   async action(action: string): Promise<void> {
     if (action === 'registration') {
       this.dispath('registration');
@@ -39,7 +62,7 @@ export default class DataBaseServices extends Observer {
       if (!this.user.image) {
         this.user.image = './assets/no-user.png';
       }
-
+ 
       const user: UserModel | null = await getUser(this.user.email);
       if (user) {
         const userScore = user.score;
@@ -48,7 +71,7 @@ export default class DataBaseServices extends Observer {
       } else {
         await addUser(this.user);
       }
-
+ 
       sessionStorage.setItem('match-match-game', this.user.email);
       this.dispath('account');
       this.isUser = true;
@@ -63,7 +86,7 @@ export default class DataBaseServices extends Observer {
       document.location.hash = '#/score';
     }
   }
-
+ 
   clear(): void {
     this.user.lastName = '';
     this.user.firstName = '';

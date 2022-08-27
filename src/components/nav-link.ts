@@ -3,16 +3,22 @@ import { ILinkProps } from '../Interfaces/interfaces';
 import Services from '../Service/service';
 
 export default class NavLink extends BaseComponent {
+  private link?: HTMLElement;
+
   constructor(private readonly parent: HTMLElement, private readonly services: Services, private props: ILinkProps) {
     super('li', 'nav-list__item');
   }
 
   render = () => {
-    const { content, path } = this.props;
-
+    const { content, path, game } = this.props;
     const link = new BaseComponent('a', 'nav-list__link').element;
     link.setAttribute('href', `#${path}`);
     link.textContent = `${content}`;
+    link.onclick = () => {
+      if (game) {
+        this.services.dataBase.gamePath = game;
+      }
+    };
     this.element.appendChild(link);
     this.parent.appendChild(this.element);
 

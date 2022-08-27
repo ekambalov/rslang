@@ -1,4 +1,4 @@
-import Store from '../model/store';
+import Store from '../Models/store';
 import AppViewer from '../view/appViewer';
 
 class Controller {
