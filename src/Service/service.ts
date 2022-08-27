@@ -1,6 +1,5 @@
 import MenuService from './menu-service';
 import RouterService from './router-service';
-// eslint-disable-next-line import/no-cycle
 import DataBaseServices from './data-base-service';
 import FormService from './form-service';
 import TextbookService from './textbook-service';
