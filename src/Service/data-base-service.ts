@@ -1,63 +1,30 @@
 import Observer from '../Abstract/observer';
+import getWords from '../Model/data-base';
+import getRandomInteger from '../Utils/utils';
 import { IDataBaseServices } from '../Interfaces/interfaces';
+import { Word } from '../Interfaces/word-model';
 
 export default class DataBaseServices extends Observer implements IDataBaseServices {
+  firstPage = 0;
+
+  lastPage = 29;
+
+  amountWords = 0;
+
+  words?: Word[];
+
+  gamePath = '';
+
   isAutorise = false;
-  // constructor() {
-  //   super();
-  //  this.session();
-  // }
-  /*
-  async session(): Promise<void> {
-    const email = sessionStorage.getItem('rs-lang-autorise-user');
-    if (email) {
-      this.isAutorise = true;
-      const user: UserModel | null = await getUser(email);
-      if (user) {
-        this.user = user;
-        this.dispath('account');
-      }
-    }
+
+  getWordsByLevel = async (level: number) => {
+    const random = getRandomInteger(this.firstPage, this.lastPage);
+    const words = await getWords(level, random);
+    this.words = words;
+    this.playSelectionGame();
+  };
+
+  playSelectionGame() {
+    document.location.href = this.gamePath;
   }
-
-  async action(action: string): Promise<void> {
-    if (action === 'registration') {
-      this.dispath('registration');
-    }
-    if (action === 'addUser') {
-      if (!this.user.image) {
-        this.user.image = './assets/no-user.png';
-      }
-
-      const user: UserModel | null = await getUser(this.user.email);
-      if (user) {
-        const userScore = user.score;
-        this.user.score = this.user.score < userScore ? userScore : this.user.score;
-        await updateUser(this.user);
-      } else {
-        await addUser(this.user);
-      }
-
-      sessionStorage.setItem('match-match-game', this.user.email);
-      this.dispath('account');
-      this.isUser = true;
-      document.location.hash = '#/score';
-    }
-    if (action === 'update') {
-      await updateUser(this.user);
-      this.dispath('account');
-      document.location.hash = '#/score';
-    }
-    if (action === 'cancel') {
-      document.location.hash = '#/score';
-    }
-  }
-
-  clear(): void {
-    this.user.lastName = '';
-    this.user.firstName = '';
-    this.user.email = '';
-    this.user.image = '';
-  }
-*/
 }

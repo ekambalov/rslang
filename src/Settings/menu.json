@@ -9,11 +9,13 @@
   },
   {
     "content": "Аудиовызов",
-    "path": "/audio-challenge"
+    "path": "/level-selection",
+    "game": "#/audio-call"
   },
   {
     "content": "Спринт",
-    "path": "/sprint"
+    "path": "/level-selection",
+    "game": "#/sprint"
   },
   {
     "content": "Статистика",

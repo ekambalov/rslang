@@ -2,11 +2,12 @@ import Services from './Service/service';
 import RouterService from './Service/router-service';
 import MenuService from './Service/menu-service';
 import BaseComponent from './Abstract/base-component';
-import Router from './components/router';
-import Header from './components/header';
-import Footer from './components/footer';
+import Router from './Components/router';
+import Header from './Components/header';
+import Footer from './Components/footer';
 import FormService from './Service/form-service';
 import DataBaseServices from './Service/data-base-service';
+import AudioCallService from './Service/audio-call';
 import TextbookService from './Service/textbook-service';
 
 class App {
@@ -18,6 +19,7 @@ class App {
       router: new RouterService(),
       form: new FormService(),
       dataBase: new DataBaseServices(),
+      audioCall: new AudioCallService(),
       textbook: new TextbookService(),
     };
   }
