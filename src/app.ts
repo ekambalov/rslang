@@ -8,6 +8,7 @@ import Footer from './components/footer';
 import FormService from './Service/form-service';
 import DataBaseServices from './Service/data-base-service';
 import AudioCallService from './Service/audio-call';
+import TextbookService from './Service/textbook-service';
 
 class App {
   private services: Services;
@@ -19,6 +20,7 @@ class App {
       form: new FormService(),
       dataBase: new DataBaseServices(),
       audioCall: new AudioCallService(),
+      textbook: new TextbookService(),
     };
   }
 
@@ -30,6 +32,7 @@ class App {
 
     new Router(main, this.services).render();
     new Footer(this.root, this.services).render();
+    window.addEventListener('load', this.services.form.loadWindow);
   }
 }
 

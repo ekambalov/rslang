@@ -5,7 +5,5 @@ export default class Answers extends BaseComponent {
     super('div', 'answers-container');
   }
 
-  render = () => {
-    
-  }
+  render = () => {};
 }

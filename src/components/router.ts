@@ -1,10 +1,11 @@
 import MainPage from '../Pages/Main/page';
-import Services from '../Service/service';
 import TeamPage from '../Pages/AboutTeam/page';
 import AudioCall from '../Pages/AudioCall/page';
 import LevelSelection from '../Pages/LevelSelection/page';
+import TextbookPage from '../Pages/Textbook/textbook';
+import Services from '../Service/service';
 
-type Page = MainPage | TeamPage | AudioCall | LevelSelection;
+type Page = MainPage | TeamPage | TextbookPage | AudioCall | LevelSelection;
 
 interface RoutesInterface {
   path: string;
@@ -16,10 +17,10 @@ export default class Router {
 
   constructor(private readonly root: HTMLElement, private readonly services: Services) {
     this.routes = [
-      { path: '/main', component: new MainPage(this.root, this.services) },
-      { path: '/audio-call', component: new AudioCall(this.root, this.services) },
-      { path: '/authors', component: new TeamPage(this.root, this.services) },
-      { path: '/level-selection', component: new LevelSelection(this.root, this.services) },
+      { path: '#/main', component: new MainPage(this.root, this.services) },
+      { path: '#/audio-call', component: new AudioCall(this.root, this.services) },
+      { path: '#/authors', component: new TeamPage(this.root, this.services) },
+      { path: '#/level-selection', component: new LevelSelection(this.root, this.services) },
     ];
   }
 
@@ -29,7 +30,7 @@ export default class Router {
   };
 
   routing = (): void => {
-    const path = document.location.hash.slice(1).toLowerCase() || '#/main';
+    const path = document.location.hash.toLowerCase() || '#/main';
     this.services.router.setRouter(path);
     const currentRout = this.routes.find((item) => item.path === path) || this.routes[0];
     currentRout.component.render();

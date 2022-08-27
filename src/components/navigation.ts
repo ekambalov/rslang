@@ -2,8 +2,8 @@ import BaseComponent from '../Abstract/base-component';
 // import { getNavSetting } from '../Model/getSettings';
 import linksProps from '../Settings/menu.json';
 import Services from '../Service/service';
-import ButtonCloseMenu from './button-close-menu';
 import NavLink from './nav-link';
+import ButtonWithCallback from './button-with-callback';
 
 export default class Navigation extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
@@ -11,7 +11,14 @@ export default class Navigation extends BaseComponent {
   }
 
   render = () => {
-    new ButtonCloseMenu(this.element, this.services).render();
+    new ButtonWithCallback(
+      this.element,
+      this.services,
+      'header__btn_closeMenu',
+      '',
+      'button',
+      this.services.menu.closeMenu
+    ).render();
 
     const navList = new BaseComponent('ul', 'nav-list').element;
     linksProps.forEach((link) => new NavLink(navList, this.services, link).render());
@@ -28,7 +35,7 @@ export default class Navigation extends BaseComponent {
   closeMenu = () => {
     this.element.classList.remove('open');
     this.services.menu.removeDarkLayer();
-    this.scrollOn();
+    this.scrollOff();
   };
 
   openMenu = () => {

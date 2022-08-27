@@ -1,0 +1,19 @@
+.textbook {
+  width: 95%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+
+  &__title {
+    font-family: 'Junegull';
+    font-size: 35px;
+    font-weight: 200;
+    color: aliceblue;
+    text-shadow: 1px 3px 1px rgb(10, 10, 10);
+    text-decoration: none;
+    text-align: center;
+  }
+  &__cart {
+    margin-bottom: 20px;
+  }
+}
