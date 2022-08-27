@@ -1,9 +1,7 @@
 /* eslint-disable import/no-cycle */
 import BaseComponent from '../Abstract/base-component';
-// eslint-disable-next-line import/no-cycle
 import Services from '../Service/service';
 import { IOptionsInput } from '../Interfaces/interfaces';
-// import Input from './input';
 
 export interface OptionsInput {
   title: string;

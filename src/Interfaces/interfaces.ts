@@ -27,4 +27,5 @@ export interface IState {
   userItem: IUserID;
   isAutorise: boolean;
   userInfoAutorise: IUserToken;
+  deleteUser: string;
 }

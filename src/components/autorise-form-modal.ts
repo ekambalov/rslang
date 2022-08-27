@@ -28,6 +28,7 @@ export default class FormAutorise extends BaseComponent {
     this.services.form.clearInput();
     this.services.form.unDisabledBtnAutorise();
     this.element.style.display = 'block';
+    this.services.form.removeAutoriseError();
   };
 
   closeAutoriseForm = () => {

@@ -11,6 +11,8 @@ const inputs: IOptionsInput[] = [
 ];
 
 export default class Form extends BaseComponent {
+  private messageElement?: HTMLElement;
+
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
     super('form', 'form');
   }
@@ -37,7 +39,23 @@ export default class Form extends BaseComponent {
       'button'
       // this.services.form.clickEnter
     ).render();
+    this.messageElement = new BaseComponent('p', 'autorise-error').element;
+    this.messageElement.textContent = '';
     this.element.prepend(helloTxt);
+    this.element.appendChild(this.messageElement);
     this.parent.appendChild(this.element);
+    this.services.form.add('show-autorise-error', this.showAutoriseError);
+    this.services.form.add('remove-autorise-error', this.removeAutoriseError);
   }
+
+  showAutoriseError = () => {
+    (this.messageElement as HTMLElement).textContent = this.services.form.btnClickAutorise
+      ? 'Такой пользователь уже есть :('
+      : 'Такого пользователя нет :(';
+    if (!this.services.form.fullAllInput) (this.messageElement as HTMLElement).textContent = 'Не все поля заполнены';
+  };
+
+  removeAutoriseError = () => {
+    (this.messageElement as HTMLElement).textContent = '';
+  };
 }

@@ -9,6 +9,7 @@ const State: IState = localStorage.getItem('state')
         email: '',
       },
       isAutorise: false,
+      deleteUser: '',
       userInfoAutorise: {
         message: '',
         token: '',

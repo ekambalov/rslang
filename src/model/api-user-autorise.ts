@@ -1,49 +1,59 @@
-/* eslint-disable prettier/prettier */
-import { IUser, IUserGetToken } from '../Interfaces/user-model';
+import { IUserToken, IUser, IUserID, IUserGetToken } from '../Interfaces/user-model';
 import State from './state';
 
-const base = 'https://rs-learn-words.herokuapp.com/'
+const base = 'https://rs-learn-words.herokuapp.com/';
 // const base = 'https://app-learn-words.herokuapp.com/'; from Nikita
 
-export const getUserTokken = async (user: IUserGetToken): Promise<void> => {
-  try {
-    const response: Response = await fetch(`${base}signin`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    });
-    const content = await response.json();
-    if(response.status === 200) {
-      State.userInfoAutorise = content;
-      State.isAutorise = true;  
-      localStorage.setItem('state', JSON.stringify(State));
-    }
-    console.log(State);
-  } catch (e) {
-    console.log(e);
+export const getUserTokken = async (user: IUserGetToken): Promise<IUserToken | number> => {
+  const response: Response = await fetch(`${base}signin`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(user),
+  });
+  if (response.status === 200) {
+    const content: IUserToken = await response.json();
+    State.userInfoAutorise = content;
+    State.isAutorise = true;
+    localStorage.setItem('userInfoTokken', JSON.stringify(content));
+    return content;
   }
+  return response.status;
 };
 
-export const createUser = async (user: IUser): Promise<void> => {
-  try {
-    const response: Response = await fetch(`${base}users`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    });
-    const content = await response.json();
+export const createUser = async (user: IUser): Promise<IUserID | number> => {
+  const response: Response = await fetch(`${base}users`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(user),
+  });
+  if (response.status === 200) {
+    const content: IUserID = await response.json();
+    localStorage.setItem('userInfo', JSON.stringify(content));
     State.userItem = content;
-    console.log(content);
-   
-  } catch (e) {
-    console.log(e);
+    return content;
   }
+  return response.status;
+};
+
+export const deleteUserServer = async (): Promise<void> => {
+  const response: Response = await fetch(`${base}users/${State.userInfoAutorise.userId}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${State.userInfoAutorise.token}`,
+    },
+  });
+  const content = await response.json();
+  if (response.status === 204) {
+    State.isAutorise = false;
+    localStorage.removeItem('state');
+  }
+  console.log(content);
 };
 
 /*

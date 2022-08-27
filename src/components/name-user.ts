@@ -8,15 +8,19 @@ export default class NameUser extends BaseComponent {
   }
 
   render = () => {
-    this.element.textContent = localStorage.getItem('state')
-      ? JSON.parse(localStorage.getItem('state') as string).userItem.name
-      : '';
+    this.element.textContent = localStorage.getItem('userInfoEnter')
+      ? JSON.parse(localStorage.getItem('userInfoEnter') as string).name
+      : this.services.form.user.name;
+
+    // this.element.textContent = localStorage.getItem('userInfoEnter')
+    //  ? JSON.parse(localStorage.getItem('userInfoEnter') as string).user.name
+    //  : this.services.form.userInfoAutorise.name;
 
     this.services.form.add('show-user-name', this.showNameUser);
     this.parent.appendChild(this.element);
   };
 
   showNameUser = () => {
-    this.element.innerHTML = this.services.form.user.name;
+    this.element.innerHTML = JSON.parse(localStorage.getItem('userInfoEnter') as string).name;
   };
 }

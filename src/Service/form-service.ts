@@ -1,14 +1,22 @@
 /* eslint-disable import/no-cycle */
 import Observer from '../Abstract/observer';
 import { FormInput } from '../components/form-Input';
-import { IUser } from '../Interfaces/user-model';
-import { createUser, getUserTokken } from '../model/api-user-autorise';
+import { IUser, IUserToken } from '../Interfaces/user-model';
+import { createUser, getUserTokken, deleteUserServer } from '../model/api-user-autorise';
 
 export default class FormService extends Observer {
   user: IUser = {
     name: '',
     password: '',
     email: '',
+  };
+
+  userInfoAutorise: IUserToken = {
+    message: '',
+    token: '',
+    refreshToken: '',
+    userId: '',
+    name: '',
   };
 
   btnClickAutorise = false;
@@ -18,8 +26,9 @@ export default class FormService extends Observer {
   fullAllInput = false;
 
   loadWindow = () => {
-    if (localStorage.getItem('state')) {
+    if (localStorage.getItem('userInfoEnter')) {
       this.showExitAutorise();
+      this.showNameUser();
       this.hideBtnAutorise();
     }
   };
@@ -27,12 +36,16 @@ export default class FormService extends Observer {
   clickAutorise = () => {
     this.btnClickAutorise = true;
     this.btnClickEnter = false;
+    if (this.checkAllInput()) this.createNewUser();
+    else this.showAutoriseError();
     console.log(this.btnClickAutorise, this.btnClickEnter);
   };
 
   clickEnter = () => {
     this.btnClickAutorise = false;
     this.btnClickEnter = true;
+    if (this.checkAllInput()) this.getTokken();
+    else this.showAutoriseError();
     console.log(this.btnClickAutorise, this.btnClickEnter);
   };
 
@@ -45,10 +58,6 @@ export default class FormService extends Observer {
     this.dispath('clear-form');
   };
 
-  clearForm = () => {
-    this.dispath('clear-form');
-  };
-
   showNameUser = () => {
     this.dispath('show-user-name');
   };
@@ -57,16 +66,16 @@ export default class FormService extends Observer {
     this.dispath('hide-exit-autorise');
   };
 
+  showExitAutorise = () => {
+    this.dispath('show-exit-autorise');
+  };
+
   disabledBtnAutorise = () => {
     this.dispath('disabled-btn-autorise');
   };
 
   unDisabledBtnAutorise = () => {
     this.dispath('un-disabled-btn-autorise');
-  };
-
-  showExitAutorise = () => {
-    this.dispath('show-exit-autorise');
   };
 
   hideBtnAutorise = () => {
@@ -89,39 +98,78 @@ export default class FormService extends Observer {
     this.dispath('remove-error-message');
   };
 
-  clear(): void {
+  showAutoriseError = () => {
+    this.dispath('show-autorise-error');
+  };
+
+  removeAutoriseError = () => {
+    this.dispath('remove-autorise-error');
+  };
+
+  clear = (): void => {
     this.user.name = '';
     this.user.password = '';
     this.user.email = '';
-  }
+  };
 
-  autoriseNewUser = async (): Promise<void> => {
+  deleteUser = () => {
+    deleteUserServer();
+  };
+
+  createNewUser = async (): Promise<void> => {
     this.disabledBtnAutorise();
-    await createUser(this.user);
-    const userTokken = {
+    const responseCreateAnswe = await createUser(this.user);
+    if (typeof responseCreateAnswe === 'number') {
+      this.showAutoriseError();
+      this.unDisabledBtnAutorise();
+      this.clearInput();
+      this.clear();
+      this.btnClickAutorise = false;
+      this.btnClickEnter = false;
+    } else {
+      console.log(responseCreateAnswe);
+      this.getTokken();
+      this.removeAutoriseError();
+    }
+  };
+
+  getTokken = async (): Promise<void> => {
+    this.disabledBtnAutorise();
+    const userItem = {
       email: this.user.email,
       password: this.user.password,
     };
-    await getUserTokken(userTokken);
-    this.clearInput();
-    this.closeAutoriseForm();
-    this.hideBtnAutorise();
-    this.showNameUser();
-    this.showExitAutorise();
-    this.clear();
-    this.btnClickAutorise = false;
+    const answeToken = await getUserTokken(userItem);
+    if (typeof answeToken === 'number') {
+      this.showAutoriseError();
+      this.unDisabledBtnAutorise();
+      this.clearInput();
+      this.clear();
+    } else {
+      this.userInfoAutorise = answeToken;
+      this.clearInput();
+      this.closeAutoriseForm();
+      this.hideBtnAutorise();
+      this.showNameUser();
+      this.showExitAutorise();
+      this.clear();
+      this.btnClickAutorise = false;
+      this.btnClickEnter = false;
+      this.removeAutoriseError();
+      console.log(answeToken);
+    }
   };
 
-  checkAllInput = () => {
+  checkAllInput = (): boolean => {
     if (this.user.name && this.user.password && this.user.email) {
       this.fullAllInput = true;
-      if (!this.btnClickAutorise) {
-        this.autoriseNewUser();
-      }
-    } else {
-      this.fullAllInput = false;
-      console.log('Не все поля заполнены');
+      localStorage.setItem('userInfoEnter', JSON.stringify(this.user));
+      return true;
     }
+    this.fullAllInput = false;
+    console.log('Не все поля заполнены');
+    // this.showAutoriseError();
+    return false;
   };
 
   checkInput(input: FormInput, value: string): void {
