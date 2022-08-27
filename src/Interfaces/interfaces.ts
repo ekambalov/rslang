@@ -3,6 +3,7 @@ import { IUserID, IUserToken, IUser } from './user-model';
 export interface ILinkProps {
   content: string;
   path: string;
+  game?: string;
 }
 export interface ILinkButtonProps {
   content: string;
@@ -20,6 +21,7 @@ export interface IOptionsInput {
   id: string;
   name: string;
 }
+
 export interface ICallback {
   (): void;
 }
@@ -38,7 +40,7 @@ export interface IMenuServise {
 }
 
 export interface IRouterService {
-  router?: string;
+  router: string;
   setRouter(router: string): void;
 }
 

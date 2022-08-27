@@ -1,9 +1,12 @@
 import MainPage from '../Pages/Main/page';
-import Services from '../Service/service';
 import TeamPage from '../Pages/AboutTeam/page';
+import AudioCall from '../Pages/AudioCall/page';
+import LevelSelection from '../Pages/LevelSelection/page';
 import TextbookPage from '../Pages/Textbook/textbook';
+import Services from '../Service/service';
 
-type Page = MainPage | TeamPage | TextbookPage;
+type Page = MainPage | TeamPage | TextbookPage | AudioCall | LevelSelection;
+
 interface RoutesInterface {
   path: string;
   component: Page;
@@ -15,7 +18,9 @@ export default class Router {
   constructor(private readonly root: HTMLElement, private readonly services: Services) {
     this.routes = [
       { path: '#/main', component: new MainPage(this.root, this.services) },
+      { path: '#/audio-call', component: new AudioCall(this.root, this.services) },
       { path: '#/authors', component: new TeamPage(this.root, this.services) },
+      { path: '#/level-selection', component: new LevelSelection(this.root, this.services) },
       { path: '#/book', component: new TextbookPage(this.root, this.services) },
     ];
   }

@@ -8,9 +8,7 @@ export default class MainPage {
   constructor(private parent: HTMLElement, private services: Services) {}
 
   render = () => {
-    // new Header(this.parent, this.services).render();
     this.parent.innerHTML = '';
     new Main(this.parent, this.services).render();
-    // new Footer(this.parent, this.services).render();
   };
 }

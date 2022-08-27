@@ -1,8 +1,8 @@
 import { Word } from '../../Interfaces/word-model';
 import BaseComponent from '../../Abstract/base-component';
-import { getWords } from '../../model/getTextbook';
+import { getWords } from '../../Model/getTextbook';
 import Services from '../../Service/service';
-import TextBookCart from '../../components/textbook-cart';
+import TextBookCart from '../../Components/textbook-cart';
 
 export default class TextbookPage extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
