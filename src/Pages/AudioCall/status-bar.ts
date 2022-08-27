@@ -16,7 +16,7 @@ export default class StatusBar extends BaseComponent {
     this.services.audioCall.add('next-word', this.updateCurrentStatus);
 
     this.total = new BaseComponent('span', 'status-bar__current').element;
-    this.total.textContent = `${20}`;
+    this.total.textContent = `${this.services.audioCall.amountWords}`;
 
     this.element.appendChild(this.current);
     this.element.appendChild(this.total);
@@ -26,7 +26,7 @@ export default class StatusBar extends BaseComponent {
 
   updateCurrentStatus = (currentStatus: string) => {
     if (this.current) {
-      this.current.textContent = currentStatus;
+      this.current.textContent = `${currentStatus}/`;
     }
   };
 }

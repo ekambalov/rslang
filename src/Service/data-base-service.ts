@@ -13,7 +13,7 @@ export default class DataBaseServices extends Observer {
 
   amountWords = 0;
 
-  wordsData?: IWord[];
+  words?: IWord[];
 
   gamePath = '';
 
@@ -29,7 +29,7 @@ export default class DataBaseServices extends Observer {
   getWordsByLevel = async (level: number) => {
     const random = getRandomInteger(this.firstPage, this.lastPage);
     const words = await getWords(level, random);
-    this.wordsData = words;
+    this.words = words;
     this.playSelectionGame();
   };
 

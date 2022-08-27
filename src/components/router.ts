@@ -29,7 +29,6 @@ export default class Router {
   };
 
   routing = (): void => {
-    debugger;
     const path = document.location.hash.slice(1).toLowerCase() || '#/main';
     this.services.router.setRouter(path);
     const currentRout = this.routes.find((item) => item.path === path) || this.routes[0];
