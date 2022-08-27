@@ -1,7 +1,7 @@
 import { Word } from '../Interfaces/word-model';
 import Services from '../Service/service';
 import BaseComponent from '../Abstract/base-component';
-import { baseUrl } from '../model/getTextbook';
+import { baseUrl } from '../Model/getTextbook';
 import ButtonAudioTextbook from './button-audio-textbook';
 
 export default class TextBookCart extends BaseComponent {

@@ -21,6 +21,7 @@ export default class Router {
       { path: '#/audio-call', component: new AudioCall(this.root, this.services) },
       { path: '#/authors', component: new TeamPage(this.root, this.services) },
       { path: '#/level-selection', component: new LevelSelection(this.root, this.services) },
+      { path: '#/book', component: new TextbookPage(this.root, this.services) },
     ];
   }
 

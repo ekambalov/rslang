@@ -2,7 +2,7 @@ import BaseComponent from '../../Abstract/base-component';
 import Services from '../../Service/service';
 import avatar from '../../Settings/avatar-team-page.json';
 import linksProps from '../../Settings/link-person-gitHub.json';
-import LinkGitHub from '../../components/link-GitHub';
+import LinkGitHub from '../../Components/link-GitHub';
 
 const name = ['Никита', 'Светлана', 'Ягор'];
 const work = ['frontend developer', 'frontend developer', 'frontend developer'];
