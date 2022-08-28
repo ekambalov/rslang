@@ -46,7 +46,7 @@ export default class FormEnter extends BaseComponent {
     (this.messageElement as HTMLElement).textContent = this.services.form.btnClickAutorise
       ? 'Такой пользователь уже есть :('
       : 'Такого пользователя нет :(';
-    if (!this.services.form.fullAllInput) (this.messageElement as HTMLElement).textContent = 'Не все поля заполнены';
+    if (!this.services.form.fullEnterInput) (this.messageElement as HTMLElement).textContent = 'Не все поля заполнены';
   };
 
   removeAutoriseError = () => {

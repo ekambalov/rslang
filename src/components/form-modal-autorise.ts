@@ -29,6 +29,8 @@ export default class AutoriseFormModal extends BaseComponent {
     this.services.form.unDisabledBtnAutorise();
     this.element.style.display = 'block';
     this.services.form.removeAutoriseError();
+    this.services.form.fullAllInput = false;
+    this.services.form.fullEnterInput = false;
   };
 
   closeAutoriseForm = () => {

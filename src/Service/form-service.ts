@@ -24,12 +24,24 @@ export default class FormService extends Observer implements IFormService {
 
   fullAllInput = false;
 
+  fullEnterInput = false;
+
   loadWindow = () => {
-    if (localStorage.getItem('userInfoEnter')) {
+    if (localStorage.getItem('userInfoTokken')) {
       this.showExitAutorise();
       this.showNameUser();
       this.hideBtnAutorise();
     }
+  };
+
+  clear = (): void => {
+    this.user.name = '';
+    this.user.password = '';
+    this.user.email = '';
+    this.btnClickAutorise = false;
+    this.btnClickEnter = false;
+    this.fullAllInput = false;
+    this.fullEnterInput = false;
   };
 
   openFormFull = () => {
@@ -107,12 +119,6 @@ export default class FormService extends Observer implements IFormService {
     this.dispath('remove-autorise-error');
   };
 
-  clear = (): void => {
-    this.user.name = '';
-    this.user.password = '';
-    this.user.email = '';
-  };
-
   clickAutorise = () => {
     this.btnClickAutorise = true;
     this.btnClickEnter = false;
@@ -183,6 +189,7 @@ export default class FormService extends Observer implements IFormService {
       return true;
     }
     if (this.user.password && this.user.email && !this.btnClickEnter) {
+      this.fullEnterInput = true;
       localStorage.setItem('userInfoEnter', JSON.stringify(this.user));
       return true;
     }
