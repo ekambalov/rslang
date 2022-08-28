@@ -1,6 +1,6 @@
 .form-container {
   width: 365px;
-  height: 500px;
+  height: 550px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,7 +12,12 @@
   z-index: 10; 
   display: none; 
 }
-
+.form-enter__img_hello {
+  width: 90px;
+  height: 90px;
+  margin-bottom: 15px;
+}
+.header__btn_openEnter,
 .header__btn_openAutorise,
 .header__btn_closeAutorise {
 font-family: 'Comic Book';
@@ -34,9 +39,14 @@ cursor: pointer;
     color: white;
   }
   }
+  .header__btn_openEnter {
+    color: white;  
+    margin-left: 15px;  
+  }
 
-.header__btn_openAutorise:hover {
-  color: white;
+.header__btn_openAutorise:hover,
+.header__btn_openEnter:hover  {
+  color: red;
 }
 .error {
   border: 2px solid red;

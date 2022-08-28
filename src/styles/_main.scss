@@ -46,7 +46,7 @@ h1 {
 }
 
 .button__link:hover {
-  color: rgb(85, 6, 19);
+  color: rgb(128, 13, 13);
 }
 
 .containerButton__button_book,
@@ -89,7 +89,7 @@ h1 {
   grid-area: 4 / 4 / 5 / 6;
   background-image: url('./assets/img/statistic.png');
 }
-
+.containerButton__button_enter,
 .containerButton__button_autorize,
 .containerButton__button_autor {
   background-repeat: no-repeat;
@@ -107,15 +107,23 @@ h1 {
 }
 
 .containerButton__button_autorize:hover .button__link,
+.containerButton__button_enter:hover .button__link,
 .containerButton__button_autor:hover .button__link {
   color: white;
   text-shadow: 2px 2px 2px rgb(34, 30, 30);
 }
 
 .containerButton__button_autorize {
-  grid-area: 6 / 2 / 7 / 5;
+  grid-area: 6 / 2 / 7 / 3;
+}
+.containerButton__button_enter {
+  grid-area: 6 / 4 / 7 / 5;
+  transform: translate(-2px) rotate(3deg);
   background-image: url('./assets/img/autorize.png');
-
+  margin-bottom: -7px;
+  margin-top: 7px;
+  text-align: left;
+  padding-left: 15px;
 }
 
 .containerButton__button_autor {
@@ -123,7 +131,7 @@ h1 {
   background-image: url('./assets/img/team2.png');
   transform: translate(-3px) rotate(3deg);
 }
-
+.containerButton__button_enter:hover,
 .containerButton__button_autorize:hover,
 .containerButton__button_autor:hover {
   background-color: rgb(65, 12, 211);

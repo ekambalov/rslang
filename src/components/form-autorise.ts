@@ -10,7 +10,7 @@ const inputs: IOptionsInput[] = [
   { title: 'Введите пароль:', type: 'password', id: 'password', name: 'password' },
 ];
 
-export default class Form extends BaseComponent {
+export default class FormAutorise extends BaseComponent {
   private messageElement?: HTMLElement;
 
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
@@ -30,14 +30,6 @@ export default class Form extends BaseComponent {
       'Авторизация',
       'button'
       //  this.services.form.clickAutorise
-    ).render();
-    new Button(
-      this.element,
-      this.services,
-      'form__btn_enter',
-      'Войти',
-      'button'
-      // this.services.form.clickEnter
     ).render();
     this.messageElement = new BaseComponent('p', 'autorise-error').element;
     this.messageElement.textContent = '';

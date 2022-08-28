@@ -1,9 +1,9 @@
 import BaseComponent from '../Abstract/base-component';
 import Services from '../Service/service';
-import Form from './form';
 import ButtonWithCallback from './button-with-callback';
+import FormAutorise from './form-autorise';
 
-export default class FormAutorise extends BaseComponent {
+export default class AutoriseFormModal extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
     super('div', 'form-container');
   }
@@ -17,9 +17,9 @@ export default class FormAutorise extends BaseComponent {
       'button',
       this.services.form.closeAutoriseForm
     ).render();
-    new Form(this.element, this.services).render();
-    this.services.form.add('close-autorise', this.closeAutoriseForm);
-    this.services.form.add('open-autorise', this.openAutoriseForm);
+    new FormAutorise(this.element, this.services).render();
+    this.services.form.add('close-autorise-form', this.closeAutoriseForm);
+    this.services.form.add('open-autorise-form', this.openAutoriseForm);
     this.parent.appendChild(this.element);
   }
 
@@ -29,6 +29,8 @@ export default class FormAutorise extends BaseComponent {
     this.services.form.unDisabledBtnAutorise();
     this.element.style.display = 'block';
     this.services.form.removeAutoriseError();
+    this.services.form.fullAllInput = false;
+    this.services.form.fullEnterInput = false;
   };
 
   closeAutoriseForm = () => {

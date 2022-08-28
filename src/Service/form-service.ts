@@ -1,6 +1,6 @@
 import Observer from '../Abstract/observer';
 import { IUser, IUserToken } from '../Interfaces/user-model';
-import { createUser, getUserTokken, deleteUserServer } from '../Model/api-user-autorise';
+import { createUser, getUserTokken } from '../Model/api-user-autorise';
 import { IFormService, IFormInputConponent } from '../Interfaces/interfaces';
 
 export default class FormService extends Observer implements IFormService {
@@ -24,36 +24,50 @@ export default class FormService extends Observer implements IFormService {
 
   fullAllInput = false;
 
+  fullEnterInput = false;
+
   loadWindow = () => {
-    if (localStorage.getItem('userInfoEnter')) {
+    if (localStorage.getItem('userInfoTokken')) {
       this.showExitAutorise();
       this.showNameUser();
       this.hideBtnAutorise();
     }
   };
 
-  clickAutorise = () => {
-    this.btnClickAutorise = true;
+  clear = (): void => {
+    this.user.name = '';
+    this.user.password = '';
+    this.user.email = '';
+    this.btnClickAutorise = false;
     this.btnClickEnter = false;
-    if (this.checkAllInput()) this.createNewUser();
-    else this.showAutoriseError();
-    console.log(this.btnClickAutorise, this.btnClickEnter);
+    this.fullAllInput = false;
+    this.fullEnterInput = false;
   };
 
-  clickEnter = () => {
-    this.btnClickAutorise = false;
-    this.btnClickEnter = true;
-    if (this.checkAllInput()) this.getTokken();
-    else this.showAutoriseError();
-    console.log(this.btnClickAutorise, this.btnClickEnter);
+  openFormFull = () => {
+    this.dispath('open-form-full');
+  };
+
+  closeFormFull = () => {
+    this.dispath('close-form-full');
+    this.dispath('clear-form');
   };
 
   openAutoriseForm = () => {
-    this.dispath('open-autorise');
+    this.dispath('open-autorise-form');
   };
 
   closeAutoriseForm = () => {
-    this.dispath('close-autorise');
+    this.dispath('close-autorise-form');
+    this.dispath('clear-form');
+  };
+
+  openEnterForm = () => {
+    this.dispath('open-enter-form');
+  };
+
+  closeEnterForm = () => {
+    this.dispath('close-enter-form');
     this.dispath('clear-form');
   };
 
@@ -78,11 +92,11 @@ export default class FormService extends Observer implements IFormService {
   };
 
   hideBtnAutorise = () => {
-    this.dispath('hide-button-autorise');
+    this.dispath('hide-container-autorise');
   };
 
   showBtnAutorise = () => {
-    this.dispath('show-button-autorise');
+    this.dispath('show-container-autorise');
   };
 
   clearInput = () => {
@@ -105,14 +119,21 @@ export default class FormService extends Observer implements IFormService {
     this.dispath('remove-autorise-error');
   };
 
-  clear = (): void => {
-    this.user.name = '';
-    this.user.password = '';
-    this.user.email = '';
+  clickAutorise = () => {
+    this.btnClickAutorise = true;
+    this.btnClickEnter = false;
+    if (this.checkAllInput()) this.createNewUser();
+    else this.showAutoriseError();
+    console.log(this.btnClickAutorise, this.btnClickEnter);
   };
 
-  deleteUser = () => {
-    deleteUserServer();
+  clickEnter = () => {
+    this.btnClickAutorise = false;
+    this.btnClickEnter = true;
+    if (this.user.password && this.user.email) {
+      localStorage.setItem('userInfoEnter', JSON.stringify(this.user));
+      this.getTokken();
+    } else this.showAutoriseError();
   };
 
   createNewUser = async (): Promise<void> => {
@@ -148,6 +169,8 @@ export default class FormService extends Observer implements IFormService {
       this.userInfoAutorise = answeToken;
       this.clearInput();
       this.closeAutoriseForm();
+      this.closeEnterForm();
+      this.closeFormFull();
       this.hideBtnAutorise();
       this.showNameUser();
       this.showExitAutorise();
@@ -162,6 +185,11 @@ export default class FormService extends Observer implements IFormService {
   checkAllInput = (): boolean => {
     if (this.user.name && this.user.password && this.user.email) {
       this.fullAllInput = true;
+      localStorage.setItem('userInfoEnter', JSON.stringify(this.user));
+      return true;
+    }
+    if (this.user.password && this.user.email && !this.btnClickEnter) {
+      this.fullEnterInput = true;
       localStorage.setItem('userInfoEnter', JSON.stringify(this.user));
       return true;
     }

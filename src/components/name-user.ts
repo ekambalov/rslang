@@ -8,8 +8,8 @@ export default class NameUser extends BaseComponent {
   }
 
   render = () => {
-    this.element.textContent = localStorage.getItem('userInfoEnter')
-      ? JSON.parse(localStorage.getItem('userInfoEnter') as string).name
+    this.element.textContent = localStorage.getItem('userInfoTokken')
+      ? JSON.parse(localStorage.getItem('userInfoTokken') as string).name
       : this.services.form.user.name;
 
     // this.element.textContent = localStorage.getItem('userInfoEnter')
@@ -21,6 +21,6 @@ export default class NameUser extends BaseComponent {
   };
 
   showNameUser = () => {
-    this.element.innerHTML = JSON.parse(localStorage.getItem('userInfoEnter') as string).name;
+    this.element.innerHTML = JSON.parse(localStorage.getItem('userInfoTokken') as string).name;
   };
 }

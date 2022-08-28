@@ -26,6 +26,12 @@
     "path": "/main"
   },
   {
+
+    "content": "Войти",
+    "clas": "containerButton__button_enter",
+    "path": "/main"
+  },
+  {
     "content": "Авторы",
     "clas": "containerButton__button_autor",
     "path": "/authors"
