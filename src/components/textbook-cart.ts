@@ -17,11 +17,14 @@ export default class TextBookCart extends BaseComponent {
     const img = new BaseComponent('img', 'cart__image').element as HTMLImageElement;
     img.src = baseUrl + this.wordData.image;
     img.alt = this.wordData.word;
-
     const info = new BaseComponent('div', 'cart__info').element;
     const word = new BaseComponent('p', 'cart__word').element;
     word.textContent = `${this.wordData.word} – ${this.wordData.transcription}`;
-    new ButtonAudioTextbook(word, this.services, this.wordData.audio).render();
+    new ButtonAudioTextbook(word, this.services, [
+      this.wordData.audio,
+      this.wordData.audioExample,
+      this.wordData.audioMeaning,
+    ]).render();
     const translate = new BaseComponent('p', 'cart__translate').element;
     translate.textContent = this.wordData.wordTranslate;
     const textMeaning = new BaseComponent('p', 'cart__english').element;

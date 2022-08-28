@@ -30,6 +30,7 @@ export interface IState {
   isAutorise: boolean;
   userInfoAutorise: IUserToken;
   deleteUser: string;
+  textbook: TextbookState;
 }
 
 export interface IMenuServise {
@@ -103,4 +104,10 @@ export interface IFormInputConponent {
   success(): void;
   error(message: string): void;
   removeErrorMessage(): void;
+}
+
+interface TextbookState {
+  isPlayed: boolean;
+  currentPage: number;
+  currentLevel: number;
 }
