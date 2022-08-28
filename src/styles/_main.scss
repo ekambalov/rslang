@@ -43,10 +43,9 @@ h1 {
   font-family: 'Junegull';
   text-align: center;
   text-decoration: none;
-}
-
-.button__link:hover {
+   &:hover {
   color: rgb(128, 13, 13);
+}
 }
 
 .containerButton__button_book,
@@ -104,6 +103,7 @@ h1 {
   text-align: center;
   padding-top: 15px;
   background-color: rgb(167, 146, 223);
+  cursor: pointer;
 }
 
 .containerButton__button_autorize:hover .button__link,
@@ -134,9 +134,8 @@ h1 {
 .containerButton__button_enter:hover,
 .containerButton__button_autorize:hover,
 .containerButton__button_autor:hover {
-  background-color: rgb(65, 12, 211);
-  cursor: pointer;
-}
+  background-color: rgb(65, 12, 211);  
+ }
 
 
 @media screen and (max-width: 1850px) {
@@ -252,5 +251,4 @@ h1 {
   h4 {
     font-size: 10px;
   }
-
 }

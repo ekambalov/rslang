@@ -36,6 +36,16 @@ export default class Footer extends BaseComponent {
     ).render();
 
     this.element.prepend(containerLinkGitHub, year);
+    this.services.dataBase.add('hide-footer', this.hideFooter);
+    this.services.dataBase.add('show-footer', this.showFooter);
     this.parent.appendChild(this.element);
+  };
+
+  hideFooter = () => {
+    this.element.style.display = 'none';
+  };
+
+  showFooter = () => {
+    this.element.style.display = 'flex';
   };
 }

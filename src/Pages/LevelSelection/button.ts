@@ -19,6 +19,7 @@ export default class ButtonSelection extends BaseComponent<HTMLButtonElement> {
   render() {
     this.element.textContent = this.props.content;
     this.element.setAttribute('data-group', this.props.group);
+    this.element.classList.add('level-btn');
     this.element.addEventListener('click', this.selectLevel);
     this.parent.appendChild(this.element);
   }

@@ -27,4 +27,12 @@ export default class DataBaseServices extends Observer implements IDataBaseServi
   playSelectionGame() {
     document.location.href = this.gamePath;
   }
+
+  hideFooter = () => {
+    this.dispath('hide-footer');
+  };
+
+  showFooter = () => {
+    this.dispath('show-footer');
+  };
 }
