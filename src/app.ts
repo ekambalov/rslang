@@ -9,6 +9,7 @@ import FormService from './Service/form-service';
 import DataBaseServices from './Service/data-base-service';
 import AudioCallService from './Service/audio-call';
 import TextbookService from './Service/textbook-service';
+import SprintService from './Service/sprint-service';
 
 class App {
   private services: Services;
@@ -21,6 +22,7 @@ class App {
       dataBase: new DataBaseServices(),
       audioCall: new AudioCallService(),
       textbook: new TextbookService(),
+      sprint: new SprintService(),
     };
   }
 
