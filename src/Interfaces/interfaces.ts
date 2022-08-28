@@ -79,7 +79,6 @@ export interface IFormService {
   showAutoriseError(): void;
   removeAutoriseError(): void;
   clear(): void;
-  deleteUser(): void;
   createNewUser(): void;
   getTokken(): void;
   checkAllInput(): boolean;

@@ -2,10 +2,13 @@ import BaseComponent from '../Abstract/base-component';
 import Services from '../Service/service';
 import Navigation from './navigation';
 import DarkLayer from './dark-layer';
-import FormAutorise from './autorise-form-modal';
 import ButtonWithCallback from './button-with-callback';
 import ContainerExitAutorise from './container-exit-autorise';
-import ButtonAutorise from './button-autorise';
+
+import AutoriseFormModal from './form-modal-autorise';
+import EnterFormModal from './form-modal-enter';
+import ContainerCoiceAutorise from './container-coice-autorise';
+import FormModalFull from './form-modal-full';
 
 export default class Header extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
@@ -23,16 +26,11 @@ export default class Header extends BaseComponent {
     ).render();
     new Navigation(this.element, this.services).render();
     new DarkLayer(this.element, this.services).render();
-    new ButtonAutorise(
-      this.element,
-      this.services,
-      'header__btn_openAutorise',
-      'Autorise',
-      'button',
-      this.services.form.openAutoriseForm
-    ).render();
+    new ContainerCoiceAutorise(this.element, this.services).render();
     new ContainerExitAutorise(this.element, this.services).render();
-    new FormAutorise(this.element, this.services).render();
+    new AutoriseFormModal(this.element, this.services).render();
+    new EnterFormModal(this.element, this.services).render();
+    new FormModalFull(this.element, this.services).render();
     this.parent.appendChild(this.element);
   };
 }

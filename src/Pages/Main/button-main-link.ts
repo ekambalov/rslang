@@ -17,7 +17,7 @@ export default class ButtonLink extends BaseComponent {
     this.element.classList.add(`${clas}`);
     this.element.textContent = `${content}`;
     if (this.element.textContent === 'Авторизация') {
-      this.element.addEventListener('click', this.services.form.openAutoriseForm);
+      this.element.addEventListener('click', this.services.form.openFormFull);
     }
     this.parent.appendChild(this.element);
   };
