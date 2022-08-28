@@ -9,19 +9,14 @@ export default class AudioCallHeader extends BaseComponent {
 
   render(): void {
     const btnFullScreen = new BaseComponent<HTMLButtonElement>('button', 'audio-call-header__btn-fullscreen').element;
-
-    this.element.appendChild(btnFullScreen);
-
+    this.element.prepend(btnFullScreen);
     new StatusBar(this.element, this.services).render();
-
     const btnExit = new BaseComponent<HTMLButtonElement>('button', 'audio-call-header__btn-exit').element;
-
-    this.element.appendChild(btnExit);
-
+    btnExit.textContent = 'X';
     btnExit.addEventListener('click', () => {
       document.location.hash = '#/main';
     });
-
+    this.element.append(btnExit);
     this.parent.appendChild(this.element);
   }
 }

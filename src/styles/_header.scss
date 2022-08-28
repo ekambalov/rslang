@@ -112,12 +112,6 @@ cursor: pointer;
   cursor: pointer;
 }
 
-@media screen and (min-width: 1400px) {
-  .nav-list__link {
-    font-size: 20px;
-  }
-}
-
 .dark-layer {
   display: none;
   background-color: rgba(20, 19, 19, 0.8);
@@ -128,3 +122,17 @@ cursor: pointer;
   top: 0;
   left: 0;
 }
+
+@media screen and (min-width: 1400px) {
+  .nav-list__link {
+    font-size: 20px;
+  }
+}
+
+
+@media screen and (max-width: 400px) {
+  .header {
+  padding: 20px 16px 0;
+}
+}
+

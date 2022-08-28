@@ -7,12 +7,12 @@ export default class LevelSelection {
 
   render() {
     this.parent.innerHTML = '';
-    const container = new BaseComponent('div').element;
+    const container = new BaseComponent('div', 'level-selection').element;
     const title = new BaseComponent('h1', 'level-selection__title').element;
-    title.textContent = 'Аудио вызов';
+    title.textContent = 'Выберите';
     container.appendChild(title);
     const text = new BaseComponent('p', 'level-selection__text').element;
-    text.textContent = 'Выберите уровень';
+    text.textContent = 'уровень игры';
     container.appendChild(text);
     new SelectionContainer(container, this.services).render();
 

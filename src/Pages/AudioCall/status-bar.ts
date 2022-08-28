@@ -12,7 +12,7 @@ export default class StatusBar extends BaseComponent {
 
   render = async () => {
     this.current = new BaseComponent('span', 'status-bar__current').element;
-    this.current.textContent = '0/';
+    this.current.textContent = '0 /';
     this.services.audioCall.add('next-word', this.updateCurrentStatus);
 
     this.total = new BaseComponent('span', 'status-bar__current').element;

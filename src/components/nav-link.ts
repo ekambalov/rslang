@@ -18,6 +18,9 @@ export default class NavLink extends BaseComponent {
       if (game) {
         this.services.dataBase.gamePath = game;
       }
+      if (content === 'Аудиовызов' || content === 'Спринт') this.services.dataBase.hideFooter();
+      else this.services.dataBase.showFooter();
+      this.services.menu.closeMenu();
     };
     this.element.appendChild(link);
     this.parent.appendChild(this.element);
