@@ -5,21 +5,23 @@ import BaseComponent from '../../Abstract/base-component';
 // import { Word } from '../../Interfaces/word-model';
 // import TextBookCart from '../../components/textbook-cart';
 // import ButtonWithCallback from '../../components/button-with-callback';
-import GameContainer from './game-container';
+import Timer from './game-timer';
 
-export default class SprintPage extends BaseComponent {
+export default class HeaderGame extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
-    super('section', 'sprint');
+    super('div', 'game__header');
   }
 
   render = () => {
-    this.parent.innerHTML = ''; // clear the main section
-    this.element.innerHTML = ''; // clear the main section
-    const btnReturn = new BaseComponent('a', 'spint_btn-exit-game').element;
-    btnReturn.innerText = 'X';
-    btnReturn.setAttribute('href', `#/main`);
-    this.element.prepend(btnReturn);
-    new GameContainer(this.element, this.services).render();
+    const count = new BaseComponent('h6', 'game-header__count').element;
+    count.innerText = '0';
+    new Timer(this.element, this.services).render();
+    this.element.append(count);
     this.parent.appendChild(this.element);
+    this.services.sprint.add('reset-count-game', this.resetCount);
+  };
+
+  resetCount = () => {
+    this.element.childNodes[0].textContent = '0';
   };
 }

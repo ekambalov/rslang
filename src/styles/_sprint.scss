@@ -1,11 +1,83 @@
-.spint_btn-exit-game {
-font-size: 20px;
-border: 2px solid white;
-border-radius: 50%;
-color:white;
-padding: 6px 11px;
-text-decoration: none;
-&:hover {
-  color:gold;
+.sprint {
+background-image: url('./assets/img/fonSprint3.jpg');
+background-size: 100% 100%;
+width: 100%;
+min-height: calc(100vh - 70px);
+padding: 20px 40px;
+display: flex;
+flex-direction: column;
+align-items:center;
+
 }
+.spint_btn-exit-game {
+  font-size: 20px;
+  border: 2px solid white;
+  border-radius: 50%;
+  color:white;
+  padding: 6px 11px;
+  text-decoration: none;
+  margin-left: 85%;
+  &:hover {
+    color:gold;
+  }
+}
+
+.game-container { 
+  margin: 40px auto;
+  width: 70%;
+  min-height: 400px;
+  background-color: rgb(2, 7, 36);
+  border: 2px solid transparent;
+  border-radius: 20px;
+  box-shadow: 0 14px 28px rgba(245, 243, 243, 0.25), 0 10px 10px rgba(250, 250, 250, 0.22);
+}
+
+.game__header {
+  width: 100%;
+  color: white;
+  font-family: 'Junegull'; 
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 50px;
+}
+
+.game-header__count,
+.game-header__timer {
+  font-size: 50px;
+  font-family: 'Commic Book';
+}
+.game-header__timer {
+  border: 2px solid white;
+  border-radius: 50%;
+  color: gold;
+  font-size: 40px;
+padding: 5px 10px;
+}
+.rule__txt {
+  padding: 30px;
+  color: rgb(223, 208, 122);
+  font-family: 'Junegull'; 
+  font-size: 20px;
+  text-shadow: 1px 3px 1px rgb(10, 10, 10);
+  font-weight: 200;
+  text-align: center;
+  text-transform: none;
+  line-height: 35px;
+}
+.rule__btn_start {
+  width: 120px;
+  height: 40px;  
+  background-image: url('./assets/img/btn.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  margin: 10px auto 40px;
+  border: none;
+  font-size: 20px;
+  font-family: 'Comic Book';
+  text-align: center;
+  background-color: transparent;
+  text-decoration: none;
+  cursor: pointer;
+  color: rgb(51, 3, 35);
+  margin-left: calc(50% - 60px);
 }

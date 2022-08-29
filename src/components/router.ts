@@ -1,4 +1,4 @@
-import MainPage from '../Pages/Main/page';
+import MainPage from '../Pages/Main/page-main';
 import TeamPage from '../Pages/AboutTeam/page';
 import AudioCall from '../Pages/AudioCall/page';
 import LevelSelection from '../Pages/LevelSelection/page';

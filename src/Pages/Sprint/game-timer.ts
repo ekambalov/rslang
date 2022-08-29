@@ -5,21 +5,24 @@ import BaseComponent from '../../Abstract/base-component';
 // import { Word } from '../../Interfaces/word-model';
 // import TextBookCart from '../../components/textbook-cart';
 // import ButtonWithCallback from '../../components/button-with-callback';
-import GameContainer from './game-container';
 
-export default class SprintPage extends BaseComponent {
+export default class Timer extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
-    super('section', 'sprint');
+    super('h6', 'game-header__timer');
   }
 
   render = () => {
-    this.parent.innerHTML = ''; // clear the main section
-    this.element.innerHTML = ''; // clear the main section
-    const btnReturn = new BaseComponent('a', 'spint_btn-exit-game').element;
-    btnReturn.innerText = 'X';
-    btnReturn.setAttribute('href', `#/main`);
-    this.element.prepend(btnReturn);
-    new GameContainer(this.element, this.services).render();
+    this.element.textContent = '60';
     this.parent.appendChild(this.element);
+    this.services.sprint.add('start-timer', this.startTimer);
+    this.services.sprint.add('reset-timer', this.resetTimer);
+  };
+
+  startTimer = () => {
+    this.services.sprint.timer(this.element);
+  };
+
+  resetTimer = () => {
+    this.element.innerHTML = '60';
   };
 }
