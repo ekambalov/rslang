@@ -19,23 +19,25 @@ export default class TextbookPage extends BaseComponent {
     new TextBookSettings(settings, this.services).render();
     title.textContent = 'Учебник';
     const carts = new BaseComponent('div', 'textbook__carts').element;
-    this.getWords(carts);
     this.element.append(title, settings, carts);
     this.parent.appendChild(this.element); // add our section to main
+    this.drawWords();
     this.services.textbook.add('get-words', () => {
-      this.getWords(carts);
+      this.drawWords();
     });
   };
 
-  private async getWords(parent: HTMLElement): Promise<void> {
+  async drawWords(): Promise<void> {
+    const parent = document.querySelector('.textbook__carts');
     const page = State.textbook.currentPage;
     const group = State.textbook.currentLevel;
     const res = await getWords(page, group);
     const words = (await res.json()) as Word[];
     const container = parent;
-    container.innerHTML = '';
+    if (container instanceof HTMLElement) container.innerHTML = '';
+
     words.forEach((word) => {
-      new TextBookCart(parent, this.services, word).render();
+      if (parent instanceof HTMLElement) new TextBookCart(parent, this.services, word).render();
     });
     const pageBox = document.querySelector('.settings__page');
     if (pageBox instanceof HTMLElement) pageBox.textContent = `${State.textbook.currentPage + 1}`;
