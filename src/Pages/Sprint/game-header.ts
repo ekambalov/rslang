@@ -1,11 +1,7 @@
 import Services from '../../Service/service';
 import BaseComponent from '../../Abstract/base-component';
-// import State from '../../model/state';
-// import { getWords } from '../../model/getTextbook';
-// import { Word } from '../../Interfaces/word-model';
-// import TextBookCart from '../../components/textbook-cart';
-// import ButtonWithCallback from '../../components/button-with-callback';
 import Timer from './game-timer';
+import ButtonWithCallback from '../../components/button-with-callback';
 
 export default class HeaderGame extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
@@ -16,12 +12,20 @@ export default class HeaderGame extends BaseComponent {
     const count = new BaseComponent('h6', 'game-header__count').element;
     count.innerText = '0';
     new Timer(this.element, this.services).render();
+    new ButtonWithCallback(
+      this.element,
+      this.services,
+      'game-header__btn-repeat',
+      '',
+      'button',
+      this.services.sprint.repeatGame
+    ).render();
     this.element.append(count);
     this.parent.appendChild(this.element);
     this.services.sprint.add('reset-count-game', this.resetCount);
   };
 
   resetCount = () => {
-    this.element.childNodes[0].textContent = '0';
+    this.element.children[2].textContent = '0';
   };
 }

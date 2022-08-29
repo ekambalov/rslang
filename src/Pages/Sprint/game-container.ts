@@ -2,6 +2,7 @@ import Services from '../../Service/service';
 import BaseComponent from '../../Abstract/base-component';
 import HeaderGame from './game-header';
 import RuleGame from './game-rule';
+import FieldGame from './game-field';
 
 export default class GameContainer extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
@@ -11,6 +12,8 @@ export default class GameContainer extends BaseComponent {
   render = () => {
     new HeaderGame(this.element, this.services).render();
     new RuleGame(this.element, this.services).render();
+
+    new FieldGame(this.element, this.services).render();
     this.parent.appendChild(this.element);
   };
 }

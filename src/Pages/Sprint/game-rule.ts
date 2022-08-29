@@ -19,7 +19,7 @@ export default class RuleGame extends BaseComponent {
       'rule__btn_start',
       'start',
       'button',
-      this.services.sprint.startTimer
+      this.services.sprint.startGameSprint
     ).render();
     this.services.sprint.add('hide-rule-sprint', this.hideRule);
     this.services.sprint.add('show-rule-sprint', this.showRule);
@@ -29,7 +29,6 @@ export default class RuleGame extends BaseComponent {
 
   hideRule = () => {
     this.element.style.display = 'none';
-    this.services.sprint.startTimer();
   };
 
   showRule = () => {

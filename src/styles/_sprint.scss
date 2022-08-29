@@ -3,7 +3,7 @@ background-image: url('./assets/img/fonSprint3.jpg');
 background-size: 100% 100%;
 width: 100%;
 min-height: calc(100vh - 70px);
-padding: 20px 40px;
+padding: 10px 0;
 display: flex;
 flex-direction: column;
 align-items:center;
@@ -42,7 +42,7 @@ align-items:center;
 }
 
 .game-header__count,
-.game-header__timer {
+.game-header__timer { 
   font-size: 50px;
   font-family: 'Commic Book';
 }
@@ -80,4 +80,153 @@ padding: 5px 10px;
   cursor: pointer;
   color: rgb(51, 3, 35);
   margin-left: calc(50% - 60px);
+  &:hover {
+    background-image: url('./assets/img/btnForm.png');
+    color: rgb(13, 5, 56);
+  }
+}
+.game-header__btn-repeat {
+  width: 40px;
+  height: 40px;  
+  background-image: url('./assets/img/arrowRepeat1.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border: none;
+  background-color:transparent;
+  margin-top: 10px;
+  cursor: pointer;
+  &:hover {
+    background-image: url('./assets/img/arrowRepeat2.png');
+  }
+}
+
+.game__field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+  margin: 10px auto 40px;
+  display: none;
+}
+
+.game__wrapper-word-audio {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  width: 100%;
+}
+.game__words {
+  width: 440px;
+  height: 250px; 
+  background-image: url('./assets/img/monitor.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat; 
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.game__audio {
+  width: 150px;
+  height: 200px; 
+  position: relative;
+ top: 50px;
+  background-image: url('./assets/img/dinamik.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat; 
+  cursor: pointer;
+  &:hover {
+    background-image: url('./assets/img/dinamik2.png');
+  }
+}
+.words__eng, 
+.words__rus {
+  color: rgb(245, 209, 9);
+  font-family: 'Junegull'; 
+  font-size: 35px;
+  text-shadow: 1px 3px 1px rgb(10, 10, 10);
+  font-weight: 200; 
+  text-transform: none;
+  line-height: 35px;
+}
+.words__rus {
+color:white;
+font-size: 30px;
+margin-top: 30px;
+}
+.game__wrapper-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 50px;  
+}
+.game__btn_true,
+.game__btn_false {
+  width: 150px;
+  height: 60px;  
+  background-image: url('./assets/img/btnForm2.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;  
+  border: none;
+  font-size: 20px;
+  font-family: 'Junegull';
+  text-align: center;
+  background-color: transparent;  
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+  color: rgb(51, 3, 35);
+   &:hover {
+    color: rgb(9, 95, 74);
+    background-image: url('./assets/img/btnForm4.png');
+}
+}
+
+.game__btn_false {
+  background-image: url('./assets/img/btnForm.png');
+}
+
+@media screen and (max-width: 800px) {
+  .game-container { 
+    margin: 10px auto;
+    width: 90%;
+}
+}
+@media screen and (max-width: 600px) {
+  .game-container { 
+    margin: 10px auto;
+    width: 100%;
+}
+
+.game-header__timer {
+  font-size: 30px; 
+}
+.game-header__count {
+  font-size: 35px; 
+}
+.game__words { 
+  height: 200px;  
+}
+.game__audio { 
+  height: 150px; 
+  position: relative;
+ top: 50px;
+}
+}
+@media screen and (max-width: 400px) { 
+  .game__wrapper-btn {  
+    gap: 20px;  
+  }
+  .game__btn_true,
+  .game__btn_false {
+    width: 100px;
+    height: 50px;  
+   font-size: 14px;
+}
+.game__words { 
+  height: 180px;  
+}
+.game__audio { 
+  height: 130px; 
+}
 }

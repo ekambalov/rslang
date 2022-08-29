@@ -3,6 +3,13 @@ import Observer from '../Abstract/observer';
 export default class SprintService extends Observer {
   endTimeGame = false;
 
+  idTimerGame: NodeJS.Timer | undefined;
+
+  repeatGame = () => {
+    clearInterval(this.idTimerGame as NodeJS.Timer);
+    this.startGameSprint();
+  };
+
   exitGameSprint = () => {
     this.dispath('enter-game-sprint'); // выход из игры
   };
@@ -15,9 +22,25 @@ export default class SprintService extends Observer {
     this.dispath('show-rule-sprint'); // показываем правила игры
   };
 
-  startTimer = () => {
+  showFiledGame = () => {
+    this.dispath('show-filed-game'); // показываем поле игры
+  };
+
+  hideFileGame = () => {
+    this.dispath('hide-filed-game'); // прячем поле игры
+  };
+
+  startGameSprint = () => {
     this.dispath('start-timer'); // запускаем таймер
     this.hideRuleSprint();
+    this.showFiledGame();
+    this.resetTimerAndCount();
+    this.endTimeGame = false;
+  };
+
+  resetTimerAndCount = () => {
+    this.dispath('reset-timer');
+    this.dispath('reset-count-game');
   };
 
   resetTimer = () => {
@@ -43,5 +66,7 @@ export default class SprintService extends Observer {
       1000,
       element
     );
+    this.idTimerGame = timerGame;
+    console.log(typeof timerGame);
   };
 }
