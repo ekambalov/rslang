@@ -1,4 +1,5 @@
 import { IUserID, IUserToken, IUser } from './user-model';
+import { Word } from './word-model';
 
 export interface ILinkProps {
   content: string;
@@ -31,6 +32,10 @@ export interface IState {
   userInfoAutorise: IUserToken;
   deleteUser: string;
   textbook: TextbookState;
+  currentArrayWords: Word[];
+  currentArrayWordsGame: Word[];
+  currentPageGame: number;
+  currentLevelGame: number;
 }
 
 export interface IMenuServise {

@@ -1,6 +1,12 @@
 import Observer from '../Abstract/observer';
+import State from '../model/state';
+import { Word } from '../Interfaces/word-model';
+import fethWords from '../model/data-base';
+import getRandomInteger from '../utils/utils';
 
 export default class SprintService extends Observer {
+  private baseUrl = 'https://rs-learn-words.herokuapp.com/';
+
   endTimeGame = false; // закончилось время таймера
 
   countTrueAnsve = 0; // количество правильных ответов подряд
@@ -16,6 +22,29 @@ export default class SprintService extends Observer {
   stopAudioError = false; // нажата ли кнопка отмены звукового сигнала
 
   idTimerGame: NodeJS.Timer | undefined; // ID таймера для его остановки;
+
+  trueAnswe: string[] = [];
+
+  currentWords: Word[] = [];
+
+  currentWordID = 0;
+
+  currentWord: Word = {
+    audio: 'files/03_2450.mp3',
+    audioExample: 'files/03_2450_example.mp3',
+    audioMeaning: 'files/03_2450_meaning.mp3',
+    group: 4,
+    id: '5e9f5ee35eb9e72bc21afe31',
+    image: 'files/03_2450.jpg',
+    page: 2,
+    textExample: 'I quietly passed on a <b>hint</b> to my sister about the test.',
+    textExampleTranslate: 'Я спокойно передал намек моей сестре о тесте',
+    textMeaning: 'A <i>hint</i> is information that suggests something will happen or is true.',
+    textMeaningTranslate: 'Подсказка - это информация, которая предполагает, что что-то случится или будет правдой',
+    transcription: '[hint]',
+    word: 'hint',
+    wordTranslate: 'намек',
+  };
 
   repeatGame = () => {
     clearInterval(this.idTimerGame as NodeJS.Timer); // перезапуск игры
@@ -43,15 +72,25 @@ export default class SprintService extends Observer {
   };
 
   playAudioWord = () => {
-    this.dispath('play-audio-word'); // произношение слова
+    if (this.currentWord) {
+      const { audio } = this.currentWord; // произношение слова
+      new Audio(`${this.baseUrl}${audio}`).play();
+    } else {
+      throw new Error('word is not found');
+    }
   };
 
   stopAudioWord = () => {
     this.dispath('stop-audio-word'); // произношение слова
   };
 
+  writeWordGame = () => {
+    this.dispath('write-word-game'); // пишем слова англ/рус
+  };
+
   startGameSprint = () => {
     this.resetSettingGame();
+    this.writeWordGame();
     this.hideRuleSprint();
     this.showFiledGame();
     this.listener();
@@ -86,6 +125,7 @@ export default class SprintService extends Observer {
         if (seconds < 0) {
           clearInterval(timerGame);
           this.endTimeGame = true;
+          this.hideFileGame();
         }
       },
       1000,
@@ -128,6 +168,8 @@ export default class SprintService extends Observer {
     this.playAudioError();
     this.countTrueAnsve = 0;
     this.addCountReset();
+    this.addCountGame();
+    this.writeWordGame();
   };
 
   btnTrueClick = () => {
@@ -136,6 +178,7 @@ export default class SprintService extends Observer {
     this.countTrueAnsve += 1;
     this.playAudioError();
     this.addCountGame();
+    this.writeWordGame();
   };
 
   listener = () => {
@@ -152,5 +195,40 @@ export default class SprintService extends Observer {
           break;
       }
     });
+  };
+
+  getWordEngl = () => {
+    if (State.currentArrayWordsGame.length) {
+      this.currentWordID = State.currentArrayWordsGame.length - 1;
+      const word = State.currentArrayWordsGame.pop();
+      this.currentWord = word as Word;
+      console.log('слово', word?.word);
+      return word;
+    }
+    let random: number = getRandomInteger(0, 29);
+    if (random === State.currentPageGame) random = getRandomInteger(0, 29);
+    fethWords(State.currentLevelGame, random);
+    this.currentWordID = State.currentArrayWordsGame.length - 1;
+    const word = State.currentArrayWordsGame.pop();
+    this.currentWord = word as Word;
+    console.log('кончились слова это новая страница и слово ', word);
+    console.log('кончились слова это новая страница и id', this.currentWordID);
+    return word;
+  };
+
+  getRusWord = () => {
+    this.currentWordID = State.currentArrayWordsGame.length - 1;
+    const random = getRandomInteger(0, 10);
+    if (random <= 5) {
+      this.translate = true;
+      console.log('правильный перевод', State.currentArrayWordsGame[this.currentWordID].wordTranslate);
+      return State.currentArrayWordsGame[this.currentWordID].wordTranslate;
+    }
+    this.translate = false;
+    let id: number = getRandomInteger(0, 19);
+    console.log('рандомный id', id);
+    if (this.currentWordID === id) id = getRandomInteger(0, 19);
+    console.log('неправильный перевод', State.currentArrayWords[id].wordTranslate);
+    return State.currentArrayWords[id].wordTranslate;
   };
 }

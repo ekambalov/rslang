@@ -15,9 +15,10 @@ export default class FieldGame extends BaseComponent {
     wrapperWordAudio.prepend(fieldWords);
 
     const wordEnglish = new BaseComponent('h6', 'words__eng').element;
-    wordEnglish.innerHTML = 'Hello';
+    wordEnglish.innerHTML = `Hello`;
+
     const wordRus = new BaseComponent('h6', 'words__rus').element;
-    wordRus.innerHTML = 'Привет';
+    wordRus.innerHTML = `Привет`;
     fieldWords.append(wordEnglish, wordRus);
 
     const wrapperbutton = new BaseComponent('div', 'game__wrapper-btn').element;
@@ -39,6 +40,7 @@ export default class FieldGame extends BaseComponent {
     ).render();
     this.services.sprint.add('show-filed-game', this.showFiledGame);
     this.services.sprint.add('hide-filed-game', this.hideFiledGame);
+    this.services.sprint.add('write-word-game', this.writeWordGame);
     this.element.prepend(wrapperWordAudio, wrapperbutton);
     this.parent.appendChild(this.element);
   };
@@ -51,5 +53,16 @@ export default class FieldGame extends BaseComponent {
   hideFiledGame = () => {
     this.element.style.display = 'none';
     this.services.sprint.resetSettingGame();
+  };
+
+  writeWordGame = () => {
+    const englWord = this.services.sprint.getWordEngl()?.word;
+    if (englWord) {
+      this.element.children[0].children[0].children[0].innerHTML = englWord;
+    }
+    const rusWord = this.services.sprint.getRusWord();
+    if (rusWord) {
+      this.element.children[0].children[0].children[1].innerHTML = rusWord;
+    }
   };
 }
