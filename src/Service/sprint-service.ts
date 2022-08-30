@@ -54,6 +54,7 @@ export default class SprintService extends Observer {
     this.resetSettingGame();
     this.hideRuleSprint();
     this.showFiledGame();
+    this.listener();
     this.dispath('start-timer'); // запускаем таймер
   };
 
@@ -101,7 +102,7 @@ export default class SprintService extends Observer {
     this.dispath('add-count-game-reset'); // устанавливаем +10 счёта очков
   };
 
-  srcAudioTrue = '../assets/img/true.mp3';
+  srcAudioTrue = '../assets/img/true2.mp3';
 
   srcAudioFalse = '../assets/img/false.mp3';
 
@@ -135,5 +136,21 @@ export default class SprintService extends Observer {
     this.countTrueAnsve += 1;
     this.playAudioError();
     this.addCountGame();
+  };
+
+  listener = () => {
+    window.addEventListener('keydown', (event) => {
+      const { key: keys } = event;
+      switch (keys) {
+        case 'ArrowLeft':
+          this.btnFalseClick();
+          break;
+        case 'ArrowRight':
+          this.btnTrueClick();
+          break;
+        default:
+          break;
+      }
+    });
   };
 }
