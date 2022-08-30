@@ -1,12 +1,24 @@
 import Observer from '../Abstract/observer';
 
 export default class SprintService extends Observer {
-  endTimeGame = false;
+  endTimeGame = false; // закончилось время таймера
 
-  idTimerGame: NodeJS.Timer | undefined;
+  countTrueAnsve = 0; // количество правильных ответов подряд
+
+  userResult = 0; // количество набранных очков
+
+  translate = true; //  показывается правильный ответ
+
+  clickButtonTrue = false; // нажата ли кнопка верно
+
+  clickButtonFalse = false; // нажата ли кнопка неверно
+
+  stopAudioError = false; // нажата ли кнопка отмены звукового сигнала
+
+  idTimerGame: NodeJS.Timer | undefined; // ID таймера для его остановки;
 
   repeatGame = () => {
-    clearInterval(this.idTimerGame as NodeJS.Timer);
+    clearInterval(this.idTimerGame as NodeJS.Timer); // перезапуск игры
     this.startGameSprint();
   };
 
@@ -39,16 +51,20 @@ export default class SprintService extends Observer {
   };
 
   startGameSprint = () => {
-    this.dispath('start-timer'); // запускаем таймер
+    this.resetSettingGame();
     this.hideRuleSprint();
     this.showFiledGame();
-    this.resetTimerAndCount();
-    this.endTimeGame = false;
+    this.dispath('start-timer'); // запускаем таймер
   };
 
-  resetTimerAndCount = () => {
+  resetSettingGame = () => {
     this.dispath('reset-timer');
     this.dispath('reset-count-game');
+    this.countTrueAnsve = 0;
+    this.clickButtonFalse = false;
+    this.clickButtonTrue = false;
+    this.endTimeGame = false;
+    this.userResult = 0;
   };
 
   resetTimer = () => {
@@ -75,6 +91,49 @@ export default class SprintService extends Observer {
       element
     );
     this.idTimerGame = timerGame;
-    console.log(typeof timerGame);
+  };
+
+  addCountGame = () => {
+    this.dispath('add-count-game'); // увеличиваем очки за игру
+  };
+
+  addCountReset = () => {
+    this.dispath('add-count-game-reset'); // устанавливаем +10 счёта очков
+  };
+
+  srcAudioTrue = '../assets/img/true.mp3';
+
+  srcAudioFalse = '../assets/img/false.mp3';
+
+  playAudioError = () => {
+    if (this.stopAudioError) return;
+    if (
+      (this.translate && this.clickButtonTrue && !this.stopAudioError) ||
+      (!this.translate && this.clickButtonFalse && !this.stopAudioError)
+    ) {
+      new Audio(this.srcAudioTrue).play();
+    } else {
+      new Audio(this.srcAudioFalse).play();
+    }
+  };
+
+  disabledBtnAudioError = () => {
+    this.dispath('disabled-audio-error');
+  };
+
+  btnFalseClick = () => {
+    this.clickButtonFalse = true;
+    this.clickButtonTrue = false;
+    this.playAudioError();
+    this.countTrueAnsve = 0;
+    this.addCountReset();
+  };
+
+  btnTrueClick = () => {
+    this.clickButtonFalse = false;
+    this.clickButtonTrue = true;
+    this.countTrueAnsve += 1;
+    this.playAudioError();
+    this.addCountGame();
   };
 }

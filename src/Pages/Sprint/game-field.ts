@@ -27,7 +27,7 @@ export default class FieldGame extends BaseComponent {
       'game__btn_false',
       'неверно ⇽',
       'button',
-      this.services.sprint.startGameSprint // временная заглушка
+      this.services.sprint.btnFalseClick
     ).render();
     new ButtonWithCallback(
       wrapperbutton,
@@ -35,7 +35,7 @@ export default class FieldGame extends BaseComponent {
       'game__btn_true',
       'верно  ⇾',
       'button',
-      this.services.sprint.startGameSprint // временная заглушка
+      this.services.sprint.btnTrueClick
     ).render();
     this.services.sprint.add('show-filed-game', this.showFiledGame);
     this.services.sprint.add('hide-filed-game', this.hideFiledGame);
@@ -45,11 +45,11 @@ export default class FieldGame extends BaseComponent {
 
   showFiledGame = () => {
     this.element.style.display = 'flex';
-    this.services.sprint.resetTimerAndCount();
+    this.services.sprint.resetSettingGame();
   };
 
   hideFiledGame = () => {
     this.element.style.display = 'none';
-    this.services.sprint.resetTimerAndCount();
+    this.services.sprint.resetSettingGame();
   };
 }
