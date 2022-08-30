@@ -1,6 +1,7 @@
 import Services from '../../Service/service';
 import BaseComponent from '../../Abstract/base-component';
 import ButtonWithCallback from '../../components/button-with-callback';
+import AudioBtnGameSprint from './audio-btn';
 
 export default class FieldGame extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
@@ -10,13 +11,15 @@ export default class FieldGame extends BaseComponent {
   render = () => {
     const wrapperWordAudio = new BaseComponent('div', 'game__wrapper-word-audio').element;
     const fieldWords = new BaseComponent('div', 'game__words words').element;
-    const fieldAudio = new BaseComponent('div', 'game__audio').element;
-    wrapperWordAudio.append(fieldWords, fieldAudio);
+    new AudioBtnGameSprint(wrapperWordAudio, this.services).render();
+    wrapperWordAudio.prepend(fieldWords);
+
     const wordEnglish = new BaseComponent('h6', 'words__eng').element;
     wordEnglish.innerHTML = 'Hello';
     const wordRus = new BaseComponent('h6', 'words__rus').element;
     wordRus.innerHTML = 'Привет';
     fieldWords.append(wordEnglish, wordRus);
+
     const wrapperbutton = new BaseComponent('div', 'game__wrapper-btn').element;
     new ButtonWithCallback(
       wrapperbutton,

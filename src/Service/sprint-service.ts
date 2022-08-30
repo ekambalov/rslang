@@ -30,6 +30,14 @@ export default class SprintService extends Observer {
     this.dispath('hide-filed-game'); // прячем поле игры
   };
 
+  playAudioWord = () => {
+    this.dispath('play-audio-word'); // произношение слова
+  };
+
+  stopAudioWord = () => {
+    this.dispath('stop-audio-word'); // произношение слова
+  };
+
   startGameSprint = () => {
     this.dispath('start-timer'); // запускаем таймер
     this.hideRuleSprint();
