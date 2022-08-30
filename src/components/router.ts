@@ -36,7 +36,8 @@ export default class Router {
     const path = document.location.hash.toLowerCase() || '#/main';
     this.services.router.setRouter(path);
     if (path.includes('book')) {
-      this.routes[4].component.render();
+      const currentRout = this.routes.find((item) => item.path === '#/book') || this.routes[0];
+      currentRout.component.render();
       return;
     }
     const currentRout = this.routes.find((item) => item.path === path) || this.routes[0];
