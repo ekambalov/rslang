@@ -10,6 +10,10 @@ export default class Observer {
     this.listeners.push({ name, callback });
   }
 
+  remove(name: string) {
+    this.listeners = this.listeners.filter((listener) => name !== listener.name);
+  }
+
   dispath(name: string, ...params: string[]): void {
     this.listeners.filter((it) => it.name === name).forEach((it) => it.callback(...params));
   }

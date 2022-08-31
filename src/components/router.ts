@@ -35,6 +35,11 @@ export default class Router {
   routing = (): void => {
     const path = document.location.hash.toLowerCase() || '#/main';
     this.services.router.setRouter(path);
+    if (path.includes('book')) {
+      const currentRout = this.routes.find((item) => item.path === '#/book') || this.routes[0];
+      currentRout.component.render();
+      return;
+    }
     const currentRout = this.routes.find((item) => item.path === path) || this.routes[0];
     currentRout.component.render();
   };

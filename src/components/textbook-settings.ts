@@ -10,31 +10,60 @@ export default class TextBookSettings extends BaseComponent {
   }
 
   render = () => {
+    const path = document.location.hash.toLowerCase();
+    const page = path.slice(path.indexOf('page') + 5, path.indexOf('&'));
+    const group = path.slice(path.indexOf('group') + 6);
+    if (Number.isNaN(Number(page)) || Number(page) <= 0) {
+      State.textbook.currentPage = 0;
+    } else if (Number(page) > 29) {
+      State.textbook.currentPage = 29;
+    } else {
+      State.textbook.currentPage = Number(page);
+    }
+
+    if (Number.isNaN(Number(group)) || Number(group) <= 0) {
+      State.textbook.currentLevel = 0;
+    } else if (Number(group) > 5) {
+      State.textbook.currentLevel = 5;
+    } else {
+      State.textbook.currentLevel = Number(group);
+    }
+
     const levelSelector = new BaseComponent('select', 'settings__level level').element as HTMLSelectElement;
     levels.forEach((stage) => {
       const level = new BaseComponent('option', 'level__item').element as HTMLOptionElement;
       level.textContent = stage;
       levelSelector.append(level);
     });
+    levelSelector.value = `Уровень ${State.textbook.currentLevel + 1}`;
     const navigation = new BaseComponent('div', 'settings__nav').element as HTMLDivElement;
-    const prevBtn = new BaseComponent('button', 'settings__prev').element;
+    const prevBtn = new BaseComponent('a', 'settings__prev').element as HTMLLinkElement;
     prevBtn.textContent = '<';
-    const nextBtn = new BaseComponent('button', 'settings__next').element;
+    prevBtn.href =
+      State.textbook.currentPage <= 0
+        ? `#book?page=${0}&group=${State.textbook.currentLevel}`
+        : `#book?page=${State.textbook.currentPage - 1}&group=${State.textbook.currentLevel}`;
+    const nextBtn = new BaseComponent('a', 'settings__next').element as HTMLLinkElement;
     nextBtn.textContent = '>';
+    nextBtn.href =
+      State.textbook.currentPage >= 29
+        ? `#book?page=${29}&group=${State.textbook.currentLevel}`
+        : `#book?page=${State.textbook.currentPage + 1}&group=${State.textbook.currentLevel}`;
     const currentPage = new BaseComponent('span', 'settings__page').element;
     currentPage.textContent = `${State.textbook.currentPage + 1}`;
     navigation.append(prevBtn, currentPage, nextBtn);
     this.element.append(levelSelector, navigation);
     this.parent.appendChild(this.element);
     nextBtn.addEventListener('click', () => {
-      this.services.textbook.nextPage();
+      nextBtn.href = `#book?page=${State.textbook.currentPage + 1}&group=${State.textbook.currentLevel}`;
     });
     prevBtn.addEventListener('click', () => {
-      this.services.textbook.prevPage();
+      if (State.textbook.currentPage === 0) return;
+      prevBtn.href = `#book?page=${State.textbook.currentPage - 1}&group=${State.textbook.currentLevel}`;
     });
     levelSelector.addEventListener('change', () => {
       const levelNumber = Number(levelSelector.value.slice(-1)) - 1;
-      this.services.textbook.setLevel(levelNumber);
+      window.location.href = `#book?page=${0}&group=${levelNumber}`;
     });
   };
 }
