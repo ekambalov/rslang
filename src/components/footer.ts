@@ -9,6 +9,8 @@ export default class Footer extends BaseComponent {
   }
 
   render = () => {
+    this.services.router.add('router', this.switchVisible);
+
     const containerLinkGitHub = new BaseComponent('div', 'footer-links').element;
     linksProps.forEach((link) =>
       new LinkGitHub(
@@ -36,16 +38,19 @@ export default class Footer extends BaseComponent {
     ).render();
 
     this.element.prepend(containerLinkGitHub, year);
-    this.services.dataBase.add('hide-footer', this.hideFooter);
-    this.services.dataBase.add('show-footer', this.showFooter);
     this.parent.appendChild(this.element);
   };
 
-  hideFooter = () => {
-    this.element.style.display = 'none';
-  };
-
-  showFooter = () => {
-    this.element.style.display = 'flex';
+  switchVisible = (path: string) => {
+    switch (path) {
+      case '#/audio-call':
+        this.element.style.display = 'none';
+        break;
+      case '#/sprint':
+        this.element.style.display = 'none';
+        break;
+      default:
+        this.element.style.display = 'flex';
+    }
   };
 }
