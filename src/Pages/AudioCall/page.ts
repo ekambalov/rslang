@@ -3,21 +3,27 @@ import Services from '../../Service/service';
 import AudioCallHeader from './header';
 import WordContainer from './word';
 
-export default class AudioCall {
-  constructor(private readonly parent: HTMLElement, private readonly services: Services) {}
+export default class AudioCall extends BaseComponent {
+  constructor(private readonly parent: HTMLElement, private readonly services: Services) {
+    super('div', 'audio-call');
+  }
 
   render() {
+    this.destroy();
     const words = this.services.dataBase.words ?? [];
+
     if (words.length) {
       this.services.audioCall.setWords(words);
     }
+
     this.parent.innerHTML = '';
-    const container = new BaseComponent('div', 'audio-call').element;
 
-    new AudioCallHeader(container, this.services).render();
+    this.children = [new AudioCallHeader(this.element, this.services), new WordContainer(this.element, this.services)];
 
-    new WordContainer(container, this.services).render();
+    this.children.forEach((element) => {
+      element.render();
+    });
 
-    this.parent.appendChild(container);
+    this.parent.appendChild(this.element);
   }
 }
