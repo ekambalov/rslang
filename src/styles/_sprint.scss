@@ -219,6 +219,18 @@ margin-top: 30px;
   background-image: url('./assets/img/btnForm.png');
 }
 
+.game__results {
+  width: 70%;
+}
+.results__title {
+  font-size: 30px;
+  font-family: 'Junegull';
+  text-align: center;
+  color: gold;  
+  text-shadow: 1px 3px 1px rgb(10, 10, 10);
+  font-weight: 200;
+}
+
 @media screen and (max-width: 800px) {
   .game-container { 
     margin: 10px auto;

@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 import Services from '../../Service/service';
 import BaseComponent from '../../Abstract/base-component';
 import ButtonWithCallback from '../../components/button-with-callback';
@@ -6,6 +7,7 @@ import AudioBtnGameSprint from './audio-btn';
 export default class FieldGame extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
     super('div', 'game__field');
+    this.services.sprint.add('write-word-game', this.writeWordGame);
   }
 
   render = () => {
@@ -40,7 +42,6 @@ export default class FieldGame extends BaseComponent {
     ).render();
     this.services.sprint.add('show-filed-game', this.showFiledGame);
     this.services.sprint.add('hide-filed-game', this.hideFiledGame);
-    this.services.sprint.add('write-word-game', this.writeWordGame);
     this.element.prepend(wrapperWordAudio, wrapperbutton);
     this.parent.appendChild(this.element);
   };
@@ -56,6 +57,20 @@ export default class FieldGame extends BaseComponent {
   };
 
   writeWordGame = () => {
+    // e.stopPropagation();
+    console.log('в поле зашли');
+    console.log(this.services.sprint.getNewWord());
+    const englWordrusWord = this.services.sprint.getNewWord();
+    if (englWordrusWord) {
+      this.element.children[0].children[0].children[0].innerHTML = englWordrusWord[0];
+      this.element.children[0].children[0].children[1].innerHTML = englWordrusWord[1];
+    }
+  };
+
+  /* writeWordGame = () => {
+    console.log('в поле зашли');
+    const words = this.services.sprint.getNewWord();
+    
     const englWord = this.services.sprint.getWordEngl()?.word;
     if (englWord) {
       this.element.children[0].children[0].children[0].innerHTML = englWord;
@@ -64,5 +79,5 @@ export default class FieldGame extends BaseComponent {
     if (rusWord) {
       this.element.children[0].children[0].children[1].innerHTML = rusWord;
     }
-  };
+  }; */
 }
