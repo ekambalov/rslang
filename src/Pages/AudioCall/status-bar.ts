@@ -2,31 +2,40 @@ import BaseComponent from '../../Abstract/base-component';
 import Services from '../../Service/service';
 
 export default class StatusBar extends BaseComponent {
-  private total?: HTMLElement;
+  private total?: BaseComponent;
 
-  private current?: HTMLElement;
+  private current?: BaseComponent;
 
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
     super('p', 'audio-call-header__status-bar status-bar');
   }
 
   render = async () => {
-    this.current = new BaseComponent('span', 'status-bar__current').element;
-    this.current.textContent = '0 /';
     this.services.audioCall.add('next-word', this.updateCurrentStatus);
 
-    this.total = new BaseComponent('span', 'status-bar__current').element;
-    this.total.textContent = `${this.services.audioCall.amountWords}`;
+    this.children = [
+      (this.current = new BaseComponent('span', 'status-bar__current')),
+      (this.total = new BaseComponent('span', 'status-bar__current')),
+    ];
 
-    this.element.appendChild(this.current);
-    this.element.appendChild(this.total);
+    this.current.element.textContent = '0 /';
+
+    this.total.element.textContent = `${this.services.audioCall.amountWords}`;
+
+    this.element.appendChild(this.current.element);
+    this.element.appendChild(this.total.element);
 
     this.parent.appendChild(this.element);
   };
 
   updateCurrentStatus = (currentStatus: string) => {
     if (this.current) {
-      this.current.textContent = `${currentStatus}/`;
+      this.current.element.textContent = `${currentStatus}/`;
     }
+  };
+
+  destroy = () => {
+    this.services.audioCall.remove('next-word');
+    super.destroy();
   };
 }

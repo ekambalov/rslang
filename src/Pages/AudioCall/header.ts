@@ -3,20 +3,35 @@ import Services from '../../Service/service';
 import StatusBar from './status-bar';
 
 export default class AudioCallHeader extends BaseComponent {
+  btnFullscreen?: BaseComponent;
+
+  statusBar?: StatusBar;
+
+  btnExit?: BaseComponent;
+
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
     super('div', 'audio-call-header');
   }
 
   render(): void {
-    const btnFullScreen = new BaseComponent<HTMLButtonElement>('button', 'audio-call-header__btn-fullscreen').element;
-    this.element.prepend(btnFullScreen);
-    new StatusBar(this.element, this.services).render();
-    const btnExit = new BaseComponent<HTMLButtonElement>('button', 'audio-call-header__btn-exit').element;
-    btnExit.textContent = 'X';
-    btnExit.addEventListener('click', () => {
+    this.children = [
+      (this.btnFullscreen = new BaseComponent<HTMLButtonElement>('button', 'audio-call-header__btn-fullscreen')),
+      (this.statusBar = new StatusBar(this.element, this.services)),
+      (this.btnExit = new BaseComponent<HTMLButtonElement>('button', 'audio-call-header__btn-exit')),
+    ];
+
+    this.element.prepend(this.btnFullscreen.element);
+
+    this.statusBar.render();
+
+    this.btnExit.element.textContent = 'X';
+
+    this.btnExit.element.addEventListener('click', () => {
       document.location.hash = '#/main';
     });
-    this.element.append(btnExit);
+
+    this.element.appendChild(this.btnExit.element);
+
     this.parent.appendChild(this.element);
   }
 }
