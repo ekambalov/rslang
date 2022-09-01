@@ -9,6 +9,13 @@ flex-direction: column;
 align-items:center;
 
 }
+.spint_btn-container {
+  width: 100%;
+  padding: 5px 25px;
+  display: flex;
+  justify-content: space-between;  
+}
+
 .spint_btn-exit-game {
   font-size: 20px;
   border: 2px solid white;
@@ -16,12 +23,30 @@ align-items:center;
   color:white;
   padding: 6px 11px;
   text-decoration: none;
-  margin-left: 85%;
+
   &:hover {
     color:gold;
   }
 }
-
+.spint__btn_audio-true-false {
+  width: 40px;
+  height: 40px;  
+  background-image: url('./assets/img/nota1.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border: none;
+  background-color:transparent; 
+  cursor: pointer;
+  &:hover {
+    background-image: url('./assets/img/nota2.png');
+  }
+}
+.disabled-error {
+  background-image: url('./assets/img/nota.png');
+  &:hover {
+    background-image: url('./assets/img/nota0.png');
+  }
+}
 .game-container { 
   margin: 40px auto;
   width: 70%;
@@ -38,7 +63,8 @@ align-items:center;
   font-family: 'Junegull'; 
   display: flex;
   justify-content: space-between;
-  padding: 5px 50px;
+  align-items: center;
+  padding: 0 50px;
 }
 
 .game-header__count,
@@ -46,6 +72,13 @@ align-items:center;
   font-size: 50px;
   font-family: 'Commic Book';
 }
+.game-header__count-add {
+
+  font-size: 20px;
+  font-family: 'Commic Book';
+  color: rgb(116, 127, 226);
+}
+
 .game-header__timer {
   border: 2px solid white;
   border-radius: 50%;
@@ -184,6 +217,18 @@ margin-top: 30px;
 
 .game__btn_false {
   background-image: url('./assets/img/btnForm.png');
+}
+
+.game__results {
+  width: 70%;
+}
+.results__title {
+  font-size: 30px;
+  font-family: 'Junegull';
+  text-align: center;
+  color: gold;  
+  text-shadow: 1px 3px 1px rgb(10, 10, 10);
+  font-weight: 200;
 }
 
 @media screen and (max-width: 800px) {

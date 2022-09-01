@@ -3,25 +3,39 @@ import Services from '../Service/service';
 import ButtonWithCallback from './button-with-callback';
 import FormEnter from './form-enter';
 
-export default class EnterFormModal extends BaseComponent {
+export default class EnterFormModal extends BaseComponent<HTMLDivElement> {
+  private closeAutorise?: ButtonWithCallback;
+
+  private formEnter?: FormEnter;
+
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
     super('div', 'form-container');
   }
 
   render(): void {
-    new ButtonWithCallback(
-      this.element,
-      this.services,
-      'header__btn_closeAutorise',
-      'X',
-      'button',
-      this.services.form.closeEnterForm
-    ).render();
-    new FormEnter(this.element, this.services).render();
+    this.children = [
+      (this.closeAutorise = new ButtonWithCallback(
+        this.element,
+        this.services,
+        'header__btn_closeAutorise',
+        'X',
+        'button',
+        this.services.form.closeEnterForm
+      )),
+      (this.formEnter = new FormEnter(this.element, this.services)),
+    ];
+    this.closeAutorise.render();
+    this.formEnter.render();
     this.services.form.add('close-enter-form', this.closeEnterForm);
     this.services.form.add('open-enter-form', this.openEnterForm);
     this.parent.appendChild(this.element);
   }
+
+  destroy = () => {
+    this.services.form.remove('close-enter-form');
+    this.services.form.remove('open-enter-form');
+    super.destroy();
+  };
 
   openEnterForm = () => {
     this.services.menu.showDarkLayer();

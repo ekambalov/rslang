@@ -1,10 +1,5 @@
 import Services from '../../Service/service';
 import BaseComponent from '../../Abstract/base-component';
-// import State from '../../model/state';
-// import { getWords } from '../../model/getTextbook';
-// import { Word } from '../../Interfaces/word-model';
-// import TextBookCart from '../../components/textbook-cart';
-// import ButtonWithCallback from '../../components/button-with-callback';
 
 export default class Timer extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {

@@ -1,8 +1,9 @@
 import Observer from '../Abstract/observer';
-import getWords from '../Model/data-base';
+import getWords from '../model/data-base';
 import getRandomInteger from '../Utils/utils';
 import { IDataBaseServices } from '../Interfaces/interfaces';
 import { Word } from '../Interfaces/word-model';
+// import State from '../model/state';
 
 export default class DataBaseServices extends Observer implements IDataBaseServices {
   firstPage = 0;
@@ -22,6 +23,8 @@ export default class DataBaseServices extends Observer implements IDataBaseServi
     const words = await getWords(level, random);
     this.words = words;
     this.playSelectionGame();
+    // console.log(words);
+    // console.log(State.currentArrayWords);
   };
 
   playSelectionGame() {

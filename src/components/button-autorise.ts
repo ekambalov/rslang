@@ -30,4 +30,11 @@ export default class ButtonAutorise extends BaseComponent<HTMLButtonElement> {
   showBtnAutorise = () => {
     this.element.style.display = 'block';
   };
+
+  destroy = () => {
+    this.element.removeEventListener('click', this.callback);
+    this.service.form.remove('hide-button-autorise');
+    this.service.form.remove('show-button-autorise');
+    super.destroy();
+  };
 }

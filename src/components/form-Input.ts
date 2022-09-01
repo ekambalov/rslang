@@ -33,7 +33,6 @@ export class FormInput extends BaseComponent implements IFormInputConponent {
       <label class="form__label" for="${this.id}">${this.title}</label>
       <input class="form__input" type="${this.type}" id="${this.id}" name="${this.name}" autocomplete="off">`;
 
-    // const input = new Input(this.parent, this.services, 'form__input', this.id, this.type, this.name).element;
     this.messageElement = new BaseComponent('p', 'message-error').element;
     this.messageElement.textContent = '';
     this.element.appendChild(this.messageElement);
@@ -47,6 +46,13 @@ export class FormInput extends BaseComponent implements IFormInputConponent {
     this.services.form.add('remove-error-message', this.removeErrorMessage);
     this.services.form.add('clear-input', this.clearInput);
   }
+
+  destroy = () => {
+    this.services.form.remove('error-message');
+    this.services.form.remove('remove-error-message');
+    this.services.form.remove('clear-input');
+    super.destroy();
+  };
 
   clear(): void {
     this.element.classList.remove('success');
