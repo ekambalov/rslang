@@ -1,7 +1,7 @@
 import { IState } from '../Interfaces/interfaces';
 
 const State: IState = localStorage.getItem('state')
-  ? JSON.parse(localStorage.getItem('state') as string)
+  ? JSON.parse(localStorage.getItem('state') ?? '')
   : {
       userItem: {
         id: '',
@@ -23,8 +23,8 @@ const State: IState = localStorage.getItem('state')
         currentLevel: 0,
       },
       words: [],
-      currentPageGame: 0,
-      currentLevelGame: 0,
+      currentPage: 0,
+      currentLevel: 0,
     };
 
 export default State;
