@@ -27,7 +27,7 @@ export default class ButtonSelection extends BaseComponent<HTMLButtonElement> {
   selectLevel = () => {
     const { group } = this.element.dataset;
     if (group) {
-      this.services.dataBase.getWordsByLevel(+group);
+      this.services.levelSelection.getWordsByLevel(+group);
     } else {
       throw new Error('group is undefined');
     }

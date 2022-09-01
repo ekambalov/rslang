@@ -9,7 +9,11 @@ export default class SelectionContainer extends BaseComponent {
   }
 
   render() {
-    buttonsProps.forEach((button) => new ButtonSelection(this.element, this.services, button).render());
+    buttonsProps.forEach((button, idx) => {
+      this.children.push(new ButtonSelection(this.element, this.services, button));
+      this.children[idx].render();
+    });
+
     this.parent.appendChild(this.element);
   }
 }

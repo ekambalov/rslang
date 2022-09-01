@@ -34,8 +34,8 @@ export interface IState {
   deleteUser: string;
   textbook: TextbookState;
   words: Word[];
-  currentPageGame: number;
-  currentLevelGame: number;
+  currentPage: number;
+  currentLevel: number;
 }
 
 export interface IMenuServise {

@@ -7,6 +7,12 @@ import getRandomInteger from '../utils/utils';
 export default class SprintService extends Observer {
   private baseUrl = 'https://rs-learn-words.herokuapp.com/';
 
+  currentArrayWordsGame: Word[] = [];
+
+  private constantWords?: Word[];
+
+  currentPage = 0;
+
   endTimeGame = false; // закончилось время таймера
 
   countTrueAnsve = 0; // количество правильных ответов подряд
@@ -56,7 +62,7 @@ export default class SprintService extends Observer {
 
   repeatGame = async () => {
     clearInterval(this.idTimerGame as NodeJS.Timer); // перезапуск игры
-    await fethWords(State.currentLevelGame, getRandomInteger(0, 19));
+    await fethWords(State.currentLevel, getRandomInteger(0, 19));
     this.startGameSprint();
   };
 
@@ -269,8 +275,12 @@ export default class SprintService extends Observer {
   };
 
   getNewPagesWord = async () => {
-    const random = getRandomInteger(0, 29);
-    await fethWords(State.currentLevelGame, random);
+    const page = getRandomInteger(0, 29);
+    this.currentPage = page;
+    const words = await fethWords(State.currentLevel, page);
+
+    this.constantWords = [...words];
+    this.currentArrayWordsGame = [...words];
     this.currentArrayWordsGame = [...State.words];
     this.getNewWord();
   };
