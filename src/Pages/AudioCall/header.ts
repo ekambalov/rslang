@@ -1,5 +1,5 @@
 import BaseComponent from '../../Abstract/base-component';
-import Services from '../../Service/service';
+import Services from '../../Interfaces/services';
 import StatusBar from './status-bar';
 
 export default class AudioCallHeader extends BaseComponent {
@@ -13,7 +13,7 @@ export default class AudioCallHeader extends BaseComponent {
     super('div', 'audio-call-header');
   }
 
-  render(): void {
+  render = () => {
     this.children = [
       (this.btnFullscreen = new BaseComponent<HTMLButtonElement>('button', 'audio-call-header__btn-fullscreen')),
       (this.statusBar = new StatusBar(this.element, this.services)),
@@ -33,5 +33,5 @@ export default class AudioCallHeader extends BaseComponent {
     this.element.appendChild(this.btnExit.element);
 
     this.parent.appendChild(this.element);
-  }
+  };
 }

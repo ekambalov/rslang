@@ -1,5 +1,5 @@
 import BaseComponent from '../../Abstract/base-component';
-import Services from '../../Service/service';
+import Services from '../../Interfaces/services';
 import LeftContainerMain from './left-container-main';
 import RightContainerMain from './right-container-main';
 

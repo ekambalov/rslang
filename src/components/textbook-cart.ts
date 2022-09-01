@@ -1,5 +1,5 @@
 import { Word } from '../Interfaces/word-model';
-import Services from '../Service/service';
+import Services from '../Interfaces/services';
 import BaseComponent from '../Abstract/base-component';
 import { baseUrl } from '../Model/getTextbook';
 import ButtonAudioTextbook from './button-audio-textbook';

@@ -1,5 +1,5 @@
 import BaseComponent from '../Abstract/base-component';
-import Services from '../Service/service';
+import Services from '../Interfaces/services';
 import FormFull from './form-full';
 import ButtonWithCallback from './button-with-callback';
 

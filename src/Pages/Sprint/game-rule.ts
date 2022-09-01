@@ -1,4 +1,4 @@
-import Services from '../../Service/service';
+import Services from '../../Interfaces/services';
 import BaseComponent from '../../Abstract/base-component';
 import ButtonWithCallback from '../../components/button-with-callback';
 

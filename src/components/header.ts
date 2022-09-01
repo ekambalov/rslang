@@ -1,5 +1,5 @@
 import BaseComponent from '../Abstract/base-component';
-import Services from '../Service/service';
+import Services from '../Interfaces/services';
 import Navigation from './navigation';
 import DarkLayer from './dark-layer';
 import ButtonWithCallback from './button-with-callback';

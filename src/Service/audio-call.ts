@@ -31,13 +31,13 @@ export default class AudioСallService extends Observer {
     if (this.word) {
       this.counter += 1;
       const { word, image } = this.word;
-      this.dispath('next-word', image, word);
+      this.dispatch('next-word', image, word);
     } else {
       try {
         throw new Error('word is not found');
       } catch (e) {
         console.log(e);
-        this.dispath('stop-game');
+        this.dispatch('stop-game');
       }
     }
   };
@@ -48,13 +48,13 @@ export default class AudioСallService extends Observer {
       const audioWord = new Audio(`${this.baseUrl}${audio}`);
       audioWord.addEventListener('ended', this.stopAudio);
       audioWord.play();
-      this.dispath('play-audio');
+      this.dispatch('play-audio');
     } else {
       throw new Error('word is not found');
     }
   };
 
   stopAudio = () => {
-    this.dispath('stop-audio');
+    this.dispatch('stop-audio');
   };
 }

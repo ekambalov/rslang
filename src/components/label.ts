@@ -1,6 +1,6 @@
 /* eslint-disable import/no-cycle */
 import BaseComponent from '../Abstract/base-component';
-import Services from '../Service/service';
+import Services from '../Interfaces/services';
 import { IOptionsInput } from '../Interfaces/interfaces';
 
 export default class Label extends BaseComponent<HTMLLabelElement> {

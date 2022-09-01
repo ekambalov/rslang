@@ -1,7 +1,7 @@
 import BaseComponent from '../Abstract/base-component';
 // import { getNavSetting } from '../Model/getSettings';
 import linksProps from '../Settings/menu.json';
-import Services from '../Service/service';
+import Services from '../Interfaces/services';
 import NavLink from './nav-link';
 import ButtonWithCallback from './button-with-callback';
 

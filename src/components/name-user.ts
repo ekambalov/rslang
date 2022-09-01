@@ -1,5 +1,5 @@
 import BaseComponent from '../Abstract/base-component';
-import Services from '../Service/service';
+import Services from '../Interfaces/services';
 //  import State from '../model/state';
 
 export default class NameUser extends BaseComponent {

@@ -1,4 +1,4 @@
-import Services from '../../Service/service';
+import Services from '../../Interfaces/services';
 import Team from './team';
 
 export default class TeamPage {
