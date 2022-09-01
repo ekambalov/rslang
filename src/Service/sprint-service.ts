@@ -84,10 +84,30 @@ export default class SprintService extends Observer {
     this.dispath('hide-filed-game'); // прячем поле игры
   };
 
+  showResult = () => {
+    this.dispath('show-results-sprint');
+  };
+
+  hideResult = () => {
+    this.dispath('hide-results-sprint');
+  };
+
+  writeResult = () => {
+    this.dispath('write-results-sprint');
+  };
+
   playAudioWord = () => {
     if (this.currentWord) {
       const { audio } = this.currentWord; // произношение слова
       new Audio(`${this.baseUrl}${audio}`).play();
+    } else {
+      throw new Error('word is not found');
+    }
+  };
+
+  playWordResulTable = (src: string) => {
+    if (src) {
+      new Audio(`${this.baseUrl}${src}`).play();
     } else {
       throw new Error('word is not found');
     }
@@ -105,8 +125,9 @@ export default class SprintService extends Observer {
     this.currentArrayWordsGame = [...State.words];
     this.resetSettingGame();
     this.writeWordGame();
-    this.hideRuleSprint();
-    this.showFiledGame();
+    this.hideRuleSprint(); // прячем правила
+    this.hideResult(); // прячем результаты
+    this.showFiledGame(); // показываем игровое поле
     this.listener();
     this.dispath('start-timer'); // запускаем таймер
   };
@@ -132,6 +153,13 @@ export default class SprintService extends Observer {
     this.dispath('reset-count-game'); // сбрасываем счёт игры
   };
 
+  finishGame = () => {
+    this.endTimeGame = true;
+    this.hideFileGame();
+    this.showResult();
+    this.writeResult();
+  };
+
   timer = (element: HTMLElement) => {
     let seconds = 60;
     const timerGame = setInterval(
@@ -140,9 +168,8 @@ export default class SprintService extends Observer {
         el.innerHTML = `${seconds}`;
         seconds -= 1;
         if (seconds < 0) {
+          this.finishGame();
           clearInterval(timerGame);
-          this.endTimeGame = true;
-          this.hideFileGame();
         }
       },
       1000,
@@ -251,7 +278,6 @@ export default class SprintService extends Observer {
 
   // eslint-disable-next-line consistent-return
   getNewWord = () => {
-    console.log(this.constantWords);
     if (this.currentArrayWordsGame.length) {
       console.log(this.currentArrayWordsGame.length);
       const wordID = this.currentArrayWordsGame.length - 1;

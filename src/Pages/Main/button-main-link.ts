@@ -25,14 +25,14 @@ export default class ButtonLink extends BaseComponent {
     if (this.element.textContent === 'Спринт') {
       this.element.addEventListener('click', () => {
         if (game) {
-          this.services.dataBase.gamePath = game;
+          this.services.levelSelection.gamePath = game;
         }
       });
     }
     if (this.element.textContent === 'Аудиовызов') {
       this.element.addEventListener('click', () => {
         if (game) {
-          this.services.dataBase.gamePath = game;
+          this.services.levelSelection.gamePath = game;
         }
       });
     }
