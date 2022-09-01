@@ -9,7 +9,7 @@ export default class SprintService extends Observer {
 
   currentArrayWordsGame: Word[] = [];
 
-  private constantWords?: Word[];
+  constantWords?: Word[];
 
   currentPage = 0;
 
@@ -239,8 +239,19 @@ export default class SprintService extends Observer {
     });
   };
 
+  getUnikNumber = (number: number, from: number, to: number): number => {
+    let unikNumber = getRandomInteger(from, to);
+    if (unikNumber === number) {
+      do {
+        unikNumber = getRandomInteger(from, to);
+      } while (unikNumber === number);
+    }
+    return unikNumber;
+  };
+
   // eslint-disable-next-line consistent-return
   getNewWord = () => {
+    console.log(this.constantWords);
     if (this.currentArrayWordsGame.length) {
       console.log(this.currentArrayWordsGame.length);
       const wordID = this.currentArrayWordsGame.length - 1;
@@ -256,14 +267,7 @@ export default class SprintService extends Observer {
       }
       if (random > 5) {
         this.translateShowTrue = false; // будем показывать неправильный перевод
-        let id: number = getRandomInteger(0, 19); // рандомный id для превода
-        if (id === wordID) {
-          do {
-            id = getRandomInteger(0, 19); // если id совпало со словом- берем другое id
-          } while (id === wordID);
-          const falseTranslate = State.words[id].wordTranslate;
-          return [englWord, falseTranslate, 'false'];
-        }
+        const id: number = this.getUnikNumber(wordID, 0, 19); // рандомный id для превода
         const falseTranslate = State.words[id].wordTranslate;
         return [englWord, falseTranslate, 'false'];
       }
@@ -273,13 +277,10 @@ export default class SprintService extends Observer {
   };
 
   getNewPagesWord = async () => {
-    const page = getRandomInteger(0, 29);
+    const page = this.getUnikNumber(this.currentPage, 0, 29);
     this.currentPage = page;
     const words = await fethWords(State.currentLevel, page);
-
     this.constantWords = [...words];
     this.currentArrayWordsGame = [...words];
-    this.currentArrayWordsGame = [...State.words];
-    this.getNewWord();
   };
 }

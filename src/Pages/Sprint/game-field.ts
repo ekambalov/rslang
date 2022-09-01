@@ -54,8 +54,8 @@ export default class FieldGame extends BaseComponent {
     this.audioBtnGameSprint.render();
     this.wrapperWordAudio.element.prepend(this.fieldWords.element);
 
-    // this.wordEnglish.element.innerHTML = `Hello`;
-    // this.wordRus.element.innerHTML = `Привет`;
+    this.wordEnglish.element.innerHTML = `${this.services.sprint.currentWord.word}`;
+    this.wordRus.element.innerHTML = `${this.services.sprint.currentWord.wordTranslate}`;
     this.fieldWords.element.append(this.wordEnglish.element, this.wordRus.element);
 
     this.buttonFalse.render();
@@ -85,6 +85,9 @@ export default class FieldGame extends BaseComponent {
     if (englWordrusWord) {
       this.element.children[0].children[0].children[0].innerHTML = englWordrusWord[0];
       this.element.children[0].children[0].children[1].innerHTML = englWordrusWord[1];
+    }
+    if (this.services.sprint.currentArrayWordsGame.length === 0) {
+      this.services.sprint.getNewPagesWord();
     }
   };
 

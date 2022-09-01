@@ -2,6 +2,7 @@ import Services from '../../Service/service';
 import BaseComponent from '../../Abstract/base-component';
 import GameContainer from './game-container';
 import AudioTrueFalseBtn from './audio-btn-true-false';
+import State from '../../model/state';
 
 export default class SprintPage extends BaseComponent {
   private audioTrueFalseBtn?: AudioTrueFalseBtn;
@@ -17,6 +18,11 @@ export default class SprintPage extends BaseComponent {
   }
 
   render = () => {
+    this.services.sprint.constantWords = [...State.words];
+    this.services.sprint.currentArrayWordsGame = [...State.words];
+    this.services.sprint.currentPage = State.currentPage;
+    this.services.sprint.currentWord = State.words[State.words.length - 1];
+
     this.destroy();
     this.parent.innerHTML = '';
     this.children = [
