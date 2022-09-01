@@ -10,6 +10,7 @@ export interface ILinkButtonProps {
   content: string;
   clas: string;
   path: string;
+  game?: string;
 }
 export interface ILinkGitHub {
   src: string;

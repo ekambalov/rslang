@@ -12,7 +12,7 @@ export default class ButtonLink extends BaseComponent {
   }
 
   render = () => {
-    const { content, clas, path } = this.props;
+    const { content, clas, path, game } = this.props;
     this.element.setAttribute('href', `#${path}`);
     this.element.classList.add(`${clas}`);
     this.element.textContent = `${content}`;
@@ -22,6 +22,30 @@ export default class ButtonLink extends BaseComponent {
     if (this.element.textContent === 'Войти') {
       this.element.addEventListener('click', this.services.form.openEnterForm);
     }
+    if (this.element.textContent === 'Спринт') {
+      this.element.addEventListener('click', () => {
+        if (game) {
+          this.services.dataBase.gamePath = game;
+        }
+      });
+    }
+    if (this.element.textContent === 'Аудиовызов') {
+      this.element.addEventListener('click', () => {
+        if (game) {
+          this.services.dataBase.gamePath = game;
+        }
+      });
+    }
     this.parent.appendChild(this.element);
+  };
+
+  destroy = () => {
+    if (this.element.textContent === 'Авторизация') {
+      this.element.removeEventListener('click', this.services.form.openAutoriseForm);
+    }
+    if (this.element.textContent === 'Войти') {
+      this.element.removeEventListener('click', this.services.form.openEnterForm);
+    }
+    super.destroy();
   };
 }

@@ -7,12 +7,14 @@
   {
     "content": "Аудиовызов",
     "clas": "containerButton__button_audio",
-    "path": "/audio-call"
+    "path": "/level-selection",
+    "game": "#/audio-call"
   },
   {
     "content": "Спринт",
     "clas": "containerButton__button_sprint",
-    "path": "/sprint"
+    "path": "/level-selection",
+    "game": "#/sprint"
   },
   {
     "content": "Статистика",
