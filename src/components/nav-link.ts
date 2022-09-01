@@ -16,7 +16,7 @@ export default class NavLink extends BaseComponent {
     link.textContent = `${content}`;
     link.onclick = () => {
       if (game) {
-        this.services.dataBase.gamePath = game;
+        this.services.levelSelection.gamePath = game;
       }
       this.services.menu.closeMenu();
     };

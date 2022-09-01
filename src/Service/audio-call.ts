@@ -1,25 +1,29 @@
 import Observer from '../Abstract/observer';
 import { Word } from '../Interfaces/word-model';
+import State from '../Model/state';
 
 export default class AudioСallService extends Observer {
   private baseUrl = 'https://rs-learn-words.herokuapp.com/';
 
   amountWords = 0;
 
+  private constantWords?: Word[];
+
+  private words?: Word[];
+
   counter = 0;
 
   private word?: Word;
-
-  words?: Word[];
 
   getWord = () => {
     this.word = this.words?.pop();
     return this.word;
   };
 
-  setWords = (data: Word[]) => {
-    this.words = data;
-    this.amountWords = data.length;
+  setWords = () => {
+    this.words = [...State.words];
+    this.constantWords = [...State.words];
+    this.amountWords = this.words.length;
   };
 
   nextWord = () => {

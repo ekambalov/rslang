@@ -1,15 +1,15 @@
 import MenuService from './menu-service';
 import RouterService from './router-service';
-import DataBaseServices from './data-base-service';
 import FormService from './form-service';
 import AudioCallService from './audio-call';
 import TextbookService from './textbook-service';
 import SprintService from './sprint-service';
+import LevelSelectionService from './level-selection';
 
 export default interface Services {
   menu: MenuService;
   router: RouterService;
-  dataBase: DataBaseServices;
+  levelSelection: LevelSelectionService;
   form: FormService;
   audioCall: AudioCallService;
   textbook: TextbookService;

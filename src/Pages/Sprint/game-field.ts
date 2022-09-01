@@ -54,8 +54,8 @@ export default class FieldGame extends BaseComponent {
     this.audioBtnGameSprint.render();
     this.wrapperWordAudio.element.prepend(this.fieldWords.element);
 
-    this.wordEnglish.element.innerHTML = `Hello`;
-    this.wordRus.element.innerHTML = `Привет`;
+    // this.wordEnglish.element.innerHTML = `Hello`;
+    // this.wordRus.element.innerHTML = `Привет`;
     this.fieldWords.element.append(this.wordEnglish.element, this.wordRus.element);
 
     this.buttonFalse.render();

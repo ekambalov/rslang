@@ -6,10 +6,10 @@ import Router from './Components/router';
 import Header from './Components/header';
 import Footer from './Components/footer';
 import FormService from './Service/form-service';
-import DataBaseServices from './Service/data-base-service';
 import AudioCallService from './Service/audio-call';
 import TextbookService from './Service/textbook-service';
 import SprintService from './Service/sprint-service';
+import LevelSelectionService from './Service/level-selection';
 
 class App {
   private services: Services;
@@ -19,7 +19,7 @@ class App {
       menu: new MenuService(),
       router: new RouterService(),
       form: new FormService(),
-      dataBase: new DataBaseServices(),
+      levelSelection: new LevelSelectionService(),
       audioCall: new AudioCallService(),
       textbook: new TextbookService(),
       sprint: new SprintService(),

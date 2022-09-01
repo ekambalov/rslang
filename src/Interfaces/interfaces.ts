@@ -33,10 +33,9 @@ export interface IState {
   userInfoAutorise: IUserToken;
   deleteUser: string;
   textbook: TextbookState;
-  currentArrayWords: Word[];
-  currentArrayWordsGame: Word[];
-  currentPageGame: number;
-  currentLevelGame: number;
+  words: Word[];
+  currentPage: number;
+  currentLevel: number;
 }
 
 export interface IMenuServise {

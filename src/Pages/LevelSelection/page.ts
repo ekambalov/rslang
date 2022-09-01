@@ -2,22 +2,38 @@ import BaseComponent from '../../Abstract/base-component';
 import Services from '../../Service/service';
 import SelectionContainer from './selection-container';
 
-export default class LevelSelection {
-  constructor(private readonly parent: HTMLElement, private readonly services: Services) {}
+export default class LevelSelection extends BaseComponent {
+  private title?: BaseComponent;
 
-  render() {
-    this.parent.innerHTML = '';
-    const container = new BaseComponent('div', 'level-selection').element;
-    const title = new BaseComponent('h1', 'level-selection__title').element;
-    title.textContent = 'Выберите';
-    container.appendChild(title);
-    const text = new BaseComponent('p', 'level-selection__text').element;
-    text.textContent = 'уровень игры';
-    container.appendChild(text);
-    new SelectionContainer(container, this.services).render();
+  private text?: BaseComponent;
 
-    this.parent.appendChild(container);
+  private selectionContainer?: SelectionContainer;
+
+  constructor(private readonly parent: HTMLElement, private readonly services: Services) {
+    super('div', 'level-selection');
   }
 
-  showLevelSelection() {}
+  render() {
+    this.destroy();
+
+    this.parent.innerHTML = '';
+
+    this.children = [
+      (this.title = new BaseComponent('h1', 'level-selection__title')),
+      (this.text = new BaseComponent('p', 'level-selection__text')),
+      (this.selectionContainer = new SelectionContainer(this.element, this.services)),
+    ];
+
+    this.title.element.textContent = 'Выберите';
+
+    this.element.appendChild(this.title.element);
+
+    this.text.element.textContent = 'уровень игры';
+
+    this.element.appendChild(this.text.element);
+
+    this.selectionContainer.render();
+
+    this.parent.appendChild(this.element);
+  }
 }
