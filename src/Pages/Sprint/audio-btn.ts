@@ -10,4 +10,9 @@ export default class AudioBtnGameSprint extends BaseComponent<HTMLButtonElement>
     this.element.addEventListener('click', this.services.sprint.playAudioWord);
     this.parent.appendChild(this.element);
   };
+
+  destroy = () => {
+    this.element.removeEventListener('click', this.services.sprint.playAudioWord);
+    super.destroy();
+  };
 }

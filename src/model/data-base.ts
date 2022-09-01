@@ -10,5 +10,6 @@ export default async (group: number, page: number): Promise<Word[]> => {
   State.currentArrayWordsGame = [...words];
   State.currentLevelGame = group;
   State.currentPageGame = page;
+  localStorage.setItem('state', JSON.stringify(State));
   return words;
 };

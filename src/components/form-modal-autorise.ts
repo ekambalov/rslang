@@ -3,25 +3,40 @@ import Services from '../Service/service';
 import ButtonWithCallback from './button-with-callback';
 import FormAutorise from './form-autorise';
 
-export default class AutoriseFormModal extends BaseComponent {
+export default class AutoriseFormModal extends BaseComponent<HTMLDivElement> {
+  private btnCloseAutorise?: ButtonWithCallback;
+
+  private formAutorise?: FormAutorise;
+
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
     super('div', 'form-container');
   }
 
   render(): void {
-    new ButtonWithCallback(
-      this.element,
-      this.services,
-      'header__btn_closeAutorise',
-      'X',
-      'button',
-      this.services.form.closeAutoriseForm
-    ).render();
-    new FormAutorise(this.element, this.services).render();
+    this.children = [
+      (this.btnCloseAutorise = new ButtonWithCallback(
+        this.element,
+        this.services,
+        'header__btn_closeAutorise',
+        'X',
+        'button',
+        this.services.form.closeAutoriseForm
+      )),
+      (this.formAutorise = new FormAutorise(this.element, this.services)),
+    ];
+    this.btnCloseAutorise.render();
+    this.formAutorise.render();
+
     this.services.form.add('close-autorise-form', this.closeAutoriseForm);
     this.services.form.add('open-autorise-form', this.openAutoriseForm);
     this.parent.appendChild(this.element);
   }
+
+  destroy = () => {
+    this.services.form.remove('close-autorise-form');
+    this.services.form.remove('open-autorise-form');
+    super.destroy();
+  };
 
   openAutoriseForm = () => {
     this.services.menu.showDarkLayer();

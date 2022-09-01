@@ -1,7 +1,7 @@
 import Services from '../../Service/service';
 import BaseComponent from '../../Abstract/base-component';
 import TableBodyResultsGame from './game-results-table-body';
-import State from '../../model/state';
+// import State from '../../model/state';
 
 export default class ResultsGameSprint extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
@@ -16,7 +16,7 @@ export default class ResultsGameSprint extends BaseComponent {
     const res = new BaseComponent('h6', 'results__count').element;
     res.innerHTML = 'Верно: 36 слов';
     this.element.prepend(title, res);
-    new TableBodyResultsGame(this.parent, this.services, State.currentArrayWords[0]).render();
+    new TableBodyResultsGame(this.parent, this.services, this.services.sprint.currentWord).render();
     this.parent.appendChild(this.element);
   };
 

@@ -20,4 +20,9 @@ export default class ButtonWithCallback extends BaseComponent<HTMLButtonElement>
     this.element.addEventListener('click', this.callback);
     this.parent.appendChild(this.element);
   };
+
+  destroy = () => {
+    this.element.removeEventListener('click', this.callback);
+    super.destroy();
+  };
 }

@@ -48,6 +48,12 @@ export default class FormFull extends BaseComponent {
     this.services.form.add('remove-autorise-error', this.removeAutoriseError);
   }
 
+  destroy = () => {
+    this.services.form.remove('show-autorise-error');
+    this.services.form.remove('remove-autorise-error');
+    super.destroy();
+  };
+
   showAutoriseError = () => {
     (this.messageElement as HTMLElement).textContent = this.services.form.btnClickAutorise
       ? 'Такой пользователь уже есть :('

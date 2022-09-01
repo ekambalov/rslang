@@ -52,8 +52,9 @@ export default class SprintService extends Observer {
     wordTranslate: 'намек',
   };
 
-  repeatGame = () => {
+  repeatGame = async () => {
     clearInterval(this.idTimerGame as NodeJS.Timer); // перезапуск игры
+    await fethWords(State.currentLevelGame, getRandomInteger(0, 19));
     this.startGameSprint();
   };
 
@@ -147,6 +148,10 @@ export default class SprintService extends Observer {
     this.dispath('add-count-game'); // увеличиваем очки за игру
   };
 
+  correctAddCount = () => {
+    this.dispath('correct-add-count'); // увеличиваем очки за игру
+  };
+
   addCountReset = () => {
     this.dispath('add-count-game-reset'); // устанавливаем +10 счёта очков
   };
@@ -175,13 +180,15 @@ export default class SprintService extends Observer {
     this.clickButtonFalse = true;
     this.clickButtonTrue = false;
     this.playAudioError();
-    this.countTrueAnsve = 0;
-    this.addCountReset();
     if (!this.translateShowTrue) {
+      this.countTrueAnsve += 1;
       this.addCountGame();
+      this.correctAddCount();
       this.arrayWordsAnsweTrue.push(this.currentWord);
       this.arrayShowWords.push(this.currentWord);
     } else {
+      this.countTrueAnsve = 0;
+      this.addCountReset();
       this.arrayWordsAnsweFalse.push(this.currentWord);
       this.arrayShowWords.push(this.currentWord);
     }
@@ -191,17 +198,20 @@ export default class SprintService extends Observer {
   btnTrueClick = () => {
     this.clickButtonFalse = false;
     this.clickButtonTrue = true;
-    this.countTrueAnsve += 1;
     this.playAudioError();
     if (this.translateShowTrue) {
+      this.countTrueAnsve += 1;
       this.addCountGame();
+      this.correctAddCount();
       this.arrayWordsAnsweTrue.push(this.currentWord);
       this.arrayShowWords.push(this.currentWord);
       console.log('array true', this.arrayWordsAnsweTrue);
     } else {
       this.arrayWordsAnsweFalse.push(this.currentWord);
+      this.countTrueAnsve = 0;
+      this.addCountReset();
       this.arrayShowWords.push(this.currentWord);
-      console.log('array true', this.arrayWordsAnsweFalse);
+      console.log('array false', this.arrayWordsAnsweFalse);
     }
     this.writeWordGame();
   };

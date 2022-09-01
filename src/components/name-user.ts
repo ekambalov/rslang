@@ -20,6 +20,11 @@ export default class NameUser extends BaseComponent {
     this.parent.appendChild(this.element);
   };
 
+  destroy = () => {
+    this.services.form.remove('show-user-name');
+    super.destroy();
+  };
+
   showNameUser = () => {
     this.element.innerHTML = JSON.parse(localStorage.getItem('userInfoTokken') as string).name;
   };
