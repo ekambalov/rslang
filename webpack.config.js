@@ -28,7 +28,8 @@ const baseConfig = {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: 'asset/resource',
             },
-            {   test: /\.(woff|woff2|eot|ttf|otf)$/,
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/,
                 type: 'asset/resource',
             },
             {
@@ -60,12 +61,16 @@ const baseConfig = {
         new CopyPlugin({
             patterns: [
                 {
-                  from: path.resolve(__dirname, 'src/assets/img'),
-                  to:   path.resolve(__dirname, 'dist/assets/img')
+                    from: path.resolve(__dirname, 'src/assets/img'),
+                    to: path.resolve(__dirname, 'dist/assets/img')
+                },
+                {
+                    from: path.resolve(__dirname, 'src/assets/audio'),
+                    to: path.resolve(__dirname, 'dist/assets/audio')
                 }
             ]
         }),
-        
+
     ]
 };
 

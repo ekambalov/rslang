@@ -1,6 +1,6 @@
 import Observer from '../Abstract/observer';
 import getWords from '../model/data-base';
-import getRandomInteger from '../Utils/utils';
+import { getRandomInteger } from '../Utils/utils';
 import State from '../Model/state';
 import { Word } from '../Interfaces/word-model';
 

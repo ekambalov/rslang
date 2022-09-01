@@ -1,7 +1,7 @@
 import BaseComponent from '../../Abstract/base-component';
 import Services from '../../Interfaces/services';
 import buttonsProps from '../../Settings/buttonsSelection.json';
-import ButtonSelection from './button';
+import ButtonSelect from './button';
 
 export default class SelectionContainer extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
@@ -10,7 +10,7 @@ export default class SelectionContainer extends BaseComponent {
 
   render = () => {
     buttonsProps.forEach((button, idx) => {
-      this.children.push(new ButtonSelection(this.element, this.services, button));
+      this.children.push(new ButtonSelect(this.element, this.services, button));
       this.children[idx].render();
     });
 

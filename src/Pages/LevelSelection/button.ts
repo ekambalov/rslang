@@ -1,17 +1,17 @@
 import BaseComponent from '../../Abstract/base-component';
 import Services from '../../Interfaces/services';
 
-interface IButtonSelectionProps {
+interface IButtonSelectProps {
   className: string;
   content: string;
   group: string;
 }
 
-export default class ButtonSelection extends BaseComponent<HTMLButtonElement> {
+export default class ButtonSelect extends BaseComponent<HTMLButtonElement> {
   constructor(
     private readonly parent: HTMLElement,
     private readonly services: Services,
-    private props: IButtonSelectionProps
+    private props: IButtonSelectProps
   ) {
     super('button', `${props.className}`);
   }
