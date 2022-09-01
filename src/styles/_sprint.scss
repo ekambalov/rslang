@@ -218,15 +218,24 @@ margin-top: 30px;
 .game__btn_false {
   background-image: url('./assets/img/btnForm.png');
 }
-
+/* ***************RESULTS**************************** */
 .game__results {
-  width: 70%;
+  width: 100%;
+  padding: 0;
 }
 .results__title {
   font-size: 30px;
   font-family: 'Junegull';
   text-align: center;
   color: gold;  
+  text-shadow: 1px 3px 1px rgb(10, 10, 10);
+  font-weight: 200;
+}
+.results__count {
+  font-size: 20px;
+  font-family: 'Junegull';
+  text-align: center;
+  color: white;  
   text-shadow: 1px 3px 1px rgb(10, 10, 10);
   font-weight: 200;
 }

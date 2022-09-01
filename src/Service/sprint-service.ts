@@ -25,6 +25,8 @@ export default class SprintService extends Observer {
 
   trueAnswe: string[] = [];
 
+  currentArrayWordsGame: Word[] = [];
+
   arrayShowWords: Word[] = [];
 
   arrayWordsAnsweTrue: Word[] = [];
@@ -96,6 +98,7 @@ export default class SprintService extends Observer {
   };
 
   startGameSprint = () => {
+    this.currentArrayWordsGame = [...State.words];
     this.resetSettingGame();
     this.writeWordGame();
     this.hideRuleSprint();
@@ -205,7 +208,7 @@ export default class SprintService extends Observer {
       this.correctAddCount();
       this.arrayWordsAnsweTrue.push(this.currentWord);
       this.arrayShowWords.push(this.currentWord);
-      console.log('array true', this.arrayWordsAnsweTrue);
+      console.log('array true', this.arrayWordsAnsweTrue.length);
     } else {
       this.arrayWordsAnsweFalse.push(this.currentWord);
       this.countTrueAnsve = 0;
@@ -234,10 +237,10 @@ export default class SprintService extends Observer {
 
   // eslint-disable-next-line consistent-return
   getNewWord = () => {
-    if (State.currentArrayWordsGame.length) {
-      console.log(State.currentArrayWordsGame.length);
-      const wordID = State.currentArrayWordsGame.length - 1;
-      const wordFull = State.currentArrayWordsGame.pop();
+    if (this.currentArrayWordsGame.length) {
+      console.log(this.currentArrayWordsGame.length);
+      const wordID = this.currentArrayWordsGame.length - 1;
+      const wordFull = this.currentArrayWordsGame.pop();
       this.currentWord = wordFull as Word; // получили англ слово и сохранили
       const englWord = (wordFull as Word).word;
 
@@ -254,10 +257,10 @@ export default class SprintService extends Observer {
           do {
             id = getRandomInteger(0, 19); // если id совпало со словом- берем другое id
           } while (id === wordID);
-          const falseTranslate = State.currentArrayWords[id].wordTranslate;
+          const falseTranslate = State.words[id].wordTranslate;
           return [englWord, falseTranslate, 'false'];
         }
-        const falseTranslate = State.currentArrayWords[id].wordTranslate;
+        const falseTranslate = State.words[id].wordTranslate;
         return [englWord, falseTranslate, 'false'];
       }
     } else {
@@ -268,41 +271,7 @@ export default class SprintService extends Observer {
   getNewPagesWord = async () => {
     const random = getRandomInteger(0, 29);
     await fethWords(State.currentLevelGame, random);
+    this.currentArrayWordsGame = [...State.words];
     this.getNewWord();
   };
-
-  /* getWordEngl = () => {
-    if (State.currentArrayWordsGame.length) {
-      this.currentWordID = State.currentArrayWordsGame.length - 1;
-      const word = State.currentArrayWordsGame.pop();
-      this.currentWord = word as Word;
-      console.log('слово', word);
-      return word;
-    }
-    let random: number = getRandomInteger(0, 29);
-    if (random === State.currentPageGame) random = getRandomInteger(0, 29);
-    fethWords(State.currentLevelGame, random);
-    this.currentWordID = State.currentArrayWordsGame.length - 1;
-    const word = State.currentArrayWordsGame.pop();
-    this.currentWord = word as Word;
-    console.log('кончились слова это новая страница и слово ', word);
-    console.log('кончились слова это новая страница и id', this.currentWordID);
-    return word;
-  };
-
-  getRusWord = () => {
-    this.currentWordID = State.currentArrayWordsGame.length - 1;
-    const random = getRandomInteger(0, 10);
-    if (random <= 5) {
-      this.translate = true;
-      console.log('правильный перевод', State.currentArrayWordsGame[this.currentWordID].wordTranslate);
-      return State.currentArrayWordsGame[this.currentWordID].wordTranslate;
-    }
-    this.translate = false;
-    let id: number = getRandomInteger(0, 19);
-    console.log('рандомный id', id);
-    if (this.currentWordID === id) id = getRandomInteger(0, 19);
-    console.log('неправильный перевод', State.currentArrayWords[id].wordTranslate);
-    return State.currentArrayWords[id].wordTranslate;
-  }; */
 }

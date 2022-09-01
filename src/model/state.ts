@@ -22,8 +22,8 @@ const State: IState = localStorage.getItem('state')
         currentPage: 0,
         currentLevel: 0,
       },
-      currentArrayWords: [],
-      currentArrayWordsGame: [],
+      words: [],
+      // currentArrayWordsGame: [],
       currentPageGame: 0,
       currentLevelGame: 0,
     };

@@ -15,12 +15,12 @@ export default class GameContainer extends BaseComponent<HTMLDivElement> {
       new HeaderGame(this.element, this.services),
       new RuleGame(this.element, this.services),
       new FieldGame(this.element, this.services),
+      // new ResultsGameSprint(this.element, this.services),
     ];
 
     this.children.forEach((element) => {
       element.render();
     });
-    // new ResultsGameSprint(this.element, this.services).render();
     this.parent.appendChild(this.element);
   };
 }

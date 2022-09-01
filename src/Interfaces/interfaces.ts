@@ -33,8 +33,7 @@ export interface IState {
   userInfoAutorise: IUserToken;
   deleteUser: string;
   textbook: TextbookState;
-  currentArrayWords: Word[];
-  currentArrayWordsGame: Word[];
+  words: Word[];
   currentPageGame: number;
   currentLevelGame: number;
 }
