@@ -31,8 +31,6 @@ export default class SprintService extends Observer {
 
   trueAnswe: string[] = [];
 
-  currentArrayWordsGame: Word[] = [];
-
   arrayShowWords: Word[] = [];
 
   arrayWordsAnsweTrue: Word[] = [];
