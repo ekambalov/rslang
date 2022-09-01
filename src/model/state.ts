@@ -22,10 +22,9 @@ const State: IState = localStorage.getItem('state')
         currentPage: 0,
         currentLevel: 0,
       },
-      currentArrayWords: [],
-      currentArrayWordsGame: [],
-      currentPageGame: 0,
-      currentLevelGame: 0,
+      words: [],
+      currentPage: 0,
+      currentLevel: 0,
     };
 
 export default State;

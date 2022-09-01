@@ -7,6 +7,12 @@ import getRandomInteger from '../utils/utils';
 export default class SprintService extends Observer {
   private baseUrl = 'https://rs-learn-words.herokuapp.com/';
 
+  currentArrayWordsGame: Word[] = [];
+
+  private constantWords?: Word[];
+
+  currentPage = 0;
+
   endTimeGame = false; // закончилось время таймера
 
   countTrueAnsve = 0; // количество правильных ответов подряд
@@ -54,7 +60,7 @@ export default class SprintService extends Observer {
 
   repeatGame = async () => {
     clearInterval(this.idTimerGame as NodeJS.Timer); // перезапуск игры
-    await fethWords(State.currentLevelGame, getRandomInteger(0, 19));
+    await fethWords(State.currentLevel, getRandomInteger(0, 19));
     this.startGameSprint();
   };
 
@@ -234,10 +240,10 @@ export default class SprintService extends Observer {
 
   // eslint-disable-next-line consistent-return
   getNewWord = () => {
-    if (State.currentArrayWordsGame.length) {
-      console.log(State.currentArrayWordsGame.length);
-      const wordID = State.currentArrayWordsGame.length - 1;
-      const wordFull = State.currentArrayWordsGame.pop();
+    if (this.currentArrayWordsGame.length) {
+      console.log(this.currentArrayWordsGame.length);
+      const wordID = this.currentArrayWordsGame.length - 1;
+      const wordFull = this.currentArrayWordsGame.pop();
       this.currentWord = wordFull as Word; // получили англ слово и сохранили
       const englWord = (wordFull as Word).word;
 
@@ -254,10 +260,10 @@ export default class SprintService extends Observer {
           do {
             id = getRandomInteger(0, 19); // если id совпало со словом- берем другое id
           } while (id === wordID);
-          const falseTranslate = State.currentArrayWords[id].wordTranslate;
+          const falseTranslate = State.words[id].wordTranslate;
           return [englWord, falseTranslate, 'false'];
         }
-        const falseTranslate = State.currentArrayWords[id].wordTranslate;
+        const falseTranslate = State.words[id].wordTranslate;
         return [englWord, falseTranslate, 'false'];
       }
     } else {
@@ -266,15 +272,19 @@ export default class SprintService extends Observer {
   };
 
   getNewPagesWord = async () => {
-    const random = getRandomInteger(0, 29);
-    await fethWords(State.currentLevelGame, random);
+    const page = getRandomInteger(0, 29);
+    this.currentPage = page;
+    const words = await fethWords(State.currentLevel, page);
+
+    this.constantWords = [...words];
+    this.currentArrayWordsGame = [...words];
     this.getNewWord();
   };
 
   /* getWordEngl = () => {
-    if (State.currentArrayWordsGame.length) {
-      this.currentWordID = State.currentArrayWordsGame.length - 1;
-      const word = State.currentArrayWordsGame.pop();
+    if (this.currentArrayWordsGame.length) {
+      this.currentWordID = this.currentArrayWordsGame.length - 1;
+      const word = this.currentArrayWordsGame.pop();
       this.currentWord = word as Word;
       console.log('слово', word);
       return word;
@@ -282,8 +292,8 @@ export default class SprintService extends Observer {
     let random: number = getRandomInteger(0, 29);
     if (random === State.currentPageGame) random = getRandomInteger(0, 29);
     fethWords(State.currentLevelGame, random);
-    this.currentWordID = State.currentArrayWordsGame.length - 1;
-    const word = State.currentArrayWordsGame.pop();
+    this.currentWordID = this.currentArrayWordsGame.length - 1;
+    const word = this.currentArrayWordsGame.pop();
     this.currentWord = word as Word;
     console.log('кончились слова это новая страница и слово ', word);
     console.log('кончились слова это новая страница и id', this.currentWordID);
@@ -291,18 +301,18 @@ export default class SprintService extends Observer {
   };
 
   getRusWord = () => {
-    this.currentWordID = State.currentArrayWordsGame.length - 1;
+    this.currentWordID = this.currentArrayWordsGame.length - 1;
     const random = getRandomInteger(0, 10);
     if (random <= 5) {
       this.translate = true;
-      console.log('правильный перевод', State.currentArrayWordsGame[this.currentWordID].wordTranslate);
-      return State.currentArrayWordsGame[this.currentWordID].wordTranslate;
+      console.log('правильный перевод', this.currentArrayWordsGame[this.currentWordID].wordTranslate);
+      return this.currentArrayWordsGame[this.currentWordID].wordTranslate;
     }
     this.translate = false;
     let id: number = getRandomInteger(0, 19);
     console.log('рандомный id', id);
     if (this.currentWordID === id) id = getRandomInteger(0, 19);
-    console.log('неправильный перевод', State.currentArrayWords[id].wordTranslate);
-    return State.currentArrayWords[id].wordTranslate;
+    console.log('неправильный перевод', State.words[id].wordTranslate);
+    return State.words[id].wordTranslate;
   }; */
 }

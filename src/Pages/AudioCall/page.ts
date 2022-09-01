@@ -10,11 +10,7 @@ export default class AudioCall extends BaseComponent {
 
   render() {
     this.destroy();
-    const words = this.services.dataBase.words ?? [];
-
-    if (words.length) {
-      this.services.audioCall.setWords(words);
-    }
+    this.services.audioCall.setWords();
 
     this.parent.innerHTML = '';
 
