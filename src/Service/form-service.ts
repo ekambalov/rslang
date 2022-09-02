@@ -124,7 +124,6 @@ export default class FormService extends Observer implements IFormService {
     this.btnClickEnter = false;
     if (this.checkAllInput()) this.createNewUser();
     else this.showAutoriseError();
-    console.log(this.btnClickAutorise, this.btnClickEnter);
   };
 
   clickEnter = () => {
@@ -194,7 +193,6 @@ export default class FormService extends Observer implements IFormService {
       return true;
     }
     this.fullAllInput = false;
-    console.log('Не все поля заполнены');
     // this.showAutoriseError();
     return false;
   };
