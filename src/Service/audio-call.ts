@@ -35,10 +35,27 @@ export default class AudioСallService extends Observer {
     throw new Error();
   }
 
+  getWrongAnswers = () => {
+    if (this.wrongAnswers) {
+      return this.wrongAnswers;
+    }
+    throw new Error();
+  };
+
+  getCorrectAnswers = () => {
+    if (this.correctAnswers) {
+      return this.correctAnswers;
+    }
+    throw new Error();
+  };
+
   setWords() {
     this.words = [...State.words];
     this.constantWords = [...State.words];
     this.amountWords = this.words.length;
+    this.counter = 1;
+    this.wrongAnswers = [];
+    this.correctAnswers = [];
     this.word = this.words.pop();
   }
 
@@ -65,7 +82,7 @@ export default class AudioСallService extends Observer {
       const audioWord = new Audio(`${this.baseUrl}${audio}`);
       audioWord.addEventListener('ended', this.stopAudio);
       audioWord.play();
-      this.dispath('play-audio');
+      this.dispatch('play-audio');
     } else {
       throw new Error('word is not found');
     }
