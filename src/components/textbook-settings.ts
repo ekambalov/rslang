@@ -55,6 +55,9 @@ export default class TextBookSettings extends BaseComponent {
     const sprintLink = new BaseComponent('a', 'settings__link').element as HTMLLinkElement;
     sprintLink.textContent = 'Спринт';
     sprintLink.href = '#/sprint';
+    sprintLink.addEventListener('click', () => {
+      State.textbook.fromTextbook = true;
+    });
     const audioCallLink = new BaseComponent('a', 'settings__link').element as HTMLLinkElement;
     audioCallLink.textContent = 'Аудиовызов';
     audioCallLink.href = '#/audio-call';
