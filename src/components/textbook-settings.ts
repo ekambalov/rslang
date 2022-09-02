@@ -52,7 +52,13 @@ export default class TextBookSettings extends BaseComponent {
     const currentPage = new BaseComponent('span', 'settings__page').element;
     currentPage.textContent = `${State.textbook.currentPage + 1}`;
     navigation.append(prevBtn, currentPage, nextBtn);
-    this.element.append(levelSelector, navigation);
+    const sprintLink = new BaseComponent('a', 'settings__link').element as HTMLLinkElement;
+    sprintLink.textContent = 'Спринт';
+    sprintLink.href = '#/sprint';
+    const audioCallLink = new BaseComponent('a', 'settings__link').element as HTMLLinkElement;
+    audioCallLink.textContent = 'Аудиовызов';
+    audioCallLink.href = '#/audio-call';
+    this.element.append(levelSelector, navigation, audioCallLink, sprintLink);
     this.parent.appendChild(this.element);
     nextBtn.addEventListener('click', () => {
       nextBtn.href = `#book?page=${State.textbook.currentPage + 1}&group=${State.textbook.currentLevel}`;
