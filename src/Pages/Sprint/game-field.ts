@@ -54,14 +54,16 @@ export default class FieldGame extends BaseComponent {
     this.audioBtnGameSprint.render();
     this.wrapperWordAudio.element.prepend(this.fieldWords.element);
 
-    // this.wordEnglish.element.innerHTML = `Hello`;
-    // this.wordRus.element.innerHTML = `Привет`;
+    this.wordEnglish.element.innerHTML = `${this.services.sprint.currentWord.word}`;
+    this.wordRus.element.innerHTML = `${this.services.sprint.currentWord.wordTranslate}`;
     this.fieldWords.element.append(this.wordEnglish.element, this.wordRus.element);
 
     this.buttonFalse.render();
 
     this.buttonTrue.render();
 
+    this.services.sprint.add('btn-true-active-style', this.btnTrueActiveStyle);
+    this.services.sprint.add('btn-false-active-style', this.btnFalseActiveStyle);
     this.services.sprint.add('write-word-game', this.writeWordGame);
     this.services.sprint.add('show-filed-game', this.showFiledGame);
     this.services.sprint.add('hide-filed-game', this.hideFiledGame);
@@ -79,12 +81,13 @@ export default class FieldGame extends BaseComponent {
   };
 
   writeWordGame = () => {
-    console.log('в поле зашли');
     const englWordrusWord = this.services.sprint.getNewWord();
-    console.log(englWordrusWord);
     if (englWordrusWord) {
       this.element.children[0].children[0].children[0].innerHTML = englWordrusWord[0];
       this.element.children[0].children[0].children[1].innerHTML = englWordrusWord[1];
+    }
+    if (this.services.sprint.currentArrayWordsGame.length === 0) {
+      this.services.sprint.getNewPagesWord();
     }
   };
 
@@ -92,20 +95,18 @@ export default class FieldGame extends BaseComponent {
     this.services.sprint.remove('write-word-game');
     this.services.sprint.remove('show-filed-game');
     this.services.sprint.remove('hide-filed-game');
+    this.services.sprint.remove('btn-true-active-style');
+    this.services.sprint.remove('btn-false-active-style');
     super.destroy();
   };
 
-  /* writeWordGame = () => {
-    console.log('в поле зашли');
-    const words = this.services.sprint.getNewWord();
-    
-    const englWord = this.services.sprint.getWordEngl()?.word;
-    if (englWord) {
-      this.element.children[0].children[0].children[0].innerHTML = englWord;
-    }
-    const rusWord = this.services.sprint.getRusWord();
-    if (rusWord) {
-      this.element.children[0].children[0].children[1].innerHTML = rusWord;
-    }
-  }; */
+  btnTrueActiveStyle = () => {
+    this.element.children[1].children[0].classList.remove('active');
+    this.element.children[1].children[1].classList.add('active');
+  };
+
+  btnFalseActiveStyle = () => {
+    this.element.children[1].children[0].classList.add('active');
+    this.element.children[1].children[1].classList.remove('active');
+  };
 }
