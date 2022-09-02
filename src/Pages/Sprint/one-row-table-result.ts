@@ -1,7 +1,7 @@
-import Services from '../../Service/service';
+import Services from '../../Interfaces/services';
 import BaseComponent from '../../Abstract/base-component';
 import { Word } from '../../Interfaces/word-model';
-import CellTableAudio from './cell-table-audio';
+import CellTableAudio from './cell-tabl-audio';
 
 export default class OneRowTable extends BaseComponent {
   private audio?: CellTableAudio;

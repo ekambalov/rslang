@@ -81,9 +81,7 @@ export default class FieldGame extends BaseComponent {
   };
 
   writeWordGame = () => {
-    console.log('в поле зашли');
     const englWordrusWord = this.services.sprint.getNewWord();
-    console.log(englWordrusWord);
     if (englWordrusWord) {
       this.element.children[0].children[0].children[0].innerHTML = englWordrusWord[0];
       this.element.children[0].children[0].children[1].innerHTML = englWordrusWord[1];

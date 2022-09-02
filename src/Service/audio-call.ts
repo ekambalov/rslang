@@ -45,13 +45,13 @@ export default class AudioСallService extends Observer {
     if (this.word) {
       this.counter += 1;
       const { word, image } = this.word;
-      this.dispatch('next-word', image, word);
+      this.dispath('next-word', image, word);
     } else {
       try {
         throw new Error('word is not found');
       } catch (e) {
         console.log(e);
-        this.dispatch('stop-game');
+        this.dispath('stop-game');
       }
     }
   };
@@ -62,14 +62,14 @@ export default class AudioСallService extends Observer {
       const audioWord = new Audio(`${this.baseUrl}${audio}`);
       audioWord.addEventListener('ended', this.stopAudio);
       audioWord.play();
-      this.dispatch('play-audio');
+      this.dispath('play-audio');
     } else {
       throw new Error('word is not found');
     }
   };
 
   stopAudio = () => {
-    this.dispatch('stop-audio');
+    this.dispath('stop-audio');
   };
 
   // showAnswer = () => {
@@ -81,10 +81,10 @@ export default class AudioСallService extends Observer {
       const isTrue = this.word.wordTranslate === answer;
       if (this.word.wordTranslate === answer) {
         this.correctAnswers.push(this.word);
-        this.dispatch('correct-answer');
+        this.dispath('correct-answer');
       } else {
         this.wrongAnswers.push(this.word);
-        this.dispatch('wrong-answer');
+        this.dispath('wrong-answer');
       }
       this.playSignal(isTrue);
     }

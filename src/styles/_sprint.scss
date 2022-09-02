@@ -308,13 +308,74 @@ table {
   font-weight: 100;
 }
 
-/***************************************/
+/*********больщой экран******************************/
+
+@media screen and (min-width: 1400px) {
+  .rule__txt {
+    font-size: 30px;
+    line-height: 55px;
+  }
+  .rule__btn_start {
+    width: 200px;
+    height: 60px; 
+    font-size: 30px;
+  }
+  .game-container {
+    margin: 100px auto;
+  }
+  .game__wrapper-word-audio {
+  margin: 50px auto;
+}
+.game__words {
+  width: 500px;
+  height: 350px; 
+}
+.game__audio {
+  width: 180px;
+  height: 250px;
+  top: 100px;
+}
+.game-header__count-add {
+  font-size: 30px;
+}
+.game__btn_true, .game__btn_false {
+  
+  width: 250px;
+  height: 80px;
+  font-size: 21px;
+  letter-spacing: 1.5px;
+}
+.results__title {
+  margin-top: 0px;
+  font-size: 35px;
+}
+.results__count {
+  font-size: 25px;
+}
+.table__word,
+.table__audio,
+.table__word-transcription {
+  padding: 4px 10px;
+  font-size: 20px;
+}
+table {
+  min-width: 700px;
+}
+.result {
+   max-height: 500px;
+}
+}
+/*********НЕ больщой экран******************************/
 @media screen and (max-width: 800px) {
   .game-container {
     margin: 10px auto;
     width: 90%;
   }
-}
+    table {
+      min-width: 500px;
+    }
+  }
+
 
 @media screen and (max-width: 600px) {
   .game-container {
@@ -339,11 +400,17 @@ table {
     position: relative;
     top: 50px;
   }
+  table {
+    max-width: 400px;
+  }
 }
 
 @media screen and (max-width: 400px) {
   .game__wrapper-btn {
     gap: 20px;
+  }
+  table {
+    max-width: 380px;
   }
 
   .game__btn_true,

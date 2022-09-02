@@ -1,5 +1,5 @@
-import Services from '../../Service/service';
 import BaseComponent from '../../Abstract/base-component';
+import Services from '../../Interfaces/services';
 
 export default class AudioBtnResultTable extends BaseComponent<HTMLButtonElement> {
   constructor(private readonly parent: HTMLElement, private readonly services: Services, private src: string) {

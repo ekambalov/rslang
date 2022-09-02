@@ -46,13 +46,13 @@ export default class SprintService extends Observer {
     audioExample: 'files/03_2450_example.mp3',
     audioMeaning: 'files/03_2450_meaning.mp3',
     group: 4,
-    id: '5e9f5ee35eb9e72bc21afe31',
+    id: '31',
     image: 'files/03_2450.jpg',
     page: 2,
-    textExample: 'I quietly passed on a <b>hint</b> to my sister about the test.',
-    textExampleTranslate: 'Я спокойно передал намек моей сестре о тесте',
-    textMeaning: 'A <i>hint</i> is information that suggests something will happen or is true.',
-    textMeaningTranslate: 'Подсказка - это информация, которая предполагает, что что-то случится или будет правдой',
+    textExample: 'test',
+    textExampleTranslate: 'тест',
+    textMeaning: 'true.',
+    textMeaningTranslate: 'правдой',
     transcription: '[hint]',
     word: 'hint',
     wordTranslate: 'намек',
@@ -121,6 +121,10 @@ export default class SprintService extends Observer {
     this.dispath('write-word-game'); // пишем слова англ/рус
   };
 
+  resetTimer = () => {
+    this.dispath('reset-timer'); // сбрасываем таймер
+  };
+
   startGameSprint = () => {
     this.currentArrayWordsGame = [...State.words];
     this.resetSettingGame();
@@ -133,8 +137,8 @@ export default class SprintService extends Observer {
   };
 
   resetSettingGame = () => {
-    this.dispath('reset-timer');
-    this.dispath('reset-count-game');
+    this.resetTimer();
+    this.resetCountGame();
     this.countTrueAnsve = 0;
     this.clickButtonFalse = false;
     this.clickButtonTrue = false;
@@ -143,10 +147,6 @@ export default class SprintService extends Observer {
     this.arrayShowWords = [];
     this.arrayWordsAnsweTrue = [];
     this.arrayWordsAnsweFalse = [];
-  };
-
-  resetTimer = () => {
-    this.dispath('reset-timer'); // сбрасываем таймер
   };
 
   resetCountGame = () => {
@@ -191,9 +191,9 @@ export default class SprintService extends Observer {
     this.dispath('add-count-game-reset'); // устанавливаем +10 счёта очков
   };
 
-  srcAudioTrue = '../assets/img/true2.mp3';
+  srcAudioTrue = '../assets/audio/true2.mp3';
 
-  srcAudioFalse = '../assets/img/false.mp3';
+  srcAudioFalse = '../assets/audio/error.mp3';
 
   playAudioError = () => {
     if (this.stopAudioError) return;
@@ -222,7 +222,7 @@ export default class SprintService extends Observer {
   btnFalseClick = () => {
     this.clickButtonFalse = true;
     this.clickButtonTrue = false;
-    this.btnTrueAddActiveStyle();
+    this.btnFalseAddActiveStyle();
     this.playAudioError();
     if (!this.translateShowTrue) {
       this.countTrueAnsve += 1;
@@ -250,13 +250,11 @@ export default class SprintService extends Observer {
       this.correctAddCount();
       this.arrayWordsAnsweTrue.push(this.currentWord);
       this.arrayShowWords.push(this.currentWord);
-      console.log('array true', this.arrayWordsAnsweTrue.length);
     } else {
       this.arrayWordsAnsweFalse.push(this.currentWord);
       this.countTrueAnsve = 0;
       this.addCountReset();
       this.arrayShowWords.push(this.currentWord);
-      console.log('array false', this.arrayWordsAnsweFalse);
     }
     this.writeWordGame();
   };
@@ -290,7 +288,6 @@ export default class SprintService extends Observer {
   // eslint-disable-next-line consistent-return
   getNewWord = () => {
     if (this.currentArrayWordsGame.length) {
-      console.log(this.currentArrayWordsGame.length);
       const wordID = this.currentArrayWordsGame.length - 1;
       const wordFull = this.currentArrayWordsGame.pop();
       this.currentWord = wordFull as Word; // получили англ слово и сохранили

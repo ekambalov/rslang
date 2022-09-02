@@ -1,6 +1,6 @@
-import Services from '../../Service/service';
 import BaseComponent from '../../Abstract/base-component';
 import TableBodyResultsGame from './game-results-table-body';
+import Services from './../../Interfaces/services';
 
 export default class ResultsWrapper extends BaseComponent<HTMLDivElement> {
   private countWordTrue?: BaseComponent;

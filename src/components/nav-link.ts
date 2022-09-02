@@ -38,8 +38,8 @@ export default class NavLink extends BaseComponent {
 
   removeActive(): void {
     this.element.classList.remove('active');
-    this.services.menu.dispatch('close-menu');
-    this.services.menu.dispatch('scroll-off');
+    this.services.menu.dispath('close-menu');
+    this.services.menu.dispath('scroll-off');
     if (document.querySelector('.owerflov'))
       (document.querySelector('.owerflov') as HTMLElement).style.display = 'none';
   }

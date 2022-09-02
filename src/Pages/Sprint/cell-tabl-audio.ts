@@ -1,6 +1,6 @@
-import Services from '../../Service/service';
 import BaseComponent from '../../Abstract/base-component';
-import AudioBtnResultTable from './audio-btn-result-table';
+import AudioBtnResultTable from './audio-btn-result-tabl';
+import Services from '../../Interfaces/services';
 
 export default class CellTableAudio extends BaseComponent {
   private audio?: AudioBtnResultTable;
