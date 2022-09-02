@@ -1,5 +1,5 @@
 import BaseComponent from '../Abstract/base-component';
-import Services from '../Service/service';
+import Services from '../Interfaces/services';
 import { ICallback } from '../Interfaces/interfaces';
 
 export default class ButtonWithCallback extends BaseComponent<HTMLButtonElement> {

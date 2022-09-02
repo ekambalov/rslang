@@ -1,5 +1,5 @@
 import BaseComponent from '../../Abstract/base-component';
-import Services from '../../Service/service';
+import Services from '../../Interfaces/services';
 import Slider from './slider';
 
 export default class LeftContainerMain extends BaseComponent {

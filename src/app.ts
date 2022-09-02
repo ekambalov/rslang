@@ -1,4 +1,4 @@
-import Services from './Service/service';
+import Services from './Interfaces/services';
 import RouterService from './Service/router-service';
 import MenuService from './Service/menu-service';
 import BaseComponent from './Abstract/base-component';
@@ -19,8 +19,8 @@ class App {
       menu: new MenuService(),
       router: new RouterService(),
       form: new FormService(),
-      levelSelection: new LevelSelectionService(),
       audioCall: new AudioCallService(),
+      levelSelection: new LevelSelectionService(),
       textbook: new TextbookService(),
       sprint: new SprintService(),
     };

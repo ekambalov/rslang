@@ -1,5 +1,5 @@
 import BaseComponent from '../../Abstract/base-component';
-import Services from '../../Service/service';
+import Services from '../../Interfaces/services';
 import ButtonAudio from './btn-audio';
 
 export default class WordContainer extends BaseComponent {
@@ -17,11 +17,9 @@ export default class WordContainer extends BaseComponent {
     super('div', 'word-container');
   }
 
-  render() {
+  render = () => {
     this.services.audioCall.add('next-word', this.updateWordContainer);
-
     const wordData = this.services.audioCall.getWord();
-
     if (wordData) {
       this.children = [
         (this.wordImg = new BaseComponent<HTMLImageElement>('img', 'word-img')),
@@ -31,7 +29,6 @@ export default class WordContainer extends BaseComponent {
       ];
 
       this.wordImg.element.setAttribute('src', `${this.baseUrl}${wordData.image}`);
-
       this.element.appendChild(this.wordImg.element);
 
       this.btnAudio.render();
@@ -46,9 +43,9 @@ export default class WordContainer extends BaseComponent {
 
       this.parent.appendChild(this.element);
     }
-  }
+  };
 
-  updateWordContainer() {
+  updateWordContainer = () => {
     const wordData = this.services.audioCall.getWord();
 
     if (wordData) {
@@ -60,10 +57,10 @@ export default class WordContainer extends BaseComponent {
         this.wordTranscription.element.textContent = wordData.transcription;
       }
     }
-  }
+  };
 
-  destroy = () => {
+  destroy() {
     this.services.audioCall.remove('next-word');
     super.destroy();
-  };
+  }
 }

@@ -1,5 +1,5 @@
 import BaseComponent from '../../Abstract/base-component';
-import Services from '../../Service/service';
+import Services from '../../Interfaces/services';
 import avatar from '../../Settings/avatar-team-page.json';
 import linksProps from '../../Settings/link-person-gitHub.json';
 import LinkGitHub from '../../Components/link-GitHub';

@@ -1,5 +1,6 @@
 import BaseComponent from '../../Abstract/base-component';
-import Services from '../../Service/service';
+import Services from '../../Interfaces/services';
+import Answers from './answers';
 import AudioCallHeader from './header';
 import WordContainer from './word';
 
@@ -8,18 +9,20 @@ export default class AudioCall extends BaseComponent {
     super('div', 'audio-call');
   }
 
-  render() {
-    this.destroy();
+  render = () => {
+    if (this.children.length) {
+      this.destroy();
+    }
     this.services.audioCall.setWords();
-
     this.parent.innerHTML = '';
-
-    this.children = [new AudioCallHeader(this.element, this.services), new WordContainer(this.element, this.services)];
-
+    this.children = [
+      new AudioCallHeader(this.element, this.services),
+      new WordContainer(this.element, this.services),
+      new Answers(this.element, this.services),
+    ];
     this.children.forEach((element) => {
       element.render();
     });
-
     this.parent.appendChild(this.element);
-  }
+  };
 }

@@ -1,4 +1,4 @@
-import Services from '../../Service/service';
+import Services from '../../Interfaces/services';
 import BaseComponent from '../../Abstract/base-component';
 import TableBodyResultsGame from './game-results-table-body';
 // import State from '../../model/state';

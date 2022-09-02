@@ -11,10 +11,14 @@ export default class Observer {
   }
 
   remove(name: string) {
-    this.listeners = this.listeners.filter((listener) => name !== listener.name);
+    this.listeners.forEach((listener, idx) => {
+      if (name === listener.name) {
+        this.listeners.splice(idx, 1);
+      }
+    });
   }
 
-  dispath(name: string, ...params: string[]): void {
+  dispatch(name: string, ...params: string[]): void {
     this.listeners.filter((it) => it.name === name).forEach((it) => it.callback(...params));
   }
 }

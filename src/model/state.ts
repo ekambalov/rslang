@@ -1,7 +1,7 @@
 import { IState } from '../Interfaces/interfaces';
 
 const State: IState = localStorage.getItem('state')
-  ? JSON.parse(localStorage.getItem('state') as string)
+  ? JSON.parse(localStorage.getItem('state') ?? '')
   : {
       userItem: {
         id: '',

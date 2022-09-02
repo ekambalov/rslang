@@ -1,7 +1,7 @@
 import BaseComponent from '../Abstract/base-component';
 import { baseUrl } from '../model/getTextbook';
 import State from '../model/state';
-import Services from '../Service/service';
+import Services from '../Interfaces/services';
 
 export default class ButtonAudioTextbook extends BaseComponent<HTMLButtonElement> {
   private audio: HTMLAudioElement;

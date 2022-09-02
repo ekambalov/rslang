@@ -1,6 +1,6 @@
 import BaseComponent from '../Abstract/base-component';
 import { ILinkProps } from '../Interfaces/interfaces';
-import Services from '../Service/service';
+import Services from '../Interfaces/services';
 
 export default class NavLink extends BaseComponent {
   private link?: HTMLElement;
@@ -38,8 +38,8 @@ export default class NavLink extends BaseComponent {
 
   removeActive(): void {
     this.element.classList.remove('active');
-    this.services.menu.dispath('close-menu');
-    this.services.menu.dispath('scroll-off');
+    this.services.menu.dispatch('close-menu');
+    this.services.menu.dispatch('scroll-off');
     if (document.querySelector('.owerflov'))
       (document.querySelector('.owerflov') as HTMLElement).style.display = 'none';
   }

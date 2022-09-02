@@ -1,6 +1,6 @@
 import BaseComponent from '../../Abstract/base-component';
 import sliderTextFile from '../../Settings/slider-text.json';
-import Services from '../../Service/service';
+import Services from '../../Interfaces/services';
 
 export default class Slider extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {

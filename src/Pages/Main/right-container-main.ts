@@ -1,5 +1,5 @@
 import BaseComponent from '../../Abstract/base-component';
-import Services from '../../Service/service';
+import Services from '../../Interfaces/services';
 import buttonLinkProps from '../../Settings/button-menu.json';
 import ButtonLink from './button-main-link';
 
