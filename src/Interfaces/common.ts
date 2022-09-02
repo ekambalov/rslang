@@ -114,4 +114,5 @@ interface TextbookState {
   isPlayed: boolean;
   currentPage: number;
   currentLevel: number;
+  fromTextbook: boolean;
 }

@@ -34,6 +34,7 @@ export default class TextbookPage extends BaseComponent {
     const res = await getWords(page, group);
     const words = (await res.json()) as Word[];
     const container = parent;
+    State.words = [...words];
     if (container instanceof HTMLElement) container.innerHTML = '';
 
     words.forEach((word) => {
