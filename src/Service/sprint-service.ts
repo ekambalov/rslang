@@ -156,6 +156,7 @@ export default class SprintService extends Observer {
   finishGame = () => {
     this.endTimeGame = true;
     this.hideFileGame();
+    this.upgradeResult();
     this.showResult();
     this.writeResult();
   };
@@ -210,8 +211,15 @@ export default class SprintService extends Observer {
     this.dispath('disabled-audio-error');
   };
 
+  btnTrueAddActiveStyle = () => {
+    this.dispath('btn-true-active-style');
+  };
+
+  btnFalseAddActiveStyle = () => {
+    this.dispath('btn-false-active-style');
+  };
+
   btnFalseClick = () => {
-    this.clickButtonFalse = true;
     this.clickButtonTrue = false;
     this.playAudioError();
     if (!this.translateShowTrue) {
@@ -255,9 +263,11 @@ export default class SprintService extends Observer {
       const { key: keys } = event;
       switch (keys) {
         case 'ArrowLeft':
+          this.btnFalseAddActiveStyle();
           this.btnFalseClick();
           break;
         case 'ArrowRight':
+          this.btnTrueAddActiveStyle();
           this.btnTrueClick();
           break;
         default:
@@ -308,5 +318,9 @@ export default class SprintService extends Observer {
     const words = await fethWords(State.currentLevel, page);
     this.constantWords = [...words];
     this.currentArrayWordsGame = [...words];
+  };
+
+  upgradeResult = () => {
+    this.dispath('upgrade-results-sprint');
   };
 }
