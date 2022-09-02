@@ -7,6 +7,7 @@ import Services from '../Interfaces/services';
 import SprintPage from '../Pages/Sprint/page-sprint';
 import StatisticPage from '../Pages/Statistic/page-statistic';
 import StatisticInfoPage from '../Pages/Statistic/page-statistic-Info';
+import State from '../Model/state';
 
 type Page =
   | MainPage
@@ -48,6 +49,7 @@ export default class Router {
     const path = document.location.hash.toLowerCase() || '#/main';
     this.services.router.setRouter(path);
     if (path.includes('book')) {
+      State.textbook.fromTextbook = false;
       const currentRout = this.routes.find((item) => item.path === '#/book') || this.routes[0];
       currentRout.component.render();
       return;

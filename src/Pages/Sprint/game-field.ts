@@ -3,6 +3,7 @@ import Services from '../../Interfaces/services';
 import BaseComponent from '../../Abstract/base-component';
 import ButtonWithCallback from '../../Components/button-component';
 import AudioBtnGameSprint from './audio-btn';
+import State from '../../Model/state';
 
 export default class FieldGame extends BaseComponent {
   private wrapperWordAudio?: BaseComponent;
@@ -82,12 +83,17 @@ export default class FieldGame extends BaseComponent {
 
   writeWordGame = () => {
     const englWordrusWord = this.services.sprint.getNewWord();
+
     if (englWordrusWord) {
       this.element.children[0].children[0].children[0].innerHTML = englWordrusWord[0];
       this.element.children[0].children[0].children[1].innerHTML = englWordrusWord[1];
     }
     if (this.services.sprint.currentArrayWordsGame.length === 0) {
-      this.services.sprint.getNewPagesWord();
+      if (State.textbook.fromTextbook) {
+        this.services.sprint.getNewPagesWordFromBook();
+      } else {
+        this.services.sprint.getNewPagesWordRandom();
+      }
     }
   };
 

@@ -11,6 +11,8 @@ export default class SprintService extends Observer {
 
   constantWords?: Word[];
 
+  currentPageBook = 0;
+
   currentPage = 0;
 
   endTimeGame = false; // закончилось время таймера
@@ -126,6 +128,7 @@ export default class SprintService extends Observer {
   };
 
   startGameSprint = () => {
+    this.currentPageBook = State.textbook.currentPage;
     this.currentArrayWordsGame = [...State.words];
     this.resetSettingGame();
     this.writeWordGame();
@@ -306,11 +309,27 @@ export default class SprintService extends Observer {
         return [englWord, falseTranslate, 'false'];
       }
     } else {
-      this.getNewPagesWord();
+      this.getNewPagesWordRandom();
     }
   };
 
-  getNewPagesWord = async () => {
+  stopGame = () => {
+    if (this.idTimerGame) clearInterval(this.idTimerGame);
+    this.finishGame(); // прерываем игру так как закончились слова из учебника (выбраная страница и все предыдущие страницы. Неизученные брать нельзя)
+  };
+
+  getNewPagesWordFromBook = async () => {
+    this.currentPageBook -= 1;
+    if (this.currentPageBook >= 0) {
+      const words = await fethWords(State.currentLevel, this.currentPageBook);
+      this.constantWords = [...words];
+      this.currentArrayWordsGame = [...words];
+    } else {
+      this.stopGame();
+    }
+  };
+
+  getNewPagesWordRandom = async () => {
     const page = this.getUnikNumber(this.currentPage, 0, 29);
     this.currentPage = page;
     const words = await fethWords(State.currentLevel, page);

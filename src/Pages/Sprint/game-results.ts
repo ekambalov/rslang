@@ -5,6 +5,8 @@ import ResultsWrapper from './game-results-wrapper';
 export default class ResultsGameSprint extends BaseComponent<HTMLDivElement> {
   private title?: BaseComponent;
 
+  private info?: BaseComponent;
+
   private results?: ResultsWrapper;
 
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
