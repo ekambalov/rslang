@@ -1,4 +1,4 @@
-import { IUserID, IUserToken, IUser } from './user-model';
+import { IUserID, IUserToken } from './user-model';
 import { Word } from './word-model';
 
 export interface ILinkProps {
@@ -62,7 +62,6 @@ export interface IServices {
 }
 
 export interface IFormService {
-  user: IUser;
   userInfoAutorise: IUserToken;
   btnClickAutorise: boolean;
   btnClickEnter: boolean;

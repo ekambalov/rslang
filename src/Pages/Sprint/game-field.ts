@@ -92,11 +92,11 @@ export default class FieldGame extends BaseComponent {
   };
 
   destroy = () => {
-    this.services.sprint.remove('write-word-game');
-    this.services.sprint.remove('show-filed-game');
-    this.services.sprint.remove('hide-filed-game');
-    this.services.sprint.remove('btn-true-active-style');
-    this.services.sprint.remove('btn-false-active-style');
+    this.services.sprint.remove('btn-true-active-style', this.btnTrueActiveStyle);
+    this.services.sprint.remove('btn-false-active-style', this.btnFalseActiveStyle);
+    this.services.sprint.remove('write-word-game', this.writeWordGame);
+    this.services.sprint.remove('show-filed-game', this.showFiledGame);
+    this.services.sprint.remove('hide-filed-game', this.hideFiledGame);
     super.destroy();
   };
 

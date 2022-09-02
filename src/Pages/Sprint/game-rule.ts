@@ -36,8 +36,8 @@ export default class RuleGame extends BaseComponent {
   };
 
   destroy = () => {
-    this.services.sprint.remove('hide-rule-sprint');
-    this.services.sprint.remove('show-rule-sprint');
+    this.services.sprint.remove('hide-rule-sprint', this.hideRule);
+    this.services.sprint.remove('show-rule-sprint', this.showRule);
     super.destroy();
   };
 

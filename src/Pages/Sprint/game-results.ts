@@ -27,8 +27,9 @@ export default class ResultsGameSprint extends BaseComponent<HTMLDivElement> {
   };
 
   destroy = () => {
-    this.services.sprint.remove('hide-results-sprint');
-    this.services.sprint.remove('show-results-sprint');
+    this.services.sprint.remove('hide-results-sprint', this.hideResult);
+    this.services.sprint.remove('upgrade-results-sprint', this.upgrade);
+    this.services.sprint.remove('show-results-sprint', this.showResult);
     super.destroy();
   };
 

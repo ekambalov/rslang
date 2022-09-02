@@ -1,9 +1,9 @@
 import Observer from '../Abstract/observer';
 import { IUser, IUserToken } from '../Interfaces/user-model';
 import { createUser, getUserTokken } from '../Model/api-user-autorise';
-import { IFormService, IFormInputConponent } from '../Interfaces/common';
+import { IFormInputConponent } from '../Interfaces/common';
 
-export default class FormService extends Observer implements IFormService {
+export default class FormService extends Observer {
   user: IUser = {
     name: '',
     password: '',

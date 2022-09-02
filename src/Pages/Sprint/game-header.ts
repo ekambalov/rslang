@@ -45,10 +45,10 @@ export default class HeaderGame extends BaseComponent {
   };
 
   destroy = () => {
-    this.services.sprint.remove('reset-count-game');
-    this.services.sprint.remove('add-count-game');
-    this.services.sprint.remove('add-count-game-reset');
-    this.services.sprint.remove('correct-add-count');
+    this.services.sprint.remove('reset-count-game', this.resetCount);
+    this.services.sprint.remove('add-count-game', this.addCount);
+    this.services.sprint.remove('add-count-game-reset', this.addCountReset);
+    this.services.sprint.remove('correct-add-count', this.correctAddCount);
     super.destroy();
   };
 

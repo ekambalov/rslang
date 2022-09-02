@@ -1,6 +1,6 @@
 import BaseComponent from '../../Abstract/base-component';
 import TableBodyResultsGame from './game-results-table-body';
-import Services from './../../Interfaces/services';
+import Services from '../../Interfaces/services';
 
 export default class ResultsWrapper extends BaseComponent<HTMLDivElement> {
   private countWordTrue?: BaseComponent;
@@ -40,7 +40,7 @@ export default class ResultsWrapper extends BaseComponent<HTMLDivElement> {
   };
 
   destroy = () => {
-    this.services.sprint.remove('write-results-sprint');
+    this.services.sprint.remove('write-results-sprint', this.writeResult);
     super.destroy();
   };
 

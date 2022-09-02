@@ -22,8 +22,8 @@ export default class Timer extends BaseComponent {
   };
 
   destroy = () => {
-    this.services.sprint.remove('start-timer');
-    this.services.sprint.remove('reset-timer');
+    this.services.sprint.remove('start-timer', this.startTimerGame);
+    this.services.sprint.remove('reset-timer', this.resetTimerGame);
     super.destroy();
   };
 }

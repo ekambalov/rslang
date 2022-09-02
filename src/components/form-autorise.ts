@@ -41,8 +41,8 @@ export default class FormAutorise extends BaseComponent<HTMLFormElement> {
   }
 
   destroy = () => {
-    this.services.form.remove('show-autorise-error');
-    this.services.form.remove('remove-autorise-error');
+    this.services.form.remove('show-autorise-error', this.showAutoriseError);
+    this.services.form.remove('remove-autorise-error', this.removeAutoriseError);
     super.destroy();
   };
 
