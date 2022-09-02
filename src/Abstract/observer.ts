@@ -10,9 +10,9 @@ export default class Observer {
     this.listeners.push({ name, callback });
   }
 
-  remove(name: string) {
+  remove(name: string, callback: (...params: string[]) => void) {
     this.listeners.forEach((listener, idx) => {
-      if (name === listener.name) {
+      if (name === listener.name && callback === listener.callback) {
         this.listeners.splice(idx, 1);
       }
     });

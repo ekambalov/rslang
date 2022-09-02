@@ -18,7 +18,7 @@ export default class StatusBar extends BaseComponent {
       (this.total = new BaseComponent('span', 'status-bar__current')),
     ];
 
-    this.current.element.textContent = '0 /';
+    this.current.element.textContent = '1/';
 
     this.total.element.textContent = `${this.services.audioCall.amountWords}`;
 
@@ -28,14 +28,15 @@ export default class StatusBar extends BaseComponent {
     this.parent.appendChild(this.element);
   };
 
-  updateCurrentStatus = (currentStatus: string) => {
+  updateCurrentStatus = () => {
     if (this.current) {
-      this.current.element.textContent = `${currentStatus}/`;
+      const currentState = this.services.audioCall.counter;
+      this.current.element.textContent = `${currentState}/`;
     }
   };
 
   destroy = () => {
-    this.services.audioCall.remove('next-word');
+    this.services.audioCall.remove('next-word', this.updateCurrentStatus);
     super.destroy();
   };
 }
