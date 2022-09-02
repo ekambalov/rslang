@@ -9,15 +9,21 @@ export default class Timer extends BaseComponent {
   render = () => {
     this.element.textContent = '60';
     this.parent.appendChild(this.element);
-    this.services.sprint.add('start-timer', this.startTimer);
-    this.services.sprint.add('reset-timer', this.resetTimer);
+    this.services.sprint.add('start-timer', this.startTimerGame);
+    this.services.sprint.add('reset-timer', this.resetTimerGame);
   };
 
-  startTimer = () => {
+  startTimerGame = () => {
     this.services.sprint.timer(this.element);
   };
 
-  resetTimer = () => {
+  resetTimerGame = () => {
     this.element.innerHTML = '60';
+  };
+
+  destroy = () => {
+    this.services.sprint.remove('start-timer');
+    this.services.sprint.remove('reset-timer');
+    super.destroy();
   };
 }

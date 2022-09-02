@@ -47,12 +47,13 @@ export default class AudioСallService extends Observer {
     if (this.word) {
       this.counter += 1;
       this.dispatch('next-word');
+      const { word, image } = this.word;
     } else {
       try {
         throw new Error('word is not found');
       } catch (e) {
         console.log(e);
-        this.dispatch('stop-game');
+        this.dispath('stop-game');
       }
     }
   }
@@ -63,14 +64,14 @@ export default class AudioСallService extends Observer {
       const audioWord = new Audio(`${this.baseUrl}${audio}`);
       audioWord.addEventListener('ended', this.stopAudio);
       audioWord.play();
-      this.dispatch('play-audio');
+      this.dispath('play-audio');
     } else {
       throw new Error('word is not found');
     }
   };
 
   stopAudio = () => {
-    this.dispatch('stop-audio');
+    this.dispath('stop-audio');
   };
 
   showWordCard() {
