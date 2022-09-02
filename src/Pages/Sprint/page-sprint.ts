@@ -2,7 +2,7 @@ import Services from '../../Interfaces/services';
 import BaseComponent from '../../Abstract/base-component';
 import GameContainer from './game-container-all';
 import AudioTrueFalseBtn from './audio-btn-true-false';
-import State from '../../model/state';
+import State from '../../Model/state';
 
 export default class SprintPage extends BaseComponent {
   private audioTrueFalseBtn?: AudioTrueFalseBtn;
