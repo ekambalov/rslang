@@ -19,6 +19,8 @@ export default class WordContainer extends BaseComponent {
 
   render = () => {
     this.services.audioCall.add('next-word', this.updateWordContainer);
+    this.services.audioCall.add('show-answer', this.showAnswer);
+
     const wordData = this.services.audioCall.getWord();
     if (wordData) {
       this.children = [
@@ -45,22 +47,34 @@ export default class WordContainer extends BaseComponent {
     }
   };
 
+  showAnswer = () => {
+    this.wordImg?.element.classList.add('word-img--visible');
+    this.wordText?.element.classList.add('word-text--visible');
+    this.wordTranscription?.element.classList.add('word-transcription--visible');
+  };
+
   updateWordContainer = () => {
     const wordData = this.services.audioCall.getWord();
 
     if (wordData) {
+      this.wordImg?.element.classList.remove('word-img--visible');
       this.wordImg?.element.setAttribute('src', `${this.baseUrl}${wordData.image}`);
+
       if (this.wordText) {
+        this.wordText?.element.classList.remove('word-text--visible');
         this.wordText.element.textContent = wordData.word;
       }
       if (this.wordTranscription) {
+        this.wordTranscription?.element.classList.remove('word-transcription--visible');
         this.wordTranscription.element.textContent = wordData.transcription;
       }
     }
   };
 
-  destroy() {
-    this.services.audioCall.remove('next-word');
+  destroy = () => {
+    this.services.audioCall.remove('next-word', this.updateWordContainer);
+    this.services.audioCall.remove('show-answer', this.showAnswer);
+
     super.destroy();
-  }
+  };
 }

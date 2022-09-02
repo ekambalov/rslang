@@ -6,7 +6,9 @@ import { getRandomInteger, shuffle } from '../Helper/utils';
 export default class AudioСallService extends Observer {
   private baseUrl = 'https://rs-learn-words.herokuapp.com/';
 
-  amountExtraTranslateOptions = 3;
+  private readonly amountTranslateOptions = 3;
+
+  private selectedAnswer = '';
 
   amountWords = 0;
 
@@ -18,34 +20,34 @@ export default class AudioСallService extends Observer {
 
   private words: Word[] = [];
 
-  private signalCorrect = new Audio('../assets/audio/correct.mp3');
+  private readonly signalCorrect = new Audio('../assets/audio/correct.mp3');
 
-  private signalWrong = new Audio('../assets/audio/error.mp3');
+  private readonly signalWrong = new Audio('../assets/audio/error.mp3');
 
-  counter = 0;
+  counter = 1;
 
   private word?: Word;
 
-  getWord = () => {
+  getWord() {
     if (this.word) {
       return this.word;
     }
     throw new Error();
-  };
+  }
 
-  setWords = () => {
+  setWords() {
     this.words = [...State.words];
     this.constantWords = [...State.words];
     this.amountWords = this.words.length;
     this.word = this.words.pop();
-  };
+  }
 
-  nextWord = () => {
+  nextWord() {
     this.word = this.words?.pop();
     if (this.word) {
       this.counter += 1;
+      this.dispatch('next-word');
       const { word, image } = this.word;
-      this.dispath('next-word', image, word);
     } else {
       try {
         throw new Error('word is not found');
@@ -54,7 +56,7 @@ export default class AudioСallService extends Observer {
         this.dispath('stop-game');
       }
     }
-  };
+  }
 
   playAudio = () => {
     if (this.word) {
@@ -72,44 +74,56 @@ export default class AudioСallService extends Observer {
     this.dispath('stop-audio');
   };
 
-  // showAnswer = () => {
-
-  // }
-
-  checkAnswer = (answer = '') => {
+  showWordCard() {
     if (this.word) {
-      const isTrue = this.word.wordTranslate === answer;
-      if (this.word.wordTranslate === answer) {
-        this.correctAnswers.push(this.word);
-        this.dispath('correct-answer');
-      } else {
-        this.wrongAnswers.push(this.word);
-        this.dispath('wrong-answer');
-      }
-      this.playSignal(isTrue);
+      this.dispatch('show-answer', this.word.wordTranslate, this.selectedAnswer);
+    }
+  }
+
+  onClickShowOrNext = (state: string) => {
+    if (state === 'dont-know') {
+      this.checkAnswer();
+    } else {
+      this.nextWord();
     }
   };
 
-  playSignal = (answer: boolean) => {
+  checkAnswer(answer = '') {
+    if (this.word) {
+      const isCorrect = this.word.wordTranslate === answer;
+      this.selectedAnswer = answer;
+      if (this.word.wordTranslate === answer) {
+        this.correctAnswers.push(this.word);
+      } else {
+        this.wrongAnswers.push(this.word);
+      }
+      if (answer) {
+        this.playSignal(isCorrect);
+      }
+      this.showWordCard();
+    }
+  }
+
+  playSignal(answer: boolean) {
     if (answer) {
       this.signalCorrect.play();
     } else {
       this.signalWrong.play();
     }
-  };
+  }
 
-  getTranslateOptions = () => {
+  getTranslateOptions() {
     if (!this.word) {
       throw new Error();
     }
-    const translateOptions: string[] = [this.word.wordTranslate];
-    for (let i = 0; i < this.amountExtraTranslateOptions; ) {
+    const translateOptions: Set<string> = new Set([this.word.wordTranslate]);
+    for (let i = 0; i < this.amountTranslateOptions; ) {
       const idx = getRandomInteger(0, this.amountWords);
-      if (this.constantWords[idx] !== this.word) {
-        translateOptions.push(this.constantWords[idx].wordTranslate);
+      if (!translateOptions.has(this.constantWords[idx].wordTranslate)) {
+        translateOptions.add(this.constantWords[idx].wordTranslate);
         i += 1;
       }
     }
-    return shuffle<string>(translateOptions);
-  };
+    return shuffle<string>(Array.from(translateOptions.values()));
+  }
 }
