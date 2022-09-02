@@ -1,11 +1,11 @@
 import Observer from '../Abstract/observer';
-import { IRouterService } from '../interfaces/interfaces';
+import { IRouterService } from '../Interfaces/common';
 
 export default class RouterService extends Observer implements IRouterService {
   router = '';
 
   setRouter(router: string): void {
     this.router = router;
-    this.dispath('router', this.router);
+    this.dispatch('router', this.router);
   }
 }

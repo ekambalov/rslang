@@ -1,6 +1,6 @@
 import BaseComponent from '../Abstract/base-component';
-import Services from '../Service/service';
-import { ICallback } from '../Interfaces/interfaces';
+import Services from '../Interfaces/services';
+import { ICallback } from '../Interfaces/common';
 
 export default class ButtonAutorise extends BaseComponent<HTMLButtonElement> {
   constructor(

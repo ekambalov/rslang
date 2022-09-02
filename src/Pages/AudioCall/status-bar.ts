@@ -1,5 +1,5 @@
 import BaseComponent from '../../Abstract/base-component';
-import Services from '../../Service/service';
+import Services from '../../Interfaces/services';
 
 export default class StatusBar extends BaseComponent {
   private total?: BaseComponent;
@@ -10,7 +10,7 @@ export default class StatusBar extends BaseComponent {
     super('p', 'audio-call-header__status-bar status-bar');
   }
 
-  render = async () => {
+  render = () => {
     this.services.audioCall.add('next-word', this.updateCurrentStatus);
 
     this.children = [

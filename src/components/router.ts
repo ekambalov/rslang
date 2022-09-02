@@ -3,7 +3,7 @@ import TeamPage from '../Pages/AboutTeam/page';
 import AudioCall from '../Pages/AudioCall/page';
 import LevelSelection from '../Pages/LevelSelection/page';
 import TextbookPage from '../Pages/Textbook/textbook';
-import Services from '../Service/service';
+import Services from '../Interfaces/services';
 import SprintPage from '../Pages/Sprint/page-sprint';
 
 type Page = MainPage | TeamPage | TextbookPage | AudioCall | LevelSelection | SprintPage;
@@ -19,9 +19,9 @@ export default class Router {
   constructor(private readonly root: HTMLElement, private readonly services: Services) {
     this.routes = [
       { path: '#/main', component: new MainPage(this.root, this.services) },
-      { path: '#/audio-call', component: new AudioCall(this.root, this.services) },
       { path: '#/authors', component: new TeamPage(this.root, this.services) },
       { path: '#/level-selection', component: new LevelSelection(this.root, this.services) },
+      { path: '#/audio-call', component: new AudioCall(this.root, this.services) },
       { path: '#/sprint', component: new SprintPage(this.root, this.services) },
       { path: '#/book', component: new TextbookPage(this.root, this.services) },
     ];

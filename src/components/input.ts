@@ -1,6 +1,6 @@
 /* eslint-disable import/no-cycle */
 import BaseComponent from '../Abstract/base-component';
-import Services from '../Service/service';
+import Services from '../Interfaces/services';
 
 export default class Input extends BaseComponent<HTMLInputElement> {
   constructor(

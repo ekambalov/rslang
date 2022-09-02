@@ -1,6 +1,6 @@
 import BaseComponent from '../Abstract/base-component';
-import Services from '../Service/service';
-import { IOptionsInput } from '../Interfaces/interfaces';
+import Services from '../Interfaces/services';
+import { IOptionsInput } from '../Interfaces/common';
 import { FormInput } from './form-Input';
 import Button from './button';
 

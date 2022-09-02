@@ -1,20 +1,20 @@
 import Observer from '../Abstract/observer';
-import { IMenuServise } from '../Interfaces/interfaces';
+import { IMenuServise } from '../Interfaces/common';
 
 export default class MenuService extends Observer implements IMenuServise {
   openMenu = (): void => {
-    this.dispath('open-menu');
+    this.dispatch('open-menu');
   };
 
   closeMenu = (): void => {
-    this.dispath('close-menu');
+    this.dispatch('close-menu');
   };
 
   showDarkLayer = (): void => {
-    this.dispath('show-dark-layer');
+    this.dispatch('show-dark-layer');
   };
 
   removeDarkLayer = (): void => {
-    this.dispath('remove-dark-layer');
+    this.dispatch('remove-dark-layer');
   };
 }

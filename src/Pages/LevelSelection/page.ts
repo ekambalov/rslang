@@ -1,5 +1,5 @@
 import BaseComponent from '../../Abstract/base-component';
-import Services from '../../Service/service';
+import Services from '../../Interfaces/services';
 import SelectionContainer from './selection-container';
 
 export default class LevelSelection extends BaseComponent {
@@ -13,7 +13,7 @@ export default class LevelSelection extends BaseComponent {
     super('div', 'level-selection');
   }
 
-  render() {
+  render = () => {
     this.destroy();
 
     this.parent.innerHTML = '';
@@ -35,5 +35,5 @@ export default class LevelSelection extends BaseComponent {
     this.selectionContainer.render();
 
     this.parent.appendChild(this.element);
-  }
+  };
 }

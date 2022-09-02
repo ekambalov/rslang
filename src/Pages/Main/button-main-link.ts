@@ -1,6 +1,6 @@
 import BaseComponent from '../../Abstract/base-component';
-import { ILinkButtonProps } from '../../Interfaces/interfaces';
-import Services from '../../Service/service';
+import { ILinkButtonProps } from '../../Interfaces/common';
+import Services from '../../Interfaces/services';
 
 export default class ButtonLink extends BaseComponent {
   constructor(

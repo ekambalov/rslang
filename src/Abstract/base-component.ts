@@ -15,7 +15,10 @@ export default class BaseComponent<E extends HTMLElement = HTMLElement> {
   render(): void {}
 
   destroy(): void {
-    this.children.forEach((element) => element.destroy());
+    this.children.forEach((element) => {
+      element.destroy();
+    });
+    this.children = [];
     this.element.remove();
   }
 }

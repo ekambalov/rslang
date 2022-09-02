@@ -1,6 +1,6 @@
-import Services from '../Service/service';
+import Services from '../Interfaces/services';
 import BaseComponent from '../Abstract/base-component';
-import State from '../model/state';
+import State from '../Model/state';
 
 const levels: string[] = ['Уровень 1', 'Уровень 2', 'Уровень 3', 'Уровень 4', 'Уровень 5', 'Уровень 6'];
 

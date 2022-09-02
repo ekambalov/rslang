@@ -1,4 +1,4 @@
-import Services from '../../Service/service';
+import Services from '../../Interfaces/services';
 import BaseComponent from '../../Abstract/base-component';
 import GameContainer from './game-container';
 import AudioTrueFalseBtn from './audio-btn-true-false';

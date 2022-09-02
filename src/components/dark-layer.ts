@@ -1,5 +1,5 @@
 import BaseComponent from '../Abstract/base-component';
-import Services from '../Service/service';
+import Services from '../Interfaces/services';
 
 export default class DarkLayer extends BaseComponent<HTMLDivElement> {
   constructor(private readonly parent: HTMLElement, private readonly service: Services) {
