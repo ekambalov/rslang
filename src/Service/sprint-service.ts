@@ -220,7 +220,9 @@ export default class SprintService extends Observer {
   };
 
   btnFalseClick = () => {
+    this.clickButtonFalse = true;
     this.clickButtonTrue = false;
+    this.btnTrueAddActiveStyle();
     this.playAudioError();
     if (!this.translateShowTrue) {
       this.countTrueAnsve += 1;
@@ -240,6 +242,7 @@ export default class SprintService extends Observer {
   btnTrueClick = () => {
     this.clickButtonFalse = false;
     this.clickButtonTrue = true;
+    this.btnTrueAddActiveStyle();
     this.playAudioError();
     if (this.translateShowTrue) {
       this.countTrueAnsve += 1;
@@ -263,11 +266,9 @@ export default class SprintService extends Observer {
       const { key: keys } = event;
       switch (keys) {
         case 'ArrowLeft':
-          this.btnFalseAddActiveStyle();
           this.btnFalseClick();
           break;
         case 'ArrowRight':
-          this.btnTrueAddActiveStyle();
           this.btnTrueClick();
           break;
         default:
