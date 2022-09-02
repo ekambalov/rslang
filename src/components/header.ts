@@ -2,7 +2,7 @@ import BaseComponent from '../Abstract/base-component';
 import Services from '../Interfaces/services';
 import Navigation from './navigation';
 import DarkLayer from './dark-layer';
-import ButtonWithCallback from './button-with-callback';
+import ButtonWithCallback from './button-component';
 import ContainerExitAutorise from './container-exit-autorise';
 
 import AutoriseFormModal from './form-modal-autorise';

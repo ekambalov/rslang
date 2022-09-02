@@ -1,6 +1,6 @@
 import BaseComponent from '../Abstract/base-component';
 import Services from '../Interfaces/services';
-import ButtonWithCallback from './button-with-callback';
+import ButtonWithCallback from './button-component';
 import FormAutorise from './form-autorise';
 
 export default class AutoriseFormModal extends BaseComponent<HTMLDivElement> {

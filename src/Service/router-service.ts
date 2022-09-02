@@ -1,5 +1,5 @@
 import Observer from '../Abstract/observer';
-import { IRouterService } from '../interfaces/interfaces';
+import { IRouterService } from '../Interfaces/common';
 
 export default class RouterService extends Observer implements IRouterService {
   router = '';

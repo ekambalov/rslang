@@ -1,6 +1,6 @@
 import Services from '../../Interfaces/services';
 import BaseComponent from '../../Abstract/base-component';
-import ButtonWithCallback from '../../components/button-with-callback';
+import ButtonWithCallback from '../../Components/button-component';
 
 export default class RuleGame extends BaseComponent {
   private rule?: BaseComponent;

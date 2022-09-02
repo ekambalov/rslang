@@ -1,8 +1,8 @@
 import Observer from '../Abstract/observer';
-import State from '../model/state';
+import State from '../Model/state';
 import { Word } from '../Interfaces/word-model';
-import fethWords from '../model/data-base';
-import { getRandomInteger } from '../utils/utils';
+import fethWords from '../Model/data-base';
+import { getRandomInteger } from '../Helper/utils';
 
 export default class SprintService extends Observer {
   private baseUrl = 'https://rs-learn-words.herokuapp.com/';

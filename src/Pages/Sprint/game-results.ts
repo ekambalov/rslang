@@ -1,7 +1,7 @@
 import Services from '../../Interfaces/services';
 import BaseComponent from '../../Abstract/base-component';
 import TableBodyResultsGame from './game-results-table-body';
-// import State from '../../model/state';
+// import State from '../../Model/state';
 
 export default class ResultsGameSprint extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {

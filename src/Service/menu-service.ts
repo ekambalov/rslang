@@ -1,5 +1,5 @@
 import Observer from '../Abstract/observer';
-import { IMenuServise } from '../Interfaces/interfaces';
+import { IMenuServise } from '../Interfaces/common';
 
 export default class MenuService extends Observer implements IMenuServise {
   openMenu = (): void => {
