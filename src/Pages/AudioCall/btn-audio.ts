@@ -22,10 +22,11 @@ export default class ButtonAudio extends BaseComponent<HTMLButtonElement> {
     this.element.removeAttribute('disabled');
   };
 
-  destroy() {
-    this.services.audioCall.remove('play-audio');
-    this.services.audioCall.remove('stop-audio');
+  destroy = () => {
+    this.services.audioCall.remove('play-audio', this.playAudio);
+    this.services.audioCall.remove('stop-audio', this.stopAudio);
     this.element.removeEventListener('click', this.services.audioCall.playAudio);
+
     super.destroy();
-  }
+  };
 }

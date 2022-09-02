@@ -8,21 +8,30 @@ export default class ButtonSelect extends BaseComponent<HTMLButtonElement> {
 
   render = () => {
     this.element.addEventListener('click', this.selectAnswer);
+    this.services.audioCall.add('show-answer', this.changeState);
 
     this.element.textContent = this.props;
-    this.element.setAttribute('data-answer', this.props);
     this.parent.appendChild(this.element);
   };
 
   selectAnswer = () => {
-    const answer = this.element.getAttribute('data-answer');
-    if (answer) {
-      this.services.audioCall.checkAnswer(answer);
-    }
+    this.services.audioCall.checkAnswer(this.props);
   };
 
-  destroy() {
+  changeState = (...data: string[]) => {
+    const [correctAnswer, wrongAnswer] = data;
+    if (this.props === correctAnswer) {
+      this.element.classList.add('btn-select--correct');
+    } else if (this.props === wrongAnswer) {
+      this.element.classList.add('btn-select--wrong');
+    }
     this.element.removeEventListener('click', this.selectAnswer);
+  };
+
+  destroy = () => {
+    this.element.removeEventListener('click', this.selectAnswer);
+    this.services.audioCall.remove('show-answer', this.changeState);
+
     super.destroy();
-  }
+  };
 }
