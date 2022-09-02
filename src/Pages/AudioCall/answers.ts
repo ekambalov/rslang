@@ -15,8 +15,8 @@ export default class Answers extends BaseComponent {
 
   addTranslateOptions = () => {
     const translateOptions: string[] = this.services.audioCall.getTranslateOptions();
-    translateOptions.forEach((option, idx) => {
-      this.children.push(new ButtonSelect(this.element, this.services, option));
+    translateOptions.forEach((item, idx) => {
+      this.children.push(new ButtonSelect(this.element, this.services, item));
       this.children[idx].render();
     });
   };

@@ -35,10 +35,27 @@ export default class AudioСallService extends Observer {
     throw new Error();
   }
 
+  getWrongAnswers = () => {
+    if (this.wrongAnswers) {
+      return this.wrongAnswers;
+    }
+    throw new Error();
+  };
+
+  getCorrectAnswers = () => {
+    if (this.correctAnswers) {
+      return this.correctAnswers;
+    }
+    throw new Error();
+  };
+
   setWords() {
     this.words = [...State.words];
     this.constantWords = [...State.words];
     this.amountWords = this.words.length;
+    this.counter = 1;
+    this.wrongAnswers = [];
+    this.correctAnswers = [];
     this.word = this.words.pop();
   }
 
@@ -48,25 +65,15 @@ export default class AudioСallService extends Observer {
       this.counter += 1;
       this.dispatch('next-word');
     } else {
-      try {
-        throw new Error('word is not found');
-      } catch (e) {
-        console.log(e);
-        this.dispatch('stop-game');
-      }
+      this.dispatch('stop-game');
     }
   }
 
-  playAudio = () => {
-    if (this.word) {
-      const { audio } = this.word;
-      const audioWord = new Audio(`${this.baseUrl}${audio}`);
-      audioWord.addEventListener('ended', this.stopAudio);
-      audioWord.play();
-      this.dispatch('play-audio');
-    } else {
-      throw new Error('word is not found');
-    }
+  playAudio = (path: string) => {
+    const audioWord = new Audio(`${this.baseUrl}${path}`);
+    audioWord.addEventListener('ended', this.stopAudio);
+    audioWord.play();
+    this.dispatch('play-audio');
   };
 
   stopAudio = () => {

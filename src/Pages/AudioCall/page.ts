@@ -3,6 +3,7 @@ import Services from '../../Interfaces/services';
 import Answers from './answers';
 import ButtonNext from './btn-next';
 import AudioCallHeader from './header';
+import Statistics from '../ResultGame/page';
 import WordContainer from './word';
 
 export default class AudioCall extends BaseComponent {
@@ -11,6 +12,9 @@ export default class AudioCall extends BaseComponent {
   }
 
   render = () => {
+    this.services.audioCall.add('stop-game', this.hideGame);
+    this.services.audioCall.add('stop-game', this.showStatistics);
+
     if (this.children.length) {
       this.destroy();
     }
@@ -26,5 +30,13 @@ export default class AudioCall extends BaseComponent {
       element.render();
     });
     this.parent.appendChild(this.element);
+  };
+
+  showStatistics = () => {
+    this.children.push(new Statistics(this.element, this.services));
+  };
+
+  hideGame = () => {
+    this.children.forEach((child) => child.destroy());
   };
 }

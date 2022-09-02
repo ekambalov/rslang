@@ -25,7 +25,7 @@ export default class WordContainer extends BaseComponent {
     if (wordData) {
       this.children = [
         (this.wordImg = new BaseComponent<HTMLImageElement>('img', 'word-img')),
-        (this.btnAudio = new ButtonAudio(this.element, this.services)),
+        (this.btnAudio = new ButtonAudio(this.element, this.services, { className: 'audio-call__btn-play-audio' })),
         (this.wordText = new BaseComponent('p', 'word-text')),
         (this.wordTranscription = new BaseComponent('p', 'word-transcription')),
       ];
