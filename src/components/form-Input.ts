@@ -1,5 +1,5 @@
 import BaseComponent from '../Abstract/base-component';
-import { IOptionsInput, IFormInputConponent } from '../Interfaces/interfaces';
+import { IOptionsInput, IFormInputConponent } from '../Interfaces/common';
 import Services from '../Interfaces/services';
 
 export interface OptionsInput {

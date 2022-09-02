@@ -1,7 +1,7 @@
 import Observer from '../Abstract/observer';
 import { Word } from '../Interfaces/word-model';
 import State from '../Model/state';
-import { getRandomInteger, shuffle } from '../utils/utils';
+import { getRandomInteger, shuffle } from '../Helper/utils';
 
 export default class AudioСallService extends Observer {
   private baseUrl = 'https://rs-learn-words.herokuapp.com/';

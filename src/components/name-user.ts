@@ -1,6 +1,6 @@
 import BaseComponent from '../Abstract/base-component';
 import Services from '../Interfaces/services';
-//  import State from '../model/state';
+//  import State from '../Model/state';
 
 export default class NameUser extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {

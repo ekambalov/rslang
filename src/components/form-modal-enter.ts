@@ -1,6 +1,6 @@
 import BaseComponent from '../Abstract/base-component';
 import Services from '../Interfaces/services';
-import ButtonWithCallback from './button-with-callback';
+import ButtonWithCallback from './button-component';
 import FormEnter from './form-enter';
 
 export default class EnterFormModal extends BaseComponent<HTMLDivElement> {

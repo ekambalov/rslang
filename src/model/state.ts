@@ -1,4 +1,4 @@
-import { IState } from '../Interfaces/interfaces';
+import { IState } from '../Interfaces/common';
 
 const State: IState = localStorage.getItem('state')
   ? JSON.parse(localStorage.getItem('state') ?? '')

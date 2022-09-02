@@ -3,7 +3,7 @@ import BaseComponent from '../Abstract/base-component';
 import linksProps from '../Settings/menu.json';
 import Services from '../Interfaces/services';
 import NavLink from './nav-link';
-import ButtonWithCallback from './button-with-callback';
+import ButtonWithCallback from './button-component';
 
 export default class Navigation extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {

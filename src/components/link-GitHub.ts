@@ -1,6 +1,6 @@
 import Services from '../Interfaces/services';
 import BaseComponent from '../Abstract/base-component';
-import { ILinkGitHub } from '../Interfaces/interfaces';
+import { ILinkGitHub } from '../Interfaces/common';
 
 export default class LinkGitHub extends BaseComponent {
   constructor(

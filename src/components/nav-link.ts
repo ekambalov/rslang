@@ -1,5 +1,5 @@
 import BaseComponent from '../Abstract/base-component';
-import { ILinkProps } from '../Interfaces/interfaces';
+import { ILinkProps } from '../Interfaces/common';
 import Services from '../Interfaces/services';
 
 export default class NavLink extends BaseComponent {
