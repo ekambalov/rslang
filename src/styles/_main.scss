@@ -128,7 +128,7 @@ h1 {
   margin-bottom: -7px;
   margin-top: 7px;
   text-align: left;
-  padding-left: 15px;
+  padding-left: 17px; 
 }
 
 .containerButton__button_autor {
@@ -160,7 +160,7 @@ h1 {
 
 }
 
-@media screen and (min-width: 1400px) {
+@media screen and (max-width: 1400px) {
 
   .containerButton {
     width: 525px;
@@ -182,6 +182,10 @@ h1 {
   .containerButton__button_autor {
     padding-top: 30px;
   }
+  .containerButton__button_enter {
+    padding-left: 43px;
+    padding-top: 30px;
+}
 
   h1 {
     font-size: 150px;
