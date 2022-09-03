@@ -41,14 +41,14 @@ export default class TextBookSettings extends BaseComponent {
     prevBtn.textContent = '<';
     prevBtn.href =
       State.textbook.currentPage <= 0
-        ? `#book?page=${0}&group=${State.textbook.currentLevel}`
-        : `#book?page=${State.textbook.currentPage - 1}&group=${State.textbook.currentLevel}`;
+        ? `#/book?page=${0}&group=${State.textbook.currentLevel}`
+        : `#/book?page=${State.textbook.currentPage - 1}&group=${State.textbook.currentLevel}`;
     const nextBtn = new BaseComponent('a', 'settings__next').element as HTMLLinkElement;
     nextBtn.textContent = '>';
     nextBtn.href =
       State.textbook.currentPage >= 29
-        ? `#book?page=${29}&group=${State.textbook.currentLevel}`
-        : `#book?page=${State.textbook.currentPage + 1}&group=${State.textbook.currentLevel}`;
+        ? `#/book?page=${29}&group=${State.textbook.currentLevel}`
+        : `#/book?page=${State.textbook.currentPage + 1}&group=${State.textbook.currentLevel}`;
     const currentPage = new BaseComponent('span', 'settings__page').element;
     currentPage.textContent = `${State.textbook.currentPage + 1}`;
     navigation.append(prevBtn, currentPage, nextBtn);
@@ -64,15 +64,22 @@ export default class TextBookSettings extends BaseComponent {
     this.element.append(levelSelector, navigation, audioCallLink, sprintLink);
     this.parent.appendChild(this.element);
     nextBtn.addEventListener('click', () => {
-      nextBtn.href = `#book?page=${State.textbook.currentPage + 1}&group=${State.textbook.currentLevel}`;
+      nextBtn.href = `#/book?page=${State.textbook.currentPage + 1}&group=${State.textbook.currentLevel}`;
     });
     prevBtn.addEventListener('click', () => {
       if (State.textbook.currentPage === 0) return;
-      prevBtn.href = `#book?page=${State.textbook.currentPage - 1}&group=${State.textbook.currentLevel}`;
+      prevBtn.href = `#/book?page=${State.textbook.currentPage - 1}&group=${State.textbook.currentLevel}`;
     });
     levelSelector.addEventListener('change', () => {
       const levelNumber = Number(levelSelector.value.slice(-1)) - 1;
-      window.location.href = `#book?page=${0}&group=${levelNumber}`;
+      window.location.href = `#/book?page=${0}&group=${levelNumber}`;
     });
+
+    if (localStorage.getItem('userInfoTokken')) {
+      const vocabularyLink = new BaseComponent('a', 'settings__link').element as HTMLLinkElement;
+      vocabularyLink.textContent = 'Словарь';
+      vocabularyLink.href = '#/vocabulary';
+      this.element.append(vocabularyLink);
+    }
   };
 }

@@ -5,8 +5,9 @@ import LevelSelection from '../Pages/LevelSelection/page';
 import TextbookPage from '../Pages/Textbook/textbook';
 import Services from '../Interfaces/services';
 import SprintPage from '../Pages/Sprint/page-sprint';
+import VocabularyPage from '../Pages/Vocabulary/vocabulary';
 
-type Page = MainPage | TeamPage | TextbookPage | AudioCall | LevelSelection | SprintPage;
+type Page = MainPage | TeamPage | TextbookPage | AudioCall | LevelSelection | SprintPage | VocabularyPage;
 
 interface RoutesInterface {
   path: string;
@@ -23,6 +24,7 @@ export default class Router {
       { path: '#/level-selection', component: new LevelSelection(this.root, this.services) },
       { path: '#/audio-call', component: new AudioCall(this.root, this.services) },
       { path: '#/sprint', component: new SprintPage(this.root, this.services) },
+      { path: '#/vocabulary', component: new VocabularyPage(this.root, this.services) },
       { path: '#/book', component: new TextbookPage(this.root, this.services) },
     ];
   }
@@ -35,7 +37,7 @@ export default class Router {
   routing = (): void => {
     const path = document.location.hash.toLowerCase() || '#/main';
     this.services.router.setRouter(path);
-    if (path.includes('book')) {
+    if (path.includes('#/book')) {
       const currentRout = this.routes.find((item) => item.path === '#/book') || this.routes[0];
       currentRout.component.render();
       return;

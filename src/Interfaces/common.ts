@@ -32,7 +32,8 @@ export interface IState {
   isAutorise: boolean;
   userInfoAutorise: IUserToken;
   deleteUser: string;
-  textbook: TextbookState;
+  textbook: ITextbook;
+  vocabulary: IVocabulary;
   words: Word[];
   currentPage: number;
   currentLevel: number;
@@ -111,9 +112,14 @@ export interface IFormInputConponent {
   removeErrorMessage(): void;
 }
 
-interface TextbookState {
+interface ITextbook {
   isPlayed: boolean;
   currentPage: number;
   currentLevel: number;
   fromTextbook: boolean;
+}
+interface IVocabulary {
+  difficultWords: Word[];
+  learningWords: Word[];
+  deletedWords: Word[];
 }
