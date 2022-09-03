@@ -32,8 +32,8 @@ export default class EnterFormModal extends BaseComponent<HTMLDivElement> {
   }
 
   destroy = () => {
-    this.services.form.remove('close-enter-form', this.closeEnterForm);
-    this.services.form.remove('open-enter-form', this.openEnterForm);
+    this.services.form.remove('close-enter-form');
+    this.services.form.remove('open-enter-form');
     super.destroy();
   };
 

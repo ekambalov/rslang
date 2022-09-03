@@ -5,8 +5,8 @@ import { FormInput } from './form-Input';
 import Button from './button';
 
 const inputs: IOptionsInput[] = [
-  { title: 'E-mail:', type: 'email', id: 'emall', name: 'emaill' },
-  { title: 'Введите пароль:', type: 'password', id: 'password1', name: 'password1' },
+  { title: 'E-mail:', type: 'email', id: 'emal', name: 'email' },
+  { title: 'Введите пароль:', type: 'password', id: 'password', name: 'password' },
 ];
 
 export default class FormEnter extends BaseComponent<HTMLFormElement> {
@@ -43,8 +43,8 @@ export default class FormEnter extends BaseComponent<HTMLFormElement> {
   }
 
   destroy = () => {
-    this.services.form.remove('show-autorise-error', this.showAutoriseError);
-    this.services.form.remove('remove-autorise-error', this.removeAutoriseError);
+    this.services.form.remove('show-autorise-error');
+    this.services.form.remove('remove-autorise-error');
     super.destroy();
   };
 

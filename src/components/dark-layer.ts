@@ -13,8 +13,8 @@ export default class DarkLayer extends BaseComponent<HTMLDivElement> {
   };
 
   destroy = () => {
-    this.service.menu.remove('show-dark-layer', this.showDarkLayer);
-    this.service.menu.remove('remove-dark-layer', this.removeDarkLayer);
+    this.service.menu.remove('show-dark-layer');
+    this.service.menu.remove('remove-dark-layer');
     super.destroy();
   };
 

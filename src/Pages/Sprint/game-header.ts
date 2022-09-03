@@ -45,10 +45,10 @@ export default class HeaderGame extends BaseComponent {
   };
 
   destroy = () => {
-    this.services.sprint.remove('reset-count-game', this.resetCount);
-    this.services.sprint.remove('add-count-game', this.addCount);
-    this.services.sprint.remove('add-count-game-reset', this.addCountReset);
-    this.services.sprint.remove('correct-add-count', this.correctAddCount);
+    this.services.sprint.remove('reset-count-game');
+    this.services.sprint.remove('add-count-game');
+    this.services.sprint.remove('add-count-game-reset');
+    this.services.sprint.remove('correct-add-count');
     super.destroy();
   };
 
@@ -78,6 +78,7 @@ export default class HeaderGame extends BaseComponent {
     if (this.services.sprint.countTrueAnsve > 3 && this.services.sprint.countTrueAnsve <= 6) {
       this.element.children[3].innerHTML = `${count + 20}`;
       this.services.sprint.userResult += 20;
+      console.log(this.services.sprint.userResult);
     }
     if (this.services.sprint.countTrueAnsve > 6) {
       this.element.children[3].innerHTML = `${count + 30}`;

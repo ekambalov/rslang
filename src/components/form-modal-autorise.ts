@@ -33,8 +33,8 @@ export default class AutoriseFormModal extends BaseComponent<HTMLDivElement> {
   }
 
   destroy = () => {
-    this.services.form.remove('close-autorise-form', this.closeAutoriseForm);
-    this.services.form.remove('open-autorise-form', this.openAutoriseForm);
+    this.services.form.remove('close-autorise-form');
+    this.services.form.remove('open-autorise-form');
     super.destroy();
   };
 

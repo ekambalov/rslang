@@ -53,7 +53,6 @@ main {
   display: flex;
   flex-grow: 1;
   justify-content: center;
-  align-items: center
 }
 
 @import './styles/header';
@@ -67,4 +66,3 @@ main {
 @import './styles/level-selection';
 @import './styles/audio-call';
 @import './styles/sprint';
-@import './styles/statistic';

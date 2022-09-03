@@ -21,12 +21,11 @@ const State: IState = localStorage.getItem('state')
         isPlayed: false,
         currentPage: 0,
         currentLevel: 0,
-        fromTextbook: false,
       },
       words: [],
       currentPage: 0,
       currentLevel: 0,
-      statistics: {},
+      nameGame: '',
     };
 
 export default State;

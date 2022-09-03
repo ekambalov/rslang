@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import BaseComponent from '../Abstract/base-component';
 import Services from '../Interfaces/services';
 import { IOptionsInput } from '../Interfaces/common';

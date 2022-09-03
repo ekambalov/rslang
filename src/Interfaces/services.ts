@@ -5,7 +5,6 @@ import AudioCallService from '../Service/audio-call';
 import TextbookService from '../Service/textbook-service';
 import SprintService from '../Service/sprint-service';
 import LevelSelectionService from '../Service/level-selection';
-import StatisticService from '../Service/statistic-service';
 
 export default interface Services {
   menu: MenuService;
@@ -15,5 +14,4 @@ export default interface Services {
   audioCall: AudioCallService;
   textbook: TextbookService;
   sprint: SprintService;
-  statistic: StatisticService;
 }

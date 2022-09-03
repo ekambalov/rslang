@@ -1,5 +1,5 @@
 import BaseComponent from '../Abstract/base-component';
-import { IOptionsInput } from '../Interfaces/common';
+import { IOptionsInput, IFormInputConponent } from '../Interfaces/common';
 import Services from '../Interfaces/services';
 
 export interface OptionsInput {
@@ -9,7 +9,7 @@ export interface OptionsInput {
   name: string;
 }
 
-export class FormInput extends BaseComponent {
+export class FormInput extends BaseComponent implements IFormInputConponent {
   messageElement?: HTMLElement;
 
   readonly type: string;
@@ -48,9 +48,9 @@ export class FormInput extends BaseComponent {
   }
 
   destroy = () => {
-    this.services.form.remove('error-message', this.error);
-    this.services.form.remove('remove-error-message', this.removeErrorMessage);
-    this.services.form.remove('clear-input', this.clearInput);
+    this.services.form.remove('error-message');
+    this.services.form.remove('remove-error-message');
+    this.services.form.remove('clear-input');
     super.destroy();
   };
 

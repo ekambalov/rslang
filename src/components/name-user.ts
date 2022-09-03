@@ -21,7 +21,7 @@ export default class NameUser extends BaseComponent {
   };
 
   destroy = () => {
-    this.services.form.remove('show-user-name', this.showNameUser);
+    this.services.form.remove('show-user-name');
     super.destroy();
   };
 
