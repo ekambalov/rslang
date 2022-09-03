@@ -9,7 +9,7 @@ export default class SprintService extends Observer {
 
   currentArrayWordsGame: Word[] = [];
 
-  constantWords?: Word[];
+  private constantWords?: Word[];
 
   currentPage = 0;
 
@@ -46,13 +46,13 @@ export default class SprintService extends Observer {
     audioExample: 'files/03_2450_example.mp3',
     audioMeaning: 'files/03_2450_meaning.mp3',
     group: 4,
-    id: '31',
+    id: '5e9f5ee35eb9e72bc21afe31',
     image: 'files/03_2450.jpg',
     page: 2,
-    textExample: 'test',
-    textExampleTranslate: 'тест',
-    textMeaning: 'true.',
-    textMeaningTranslate: 'правдой',
+    textExample: 'I quietly passed on a <b>hint</b> to my sister about the test.',
+    textExampleTranslate: 'Я спокойно передал намек моей сестре о тесте',
+    textMeaning: 'A <i>hint</i> is information that suggests something will happen or is true.',
+    textMeaningTranslate: 'Подсказка - это информация, которая предполагает, что что-то случится или будет правдой',
     transcription: '[hint]',
     word: 'hint',
     wordTranslate: 'намек',
@@ -65,35 +65,23 @@ export default class SprintService extends Observer {
   };
 
   exitGameSprint = () => {
-    this.dispath('enter-game-sprint'); // выход из игры
+    this.dispatch('enter-game-sprint'); // выход из игры
   };
 
   hideRuleSprint = () => {
-    this.dispath('hide-rule-sprint'); // прячем правила игры
+    this.dispatch('hide-rule-sprint'); // прячем правила игры
   };
 
   showRuleSprint = () => {
-    this.dispath('show-rule-sprint'); // показываем правила игры
+    this.dispatch('show-rule-sprint'); // показываем правила игры
   };
 
   showFiledGame = () => {
-    this.dispath('show-filed-game'); // показываем поле игры
+    this.dispatch('show-filed-game'); // показываем поле игры
   };
 
   hideFileGame = () => {
-    this.dispath('hide-filed-game'); // прячем поле игры
-  };
-
-  showResult = () => {
-    this.dispath('show-results-sprint');
-  };
-
-  hideResult = () => {
-    this.dispath('hide-results-sprint');
-  };
-
-  writeResult = () => {
-    this.dispath('write-results-sprint');
+    this.dispatch('hide-filed-game'); // прячем поле игры
   };
 
   playAudioWord = () => {
@@ -105,40 +93,26 @@ export default class SprintService extends Observer {
     }
   };
 
-  playWordResulTable = (src: string) => {
-    if (src) {
-      new Audio(`${this.baseUrl}${src}`).play();
-    } else {
-      throw new Error('word is not found');
-    }
-  };
-
   stopAudioWord = () => {
-    this.dispath('stop-audio-word'); // произношение слова
+    this.dispatch('stop-audio-word'); // произношение слова
   };
 
   writeWordGame = () => {
-    this.dispath('write-word-game'); // пишем слова англ/рус
-  };
-
-  resetTimer = () => {
-    this.dispath('reset-timer'); // сбрасываем таймер
+    this.dispatch('write-word-game'); // пишем слова англ/рус
   };
 
   startGameSprint = () => {
-    this.currentArrayWordsGame = [...State.words];
     this.resetSettingGame();
     this.writeWordGame();
-    this.hideRuleSprint(); // прячем правила
-    this.hideResult(); // прячем результаты
-    this.showFiledGame(); // показываем игровое поле
+    this.hideRuleSprint();
+    this.showFiledGame();
     this.listener();
-    this.dispath('start-timer'); // запускаем таймер
+    this.dispatch('start-timer'); // запускаем таймер
   };
 
   resetSettingGame = () => {
-    this.resetTimer();
-    this.resetCountGame();
+    this.dispatch('reset-timer');
+    this.dispatch('reset-count-game');
     this.countTrueAnsve = 0;
     this.clickButtonFalse = false;
     this.clickButtonTrue = false;
@@ -149,16 +123,12 @@ export default class SprintService extends Observer {
     this.arrayWordsAnsweFalse = [];
   };
 
-  resetCountGame = () => {
-    this.dispath('reset-count-game'); // сбрасываем счёт игры
+  resetTimer = () => {
+    this.dispatch('reset-timer'); // сбрасываем таймер
   };
 
-  finishGame = () => {
-    this.endTimeGame = true;
-    this.hideFileGame();
-    this.upgradeResult();
-    this.showResult();
-    this.writeResult();
+  resetCountGame = () => {
+    this.dispatch('reset-count-game'); // сбрасываем счёт игры
   };
 
   timer = (element: HTMLElement) => {
@@ -169,8 +139,9 @@ export default class SprintService extends Observer {
         el.innerHTML = `${seconds}`;
         seconds -= 1;
         if (seconds < 0) {
-          this.finishGame();
           clearInterval(timerGame);
+          this.endTimeGame = true;
+          this.hideFileGame();
         }
       },
       1000,
@@ -180,20 +151,20 @@ export default class SprintService extends Observer {
   };
 
   addCountGame = () => {
-    this.dispath('add-count-game'); // увеличиваем очки за игру
+    this.dispatch('add-count-game'); // увеличиваем очки за игру
   };
 
   correctAddCount = () => {
-    this.dispath('correct-add-count'); // увеличиваем очки за игру
+    this.dispatch('correct-add-count'); // увеличиваем очки за игру
   };
 
   addCountReset = () => {
-    this.dispath('add-count-game-reset'); // устанавливаем +10 счёта очков
+    this.dispatch('add-count-game-reset'); // устанавливаем +10 счёта очков
   };
 
-  srcAudioTrue = '../assets/audio/true2.mp3';
+  srcAudioTrue = '../assets/img/true2.mp3';
 
-  srcAudioFalse = '../assets/audio/error.mp3';
+  srcAudioFalse = '../assets/img/false.mp3';
 
   playAudioError = () => {
     if (this.stopAudioError) return;
@@ -208,21 +179,12 @@ export default class SprintService extends Observer {
   };
 
   disabledBtnAudioError = () => {
-    this.dispath('disabled-audio-error');
-  };
-
-  btnTrueAddActiveStyle = () => {
-    this.dispath('btn-true-active-style');
-  };
-
-  btnFalseAddActiveStyle = () => {
-    this.dispath('btn-false-active-style');
+    this.dispatch('disabled-audio-error');
   };
 
   btnFalseClick = () => {
     this.clickButtonFalse = true;
     this.clickButtonTrue = false;
-    this.btnFalseAddActiveStyle();
     this.playAudioError();
     if (!this.translateShowTrue) {
       this.countTrueAnsve += 1;
@@ -242,7 +204,6 @@ export default class SprintService extends Observer {
   btnTrueClick = () => {
     this.clickButtonFalse = false;
     this.clickButtonTrue = true;
-    this.btnTrueAddActiveStyle();
     this.playAudioError();
     if (this.translateShowTrue) {
       this.countTrueAnsve += 1;
@@ -250,11 +211,13 @@ export default class SprintService extends Observer {
       this.correctAddCount();
       this.arrayWordsAnsweTrue.push(this.currentWord);
       this.arrayShowWords.push(this.currentWord);
+      console.log('array true', this.arrayWordsAnsweTrue);
     } else {
       this.arrayWordsAnsweFalse.push(this.currentWord);
       this.countTrueAnsve = 0;
       this.addCountReset();
       this.arrayShowWords.push(this.currentWord);
+      console.log('array false', this.arrayWordsAnsweFalse);
     }
     this.writeWordGame();
   };
@@ -275,19 +238,10 @@ export default class SprintService extends Observer {
     });
   };
 
-  getUnikNumber = (number: number, from: number, to: number): number => {
-    let unikNumber = getRandomInteger(from, to);
-    if (unikNumber === number) {
-      do {
-        unikNumber = getRandomInteger(from, to);
-      } while (unikNumber === number);
-    }
-    return unikNumber;
-  };
-
   // eslint-disable-next-line consistent-return
   getNewWord = () => {
     if (this.currentArrayWordsGame.length) {
+      console.log(this.currentArrayWordsGame.length);
       const wordID = this.currentArrayWordsGame.length - 1;
       const wordFull = this.currentArrayWordsGame.pop();
       this.currentWord = wordFull as Word; // получили англ слово и сохранили
@@ -301,7 +255,14 @@ export default class SprintService extends Observer {
       }
       if (random > 5) {
         this.translateShowTrue = false; // будем показывать неправильный перевод
-        const id: number = this.getUnikNumber(wordID, 0, 19); // рандомный id для превода
+        let id: number = getRandomInteger(0, 19); // рандомный id для превода
+        if (id === wordID) {
+          do {
+            id = getRandomInteger(0, 19); // если id совпало со словом- берем другое id
+          } while (id === wordID);
+          const falseTranslate = State.words[id].wordTranslate;
+          return [englWord, falseTranslate, 'false'];
+        }
         const falseTranslate = State.words[id].wordTranslate;
         return [englWord, falseTranslate, 'false'];
       }
@@ -311,14 +272,47 @@ export default class SprintService extends Observer {
   };
 
   getNewPagesWord = async () => {
-    const page = this.getUnikNumber(this.currentPage, 0, 29);
+    const page = getRandomInteger(0, 29);
     this.currentPage = page;
     const words = await fethWords(State.currentLevel, page);
+
     this.constantWords = [...words];
     this.currentArrayWordsGame = [...words];
+    this.getNewWord();
   };
 
-  upgradeResult = () => {
-    this.dispath('upgrade-results-sprint');
+  /* getWordEngl = () => {
+    if (this.currentArrayWordsGame.length) {
+      this.currentWordID = this.currentArrayWordsGame.length - 1;
+      const word = this.currentArrayWordsGame.pop();
+      this.currentWord = word as Word;
+      console.log('слово', word);
+      return word;
+    }
+    let random: number = getRandomInteger(0, 29);
+    if (random === State.currentPageGame) random = getRandomInteger(0, 29);
+    fethWords(State.currentLevelGame, random);
+    this.currentWordID = this.currentArrayWordsGame.length - 1;
+    const word = this.currentArrayWordsGame.pop();
+    this.currentWord = word as Word;
+    console.log('кончились слова это новая страница и слово ', word);
+    console.log('кончились слова это новая страница и id', this.currentWordID);
+    return word;
   };
+
+  getRusWord = () => {
+    this.currentWordID = this.currentArrayWordsGame.length - 1;
+    const random = getRandomInteger(0, 10);
+    if (random <= 5) {
+      this.translate = true;
+      console.log('правильный перевод', this.currentArrayWordsGame[this.currentWordID].wordTranslate);
+      return this.currentArrayWordsGame[this.currentWordID].wordTranslate;
+    }
+    this.translate = false;
+    let id: number = getRandomInteger(0, 19);
+    console.log('рандомный id', id);
+    if (this.currentWordID === id) id = getRandomInteger(0, 19);
+    console.log('неправильный перевод', State.words[id].wordTranslate);
+    return State.words[id].wordTranslate;
+  }; */
 }

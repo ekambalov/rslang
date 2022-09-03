@@ -15,16 +15,16 @@ export default class AudioCallHeader extends BaseComponent {
 
   render = () => {
     this.children = [
-      (this.btnFullscreen = new BaseComponent<HTMLButtonElement>('button', 'audio-call-header__btn-fullscreen')),
+      (this.btnFullscreen = new BaseComponent<HTMLButtonElement>('button', 'audio-call-header__btn-fullscreen btn')),
       (this.statusBar = new StatusBar(this.element, this.services)),
-      (this.btnExit = new BaseComponent<HTMLButtonElement>('button', 'audio-call-header__btn-exit')),
+      (this.btnExit = new BaseComponent<HTMLButtonElement>('button', 'audio-call-header__btn-exit btn')),
     ];
+
+    this.btnFullscreen?.element.addEventListener('click', this.services.audioCall.switchScreenMode);
 
     this.element.prepend(this.btnFullscreen.element);
 
     this.statusBar.render();
-
-    this.btnExit.element.textContent = 'X';
 
     this.btnExit.element.addEventListener('click', () => {
       document.location.hash = '#/main';
@@ -33,5 +33,10 @@ export default class AudioCallHeader extends BaseComponent {
     this.element.appendChild(this.btnExit.element);
 
     this.parent.appendChild(this.element);
+  };
+
+  destroy = () => {
+    this.btnFullscreen?.element.removeEventListener('click', this.services.audioCall.switchScreenMode);
+    super.destroy();
   };
 }

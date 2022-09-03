@@ -6,6 +6,6 @@ export default class RouterService extends Observer implements IRouterService {
 
   setRouter(router: string): void {
     this.router = router;
-    this.dispath('router', this.router);
+    this.dispatch('router', this.router);
   }
 }

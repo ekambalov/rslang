@@ -78,6 +78,7 @@ export default class HeaderGame extends BaseComponent {
     if (this.services.sprint.countTrueAnsve > 3 && this.services.sprint.countTrueAnsve <= 6) {
       this.element.children[3].innerHTML = `${count + 20}`;
       this.services.sprint.userResult += 20;
+      console.log(this.services.sprint.userResult);
     }
     if (this.services.sprint.countTrueAnsve > 6) {
       this.element.children[3].innerHTML = `${count + 30}`;

@@ -21,7 +21,6 @@ const State: IState = localStorage.getItem('state')
         isPlayed: false,
         currentPage: 0,
         currentLevel: 0,
-        fromTextbook: false,
       },
       vocabulary: {
         difficultWords: [],
@@ -29,8 +28,9 @@ const State: IState = localStorage.getItem('state')
         deletedWords: [],
       },
       words: [],
-      currentPageGame: 0,
-      currentLevelGame: 0,
+      currentPage: 0,
+      currentLevel: 0,
+      nameGame: '',
     };
 
 export default State;

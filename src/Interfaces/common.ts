@@ -37,6 +37,7 @@ export interface IState {
   words: Word[];
   currentPage: number;
   currentLevel: number;
+  nameGame: 'audio-call' | 'sprint';
 }
 
 export interface IMenuServise {
@@ -116,7 +117,6 @@ interface ITextbook {
   isPlayed: boolean;
   currentPage: number;
   currentLevel: number;
-  fromTextbook: boolean;
 }
 interface IVocabulary {
   difficultWords: Word[];
