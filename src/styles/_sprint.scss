@@ -8,7 +8,9 @@
   flex-direction: column;
   align-items: center;
 }
-
+.rule__info {
+  color: red;
+}
 .spint_btn-container {
   width: 100%;
   padding: 5px 25px;
@@ -70,7 +72,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 50px;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 
 .game-header__count,
@@ -262,7 +264,8 @@
 }
 
 table {
-  margin: 7px auto; 
+  margin: 7px auto;
+  width: 70%; 
 }
 
 .table__word,
@@ -290,7 +293,7 @@ table {
 }
 
 .results__title {
-  margin-top: 30px;
+  margin-top: 5px;
   font-size: 25px;
   font-family: 'Junegull';
   text-align: center;
@@ -352,14 +355,15 @@ table {
 .results__count {
   font-size: 25px;
 }
+table {
+ 
+  width: 60%; 
+}
 .table__word,
 .table__audio,
 .table__word-transcription {
   padding: 4px 10px;
   font-size: 20px;
-}
-table {
-  min-width: 700px;
 }
 .result {
    max-height: 500px;
@@ -371,9 +375,11 @@ table {
     margin: 10px auto;
     width: 90%;
   }
-    table {
-      min-width: 500px;
-    }
+  table {
+ 
+    width: 90%; 
+  }
+    
   }
 
 
@@ -400,19 +406,14 @@ table {
     position: relative;
     top: 50px;
   }
-  table {
-    max-width: 400px;
-  }
+  
 }
 
 @media screen and (max-width: 400px) {
   .game__wrapper-btn {
     gap: 20px;
   }
-  table {
-    max-width: 380px;
-  }
-
+ 
   .game__btn_true,
   .game__btn_false {
     width: 100px;
@@ -431,6 +432,6 @@ table {
   .table__word,
   .table__audio,
   .table__word-transcription {  
-  font-size: 13px;
+  font-size: 12px;
 }
 }

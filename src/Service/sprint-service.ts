@@ -3,6 +3,7 @@ import State from '../Model/state';
 import { Word } from '../Interfaces/word-model';
 import fethWords from '../Model/data-base';
 import { getRandomInteger } from '../Helper/utils';
+import { getUserStatistic } from '../Model/api-statistic';
 
 export default class SprintService extends Observer {
   private baseUrl = 'https://rs-learn-words.herokuapp.com/';
@@ -11,11 +12,15 @@ export default class SprintService extends Observer {
 
   constantWords?: Word[];
 
+  currentPageBook = 0;
+
   currentPage = 0;
 
   endTimeGame = false; // закончилось время таймера
 
-  countTrueAnsve = 0; // количество правильных ответов подряд
+  countTrueAnsve = 0; // количество правильных ответов подряд для +20 +30 сбрасывается при неверном ответе
+
+  chainTrueAnsve = 0; // лучшая цепочка ответов подряд
 
   userResult = 0; // количество набранных очков
 
@@ -126,6 +131,7 @@ export default class SprintService extends Observer {
   };
 
   startGameSprint = () => {
+    this.currentPageBook = State.textbook.currentPage;
     this.currentArrayWordsGame = [...State.words];
     this.resetSettingGame();
     this.writeWordGame();
@@ -134,6 +140,7 @@ export default class SprintService extends Observer {
     this.showFiledGame(); // показываем игровое поле
     this.listener();
     this.dispath('start-timer'); // запускаем таймер
+    getUserStatistic(State.userInfoAutorise.userId, State.userInfoAutorise.token); //  получаем старую статистику
   };
 
   resetSettingGame = () => {
@@ -226,6 +233,7 @@ export default class SprintService extends Observer {
     this.playAudioError();
     if (!this.translateShowTrue) {
       this.countTrueAnsve += 1;
+      if (this.chainTrueAnsve < this.countTrueAnsve) this.chainTrueAnsve = this.countTrueAnsve;
       this.addCountGame();
       this.correctAddCount();
       this.arrayWordsAnsweTrue.push(this.currentWord);
@@ -246,6 +254,7 @@ export default class SprintService extends Observer {
     this.playAudioError();
     if (this.translateShowTrue) {
       this.countTrueAnsve += 1;
+      if (this.chainTrueAnsve < this.countTrueAnsve) this.chainTrueAnsve = this.countTrueAnsve;
       this.addCountGame();
       this.correctAddCount();
       this.arrayWordsAnsweTrue.push(this.currentWord);
@@ -306,11 +315,27 @@ export default class SprintService extends Observer {
         return [englWord, falseTranslate, 'false'];
       }
     } else {
-      this.getNewPagesWord();
+      this.getNewPagesWordRandom();
     }
   };
 
-  getNewPagesWord = async () => {
+  stopGame = () => {
+    if (this.idTimerGame) clearInterval(this.idTimerGame);
+    this.finishGame(); // прерываем игру так как закончились слова из учебника (выбраная страница и все предыдущие страницы. Неизученные брать нельзя)
+  };
+
+  getNewPagesWordFromBook = async () => {
+    this.currentPageBook -= 1;
+    if (this.currentPageBook >= 0) {
+      const words = await fethWords(State.currentLevel, this.currentPageBook);
+      this.constantWords = [...words];
+      this.currentArrayWordsGame = [...words];
+    } else {
+      this.stopGame();
+    }
+  };
+
+  getNewPagesWordRandom = async () => {
     const page = this.getUnikNumber(this.currentPage, 0, 29);
     this.currentPage = page;
     const words = await fethWords(State.currentLevel, page);

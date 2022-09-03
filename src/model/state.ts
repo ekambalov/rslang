@@ -24,8 +24,9 @@ const State: IState = localStorage.getItem('state')
         fromTextbook: false,
       },
       words: [],
-      currentPageGame: 0,
-      currentLevelGame: 0,
+      currentPage: 0,
+      currentLevel: 0,
+      statistics: {},
     };
 
 export default State;

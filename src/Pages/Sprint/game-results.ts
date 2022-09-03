@@ -5,6 +5,8 @@ import ResultsWrapper from './game-results-wrapper';
 export default class ResultsGameSprint extends BaseComponent<HTMLDivElement> {
   private title?: BaseComponent;
 
+  private info?: BaseComponent;
+
   private results?: ResultsWrapper;
 
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
@@ -27,8 +29,9 @@ export default class ResultsGameSprint extends BaseComponent<HTMLDivElement> {
   };
 
   destroy = () => {
-    this.services.sprint.remove('hide-results-sprint');
-    this.services.sprint.remove('show-results-sprint');
+    this.services.sprint.remove('hide-results-sprint', this.hideResult);
+    this.services.sprint.remove('upgrade-results-sprint', this.upgrade);
+    this.services.sprint.remove('show-results-sprint', this.showResult);
     super.destroy();
   };
 

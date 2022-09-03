@@ -46,8 +46,9 @@ export default class AudioСallService extends Observer {
     this.word = this.words?.pop();
     if (this.word) {
       this.counter += 1;
-      this.dispatch('next-word');
+      this.dispath('next-word');
       const { word, image } = this.word;
+      console.log(word, image);
     } else {
       try {
         throw new Error('word is not found');
@@ -76,7 +77,7 @@ export default class AudioСallService extends Observer {
 
   showWordCard() {
     if (this.word) {
-      this.dispatch('show-answer', this.word.wordTranslate, this.selectedAnswer);
+      this.dispath('show-answer', this.word.wordTranslate, this.selectedAnswer);
     }
   }
 

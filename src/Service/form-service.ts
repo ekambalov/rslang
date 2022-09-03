@@ -1,9 +1,11 @@
 import Observer from '../Abstract/observer';
 import { IUser, IUserToken } from '../Interfaces/user-model';
 import { createUser, getUserTokken } from '../Model/api-user-autorise';
-import { IFormService, IFormInputConponent } from '../Interfaces/common';
+import { IFormInputConponent } from '../Interfaces/common';
+import State from '../Model/state';
+import { getUserStatistic } from '../Model/api-statistic';
 
-export default class FormService extends Observer implements IFormService {
+export default class FormService extends Observer {
   user: IUser = {
     name: '',
     password: '',
@@ -31,6 +33,9 @@ export default class FormService extends Observer implements IFormService {
       this.showExitAutorise();
       this.showNameUser();
       this.hideBtnAutorise();
+      State.userInfoAutorise = JSON.parse(localStorage.getItem('userInfoTokken') as string);
+      getUserStatistic(State.userInfoAutorise.userId, State.userInfoAutorise.token);
+      State.isAutorise = true;
     }
   };
 
@@ -124,7 +129,6 @@ export default class FormService extends Observer implements IFormService {
     this.btnClickEnter = false;
     if (this.checkAllInput()) this.createNewUser();
     else this.showAutoriseError();
-    console.log(this.btnClickAutorise, this.btnClickEnter);
   };
 
   clickEnter = () => {
@@ -167,10 +171,11 @@ export default class FormService extends Observer implements IFormService {
       this.clear();
     } else {
       this.userInfoAutorise = answeToken;
+      State.isAutorise = true;
+      getUserStatistic(this.userInfoAutorise.userId, this.userInfoAutorise.token);
       this.clearInput();
       this.closeAutoriseForm();
       this.closeEnterForm();
-      this.closeFormFull();
       this.hideBtnAutorise();
       this.showNameUser();
       this.showExitAutorise();
@@ -194,7 +199,6 @@ export default class FormService extends Observer implements IFormService {
       return true;
     }
     this.fullAllInput = false;
-    console.log('Не все поля заполнены');
     // this.showAutoriseError();
     return false;
   };
