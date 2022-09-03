@@ -10,6 +10,8 @@ export default class TextBookSettings extends BaseComponent {
   }
 
   render = () => {
+    this.destroy();
+
     const path = document.location.hash.toLowerCase();
     const page = path.slice(path.indexOf('page') + 5, path.indexOf('&'));
     const group = path.slice(path.indexOf('group') + 6);
@@ -28,7 +30,6 @@ export default class TextBookSettings extends BaseComponent {
     } else {
       State.textbook.currentLevel = Number(group);
     }
-
     const levelSelector = new BaseComponent('select', 'settings__level level').element as HTMLSelectElement;
     levels.forEach((stage) => {
       const level = new BaseComponent('option', 'level__item').element as HTMLOptionElement;
@@ -77,7 +78,7 @@ export default class TextBookSettings extends BaseComponent {
 
     if (localStorage.getItem('userInfoTokken')) {
       const vocabularyLink = new BaseComponent('a', 'settings__link').element as HTMLLinkElement;
-      vocabularyLink.textContent = 'Словарь';
+      vocabularyLink.textContent = 'Сложные слова';
       vocabularyLink.href = '#/vocabulary';
       this.element.append(vocabularyLink);
     }

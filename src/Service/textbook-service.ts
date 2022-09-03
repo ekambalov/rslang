@@ -1,3 +1,4 @@
+import { createEasyUserWord, createDifficultUserWord, deleteUserWord } from '../model/getTextbook';
 import Observer from '../Abstract/observer';
 
 export default class TextbookService extends Observer {
@@ -10,7 +11,7 @@ export default class TextbookService extends Observer {
     if (this instanceof HTMLElement) {
       id = this.parentElement?.parentElement?.id;
     }
-    console.log(id);
+    if (id) createDifficultUserWord(id);
   }
 
   addWordToEasy(): void {
@@ -18,7 +19,7 @@ export default class TextbookService extends Observer {
     if (this instanceof HTMLElement) {
       id = this.parentElement?.parentElement?.id;
     }
-    console.log(id);
+    if (id) createEasyUserWord(id);
   }
 
   deleteWord(): void {
@@ -26,6 +27,6 @@ export default class TextbookService extends Observer {
     if (this instanceof HTMLElement) {
       id = this.parentElement?.parentElement?.id;
     }
-    console.log(id);
+    if (id) deleteUserWord(id);
   }
 }

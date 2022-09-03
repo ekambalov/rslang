@@ -12,22 +12,23 @@ export default class TextbookPage extends BaseComponent {
   }
 
   render = () => {
+    this.destroy();
+    console.log('textbook');
     this.parent.innerHTML = ''; // clear the main section
     this.element.innerHTML = ''; // clear the main section
     const title = new BaseComponent<HTMLHeadElement>('h2', 'textbook__title').element;
     const settings = new BaseComponent('div', 'textbook__settings').element;
-    new TextBookSettings(settings, this.services).render();
+    this.children.push(new TextBookSettings(settings, this.services));
     title.textContent = 'Учебник';
     const carts = new BaseComponent('div', 'textbook__carts').element;
     this.element.append(title, settings, carts);
     this.parent.appendChild(this.element); // add our section to main
     this.drawWords();
-    this.services.textbook.add('get-words', () => {
-      this.drawWords();
-    });
   };
 
   async drawWords(): Promise<void> {
+    this.children[0].render();
+
     const parent = document.querySelector('.textbook__carts');
     const page = State.textbook.currentPage;
     const group = State.textbook.currentLevel;
@@ -36,11 +37,15 @@ export default class TextbookPage extends BaseComponent {
     const container = parent;
     State.words = [...words];
     if (container instanceof HTMLElement) container.innerHTML = '';
-
     words.forEach((word) => {
-      if (parent instanceof HTMLElement) new TextBookCart(parent, this.services, word).render();
+      if (parent instanceof HTMLElement) {
+        this.children.push(new TextBookCart(parent, this.services, word));
+      }
     });
-    console.log('isautorise', State.isAutorise);
+    this.children.forEach((elemet, index) => {
+      if (index === 0) return;
+      elemet.render();
+    });
     const pageBox = document.querySelector('.settings__page');
     if (pageBox instanceof HTMLElement) pageBox.textContent = `${State.textbook.currentPage + 1}`;
   }

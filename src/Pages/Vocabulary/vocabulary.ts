@@ -1,10 +1,7 @@
-import { Word } from '../../Interfaces/word-model';
 import BaseComponent from '../../Abstract/base-component';
-import { getWords } from '../../Model/getTextbook';
+import { getUsersWords } from '../../model/getTextbook';
 import Services from '../../Interfaces/services';
 import TextBookCart from '../../components/textbook-cart';
-import TextBookSettings from '../../components/textbook-settings';
-import State from '../../Model/state';
 
 export default class VocabularyPage extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
@@ -14,6 +11,17 @@ export default class VocabularyPage extends BaseComponent {
   render = () => {
     this.parent.innerHTML = '';
     this.element.textContent = 'slounik';
+    this.drawWords(this.element);
     this.parent.appendChild(this.element);
   };
+
+  async drawWords(parent: HTMLElement): Promise<void> {
+    const words = await getUsersWords();
+    words.forEach((userWord) => {
+      if (userWord.optional?.word && parent instanceof HTMLElement && userWord.difficulty === 'hard') {
+        const word = userWord.optional?.word;
+        new TextBookCart(parent, this.services, word).render();
+      }
+    });
+  }
 }
