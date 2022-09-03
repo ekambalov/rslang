@@ -50,5 +50,15 @@ export default class ResultsWrapper extends BaseComponent<HTMLDivElement> {
 
     this.element.children[0].innerHTML = `Верно:  ${trueAnswe}`;
     this.element.children[2].innerHTML = `Неверно:  ${falseAnswe}`;
+    // пробрасываем данные статистики:
+    this.services.statistic.chainTrueAnsve = this.services.sprint.chainTrueAnsve; // цепочка
+    for (let i = 0; i < trueAnswe; i += 1) {
+      this.services.statistic.arrayIdWordsAnsweTrue.push(this.services.sprint.arrayWordsAnsweTrue[i].id);
+      // id правильных слов
+    }
+    for (let i = 0; i < falseAnswe; i += 1) {
+      this.services.statistic.arrayIdWordsAnsweFalse.push(this.services.sprint.arrayWordsAnsweFalse[i].id);
+      // id неправильных слов
+    }
   };
 }

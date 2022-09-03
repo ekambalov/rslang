@@ -54,9 +54,10 @@ export default class Router {
       currentRout.component.render();
       return;
     }
-    if (path.includes('statistic') && localStorage.getItem('userInfoEnter')) {
+    if (path.includes('statistic') && localStorage.getItem('userInfoTokken')) {
       const currentRout = this.routes.find((item) => item.path === '#/statisticInfo') || this.routes[0];
       currentRout.component.render();
+      this.services.statistic.updateStatistic();
       return;
     }
     const currentRout = this.routes.find((item) => item.path === path) || this.routes[0];

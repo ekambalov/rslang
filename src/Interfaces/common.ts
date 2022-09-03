@@ -126,13 +126,13 @@ export interface IUserStatistic {
       trueAnsve: number;
       falseAnsve: number;
       chain: number;
-      newWords: string[];
+      newWords: number;
     };
     audioCall: {
       trueAnsve: number;
       falseAnsve: number;
       chain: number;
-      newWords: string[];
+      newWords: number;
     };
     words: {
       oldWords: string[];
