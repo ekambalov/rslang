@@ -1,8 +1,12 @@
 import BaseComponent from '../../Abstract/base-component';
 import Services from '../../Interfaces/services';
+import { Word } from '../../Interfaces/word-model';
+import State from '../../Model/state';
 import ListStatistics from './list';
 
 export default class ResultsGame extends BaseComponent {
+  private title?: BaseComponent;
+
   private titleWrongAnswers?: BaseComponent;
 
   private listWrongAnswers?: BaseComponent;
@@ -11,12 +15,36 @@ export default class ResultsGame extends BaseComponent {
 
   private listCorrectAnswers?: BaseComponent;
 
+  private btnPlayAgain?: BaseComponent;
+
+  private btnExit?: BaseComponent;
+
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
-    super('div', 'audio-call-statistic');
+    super('div', 'game-results');
   }
 
   render = () => {
+    if (this.children.length) {
+      this.destroy();
+    }
+    let wrongAnswers: Word[] = [];
+    let correctAnswers: Word[] = [];
+    switch (State.nameGame) {
+      case 'audio-call':
+        wrongAnswers = this.services.audioCall.getWrongAnswers();
+        correctAnswers = this.services.audioCall.getCorrectAnswers();
+        break;
+      case 'sprint':
+        // wrongAnswers = this.services.sprint.getWrongAnswers();
+        // correctAnswers = this.services.sprint.getCorrectAnswers();
+        break;
+      default:
+        break;
+    }
     this.children = [
+      (this.btnPlayAgain = new BaseComponent<HTMLButtonElement>('button', 'game-results__btn-play-again btn')),
+      (this.btnExit = new BaseComponent<HTMLButtonElement>('button', 'game-results__btn-exit btn')),
+      (this.title = new BaseComponent('h1', 'game-results__title')),
       (this.titleWrongAnswers = new BaseComponent(
         'h2',
         'audio-call-statistic__title audio-call-statistic__title--wrong'
@@ -25,19 +53,36 @@ export default class ResultsGame extends BaseComponent {
         'h2',
         'audio-call-statistic__title audio-call-statistic__title--correct'
       )),
-      (this.listWrongAnswers = new ListStatistics(this.element, this.services, { className: 'list-wrong-answers' })),
+      (this.listWrongAnswers = new ListStatistics(this.element, this.services, {
+        words: wrongAnswers,
+        className: 'list-answers list-answers--wrong',
+      })),
       (this.listCorrectAnswers = new ListStatistics(this.element, this.services, {
-        className: 'list-correct-answers',
+        words: correctAnswers,
+        className: 'list-answers list-answers--correct',
       })),
     ];
 
-    this.titleWrongAnswers.render();
+    this.btnExit.element.addEventListener('click', () => {
+      document.location.hash = '#/main';
+    });
+    this.btnPlayAgain.element.addEventListener('click', () => {
+      document.location.reload();
+    });
 
-    this.listWrongAnswers.render();
+    this.element.appendChild(this.btnPlayAgain.element);
+    this.element.appendChild(this.btnExit.element);
 
-    this.titleCorrectAnswers.render();
+    this.title.element.textContent = 'Результат';
+    this.element.appendChild(this.title.element);
 
+    this.titleCorrectAnswers.element.innerHTML = `Верно: <span>${correctAnswers.length}</span>`;
+    this.element.appendChild(this.titleCorrectAnswers.element);
     this.listCorrectAnswers.render();
+
+    this.titleWrongAnswers.element.innerHTML = `Ошибки: <span>${wrongAnswers.length}</span>`;
+    this.element.appendChild(this.titleWrongAnswers.element);
+    this.listWrongAnswers.render();
 
     this.parent.appendChild(this.element);
   };

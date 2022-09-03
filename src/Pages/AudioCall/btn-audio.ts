@@ -12,7 +12,7 @@ export default class ButtonAudio extends BaseComponent<HTMLButtonElement> {
     private readonly services: Services,
     private props: IButtonAudioProps
   ) {
-    super('button', props.className);
+    super('button', `${props.className} btn btn-audio`);
   }
 
   render = () => {

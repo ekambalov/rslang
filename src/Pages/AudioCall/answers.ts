@@ -9,6 +9,7 @@ export default class Answers extends BaseComponent {
 
   render = () => {
     this.services.audioCall.add('next-word', this.updateContainer);
+
     this.addTranslateOptions();
     this.parent.appendChild(this.element);
   };
@@ -16,7 +17,7 @@ export default class Answers extends BaseComponent {
   addTranslateOptions = () => {
     const translateOptions: string[] = this.services.audioCall.getTranslateOptions();
     translateOptions.forEach((item, idx) => {
-      this.children.push(new ButtonSelect(this.element, this.services, item));
+      this.children.push(new ButtonSelect(this.element, this.services, [item, `${idx + 1}`]));
       this.children[idx].render();
     });
   };
@@ -25,5 +26,10 @@ export default class Answers extends BaseComponent {
     this.children.forEach((child) => child.destroy());
     this.children = [];
     this.addTranslateOptions();
+  };
+
+  destroy = () => {
+    this.services.audioCall.remove('next-word', this.updateContainer);
+    super.destroy();
   };
 }

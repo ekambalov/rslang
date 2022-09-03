@@ -36,6 +36,7 @@ export interface IState {
   words: Word[];
   currentPage: number;
   currentLevel: number;
+  nameGame: 'audio-call' | 'sprint';
 }
 
 export interface IMenuServise {

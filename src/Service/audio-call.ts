@@ -53,23 +53,39 @@ export default class AudioСallService extends Observer {
     this.words = [...State.words];
     this.constantWords = [...State.words];
     this.amountWords = this.words.length;
+    this.word = this.words.pop();
+  }
+
+  setNameGame = () => {
+    State.nameGame = 'audio-call';
+  };
+
+  resetGameData = () => {
     this.counter = 1;
     this.wrongAnswers = [];
     this.correctAnswers = [];
-    this.word = this.words.pop();
-  }
+  };
 
   nextWord() {
     this.word = this.words?.pop();
     if (this.word) {
       this.counter += 1;
       this.dispatch('next-word');
+      this.playAudio(this.word.audio);
     } else {
       this.dispatch('stop-game');
     }
   }
 
-  playAudio = (path: string) => {
+  switchScreenMode = () => {
+    if (!document.fullscreenElement) {
+      this.dispatch('full-screen');
+    } else {
+      this.dispatch('default-screen');
+    }
+  };
+
+  playAudio = (path = this.word?.audio) => {
     const audioWord = new Audio(`${this.baseUrl}${path}`);
     audioWord.addEventListener('ended', this.stopAudio);
     audioWord.play();

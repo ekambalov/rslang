@@ -25,6 +25,7 @@ const State: IState = localStorage.getItem('state')
       words: [],
       currentPage: 0,
       currentLevel: 0,
+      nameGame: '',
     };
 
 export default State;
