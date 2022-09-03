@@ -36,6 +36,7 @@ export interface IState {
   words: Word[];
   currentPage: number;
   currentLevel: number;
+  statistics: IUserStatistic;
 }
 
 export interface IMenuServise {
@@ -115,4 +116,26 @@ interface TextbookState {
   currentPage: number;
   currentLevel: number;
   fromTextbook: boolean;
+}
+
+export interface IUserStatistic {
+  learnedWords: number;
+  optional: {
+    data: string;
+    sprint: {
+      trueAnsve: number;
+      falseAnsve: number;
+      chain: number;
+      newWords: string[];
+    };
+    audioCall: {
+      trueAnsve: number;
+      falseAnsve: number;
+      chain: number;
+      newWords: string[];
+    };
+    words: {
+      oldWords: string[];
+    };
+  };
 }

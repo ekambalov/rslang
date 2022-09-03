@@ -3,6 +3,7 @@ import State from '../Model/state';
 import { Word } from '../Interfaces/word-model';
 import fethWords from '../Model/data-base';
 import { getRandomInteger } from '../Helper/utils';
+import { getUserStatistic } from '../Model/api-statistic';
 
 export default class SprintService extends Observer {
   private baseUrl = 'https://rs-learn-words.herokuapp.com/';
@@ -17,7 +18,9 @@ export default class SprintService extends Observer {
 
   endTimeGame = false; // закончилось время таймера
 
-  countTrueAnsve = 0; // количество правильных ответов подряд
+  countTrueAnsve = 0; // количество правильных ответов подряд для +20 +30 сбрасывается при неверном ответе
+
+  chainTrueAnsve = 0; // лучшая цепочка ответов подряд
 
   userResult = 0; // количество набранных очков
 
@@ -137,6 +140,7 @@ export default class SprintService extends Observer {
     this.showFiledGame(); // показываем игровое поле
     this.listener();
     this.dispath('start-timer'); // запускаем таймер
+    getUserStatistic(State.userInfoAutorise.userId, State.userInfoAutorise.token); //  получаем старую статистику
   };
 
   resetSettingGame = () => {
@@ -229,6 +233,7 @@ export default class SprintService extends Observer {
     this.playAudioError();
     if (!this.translateShowTrue) {
       this.countTrueAnsve += 1;
+      if (this.chainTrueAnsve < this.countTrueAnsve) this.chainTrueAnsve = this.countTrueAnsve;
       this.addCountGame();
       this.correctAddCount();
       this.arrayWordsAnsweTrue.push(this.currentWord);
@@ -249,6 +254,7 @@ export default class SprintService extends Observer {
     this.playAudioError();
     if (this.translateShowTrue) {
       this.countTrueAnsve += 1;
+      if (this.chainTrueAnsve < this.countTrueAnsve) this.chainTrueAnsve = this.countTrueAnsve;
       this.addCountGame();
       this.correctAddCount();
       this.arrayWordsAnsweTrue.push(this.currentWord);

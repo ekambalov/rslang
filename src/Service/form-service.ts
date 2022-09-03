@@ -2,6 +2,8 @@ import Observer from '../Abstract/observer';
 import { IUser, IUserToken } from '../Interfaces/user-model';
 import { createUser, getUserTokken } from '../Model/api-user-autorise';
 import { IFormInputConponent } from '../Interfaces/common';
+import State from '../Model/state';
+import { getUserStatistic } from '../Model/api-statistic';
 
 export default class FormService extends Observer {
   user: IUser = {
@@ -31,6 +33,9 @@ export default class FormService extends Observer {
       this.showExitAutorise();
       this.showNameUser();
       this.hideBtnAutorise();
+      State.userInfoAutorise = JSON.parse(localStorage.getItem('userInfoTokken') as string);
+      getUserStatistic(State.userInfoAutorise.userId, State.userInfoAutorise.token);
+      State.isAutorise = true;
     }
   };
 
@@ -166,10 +171,11 @@ export default class FormService extends Observer {
       this.clear();
     } else {
       this.userInfoAutorise = answeToken;
+      State.isAutorise = true;
+      getUserStatistic(this.userInfoAutorise.userId, this.userInfoAutorise.token);
       this.clearInput();
       this.closeAutoriseForm();
       this.closeEnterForm();
-      this.closeFormFull();
       this.hideBtnAutorise();
       this.showNameUser();
       this.showExitAutorise();

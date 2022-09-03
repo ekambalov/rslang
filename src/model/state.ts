@@ -26,6 +26,7 @@ const State: IState = localStorage.getItem('state')
       words: [],
       currentPage: 0,
       currentLevel: 0,
+      statistics: {},
     };
 
 export default State;
