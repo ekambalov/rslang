@@ -140,7 +140,10 @@ export default class SprintService extends Observer {
     this.showFiledGame(); // показываем игровое поле
     this.listener();
     this.dispath('start-timer'); // запускаем таймер
-    getUserStatistic(State.userInfoAutorise.userId, State.userInfoAutorise.token); //  получаем старую статистику
+    if (localStorage.getItem('userInfoTokken')) {
+      getUserStatistic(State.userInfoAutorise.userId, State.userInfoAutorise.token);
+      console.log(getUserStatistic(State.userInfoAutorise.userId, State.userInfoAutorise.token)); //  получаем старую статистику
+    }
   };
 
   resetSettingGame = () => {

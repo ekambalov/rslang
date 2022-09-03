@@ -80,10 +80,12 @@ export class FormInput extends BaseComponent {
   }
 
   removeErrorMessage(): void {
-    this.clear();
+    // this.clear();
     if (this.messageElement) {
       this.messageElement.textContent = '';
     }
-    this.element.classList.remove('error');
+    if (this.element.classList.contains('error')) {
+      this.element.classList.remove('error');
+    }
   }
 }

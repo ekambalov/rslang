@@ -26,14 +26,18 @@ export default class StatisticBook extends BaseComponent {
       (this.containerItem = new BaseComponent('div', 'book__result-item')),
       (this.bookTitle = new BaseComponent('h6', 'book__title')),
       (this.bookImage = new BaseComponent('img', 'book__img')),
-      (this.newWords = new BaseComponent('h6', 'book__new-words')),
-      (this.countTrueFalse = new BaseComponent('h6', 'book__true-false')),
-      (this.chain = new BaseComponent('h6', 'book__chain')),
+      (this.newWords = new BaseComponent('h6', 'book__new-words item-statistic')),
+      (this.countTrueFalse = new BaseComponent('h6', 'book__true-false item-statistic')),
+      (this.chain = new BaseComponent('h6', 'book__chain item-statistic')),
     ];
     this.containerTitle.element.append(this.bookTitle.element, this.bookImage.element);
     this.containerItem.element.append(this.newWords.element, this.countTrueFalse.element, this.chain.element);
 
     this.bookTitle.element.innerHTML = 'Учебник';
+    this.newWords.element.innerHTML = 'Новые слова: 0';
+    this.countTrueFalse.element.innerHTML = 'Изученные слова за день: 0';
+    this.chain.element.innerHTML = 'Процент правильных ответов: 0%';
+
     this.bookImage.element.setAttribute('src', './assets/img/book.png');
     this.bookImage.element.setAttribute('alt', 'img book logo');
 

@@ -26,14 +26,17 @@ export default class StatisticAudioCall extends BaseComponent {
       (this.containerItem = new BaseComponent('div', 'audio__result-item')),
       (this.audioTitle = new BaseComponent('h6', 'audio__title')),
       (this.audioImage = new BaseComponent('img', 'audio__img')),
-      (this.newWords = new BaseComponent('h6', 'audio__new-words')),
-      (this.countTrueFalse = new BaseComponent('h6', 'audio__true-false')),
-      (this.chain = new BaseComponent('h6', 'audio__chain')),
+      (this.newWords = new BaseComponent('h6', 'audio__new-words item-statistic')),
+      (this.countTrueFalse = new BaseComponent('h6', 'audio__true-false item-statistic')),
+      (this.chain = new BaseComponent('h6', 'audio__chain item-statistic')),
     ];
     this.containerTitle.element.append(this.audioTitle.element, this.audioImage.element);
     this.containerItem.element.append(this.newWords.element, this.countTrueFalse.element, this.chain.element);
 
     this.audioTitle.element.innerHTML = 'Аудио-вызов';
+    this.newWords.element.innerHTML = 'Новые слова: 0';
+    this.countTrueFalse.element.innerHTML = 'Верных ответов: 0%';
+    this.chain.element.innerHTML = 'Самая длинная цепочка: 1';
     this.audioImage.element.setAttribute('src', './assets/img/audio.png');
     this.audioImage.element.setAttribute('alt', 'img audio logo');
 

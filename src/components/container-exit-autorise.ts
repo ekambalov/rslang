@@ -2,6 +2,7 @@ import BaseComponent from '../Abstract/base-component';
 import Services from '../Interfaces/services';
 import ButtonWithCallback from './button-component';
 import NameUser from './name-user';
+import State from '../Model/state';
 
 export default class ContainerExitAutorise extends BaseComponent {
   private nameUser?: NameUser;
@@ -46,5 +47,6 @@ export default class ContainerExitAutorise extends BaseComponent {
     this.element.style.display = 'none';
     this.services.form.showBtnAutorise();
     localStorage.clear();
+    State.isAutorise = false;
   };
 }

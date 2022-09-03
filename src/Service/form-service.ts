@@ -30,12 +30,12 @@ export default class FormService extends Observer {
 
   loadWindow = () => {
     if (localStorage.getItem('userInfoTokken')) {
+      State.isAutorise = true;
+      State.userInfoAutorise = JSON.parse(localStorage.getItem('userInfoTokken') as string);
       this.showExitAutorise();
       this.showNameUser();
       this.hideBtnAutorise();
-      State.userInfoAutorise = JSON.parse(localStorage.getItem('userInfoTokken') as string);
       getUserStatistic(State.userInfoAutorise.userId, State.userInfoAutorise.token);
-      State.isAutorise = true;
     }
   };
 
@@ -49,17 +49,10 @@ export default class FormService extends Observer {
     this.fullEnterInput = false;
   };
 
-  openFormFull = () => {
-    this.dispath('open-form-full');
-  };
-
-  closeFormFull = () => {
-    this.dispath('close-form-full');
-    this.dispath('clear-form');
-  };
-
   openAutoriseForm = () => {
     this.dispath('open-autorise-form');
+    this.dispath('clear-input');
+    this.dispath('remove-error-message');
   };
 
   closeAutoriseForm = () => {
@@ -69,6 +62,7 @@ export default class FormService extends Observer {
 
   openEnterForm = () => {
     this.dispath('open-enter-form');
+    this.dispath('clear-input');
   };
 
   closeEnterForm = () => {
@@ -151,7 +145,6 @@ export default class FormService extends Observer {
       this.btnClickAutorise = false;
       this.btnClickEnter = false;
     } else {
-      console.log(responseCreateAnswe);
       this.getTokken();
       this.removeAutoriseError();
     }
@@ -172,7 +165,7 @@ export default class FormService extends Observer {
     } else {
       this.userInfoAutorise = answeToken;
       State.isAutorise = true;
-      getUserStatistic(this.userInfoAutorise.userId, this.userInfoAutorise.token);
+      getUserStatistic(this.userInfoAutorise.userId, this.userInfoAutorise.token); // получаем сатистику
       this.clearInput();
       this.closeAutoriseForm();
       this.closeEnterForm();

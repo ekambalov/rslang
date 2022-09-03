@@ -11,18 +11,18 @@ const base = 'https://rs-learn-words.herokuapp.com/';
 export const userStatisticFirst: IUserStatistic = {
   "learnedWords": 0,
   "optional": {
-    "data": '0309',
+    "data": '3-9-2022',
     "sprint": {
       "trueAnsve": 0,
       "falseAnsve": 0,
       "chain": 0,
-      "newWords": []
+      "newWords": 0
     },
     "audioCall": {
       "trueAnsve": 0,
       "falseAnsve": 0,
       "chain": 0,
-      "newWords": []
+      "newWords": 0
     },
     "words": {
       "oldWords": []
@@ -49,10 +49,12 @@ export const setUserStatistic = async (userId: string, userToken: string, userSt
       'Authorization': `Bearer ${userToken}`,
       'Accept': 'application/json',
      },
-    body: JSON.stringify(userStatistic),
+    body: JSON.stringify({
+      userStatistic  
+    }),
     });
     const content = await response.json();
-    console.log(content);
+    console.log(content, 'пришло в ответ с сервера когда статистику послали');
     return content;
  };
 

@@ -58,7 +58,6 @@ export interface IDataBaseServices {
 export interface IServices {
   menu: IMenuServise;
   router: IRouterService;
-  dataBase: IDataBaseServices;
   form: IFormService;
 }
 

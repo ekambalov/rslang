@@ -37,6 +37,9 @@ export default class StatisticSprint extends BaseComponent {
     this.sprintImage.element.setAttribute('src', './assets/img/sprint2.png');
     this.sprintImage.element.setAttribute('alt', 'img sprint logo');
 
+    this.newWords.element.innerHTML = 'Новые слова: 0';
+    this.countTrueFalse.element.innerHTML = 'Верных ответов: 0%';
+    this.chain.element.innerHTML = 'Самая длинная цепочка: 1';
     this.element.prepend(this.containerTitle.element, this.containerItem.element);
     this.parent.appendChild(this.element);
 

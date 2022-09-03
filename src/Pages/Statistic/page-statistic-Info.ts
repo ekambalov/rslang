@@ -7,6 +7,8 @@ export default class StatisticInfoPage extends BaseComponent {
 
   private title?: BaseComponent;
 
+  private titleDay?: BaseComponent;
+
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
     super('section', 'statistic');
   }
@@ -17,10 +19,12 @@ export default class StatisticInfoPage extends BaseComponent {
     this.children = [
       (this.statisticContainer = new StatisticContainer(this.element, this.services)),
       (this.title = new BaseComponent('h6', 'statistic__title')),
+      (this.titleDay = new BaseComponent('h6', 'statistic__title_day')),
     ];
     this.title.element.innerHTML = 'Статистика';
+    this.titleDay.element.innerHTML = 'за день';
     this.statisticContainer.render();
-    this.element.prepend(this.title.element, this.statisticContainer.element);
+    this.element.prepend(this.title.element, this.titleDay.element, this.statisticContainer.element);
     this.parent.appendChild(this.element);
   };
 }
