@@ -40,6 +40,7 @@ export default class TextbookPage extends BaseComponent {
     words.forEach((word) => {
       if (parent instanceof HTMLElement) new TextBookCart(parent, this.services, word).render();
     });
+    console.log('isautorise', State.isAutorise);
     const pageBox = document.querySelector('.settings__page');
     if (pageBox instanceof HTMLElement) pageBox.textContent = `${State.textbook.currentPage + 1}`;
   }
