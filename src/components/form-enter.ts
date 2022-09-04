@@ -43,8 +43,8 @@ export default class FormEnter extends BaseComponent<HTMLFormElement> {
   }
 
   destroy = () => {
-    this.services.form.remove('show-autorise-error', this.showAutoriseError);
-    this.services.form.remove('remove-autorise-error', this.removeAutoriseError);
+    this.services.form.remove('show-autorise-error');
+    this.services.form.remove('remove-autorise-error');
     super.destroy();
   };
 

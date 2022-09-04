@@ -33,8 +33,8 @@ export default class Button extends BaseComponent<HTMLButtonElement> {
     if (this.element.textContent === `Авторизация`)
       this.element.removeEventListener('click', this.service.form.clickAutorise);
     if (this.element.textContent === `Войти`) this.element.removeEventListener('click', this.service.form.clickEnter);
-    this.service.form.remove('disabled-btn-autorise', this.disabledBtnAutorise);
-    this.service.form.remove('un-disabled-btn-autorise', this.unDisabledBtnAutorise);
+    this.service.form.remove('disabled-btn-autorise');
+    this.service.form.remove('un-disabled-btn-autorise');
     super.destroy();
   };
 

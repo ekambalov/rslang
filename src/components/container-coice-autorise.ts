@@ -38,8 +38,8 @@ export default class ContainerCoiceAutorise extends BaseComponent {
   };
 
   destroy = () => {
-    this.services.form.remove('show-container-autorise', this.showContainerAutorise);
-    this.services.form.remove('hide-container-autorise', this.hideContainerAutorise);
+    this.services.form.remove('show-container-autorise');
+    this.services.form.remove('hide-container-autorise');
     super.destroy();
   };
 
