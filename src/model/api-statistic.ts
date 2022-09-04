@@ -49,17 +49,14 @@ export const setUserStatistic = async (userId: string, userToken: string, userSt
       'Authorization': `Bearer ${userToken}`,
       'Accept': 'application/json',
      },
-    body: JSON.stringify({
-      userStatistic  
-    }),
+    body: JSON.stringify(userStatistic),
     });
     const content = await response.json();
     console.log(content, 'пришло в ответ с сервера когда статистику послали');
     return content;
  };
 
-export const getUserStatistic = async (userId: string, userToken: string) => { 
- 
+export const getUserStatistic = async (userId: string, userToken: string) => {  
     const response: Response = await fetch(`${base}users/${userId}/statistics`, {
       method: 'GET',
       headers: {
