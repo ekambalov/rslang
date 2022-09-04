@@ -54,32 +54,32 @@ export class FormInput extends BaseComponent {
     super.destroy();
   };
 
-  clear(): void {
+  clear = (): void => {
     this.element.classList.remove('success');
     this.element.classList.remove('error');
-  }
+  };
 
-  clearInput(): void {
+  clearInput = (): void => {
     const inputs = document.getElementsByTagName('input');
     for (let i = 0; i < inputs.length; i += 1) {
       inputs[i].value = '';
     }
-  }
+  };
 
-  success(): void {
+  success = (): void => {
     this.clear();
     this.removeErrorMessage();
-  }
+  };
 
-  error(message: string): void {
+  error = (message: string): void => {
     this.clear();
     if (this.messageElement) {
       this.messageElement.textContent = message;
     }
     this.element.classList.add('error');
-  }
+  };
 
-  removeErrorMessage(): void {
+  removeErrorMessage = (): void => {
     // this.clear();
     if (this.messageElement) {
       this.messageElement.textContent = '';
@@ -87,5 +87,5 @@ export class FormInput extends BaseComponent {
     if (this.element.classList.contains('error')) {
       this.element.classList.remove('error');
     }
-  }
+  };
 }
