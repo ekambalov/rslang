@@ -1,9 +1,11 @@
 import Observer from '../Abstract/observer';
 import { IUser, IUserToken } from '../Interfaces/user-model';
 import { createUser, getUserTokken } from '../Model/api-user-autorise';
-import { IFormService, IFormInputConponent } from '../Interfaces/common';
+import { IFormInputConponent } from '../Interfaces/common';
+import State from '../Model/state';
+import { getUserStatistic } from '../Model/api-statistic';
 
-export default class FormService extends Observer implements IFormService {
+export default class FormService extends Observer {
   user: IUser = {
     name: '',
     password: '',
@@ -33,10 +35,7 @@ export default class FormService extends Observer implements IFormService {
       this.showExitAutorise();
       this.showNameUser();
       this.hideBtnAutorise();
-<<<<<<< HEAD
       getUserStatistic(State.userInfoAutorise.userId, State.userInfoAutorise.token);
-=======
->>>>>>> 079411bd768a3acb29fe293621e80e95e681123c
     }
   };
 
@@ -50,91 +49,73 @@ export default class FormService extends Observer implements IFormService {
     this.fullEnterInput = false;
   };
 
-<<<<<<< HEAD
   openAutoriseForm = () => {
     this.dispath('open-autorise-form');
     this.dispath('clear-input');
     this.dispath('remove-error-message');
-=======
-  openFormFull = () => {
-    this.dispatch('open-form-full');
-  };
-
-  closeFormFull = () => {
-    this.dispatch('close-form-full');
-    this.dispatch('clear-form');
-  };
-
-  openAutoriseForm = () => {
-    this.dispatch('open-autorise-form');
->>>>>>> 079411bd768a3acb29fe293621e80e95e681123c
   };
 
   closeAutoriseForm = () => {
-    this.dispatch('close-autorise-form');
-    this.dispatch('clear-form');
+    this.dispath('close-autorise-form');
+    this.dispath('clear-form');
   };
 
   openEnterForm = () => {
-<<<<<<< HEAD
     this.dispath('open-enter-form');
     this.dispath('clear-input');
-=======
-    this.dispatch('open-enter-form');
->>>>>>> 079411bd768a3acb29fe293621e80e95e681123c
   };
 
   closeEnterForm = () => {
-    this.dispatch('close-enter-form');
-    this.dispatch('clear-form');
+    this.dispath('close-enter-form');
+    this.dispath('clear-form');
   };
 
   showNameUser = () => {
-    this.dispatch('show-user-name');
+    this.dispath('show-user-name');
   };
 
   hideExitAutorise = () => {
-    this.dispatch('hide-exit-autorise');
+    this.dispath('hide-exit-autorise');
   };
 
   showExitAutorise = () => {
-    this.dispatch('show-exit-autorise');
+    this.dispath('show-exit-autorise');
   };
 
   disabledBtnAutorise = () => {
-    this.dispatch('disabled-btn-autorise');
+    this.dispath('disabled-btn-autorise');
   };
 
   unDisabledBtnAutorise = () => {
-    this.dispatch('un-disabled-btn-autorise');
+    this.dispath('un-disabled-btn-autorise');
   };
 
   hideBtnAutorise = () => {
-    this.dispatch('hide-container-autorise');
+    this.dispath('hide-container-autorise');
   };
 
   showBtnAutorise = () => {
-    this.dispatch('show-container-autorise');
+    this.dispath('show-container-autorise');
   };
 
   clearInput = () => {
-    this.dispatch('clear-input');
+    this.dispath('clear-input');
   };
 
   errorMessage = () => {
-    this.dispatch('error-message');
+    this.dispath('error-message');
   };
 
   removeErrorMessage = () => {
-    this.dispatch('remove-error-message');
+    this.dispath('remove-error-message');
   };
 
   showAutoriseError = () => {
-    this.dispatch('show-autorise-error');
+    this.dispath('show-autorise-error');
   };
 
   removeAutoriseError = () => {
-    this.dispatch('remove-autorise-error');
+    this.dispath('remove-autorise-error');
   };
 
   clickAutorise = () => {
@@ -142,7 +123,6 @@ export default class FormService extends Observer implements IFormService {
     this.btnClickEnter = false;
     if (this.checkAllInput()) this.createNewUser();
     else this.showAutoriseError();
-    console.log(this.btnClickAutorise, this.btnClickEnter);
   };
 
   clickEnter = () => {
@@ -184,15 +164,11 @@ export default class FormService extends Observer implements IFormService {
       this.clear();
     } else {
       this.userInfoAutorise = answeToken;
-<<<<<<< HEAD
       State.isAutorise = true;
       getUserStatistic(this.userInfoAutorise.userId, this.userInfoAutorise.token); // получаем сатистику
-=======
->>>>>>> 079411bd768a3acb29fe293621e80e95e681123c
       this.clearInput();
       this.closeAutoriseForm();
       this.closeEnterForm();
-      this.closeFormFull();
       this.hideBtnAutorise();
       this.showNameUser();
       this.showExitAutorise();
@@ -216,7 +192,6 @@ export default class FormService extends Observer implements IFormService {
       return true;
     }
     this.fullAllInput = false;
-    console.log('Не все поля заполнены');
     // this.showAutoriseError();
     return false;
   };

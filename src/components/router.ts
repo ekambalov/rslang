@@ -5,8 +5,19 @@ import LevelSelection from '../Pages/LevelSelection/page';
 import TextbookPage from '../Pages/Textbook/textbook';
 import Services from '../Interfaces/services';
 import SprintPage from '../Pages/Sprint/page-sprint';
+import StatisticPage from '../Pages/Statistic/page-statistic';
+import StatisticInfoPage from '../Pages/Statistic/page-statistic-Info';
+import State from '../Model/state';
 
-type Page = MainPage | TeamPage | TextbookPage | AudioCall | LevelSelection | SprintPage;
+type Page =
+  | MainPage
+  | TeamPage
+  | TextbookPage
+  | AudioCall
+  | LevelSelection
+  | SprintPage
+  | StatisticPage
+  | StatisticInfoPage;
 
 interface RoutesInterface {
   path: string;
@@ -24,6 +35,8 @@ export default class Router {
       { path: '#/audio-call', component: new AudioCall(this.root, this.services) },
       { path: '#/sprint', component: new SprintPage(this.root, this.services) },
       { path: '#/book', component: new TextbookPage(this.root, this.services) },
+      { path: '#/statistic', component: new StatisticPage(this.root, this.services) },
+      { path: '#/statisticInfo', component: new StatisticInfoPage(this.root, this.services) },
     ];
   }
 
@@ -36,8 +49,15 @@ export default class Router {
     const path = document.location.hash.toLowerCase() || '#/main';
     this.services.router.setRouter(path);
     if (path.includes('book')) {
+      State.textbook.fromTextbook = false;
       const currentRout = this.routes.find((item) => item.path === '#/book') || this.routes[0];
       currentRout.component.render();
+      return;
+    }
+    if (path.includes('statistic') && localStorage.getItem('userInfoTokken')) {
+      const currentRout = this.routes.find((item) => item.path === '#/statisticInfo') || this.routes[0];
+      currentRout.component.render();
+      this.services.statistic.updateStatistic();
       return;
     }
     const currentRout = this.routes.find((item) => item.path === path) || this.routes[0];
