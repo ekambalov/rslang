@@ -34,8 +34,8 @@ export default class ContainerExitAutorise extends BaseComponent {
   };
 
   destroy = () => {
-    this.services.form.remove('show-exit-autorise');
-    this.services.form.remove('hide-exit-autorise');
+    this.services.form.remove('show-exit-autorise', this.showExitAutorise);
+    this.services.form.remove('hide-exit-autorise', this.hideExitAutorise);
     super.destroy();
   };
 

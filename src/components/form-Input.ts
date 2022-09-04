@@ -48,9 +48,9 @@ export class FormInput extends BaseComponent {
   }
 
   destroy = () => {
-    this.services.form.remove('error-message');
-    this.services.form.remove('remove-error-message');
-    this.services.form.remove('clear-input');
+    this.services.form.remove('error-message', this.error);
+    this.services.form.remove('remove-error-message', this.removeErrorMessage);
+    this.services.form.remove('clear-input', this.clearInput);
     super.destroy();
   };
 
