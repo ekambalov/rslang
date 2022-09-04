@@ -9,6 +9,7 @@ export interface IUserID {
   id: string;
 }
 export interface IUserGetToken {
+  date: number;
   email: string;
   password: string;
 }
@@ -18,4 +19,5 @@ export interface IUserToken {
   refreshToken: string;
   userId: string;
   name: string;
+  date: number;
 }
