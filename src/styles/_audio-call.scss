@@ -7,11 +7,15 @@
 }
 
 .audio-call {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   min-width: 300px;
   max-width: 768px;
   width: 100%;
+  min-height: 100vh;
   padding: 1rem;
+  padding-bottom: 30vh;
 }
 
 .audio-call-header {
@@ -87,18 +91,26 @@
 
 .word-text,
 .word-transcription {
-  // display: none;
+  display: none;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 1.5rem;
   letter-spacing: 0.03em;
+
+  &--visible {
+    display: block;
+  }
 }
 
 .word-img {
-  // display: none;
+  display: none;
   height: 50vmin;
   max-height: 300px;
   border-bottom-right-radius: 11rem;
   border-top-left-radius: 11rem;
+
+  &--visible {
+    display: block;
+  }
 }
 
 .answers-container {
