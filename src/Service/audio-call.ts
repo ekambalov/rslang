@@ -57,7 +57,7 @@ export default class AudioСallService extends Observer {
   }
 
   setNameGame = () => {
-    State.nameGame = 'audio-call';
+    State.nameGame = 'audioСall';
   };
 
   resetGameData = () => {

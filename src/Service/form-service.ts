@@ -3,7 +3,9 @@ import { IUser, IUserToken } from '../Interfaces/user-model';
 import { createUser, getUserTokken } from '../Model/api-user-autorise';
 import { IFormInputConponent } from '../Interfaces/common';
 import State from '../Model/state';
-import { getUserStatistic } from '../Model/api-statistic';
+import { getStatistics, setStatistics } from '../Model/api-statistic';
+import { getDate } from '../Helper/utils';
+import defautlStatistics from '../Settings/defaut-statistics.json';
 
 export default class FormService extends Observer {
   user: IUser = {
@@ -28,15 +30,29 @@ export default class FormService extends Observer {
 
   fullEnterInput = false;
 
-  loadWindow = () => {
-    if (localStorage.getItem('userInfoTokken')) {
-      State.isAutorise = true;
-      State.userInfoAutorise = JSON.parse(localStorage.getItem('userInfoTokken') as string);
+  loadWindow = async () => {
+    const data = localStorage.getItem('userInfoTokken');
+    if (data) {
+      const userInfoAutorise = JSON.parse(data);
+      State.userInfoAutorise = userInfoAutorise;
+      const { userId, token } = State.userInfoAutorise;
       this.showExitAutorise();
       this.showNameUser();
       this.hideBtnAutorise();
-      getUserStatistic(State.userInfoAutorise.userId, State.userInfoAutorise.token);
+      State.isAutorise = true;
+      const statistics = await getStatistics(userId, token);
+      console.log(statistics);
+      if (statistics) {
+        State.statistics = statistics;
+      }
     }
+  };
+
+  setStatisticsDefault = async () => {
+    const { userId, token } = State.userInfoAutorise;
+    State.statistics = defautlStatistics;
+    State.statistics.optional.data = getDate();
+    setStatistics(userId, token, State.statistics);
   };
 
   clear = (): void => {
@@ -145,8 +161,9 @@ export default class FormService extends Observer {
       this.btnClickAutorise = false;
       this.btnClickEnter = false;
     } else {
-      this.getTokken();
+      await this.getTokken();
       this.removeAutoriseError();
+      this.setStatisticsDefault();
     }
   };
 
@@ -165,7 +182,7 @@ export default class FormService extends Observer {
     } else {
       this.userInfoAutorise = answeToken;
       State.isAutorise = true;
-      getUserStatistic(this.userInfoAutorise.userId, this.userInfoAutorise.token); // получаем сатистику
+      // getStatistics(this.userInfoAutorise.userId, this.userInfoAutorise.token); // получаем сатистику
       this.clearInput();
       this.closeAutoriseForm();
       this.closeEnterForm();
@@ -176,7 +193,6 @@ export default class FormService extends Observer {
       this.btnClickAutorise = false;
       this.btnClickEnter = false;
       this.removeAutoriseError();
-      console.log(answeToken);
     }
   };
 
