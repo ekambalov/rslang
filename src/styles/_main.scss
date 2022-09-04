@@ -43,9 +43,11 @@ h1 {
   font-family: 'Junegull';
   text-align: center;
   text-decoration: none;
-   &:hover {
-  color: rgb(128, 13, 13);
-}
+  transition: all .3s ease;
+
+  &:hover {
+    color: rgb(128, 13, 13);
+  }
 }
 
 .containerButton__button_book,
@@ -88,6 +90,7 @@ h1 {
   grid-area: 4 / 4 / 5 / 6;
   background-image: url('./assets/img/statistic.png');
 }
+
 .containerButton__button_enter,
 .containerButton__button_autorize,
 .containerButton__button_autor {
@@ -103,6 +106,7 @@ h1 {
   text-align: center;
   padding-top: 15px;
   background-color: rgb(167, 146, 223);
+  transition: all .3s ease;
   cursor: pointer;
 }
 
@@ -116,6 +120,7 @@ h1 {
 .containerButton__button_autorize {
   grid-area: 6 / 2 / 7 / 3;
 }
+
 .containerButton__button_enter {
   grid-area: 6 / 4 / 7 / 5;
   transform: translate(-2px) rotate(3deg);
@@ -123,7 +128,7 @@ h1 {
   margin-bottom: -7px;
   margin-top: 7px;
   text-align: left;
-  padding-left: 15px;
+  padding-left: 17px; 
 }
 
 .containerButton__button_autor {
@@ -131,11 +136,12 @@ h1 {
   background-image: url('./assets/img/team2.png');
   transform: translate(-3px) rotate(3deg);
 }
+
 .containerButton__button_enter:hover,
 .containerButton__button_autorize:hover,
 .containerButton__button_autor:hover {
-  background-color: rgb(65, 12, 211);  
- }
+  background-color: rgb(65, 12, 211);
+}
 
 
 @media screen and (max-width: 1850px) {
@@ -176,6 +182,10 @@ h1 {
   .containerButton__button_autor {
     padding-top: 30px;
   }
+  .containerButton__button_enter {
+    padding-left: 43px;
+    padding-top: 30px;
+}
 
   h1 {
     font-size: 150px;
@@ -226,12 +236,13 @@ h1 {
 
 @media screen and (max-width: 650px) {
 
-  .main-pages{
+  .main-pages {
     flex-direction: column;
     padding: 0;
     background-image: url('./assets/img/fonMinScreen2.png');
     gap: 30px;
   }
+
   .main__left-container {
     width: 80%;
     margin-bottom: 50px;

@@ -83,30 +83,26 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  transition: all .7s ease;
+
+  &:hover {
+    background-color: rgb(255, 255, 255);
+  }
 }
 
 .avatar0 {
-  background-image: url("./assets/img/avatar32.png");
-
-  &:hover {
-    background-image: url("./assets/img/avatar3.png");
-  }
+  background-image: url("./assets/img/avatarN.png");
+  background-color: rgb(106, 213, 240);
 }
 
 .avatar1 {
-  background-image: url("./assets/img/avatar25.png");
-
-  &:hover {
-    background-image: url("./assets/img/avatar2.png");
-  }
+  background-image: url("./assets/img/avatarS.png");
+  background-color: rgb(93, 238, 117);
 }
 
 .avatar2 {
-  background-image: url("./assets/img/avatar34.png");
-
-  &:hover {
-    background-image: url("./assets/img/avatar01.png");
-  }
+  background-image: url("./assets/img/avatarY.png");
+  background-color: rgb(226, 247, 41);
 }
 
 .cards-team__card_name-person {
@@ -132,6 +128,7 @@
 .cards__card_imgGitHub {
   height: 50px;
   margin: 20px auto 30px;
+  transition: all .3s ease;
 
   &:hover {
     transform: scale(.95);
@@ -164,6 +161,7 @@
   background-color: transparent;
   text-decoration: none;
   cursor: pointer;
+  transition: all .3s ease;
 
   &:hover {
     transform: scale(.95);

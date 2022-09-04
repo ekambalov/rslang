@@ -13,3 +13,10 @@ export function shuffle<T>(array: T[]): T[] {
   }
   return arr;
 }
+
+export const getDate = () => {
+  const day = new Date().getDate();
+  const month = new Date().getMonth();
+  const year = new Date().getFullYear();
+  return `${day}-${month}-${year}`;
+};

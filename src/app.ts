@@ -10,6 +10,7 @@ import AudioCallService from './Service/audio-call';
 import TextbookService from './Service/textbook-service';
 import SprintService from './Service/sprint-service';
 import LevelSelectionService from './Service/level-selection';
+import StatisticService from './Service/statistic-service';
 
 class App {
   private services: Services;
@@ -23,6 +24,7 @@ class App {
       levelSelection: new LevelSelectionService(),
       textbook: new TextbookService(),
       sprint: new SprintService(),
+      statistic: new StatisticService(),
     };
   }
 

@@ -1,0 +1,21 @@
+{
+  "learnedWords": 0,
+  "optional": {
+    "data": " ",
+    "sprint": {
+      "trueAnsve": 0,
+      "falseAnsve": 0,
+      "chain": 0,
+      "newWords": 0
+    },
+    "audioCall": {
+      "trueAnsve": 0,
+      "falseAnsve": 0,
+      "chain": 0,
+      "newWords": 0
+    },
+    "words": {
+      "oldWords": []
+    }
+  }
+}

@@ -1,9 +1,13 @@
 import Observer from '../Abstract/observer';
 import { IUser, IUserToken } from '../Interfaces/user-model';
 import { createUser, getUserTokken } from '../Model/api-user-autorise';
-import { IFormService, IFormInputConponent } from '../Interfaces/common';
+import { IFormInputConponent } from '../Interfaces/common';
+import State from '../Model/state';
+import { getStatistics, setStatistics } from '../Model/api-statistic';
+import { getDate } from '../Helper/utils';
+import defautlStatistics from '../Settings/defaut-statistics.json';
 
-export default class FormService extends Observer implements IFormService {
+export default class FormService extends Observer {
   user: IUser = {
     name: '',
     password: '',
@@ -26,12 +30,29 @@ export default class FormService extends Observer implements IFormService {
 
   fullEnterInput = false;
 
-  loadWindow = () => {
-    if (localStorage.getItem('userInfoTokken')) {
+  loadWindow = async () => {
+    const data = localStorage.getItem('userInfoTokken');
+    if (data) {
+      const userInfoAutorise = JSON.parse(data);
+      State.userInfoAutorise = userInfoAutorise;
+      const { userId, token } = State.userInfoAutorise;
       this.showExitAutorise();
       this.showNameUser();
       this.hideBtnAutorise();
+      State.isAutorise = true;
+      const statistics = await getStatistics(userId, token);
+      console.log(statistics);
+      if (statistics) {
+        State.statistics = statistics;
+      }
     }
+  };
+
+  setStatisticsDefault = async () => {
+    const { userId, token } = State.userInfoAutorise;
+    State.statistics = defautlStatistics;
+    State.statistics.optional.data = getDate();
+    setStatistics(userId, token, State.statistics);
   };
 
   clear = (): void => {
@@ -44,17 +65,10 @@ export default class FormService extends Observer implements IFormService {
     this.fullEnterInput = false;
   };
 
-  openFormFull = () => {
-    this.dispatch('open-form-full');
-  };
-
-  closeFormFull = () => {
-    this.dispatch('close-form-full');
-    this.dispatch('clear-form');
-  };
-
   openAutoriseForm = () => {
     this.dispatch('open-autorise-form');
+    this.dispatch('clear-input');
+    this.dispatch('remove-error-message');
   };
 
   closeAutoriseForm = () => {
@@ -64,6 +78,7 @@ export default class FormService extends Observer implements IFormService {
 
   openEnterForm = () => {
     this.dispatch('open-enter-form');
+    this.dispatch('clear-input');
   };
 
   closeEnterForm = () => {
@@ -124,7 +139,6 @@ export default class FormService extends Observer implements IFormService {
     this.btnClickEnter = false;
     if (this.checkAllInput()) this.createNewUser();
     else this.showAutoriseError();
-    console.log(this.btnClickAutorise, this.btnClickEnter);
   };
 
   clickEnter = () => {
@@ -147,9 +161,9 @@ export default class FormService extends Observer implements IFormService {
       this.btnClickAutorise = false;
       this.btnClickEnter = false;
     } else {
-      console.log(responseCreateAnswe);
-      this.getTokken();
+      await this.getTokken();
       this.removeAutoriseError();
+      this.setStatisticsDefault();
     }
   };
 
@@ -167,10 +181,11 @@ export default class FormService extends Observer implements IFormService {
       this.clear();
     } else {
       this.userInfoAutorise = answeToken;
+      State.isAutorise = true;
+      // getStatistics(this.userInfoAutorise.userId, this.userInfoAutorise.token); // получаем сатистику
       this.clearInput();
       this.closeAutoriseForm();
       this.closeEnterForm();
-      this.closeFormFull();
       this.hideBtnAutorise();
       this.showNameUser();
       this.showExitAutorise();
@@ -178,7 +193,6 @@ export default class FormService extends Observer implements IFormService {
       this.btnClickAutorise = false;
       this.btnClickEnter = false;
       this.removeAutoriseError();
-      console.log(answeToken);
     }
   };
 
@@ -194,7 +208,6 @@ export default class FormService extends Observer implements IFormService {
       return true;
     }
     this.fullAllInput = false;
-    console.log('Не все поля заполнены');
     // this.showAutoriseError();
     return false;
   };

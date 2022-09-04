@@ -1,4 +1,4 @@
-import { IUserID, IUserToken, IUser } from './user-model';
+import { IUserID, IUserToken } from './user-model';
 import { Word } from './word-model';
 
 export interface ILinkProps {
@@ -37,7 +37,8 @@ export interface IState {
   words: Word[];
   currentPage: number;
   currentLevel: number;
-  nameGame: 'audio-call' | 'sprint';
+  statistics: IUserStatistic;
+  nameGame: 'audioСall' | 'sprint';
 }
 
 export interface IMenuServise {
@@ -59,12 +60,10 @@ export interface IDataBaseServices {
 export interface IServices {
   menu: IMenuServise;
   router: IRouterService;
-  dataBase: IDataBaseServices;
   form: IFormService;
 }
 
 export interface IFormService {
-  user: IUser;
   userInfoAutorise: IUserToken;
   btnClickAutorise: boolean;
   btnClickEnter: boolean;
@@ -117,6 +116,29 @@ interface ITextbook {
   isPlayed: boolean;
   currentPage: number;
   currentLevel: number;
+  fromTextbook: boolean;
+}
+
+export interface IUserStatistic {
+  learnedWords: number;
+  optional: {
+    data: string;
+    sprint: {
+      trueAnsve: number;
+      falseAnsve: number;
+      chain: number;
+      newWords: number;
+    };
+    audioCall: {
+      trueAnsve: number;
+      falseAnsve: number;
+      chain: number;
+      newWords: number;
+    };
+    words: {
+      oldWords: string[];
+    };
+  };
 }
 interface IVocabulary {
   difficultWords: Word[];

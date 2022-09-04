@@ -22,13 +22,11 @@
     "path": "/statistic"
   },
   {
-
     "content": "Авторизация",
     "clas": "containerButton__button_autorize",
     "path": "/main"
   },
   {
-
     "content": "Войти",
     "clas": "containerButton__button_enter",
     "path": "/main"
