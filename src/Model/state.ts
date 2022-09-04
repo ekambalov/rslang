@@ -23,6 +23,11 @@ const State: IState = localStorage.getItem('state')
         currentLevel: 0,
         fromTextbook: false,
       },
+      vocabulary: {
+        difficultWords: [],
+        learningWords: [],
+        deletedWords: [],
+      },
       words: [],
       currentPage: 0,
       currentLevel: 0,
