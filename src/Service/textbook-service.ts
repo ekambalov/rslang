@@ -1,4 +1,4 @@
-import { createEasyUserWord, createDifficultUserWord, deleteUserWord } from '../model/getTextbook';
+import { createEasyUserWord, createDifficultUserWord, deleteUserWord } from '../Model/getTextbook';
 import Observer from '../Abstract/observer';
 
 export default class TextbookService extends Observer {

@@ -1,7 +1,7 @@
 import BaseComponent from '../../Abstract/base-component';
-import { getUsersWords } from '../../model/getTextbook';
+import { getUsersWords } from '../../Model/getTextbook';
 import Services from '../../Interfaces/services';
-import TextBookCart from '../../components/textbook-cart';
+import TextBookCart from '../../Components/textbook-cart';
 
 export default class VocabularyPage extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {
