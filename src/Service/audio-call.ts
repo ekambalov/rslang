@@ -70,18 +70,18 @@ export default class AudioСallService extends Observer {
     this.word = this.words?.pop();
     if (this.word) {
       this.counter += 1;
-      this.dispath('next-word');
+      this.dispatch('next-word');
       this.playAudio(this.word.audio);
     } else {
-      this.dispath('stop-game');
+      this.dispatch('stop-game');
     }
   }
 
   switchScreenMode = () => {
     if (!document.fullscreenElement) {
-      this.dispath('full-screen');
+      this.dispatch('full-screen');
     } else {
-      this.dispath('default-screen');
+      this.dispatch('default-screen');
     }
   };
 
@@ -89,16 +89,16 @@ export default class AudioСallService extends Observer {
     const audioWord = new Audio(`${this.baseUrl}${path}`);
     audioWord.addEventListener('ended', this.stopAudio);
     audioWord.play();
-    this.dispath('play-audio');
+    this.dispatch('play-audio');
   };
 
   stopAudio = () => {
-    this.dispath('stop-audio');
+    this.dispatch('stop-audio');
   };
 
   showWordCard() {
     if (this.word) {
-      this.dispath('show-answer', this.word.wordTranslate, this.selectedAnswer);
+      this.dispatch('show-answer', this.word.wordTranslate, this.selectedAnswer);
     }
   }
 

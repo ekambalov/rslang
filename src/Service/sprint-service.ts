@@ -70,35 +70,35 @@ export default class SprintService extends Observer {
   };
 
   exitGameSprint = () => {
-    this.dispath('enter-game-sprint'); // выход из игры
+    this.dispatch('enter-game-sprint'); // выход из игры
   };
 
   hideRuleSprint = () => {
-    this.dispath('hide-rule-sprint'); // прячем правила игры
+    this.dispatch('hide-rule-sprint'); // прячем правила игры
   };
 
   showRuleSprint = () => {
-    this.dispath('show-rule-sprint'); // показываем правила игры
+    this.dispatch('show-rule-sprint'); // показываем правила игры
   };
 
   showFiledGame = () => {
-    this.dispath('show-filed-game'); // показываем поле игры
+    this.dispatch('show-filed-game'); // показываем поле игры
   };
 
   hideFileGame = () => {
-    this.dispath('hide-filed-game'); // прячем поле игры
+    this.dispatch('hide-filed-game'); // прячем поле игры
   };
 
   showResult = () => {
-    this.dispath('show-results-sprint');
+    this.dispatch('show-results-sprint');
   };
 
   hideResult = () => {
-    this.dispath('hide-results-sprint');
+    this.dispatch('hide-results-sprint');
   };
 
   writeResult = () => {
-    this.dispath('write-results-sprint');
+    this.dispatch('write-results-sprint');
   };
 
   playAudioWord = () => {
@@ -119,15 +119,15 @@ export default class SprintService extends Observer {
   };
 
   stopAudioWord = () => {
-    this.dispath('stop-audio-word'); // произношение слова
+    this.dispatch('stop-audio-word'); // произношение слова
   };
 
   writeWordGame = () => {
-    this.dispath('write-word-game'); // пишем слова англ/рус
+    this.dispatch('write-word-game'); // пишем слова англ/рус
   };
 
   resetTimer = () => {
-    this.dispath('reset-timer'); // сбрасываем таймер
+    this.dispatch('reset-timer'); // сбрасываем таймер
   };
 
   startGameSprint = () => {
@@ -139,7 +139,7 @@ export default class SprintService extends Observer {
     this.hideResult(); // прячем результаты
     this.showFiledGame(); // показываем игровое поле
     this.listener();
-    this.dispath('start-timer'); // запускаем таймер
+    this.dispatch('start-timer'); // запускаем таймер
     if (localStorage.getItem('userInfoTokken')) {
       getUserStatistic(State.userInfoAutorise.userId, State.userInfoAutorise.token);
       console.log(getUserStatistic(State.userInfoAutorise.userId, State.userInfoAutorise.token)); //  получаем старую статистику
@@ -160,7 +160,7 @@ export default class SprintService extends Observer {
   };
 
   resetCountGame = () => {
-    this.dispath('reset-count-game'); // сбрасываем счёт игры
+    this.dispatch('reset-count-game'); // сбрасываем счёт игры
   };
 
   finishGame = () => {
@@ -190,15 +190,15 @@ export default class SprintService extends Observer {
   };
 
   addCountGame = () => {
-    this.dispath('add-count-game'); // увеличиваем очки за игру
+    this.dispatch('add-count-game'); // увеличиваем очки за игру
   };
 
   correctAddCount = () => {
-    this.dispath('correct-add-count'); // увеличиваем очки за игру
+    this.dispatch('correct-add-count'); // увеличиваем очки за игру
   };
 
   addCountReset = () => {
-    this.dispath('add-count-game-reset'); // устанавливаем +10 счёта очков
+    this.dispatch('add-count-game-reset'); // устанавливаем +10 счёта очков
   };
 
   srcAudioTrue = '../assets/audio/true2.mp3';
@@ -218,15 +218,15 @@ export default class SprintService extends Observer {
   };
 
   disabledBtnAudioError = () => {
-    this.dispath('disabled-audio-error');
+    this.dispatch('disabled-audio-error');
   };
 
   btnTrueAddActiveStyle = () => {
-    this.dispath('btn-true-active-style');
+    this.dispatch('btn-true-active-style');
   };
 
   btnFalseAddActiveStyle = () => {
-    this.dispath('btn-false-active-style');
+    this.dispatch('btn-false-active-style');
   };
 
   btnFalseClick = () => {
@@ -347,6 +347,6 @@ export default class SprintService extends Observer {
   };
 
   upgradeResult = () => {
-    this.dispath('upgrade-results-sprint');
+    this.dispatch('upgrade-results-sprint');
   };
 }

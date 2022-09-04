@@ -40,7 +40,7 @@ export default class StatisticService extends Observer {
   };
 
   writeStatisticSprint = () => {
-    this.dispath('write-statistic-sprint');
+    this.dispatch('write-statistic-sprint');
   };
 
   // получаем сегодня=>дату и если она такая же как и на сервере, обновляем данные на сервере

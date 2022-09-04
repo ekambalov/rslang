@@ -50,72 +50,72 @@ export default class FormService extends Observer {
   };
 
   openAutoriseForm = () => {
-    this.dispath('open-autorise-form');
-    this.dispath('clear-input');
-    this.dispath('remove-error-message');
+    this.dispatch('open-autorise-form');
+    this.dispatch('clear-input');
+    this.dispatch('remove-error-message');
   };
 
   closeAutoriseForm = () => {
-    this.dispath('close-autorise-form');
-    this.dispath('clear-form');
+    this.dispatch('close-autorise-form');
+    this.dispatch('clear-form');
   };
 
   openEnterForm = () => {
-    this.dispath('open-enter-form');
-    this.dispath('clear-input');
+    this.dispatch('open-enter-form');
+    this.dispatch('clear-input');
   };
 
   closeEnterForm = () => {
-    this.dispath('close-enter-form');
-    this.dispath('clear-form');
+    this.dispatch('close-enter-form');
+    this.dispatch('clear-form');
   };
 
   showNameUser = () => {
-    this.dispath('show-user-name');
+    this.dispatch('show-user-name');
   };
 
   hideExitAutorise = () => {
-    this.dispath('hide-exit-autorise');
+    this.dispatch('hide-exit-autorise');
   };
 
   showExitAutorise = () => {
-    this.dispath('show-exit-autorise');
+    this.dispatch('show-exit-autorise');
   };
 
   disabledBtnAutorise = () => {
-    this.dispath('disabled-btn-autorise');
+    this.dispatch('disabled-btn-autorise');
   };
 
   unDisabledBtnAutorise = () => {
-    this.dispath('un-disabled-btn-autorise');
+    this.dispatch('un-disabled-btn-autorise');
   };
 
   hideBtnAutorise = () => {
-    this.dispath('hide-container-autorise');
+    this.dispatch('hide-container-autorise');
   };
 
   showBtnAutorise = () => {
-    this.dispath('show-container-autorise');
+    this.dispatch('show-container-autorise');
   };
 
   clearInput = () => {
-    this.dispath('clear-input');
+    this.dispatch('clear-input');
   };
 
   errorMessage = () => {
-    this.dispath('error-message');
+    this.dispatch('error-message');
   };
 
   removeErrorMessage = () => {
-    this.dispath('remove-error-message');
+    this.dispatch('remove-error-message');
   };
 
   showAutoriseError = () => {
-    this.dispath('show-autorise-error');
+    this.dispatch('show-autorise-error');
   };
 
   removeAutoriseError = () => {
-    this.dispath('remove-autorise-error');
+    this.dispatch('remove-autorise-error');
   };
 
   clickAutorise = () => {
