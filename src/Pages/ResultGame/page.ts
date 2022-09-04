@@ -30,7 +30,7 @@ export default class ResultsGame extends BaseComponent {
     let wrongAnswers: Word[] = [];
     let correctAnswers: Word[] = [];
     switch (State.nameGame) {
-      case 'audio-call':
+      case 'audioСall':
         wrongAnswers = this.services.audioCall.getWrongAnswers();
         correctAnswers = this.services.audioCall.getCorrectAnswers();
         break;

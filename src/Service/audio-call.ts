@@ -57,7 +57,7 @@ export default class AudioСallService extends Observer {
   }
 
   setNameGame = () => {
-    State.nameGame = 'audio-call';
+    State.nameGame = 'audioСall';
   };
 
   resetGameData = () => {
@@ -148,4 +148,8 @@ export default class AudioСallService extends Observer {
     }
     return shuffle<string>(Array.from(translateOptions.values()));
   }
+
+  exitGame = () => {
+    this.dispatch('exit-game');
+  };
 }

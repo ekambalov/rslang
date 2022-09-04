@@ -16,6 +16,7 @@ export default class AudioCall extends BaseComponent {
     this.services.audioCall.add('stop-game', this.showResults);
     this.services.audioCall.add('full-screen', this.makeFullScreen);
     this.services.audioCall.add('default-screen', this.makeDefaultScreen);
+    this.services.audioCall.add('exit-game', this.destroy.bind(this));
     this.services.audioCall.setWords();
     this.services.audioCall.resetGameData();
     this.services.audioCall.setNameGame();

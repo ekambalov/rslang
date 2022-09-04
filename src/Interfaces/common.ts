@@ -37,7 +37,7 @@ export interface IState {
   currentPage: number;
   currentLevel: number;
   statistics: IUserStatistic;
-  nameGame: 'audio-call' | 'sprint';
+  nameGame: 'audioСall' | 'sprint';
 }
 
 export interface IMenuServise {
