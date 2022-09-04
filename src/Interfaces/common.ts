@@ -34,6 +34,7 @@ export interface IState {
   deleteUser: string;
   textbook: ITextbook;
   vocabulary: IVocabulary;
+  gamesData: IGameData;
   words: Word[];
   currentPage: number;
   currentLevel: number;
@@ -41,6 +42,12 @@ export interface IState {
   nameGame: 'audioСall' | 'sprint';
 }
 
+interface IGameData {
+  nameGame: string;
+  correctAnswers: Word[];
+  wrongAnswers: Word[];
+  series: number;
+}
 export interface IMenuServise {
   openMenu(): void;
   closeMenu(): void;
@@ -122,21 +129,22 @@ interface ITextbook {
 export interface IUserStatistic {
   learnedWords: number;
   optional: {
-    data: string;
+    date: string;
     sprint: {
-      trueAnsve: number;
-      falseAnsve: number;
-      chain: number;
+      corretAnswers: number;
+      wrongAnswers: number;
+      series: number;
       newWords: number;
     };
     audioCall: {
-      trueAnsve: number;
-      falseAnsve: number;
-      chain: number;
+      corretAnswers: number;
+      wrongAnswers: number;
+      series: number;
       newWords: number;
     };
     words: {
-      oldWords: string[];
+      idOldWords: string[];
+      idLearnedWordsPerDay: string[];
     };
   };
 }

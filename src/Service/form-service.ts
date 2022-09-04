@@ -2,10 +2,8 @@ import Observer from '../Abstract/observer';
 import { IUser, IUserToken } from '../Interfaces/user-model';
 import { createUser, getUserTokken } from '../Model/api-user-autorise';
 import { IFormInputConponent } from '../Interfaces/common';
-import State from '../Model/state';
 import { getStatistics, setStatistics } from '../Model/api-statistic';
-import { getDate } from '../Helper/utils';
-import defautlStatistics from '../Settings/defaut-statistics.json';
+import State from '../Model/state';
 
 export default class FormService extends Observer {
   user: IUser = {
@@ -50,9 +48,7 @@ export default class FormService extends Observer {
 
   setStatisticsDefault = async () => {
     const { userId, token } = State.userInfoAutorise;
-    State.statistics = defautlStatistics;
-    State.statistics.optional.data = getDate();
-    setStatistics(userId, token, State.statistics);
+    State.statistics = await setStatistics(userId, token, State.statistics);
   };
 
   clear = (): void => {

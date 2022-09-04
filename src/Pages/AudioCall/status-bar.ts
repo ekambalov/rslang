@@ -1,5 +1,6 @@
 import BaseComponent from '../../Abstract/base-component';
 import Services from '../../Interfaces/services';
+import State from '../../Model/state';
 
 export default class StatusBar extends BaseComponent {
   private total?: BaseComponent;
@@ -20,7 +21,7 @@ export default class StatusBar extends BaseComponent {
 
     this.current.element.textContent = '1/';
 
-    this.total.element.textContent = `${this.services.audioCall.amountWords}`;
+    this.total.element.textContent = `${State.words.length}`;
 
     this.element.appendChild(this.current.element);
     this.element.appendChild(this.total.element);
