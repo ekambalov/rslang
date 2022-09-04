@@ -104,3 +104,53 @@
     background-image: url(./assets/img/book-icon.png);
   }
 }
+
+@media screen and (max-width: 1000px) {
+  .cart {
+    flex-wrap: wrap;
+    gap: 20px;
+    &__btns {
+      margin-left: 0;
+      flex-direction: row;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+    }
+    &__image {
+      margin-right: auto;
+    }
+  }
+}
+@media screen and (max-width: 650px) {
+  .cart {
+    &__word {
+      font-size: 25px;
+    }
+    &__english {
+      font-size: 22px;
+    }
+    &__audio {
+      transform: translateY(5px) scale(0.8);
+    }
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .cart {
+    &__word {
+      font-size: 20px;
+    }
+    &__translate {
+      font-size: 18px;
+    }
+    &__english {
+      font-size: 18px;
+    }
+    &__image {
+      min-width: 100%;
+      object-fit: contain;
+      height: fit-content;
+    }
+  }
+}

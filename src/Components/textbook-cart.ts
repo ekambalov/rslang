@@ -66,10 +66,8 @@ export default class TextBookCart extends BaseComponent {
 
       const { addToDif } = this;
       const { addToEasy } = this;
-      const { deleteWord } = this;
       addToDif.title = 'Пометить как сложное';
-      addToEasy.title = 'Добавить в изучаемое';
-      deleteWord.title = 'Удалить слово';
+      addToEasy.title = 'Пометить как изученое';
       if (addToDif.classList.contains('cart__dif--cheked')) {
         addToDif.addEventListener('click', this.delete.bind(this));
       } else {
@@ -78,10 +76,13 @@ export default class TextBookCart extends BaseComponent {
       if (addToEasy.classList.contains('cart__easy--cheked')) {
         addToEasy.addEventListener('click', this.delete.bind(this));
       } else {
-        addToEasy.addEventListener('click', this.addWordToDif.bind(this));
+        addToEasy.addEventListener('click', this.addWordToEasy.bind(this));
       }
-      deleteWord.addEventListener('click', this.delete.bind(this));
-      btnsWrapper.append(addToDif, addToEasy, deleteWord);
+      btnsWrapper.append(addToDif, addToEasy);
+      // const { deleteWord } = this;
+      // deleteWord.title = 'Удалить слово';
+      // deleteWord.addEventListener('click', this.delete.bind(this));
+      // btnsWrapper.append(deleteWord);
 
       this.element.append(btnsWrapper);
     }
@@ -90,40 +91,49 @@ export default class TextBookCart extends BaseComponent {
   };
 
   addWordToDif(): void {
-    console.log('add to hard');
-
-    this.addToDif.classList.add('cart__dif--cheked');
-    this.addToEasy.classList.remove('cart__easy--cheked');
     this.addToDif = this.removeListeners(this.addToDif);
     this.addToEasy = this.removeListeners(this.addToEasy);
     this.addToDif.addEventListener('click', this.delete.bind(this));
     this.addToEasy.addEventListener('click', this.addWordToEasy.bind(this));
 
-    createDifficultUserWord(this.wordData.id);
+    if (this.addToEasy.classList.contains('cart__easy--cheked')) {
+      createDifficultUserWord(this.wordData.id, true);
+    } else {
+      createDifficultUserWord(this.wordData.id);
+    }
+    this.addToDif.classList.add('cart__dif--cheked');
+    this.addToEasy.classList.remove('cart__easy--cheked');
+    this.addToDif.title = 'Убрать из сложного';
+    this.addToEasy.title = 'Пометить как изученое';
   }
 
   addWordToEasy(): void {
-    console.log('add to weak');
-
-    this.addToDif.classList.remove('cart__dif--cheked');
-    this.addToEasy.classList.add('cart__easy--cheked');
     this.addToDif = this.removeListeners(this.addToDif);
     this.addToEasy = this.removeListeners(this.addToEasy);
     this.addToDif.addEventListener('click', this.addWordToDif.bind(this));
     this.addToEasy.addEventListener('click', this.delete.bind(this));
 
-    createEasyUserWord(this.wordData.id);
+    if (this.addToDif.classList.contains('cart__dif--cheked')) {
+      createEasyUserWord(this.wordData.id, true);
+    } else {
+      createEasyUserWord(this.wordData.id);
+    }
+
+    this.addToDif.classList.remove('cart__dif--cheked');
+    this.addToEasy.classList.add('cart__easy--cheked');
+    this.addToDif.title = 'Пометить как сложное';
+    this.addToEasy.title = 'Убрать из изученного';
   }
 
   delete(): void {
-    console.log('delete');
-
     this.addToDif.classList.remove('cart__dif--cheked');
     this.addToEasy.classList.remove('cart__easy--cheked');
     this.addToDif = this.removeListeners(this.addToDif);
     this.addToEasy = this.removeListeners(this.addToEasy);
     this.addToDif.addEventListener('click', this.addWordToDif.bind(this));
     this.addToEasy.addEventListener('click', this.addWordToEasy.bind(this));
+    this.addToDif.title = 'Пометить как сложное';
+    this.addToEasy.title = 'Пометить как изученое';
 
     deleteUserWord(this.wordData.id);
   }

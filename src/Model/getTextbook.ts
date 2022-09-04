@@ -77,7 +77,6 @@ const createUserWord = async (wordId: string, word: UserWord) => {
     body: JSON.stringify(word),
   }).then((res) => {
     if (res.status === 417) {
-      console.log('got');
       return updateUserWord(wordId, word);
     }
     return res.json();
@@ -86,18 +85,22 @@ const createUserWord = async (wordId: string, word: UserWord) => {
   return response;
 };
 
-export const createDifficultUserWord = async (wordId: string) => {
+export const createDifficultUserWord = async (wordId: string, isExist = false) => {
   const word = (await getWord(wordId)) as Word;
   const userWord: UserWord = { difficulty: 'hard', optional: { word } };
+
+  if (isExist) return updateUserWord(wordId, userWord);
 
   const res = await createUserWord(wordId, userWord);
 
   return res;
 };
 
-export const createEasyUserWord = async (wordId: string) => {
+export const createEasyUserWord = async (wordId: string, isExist = false) => {
   const word = (await getWord(wordId)) as Word;
   const userWord: UserWord = { difficulty: 'weak', optional: { word } };
+
+  if (isExist) return updateUserWord(wordId, userWord);
 
   const res = await createUserWord(wordId, userWord);
   return res;
