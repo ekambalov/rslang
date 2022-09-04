@@ -148,4 +148,8 @@ export default class AudioСallService extends Observer {
     }
     return shuffle<string>(Array.from(translateOptions.values()));
   }
+
+  exitGame = () => {
+    this.dispatch('exit-game');
+  };
 }
