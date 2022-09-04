@@ -18,7 +18,7 @@ export default class AudioTrueFalseBtn extends BaseComponent<HTMLButtonElement> 
   };
 
   destroy = () => {
-    this.services.sprint.remove('disabled-audio-error', this.disabledAudioError);
+    this.services.sprint.remove('disabled-audio-error');
     this.element.removeEventListener('click', this.services.sprint.disabledBtnAudioError);
     super.destroy();
   };

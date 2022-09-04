@@ -1,4 +1,4 @@
-import { IUserID, IUserToken } from './user-model';
+import { IUserID, IUserToken, IUser } from './user-model';
 import { Word } from './word-model';
 
 export interface ILinkProps {
@@ -36,7 +36,10 @@ export interface IState {
   words: Word[];
   currentPage: number;
   currentLevel: number;
+<<<<<<< HEAD
   statistics: IUserStatistic;
+=======
+>>>>>>> 079411bd768a3acb29fe293621e80e95e681123c
   nameGame: 'audio-call' | 'sprint';
 }
 
@@ -63,6 +66,7 @@ export interface IServices {
 }
 
 export interface IFormService {
+  user: IUser;
   userInfoAutorise: IUserToken;
   btnClickAutorise: boolean;
   btnClickEnter: boolean;
@@ -115,27 +119,4 @@ interface TextbookState {
   isPlayed: boolean;
   currentPage: number;
   currentLevel: number;
-  fromTextbook: boolean;
-}
-
-export interface IUserStatistic {
-  learnedWords: number;
-  optional: {
-    data: string;
-    sprint: {
-      trueAnsve: number;
-      falseAnsve: number;
-      chain: number;
-      newWords: number;
-    };
-    audioCall: {
-      trueAnsve: number;
-      falseAnsve: number;
-      chain: number;
-      newWords: number;
-    };
-    words: {
-      oldWords: string[];
-    };
-  };
 }

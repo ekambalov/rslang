@@ -1,5 +1,5 @@
 import BaseComponent from '../Abstract/base-component';
-import { IOptionsInput } from '../Interfaces/common';
+import { IOptionsInput, IFormInputConponent } from '../Interfaces/common';
 import Services from '../Interfaces/services';
 
 export interface OptionsInput {
@@ -9,7 +9,7 @@ export interface OptionsInput {
   name: string;
 }
 
-export class FormInput extends BaseComponent {
+export class FormInput extends BaseComponent implements IFormInputConponent {
   messageElement?: HTMLElement;
 
   readonly type: string;

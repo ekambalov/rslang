@@ -5,8 +5,8 @@ import { FormInput } from './form-Input';
 import Button from './button';
 
 const inputs: IOptionsInput[] = [
-  { title: 'E-mail:', type: 'email', id: 'emall', name: 'emaill' },
-  { title: 'Введите пароль:', type: 'password', id: 'password1', name: 'password1' },
+  { title: 'E-mail:', type: 'email', id: 'emal', name: 'email' },
+  { title: 'Введите пароль:', type: 'password', id: 'password', name: 'password' },
 ];
 
 export default class FormEnter extends BaseComponent<HTMLFormElement> {

@@ -32,14 +32,6 @@ export default class Navigation extends BaseComponent {
     this.parent.appendChild(this.element);
   };
 
-  destroy = () => {
-    this.services.menu.remove('close-menu', this.closeMenu);
-    this.services.menu.remove('open-menu', this.openMenu);
-    this.services.menu.remove('scroll-off', this.scrollOff);
-    this.services.menu.remove('scroll-on', this.scrollOn);
-    super.destroy();
-  };
-
   closeMenu = () => {
     this.element.classList.remove('open');
     this.services.menu.removeDarkLayer();

@@ -18,7 +18,7 @@ export default class Observer {
     });
   }
 
-  dispath(name: string, ...params: string[]): void {
+  dispatch(name: string, ...params: string[]): void {
     this.listeners.filter((it) => it.name === name).forEach((it) => it.callback(...params));
   }
 }

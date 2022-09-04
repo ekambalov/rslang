@@ -21,12 +21,14 @@ const State: IState = localStorage.getItem('state')
         isPlayed: false,
         currentPage: 0,
         currentLevel: 0,
-        fromTextbook: false,
       },
       words: [],
       currentPage: 0,
       currentLevel: 0,
+<<<<<<< HEAD
       statistics: {},
+=======
+>>>>>>> 079411bd768a3acb29fe293621e80e95e681123c
       nameGame: '',
     };
 

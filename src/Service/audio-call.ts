@@ -70,18 +70,31 @@ export default class AudioСallService extends Observer {
     this.word = this.words?.pop();
     if (this.word) {
       this.counter += 1;
+<<<<<<< HEAD
       this.dispath('next-word');
       this.playAudio(this.word.audio);
     } else {
       this.dispath('stop-game');
+=======
+      this.dispatch('next-word');
+      this.playAudio(this.word.audio);
+    } else {
+      this.dispatch('stop-game');
+>>>>>>> 079411bd768a3acb29fe293621e80e95e681123c
     }
   }
 
   switchScreenMode = () => {
     if (!document.fullscreenElement) {
+<<<<<<< HEAD
       this.dispath('full-screen');
     } else {
       this.dispath('default-screen');
+=======
+      this.dispatch('full-screen');
+    } else {
+      this.dispatch('default-screen');
+>>>>>>> 079411bd768a3acb29fe293621e80e95e681123c
     }
   };
 
@@ -89,16 +102,20 @@ export default class AudioСallService extends Observer {
     const audioWord = new Audio(`${this.baseUrl}${path}`);
     audioWord.addEventListener('ended', this.stopAudio);
     audioWord.play();
+<<<<<<< HEAD
     this.dispath('play-audio');
+=======
+    this.dispatch('play-audio');
+>>>>>>> 079411bd768a3acb29fe293621e80e95e681123c
   };
 
   stopAudio = () => {
-    this.dispath('stop-audio');
+    this.dispatch('stop-audio');
   };
 
   showWordCard() {
     if (this.word) {
-      this.dispath('show-answer', this.word.wordTranslate, this.selectedAnswer);
+      this.dispatch('show-answer', this.word.wordTranslate, this.selectedAnswer);
     }
   }
 
