@@ -20,20 +20,20 @@
 }
 
 @font-face {
-  font-family: "Junegull";
-  src: url("./assets/fonts/junegull.ttf");
+  font-family: 'Junegull';
+  src: url('./assets/fonts/junegull.ttf');
   font-weight: 400;
 }
 
 @font-face {
-  font-family: "Comic Book";
-  src: url("./assets/fonts/ComicBookFun-Regular.ttf");
+  font-family: 'Comic Book';
+  src: url('./assets/fonts/ComicBookFun-Regular.ttf');
   font-weight: 400;
 }
 
 @font-face {
-  font-family: "Inter";
-  src: url("./assets/fonts/Inter-Bold.ttf");
+  font-family: 'Inter';
+  src: url('./assets/fonts/Inter-Bold.ttf');
   font-weight: 700;
 }
 
@@ -42,7 +42,7 @@ body {
   background-color: rgb(119, 17, 222);
   background-size: cover;
   background-repeat: no-repeat;
-  font-family: "Comic Book";
+  font-family: 'Comic Book';
   box-sizing: border-box;
   min-height: 100vh;
   display: flex;
@@ -53,18 +53,17 @@ main {
   display: flex;
   flex-grow: 1;
   justify-content: center;
-  align-items: center
 }
 
-@import "./styles/header";
-@import "./styles/autorise-form";
-@import "./styles/main";
-@import "./styles/slider";
-@import "./styles/footer";
-@import "./styles/team";
-@import "./styles/cart";
-@import "./styles/textbook";
-@import "./styles/level-selection";
-@import "./styles/audio-call";
-@import "./styles/sprint";
-@import "./styles/statistic";
+@import './styles/header';
+@import './styles/autorise-form';
+@import './styles/main';
+@import './styles/slider';
+@import './styles/footer';
+@import './styles/team';
+@import './styles/cart';
+@import './styles/textbook';
+@import './styles/level-selection';
+@import './styles/audio-call';
+@import './styles/sprint';
+@import './styles/statistic';

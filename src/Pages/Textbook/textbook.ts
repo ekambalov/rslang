@@ -1,6 +1,6 @@
 import { Word } from '../../Interfaces/word-model';
 import BaseComponent from '../../Abstract/base-component';
-import { getWords } from '../../Model/getTextbook';
+import { getUsersWords, getWords } from '../../Model/getTextbook';
 import Services from '../../Interfaces/services';
 import TextBookCart from '../../Components/textbook-cart';
 import TextBookSettings from '../../Components/textbook-settings';
@@ -13,7 +13,6 @@ export default class TextbookPage extends BaseComponent {
 
   render = () => {
     this.destroy();
-    console.log('textbook');
     this.parent.innerHTML = ''; // clear the main section
     this.element.innerHTML = ''; // clear the main section
     const title = new BaseComponent<HTMLHeadElement>('h2', 'textbook__title').element;
@@ -34,12 +33,22 @@ export default class TextbookPage extends BaseComponent {
     const group = State.textbook.currentLevel;
     const res = await getWords(page, group);
     const words = (await res.json()) as Word[];
+    const userWords = await getUsersWords();
+    const userWordsId = userWords.map((element) => (element.wordId ? element.wordId : ''));
     const container = parent;
     State.words = [...words];
     if (container instanceof HTMLElement) container.innerHTML = '';
     words.forEach((word) => {
       if (parent instanceof HTMLElement) {
-        this.children.push(new TextBookCart(parent, this.services, word));
+        const index = userWordsId.indexOf(word.id);
+        if (index !== -1) {
+          if (userWords[index].difficulty === 'hard')
+            this.children.push(new TextBookCart(parent, this.services, word, true));
+          if (userWords[index].difficulty === 'weak')
+            this.children.push(new TextBookCart(parent, this.services, word, false, true));
+        } else {
+          this.children.push(new TextBookCart(parent, this.services, word));
+        }
       }
     });
     this.children.forEach((elemet, index) => {

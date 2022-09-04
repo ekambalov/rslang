@@ -1,20 +1,33 @@
 import { Word } from '../Interfaces/word-model';
 import Services from '../Interfaces/services';
 import BaseComponent from '../Abstract/base-component';
-import { baseUrl } from '../Model/getTextbook';
+import { baseUrl, createDifficultUserWord, createEasyUserWord, deleteUserWord } from '../Model/getTextbook';
 import ButtonAudioTextbook from './button-audio-textbook';
 
 export default class TextBookCart extends BaseComponent {
+  private addToDif: HTMLElement;
+
+  private addToEasy: HTMLElement;
+
+  private deleteWord: HTMLElement;
+
   constructor(
     private readonly parent: HTMLElement,
     private readonly services: Services,
-    private readonly wordData: Word
+    private readonly wordData: Word,
+    isHard = false,
+    isEasy = false
   ) {
     super('div', 'textbook__cart cart');
+    this.addToDif = new BaseComponent('button', 'cart__dif button').element;
+    this.addToEasy = new BaseComponent('button', 'cart__easy button').element;
+    this.deleteWord = new BaseComponent('button', 'cart__del button').element;
+    if (isHard) this.addToDif.classList.add('cart__dif--cheked');
+    if (isEasy) this.addToEasy.classList.add('cart__easy--cheked');
   }
 
   render = () => {
-    this.destroy();
+    super.destroy();
 
     const img = new BaseComponent('img', 'cart__image').element as HTMLImageElement;
     img.src = baseUrl + this.wordData.image;
@@ -40,7 +53,7 @@ export default class TextBookCart extends BaseComponent {
     const textMeaning = new BaseComponent('p', 'cart__english').element;
     textMeaning.innerHTML = this.wordData.textMeaning;
     const textMeaningTranslate = new BaseComponent('p', 'cart__translate').element;
-    textMeaningTranslate.textContent = this.wordData.textExampleTranslate;
+    textMeaningTranslate.textContent = this.wordData.textMeaningTranslate;
     const textExample = new BaseComponent('p', 'cart__english').element;
     textExample.innerHTML = this.wordData.textExample;
     const textExampleTranslate = new BaseComponent('p', 'cart__translate').element;
@@ -51,15 +64,23 @@ export default class TextBookCart extends BaseComponent {
     if (localStorage.getItem('userInfoTokken')) {
       const btnsWrapper = new BaseComponent('div', 'cart__btns').element;
 
-      const addToDif = new BaseComponent('button', 'cart__dif button').element;
-      const addToEasy = new BaseComponent('button', 'cart__easy button').element;
-      const deleteWord = new BaseComponent('button', 'cart__del button').element;
+      const { addToDif } = this;
+      const { addToEasy } = this;
+      const { deleteWord } = this;
       addToDif.title = 'Пометить как сложное';
       addToEasy.title = 'Добавить в изучаемое';
       deleteWord.title = 'Удалить слово';
-      addToDif.addEventListener('click', this.services.textbook.addWordToDif);
-      addToEasy.addEventListener('click', this.services.textbook.addWordToEasy);
-      deleteWord.addEventListener('click', this.services.textbook.deleteWord);
+      if (addToDif.classList.contains('cart__dif--cheked')) {
+        addToDif.addEventListener('click', this.delete.bind(this));
+      } else {
+        addToDif.addEventListener('click', this.addWordToDif.bind(this));
+      }
+      if (addToEasy.classList.contains('cart__easy--cheked')) {
+        addToEasy.addEventListener('click', this.delete.bind(this));
+      } else {
+        addToEasy.addEventListener('click', this.addWordToDif.bind(this));
+      }
+      deleteWord.addEventListener('click', this.delete.bind(this));
       btnsWrapper.append(addToDif, addToEasy, deleteWord);
 
       this.element.append(btnsWrapper);
@@ -67,4 +88,49 @@ export default class TextBookCart extends BaseComponent {
 
     this.parent.appendChild(this.element);
   };
+
+  addWordToDif(): void {
+    console.log('add to hard');
+
+    this.addToDif.classList.add('cart__dif--cheked');
+    this.addToEasy.classList.remove('cart__easy--cheked');
+    this.addToDif = this.removeListeners(this.addToDif);
+    this.addToEasy = this.removeListeners(this.addToEasy);
+    this.addToDif.addEventListener('click', this.delete.bind(this));
+    this.addToEasy.addEventListener('click', this.addWordToEasy.bind(this));
+
+    createDifficultUserWord(this.wordData.id);
+  }
+
+  addWordToEasy(): void {
+    console.log('add to weak');
+
+    this.addToDif.classList.remove('cart__dif--cheked');
+    this.addToEasy.classList.add('cart__easy--cheked');
+    this.addToDif = this.removeListeners(this.addToDif);
+    this.addToEasy = this.removeListeners(this.addToEasy);
+    this.addToDif.addEventListener('click', this.addWordToDif.bind(this));
+    this.addToEasy.addEventListener('click', this.delete.bind(this));
+
+    createEasyUserWord(this.wordData.id);
+  }
+
+  delete(): void {
+    console.log('delete');
+
+    this.addToDif.classList.remove('cart__dif--cheked');
+    this.addToEasy.classList.remove('cart__easy--cheked');
+    this.addToDif = this.removeListeners(this.addToDif);
+    this.addToEasy = this.removeListeners(this.addToEasy);
+    this.addToDif.addEventListener('click', this.addWordToDif.bind(this));
+    this.addToEasy.addEventListener('click', this.addWordToEasy.bind(this));
+
+    deleteUserWord(this.wordData.id);
+  }
+
+  removeListeners(element: HTMLElement): HTMLElement {
+    const newElement = element.cloneNode(true) as HTMLElement;
+    if (element.parentNode) element.parentNode.replaceChild(newElement, element);
+    return newElement;
+  }
 }

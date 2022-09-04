@@ -10,6 +10,7 @@ export default class TextbookService extends Observer {
     let id: string | undefined = '';
     if (this instanceof HTMLElement) {
       id = this.parentElement?.parentElement?.id;
+      this.classList.add('cart__dif--cheked');
     }
     if (id) createDifficultUserWord(id);
   }

@@ -38,6 +38,27 @@ export const getUsersWords = async () => {
   return response;
 };
 
+const updateUserWord = async (wordId: string, word: UserWord) => {
+  const user = localStorage.getItem('userInfoTokken');
+  let userId = '';
+  let token = '';
+
+  if (user) userId = (JSON.parse(user) as IUserToken).userId;
+  if (user) token = (JSON.parse(user) as IUserToken).token;
+
+  const response = fetch(`${baseUrl}users/${userId}/words/${wordId}`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(word),
+  }).then((res) => res.json());
+
+  return response;
+};
+
 const createUserWord = async (wordId: string, word: UserWord) => {
   const user = localStorage.getItem('userInfoTokken');
   let userId = '';
@@ -54,7 +75,13 @@ const createUserWord = async (wordId: string, word: UserWord) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(word),
-  }).then((res) => res.json());
+  }).then((res) => {
+    if (res.status === 417) {
+      console.log('got');
+      return updateUserWord(wordId, word);
+    }
+    return res.json();
+  });
 
   return response;
 };
