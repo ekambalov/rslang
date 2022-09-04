@@ -70,23 +70,18 @@ export default class AudioСallService extends Observer {
     this.word = this.words?.pop();
     if (this.word) {
       this.counter += 1;
-      this.dispatch('next-word');
+      this.dispath('next-word');
       this.playAudio(this.word.audio);
     } else {
-      try {
-        throw new Error('word is not found');
-      } catch (e) {
-        console.log(e);
-        this.dispath('stop-game');
-      }
+      this.dispath('stop-game');
     }
   }
 
   switchScreenMode = () => {
     if (!document.fullscreenElement) {
-      this.dispatch('full-screen');
+      this.dispath('full-screen');
     } else {
-      this.dispatch('default-screen');
+      this.dispath('default-screen');
     }
   };
 
@@ -94,7 +89,7 @@ export default class AudioСallService extends Observer {
     const audioWord = new Audio(`${this.baseUrl}${path}`);
     audioWord.addEventListener('ended', this.stopAudio);
     audioWord.play();
-    this.dispatch('play-audio');
+    this.dispath('play-audio');
   };
 
   stopAudio = () => {
