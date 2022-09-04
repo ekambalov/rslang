@@ -23,11 +23,37 @@ const State: IState = localStorage.getItem('state')
         currentLevel: 0,
         fromTextbook: false,
       },
+      gamesData: {
+        nameGame: '',
+        correctAnswers: [],
+        wrongAnswers: [],
+        series: 0,
+      },
       words: [],
       currentPage: 0,
       currentLevel: 0,
-      statistics: {},
-      nameGame: '',
+      statistics: {
+        learnedWords: 0,
+        optional: {
+          date: ' ',
+          sprint: {
+            corretAnswers: 0,
+            wrongAnswers: 0,
+            series: 0,
+            newWords: 0,
+          },
+          audioCall: {
+            corretAnswers: 0,
+            wrongAnswers: 0,
+            series: 0,
+            newWords: 0,
+          },
+          words: {
+            idOldWords: [],
+            idLearnedWordsPerDay: [],
+          },
+        },
+      },
     };
 
 export default State;
