@@ -34,6 +34,7 @@ export default class FormService extends Observer {
       State.userInfoAutorise = JSON.parse(localStorage.getItem('userInfoTokken') as string);
       this.showExitAutorise();
       this.showNameUser();
+      // document.location.reload();
       this.hideBtnAutorise();
       getUserStatistic(State.userInfoAutorise.userId, State.userInfoAutorise.token);
     }

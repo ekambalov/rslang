@@ -3,6 +3,7 @@
 import { IUserStatistic } from '../Interfaces/common';
 import State from './state';
 // import { getDate } from '../Helper/utils';
+import { getDate } from '../Helper/utils';
 
 const base = 'https://rs-learn-words.herokuapp.com/';
 
@@ -11,7 +12,7 @@ const base = 'https://rs-learn-words.herokuapp.com/';
 export const userStatisticFirst: IUserStatistic = {
   "learnedWords": 0,
   "optional": {
-    "data": '3-9-2022',
+    "data": '',
     "sprint": {
       "trueAnsve": 0,
       "falseAnsve": 0,
@@ -42,7 +43,7 @@ interface IswaggerStstistic  {
 }
 
 export const setUserStatistic = async (userId: string, userToken: string, userStatistic: IUserStatistic | IswaggerStstistic) => {
-  
+  /* console.log( userStatistic, 'user statistic'); */
   const response: Response = await fetch(`${base}users/${userId}/statistics`, {
      method: 'PUT',
      headers: {
@@ -66,13 +67,14 @@ export const getUserStatistic = async (userId: string, userToken: string) => {
     });
     if (response.status === 404) {
       State.statistics = userStatisticFirst;
+      userStatisticFirst.optional.data = getDate();
       setUserStatistic(userId, userToken, userStatisticFirst); 
-      return
+      console.log("нет статистики- первый раз зарегистрировался")
     }
     const content = await response.json();
     if (response.status === 200) {
       State.statistics = content;
-      console.log(content, 'ctatistic')
+      console.log(content, 'получили get-statistic')
     }
     
  
