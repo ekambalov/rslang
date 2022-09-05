@@ -2,8 +2,11 @@ import { IUserStatistic } from '../Interfaces/common';
 
 const base = 'https://rs-learn-words.herokuapp.com/';
 
-export const setStatistics = async (userId: string, userToken: string, userStatistic: IUserStatistic) => {
-  console.log(JSON.stringify(userStatistic));
+export const setStatistics = async (
+  userId: string,
+  userToken: string,
+  userStatistic: IUserStatistic
+): Promise<IUserStatistic> => {
   const response: Response = await fetch(`${base}users/${userId}/statistics`, {
     method: 'PUT',
     headers: {
@@ -17,7 +20,7 @@ export const setStatistics = async (userId: string, userToken: string, userStati
   return content;
 };
 
-export const getStatistics = async (userId: string, userToken: string): Promise<false | IUserStatistic> => {
+export const getStatistics = async (userId: string, userToken: string): Promise<IUserStatistic> => {
   const response: Response = await fetch(`${base}users/${userId}/statistics`, {
     method: 'GET',
     headers: {
@@ -26,9 +29,7 @@ export const getStatistics = async (userId: string, userToken: string): Promise<
       'Content-Type': 'application/json',
     },
   });
-  if (response.status === 200) {
-    const statistics = await response.json();
-    return statistics;
-  }
-  return false;
+  const statistics = await response.json();
+  delete statistics.id;
+  return statistics;
 };
