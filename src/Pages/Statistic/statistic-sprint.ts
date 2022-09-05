@@ -48,12 +48,11 @@ export default class StatisticSprint extends BaseComponent {
 
   writeStatistic = () => {
     const newWord = 16;
-    const procent = 0.25;
-    const procents = Math.trunc(procent * 100);
+    const procent = 25;
     const chain = 9;
 
     this.element.children[1].children[0].innerHTML = `Новые слова:  ${newWord}`;
-    this.element.children[1].children[1].innerHTML = `Верных ответов:  ${procents} %`;
+    this.element.children[1].children[1].innerHTML = `Верных ответов:  ${procent} %`;
     this.element.children[1].children[2].innerHTML = `Самая длинная цепочка:  ${chain}`;
   };
 

@@ -47,12 +47,11 @@ export default class StatisticAudioCall extends BaseComponent {
 
   writeStatistic = () => {
     const newWord = 16;
-    const procent = 0.6815;
-    const procents = Math.trunc(procent * 100);
+    const procent = 46;
     const chain = 9;
 
     this.element.children[1].children[0].innerHTML = `Новые слова:  ${newWord}`;
-    this.element.children[1].children[1].innerHTML = `Верных ответов:  ${procents} %`;
+    this.element.children[1].children[1].innerHTML = `Верных ответов:  ${procent} %`;
     this.element.children[1].children[2].innerHTML = `Самая длинная цепочка:  ${chain}`;
   };
 
