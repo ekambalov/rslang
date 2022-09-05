@@ -8,6 +8,7 @@ import SprintPage from '../Pages/Sprint/page-sprint';
 import StatisticPage from '../Pages/Statistic/page-statistic';
 import StatisticInfoPage from '../Pages/Statistic/page-statistic-Info';
 import VocabularyPage from '../Pages/Vocabulary/vocabulary';
+import State from '../Model/state';
 
 type Page =
   | MainPage
