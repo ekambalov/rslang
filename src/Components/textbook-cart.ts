@@ -27,7 +27,10 @@ export default class TextBookCart extends BaseComponent {
   }
 
   render = () => {
-    super.destroy();
+    if (this.children.length) {
+      console.log('got ya');
+      super.destroy();
+    }
 
     const img = new BaseComponent('img', 'cart__image').element as HTMLImageElement;
     img.src = baseUrl + this.wordData.image;
@@ -39,11 +42,12 @@ export default class TextBookCart extends BaseComponent {
     word.textContent = `${this.wordData.word} – ${this.wordData.transcription}`;
 
     this.children.push(
-      new ButtonAudioTextbook(word, this.services, [
-        this.wordData.audio,
-        this.wordData.audioExample,
-        this.wordData.audioMeaning,
-      ])
+      new ButtonAudioTextbook(
+        word,
+        this.services,
+        [this.wordData.audio, this.wordData.audioExample, this.wordData.audioMeaning],
+        this.wordData.id
+      )
     );
 
     word.prepend(level);

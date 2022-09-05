@@ -37,6 +37,8 @@ export default class TextbookPage extends BaseComponent {
     const userWordsId = userWords.map((element) => (element.wordId ? element.wordId : ''));
     const container = parent;
     State.words = [...words];
+    (this.children[0] as TextBookSettings).setLinks();
+
     if (container instanceof HTMLElement) container.innerHTML = '';
     words.forEach((word) => {
       if (parent instanceof HTMLElement) {
