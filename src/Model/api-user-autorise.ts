@@ -65,6 +65,7 @@ export async function getUserTokken(user: IUserGetToken) {
   if (localStorage.getItem('userInfoTokken') && localStorage.getItem('dateToken')) {
     userInfoTokken = JSON.parse(localStorage.getItem('userInfoTokken') as string);
     const dateTokenTokken = +JSON.parse(localStorage.getItem('dateToken') as string);
+    console.log(dateTokenTokken, Date.now());
     if (Date.now() >= dateTokenTokken + 60 * 60 * 1000 * 4) {
       return getRefrechTokkenData(userInfoTokken.userId, userInfoTokken.refreshToken);
     }

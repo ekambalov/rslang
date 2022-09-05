@@ -60,7 +60,6 @@ export default class FieldGame extends BaseComponent {
     this.fieldWords.element.append(this.wordEnglish.element, this.wordRus.element);
 
     this.buttonFalse.render();
-
     this.buttonTrue.render();
 
     this.services.sprint.add('btn-true-active-style', this.btnTrueActiveStyle);
@@ -79,6 +78,8 @@ export default class FieldGame extends BaseComponent {
 
   hideFiledGame = () => {
     this.element.style.display = 'none';
+    this.children.forEach((child) => child.destroy());
+    this.children = [];
   };
 
   writeWordGame = () => {

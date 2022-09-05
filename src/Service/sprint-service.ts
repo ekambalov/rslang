@@ -3,7 +3,6 @@ import State from '../Model/state';
 import { Word } from '../Interfaces/word-model';
 import fethWords from '../Model/data-base';
 import { getRandomInteger } from '../Helper/utils';
-import { getStatistics } from '../Model/api-statistic';
 
 export default class SprintService extends Observer {
   private baseUrl = 'https://rs-learn-words.herokuapp.com/';
@@ -20,8 +19,6 @@ export default class SprintService extends Observer {
 
   countTrueAnsve = 0; // количество правильных ответов подряд для +20 +30 сбрасывается при неверном ответе
 
-  chainTrueAnsve = 0; // лучшая цепочка ответов подряд
-
   userResult = 0; // количество набранных очков
 
   translateShowTrue = true; //  показывается правильный ответ
@@ -37,10 +34,6 @@ export default class SprintService extends Observer {
   trueAnswe: string[] = [];
 
   arrayShowWords: Word[] = [];
-
-  arrayWordsAnsweTrue: Word[] = [];
-
-  arrayWordsAnsweFalse: Word[] = [];
 
   currentWords: Word[] = [];
 
@@ -118,10 +111,6 @@ export default class SprintService extends Observer {
     }
   };
 
-  stopAudioWord = () => {
-    this.dispatch('stop-audio-word'); // произношение слова
-  };
-
   writeWordGame = () => {
     this.dispatch('write-word-game'); // пишем слова англ/рус
   };
@@ -130,20 +119,15 @@ export default class SprintService extends Observer {
     this.dispatch('reset-timer'); // сбрасываем таймер
   };
 
-  startGameSprint = () => {
-    this.currentPageBook = State.textbook.currentPage;
-    this.currentArrayWordsGame = [...State.words];
-    this.resetSettingGame();
-    this.writeWordGame();
-    this.hideRuleSprint(); // прячем правила
-    this.hideResult(); // прячем результаты
-    this.showFiledGame(); // показываем игровое поле
-    this.listener();
-    this.dispatch('start-timer'); // запускаем таймер
-    if (localStorage.getItem('userInfoTokken')) {
-      getStatistics(State.userInfoAutorise.userId, State.userInfoAutorise.token);
-      console.log(getStatistics(State.userInfoAutorise.userId, State.userInfoAutorise.token)); //  получаем старую статистику
-    }
+  resetCountGame = () => {
+    this.dispatch('reset-count-game'); // сбрасываем счёт игры
+  };
+
+  resetState = () => {
+    State.gamesData.nameGame = 'sprint';
+    State.gamesData.correctAnswers = [];
+    State.gamesData.wrongAnswers = [];
+    State.gamesData.series = 0;
   };
 
   resetSettingGame = () => {
@@ -155,12 +139,22 @@ export default class SprintService extends Observer {
     this.endTimeGame = false;
     this.userResult = 0;
     this.arrayShowWords = [];
-    this.arrayWordsAnsweTrue = [];
-    this.arrayWordsAnsweFalse = [];
+    State.gamesData.series = 0;
+    State.gamesData.correctAnswers = [];
+    State.gamesData.wrongAnswers = [];
   };
 
-  resetCountGame = () => {
-    this.dispatch('reset-count-game'); // сбрасываем счёт игры
+  startGameSprint = () => {
+    this.resetState();
+    this.resetSettingGame();
+    this.currentPageBook = State.textbook.currentPage;
+    this.currentArrayWordsGame = [...State.words];
+    this.writeWordGame();
+    this.hideRuleSprint(); // прячем правила
+    this.hideResult(); // прячем результаты
+    this.showFiledGame(); // показываем игровое поле
+    this.listener();
+    this.dispatch('start-timer'); // запускаем таймер
   };
 
   finishGame = () => {
@@ -231,40 +225,42 @@ export default class SprintService extends Observer {
   };
 
   btnFalseClick = () => {
+    console.log('1');
     this.clickButtonFalse = true;
     this.clickButtonTrue = false;
     this.btnFalseAddActiveStyle();
     this.playAudioError();
     if (!this.translateShowTrue) {
       this.countTrueAnsve += 1;
-      if (this.chainTrueAnsve < this.countTrueAnsve) this.chainTrueAnsve = this.countTrueAnsve;
+      if (State.gamesData.series < this.countTrueAnsve) State.gamesData.series = this.countTrueAnsve;
       this.addCountGame();
       this.correctAddCount();
-      this.arrayWordsAnsweTrue.push(this.currentWord);
+      State.gamesData.correctAnswers.push(this.currentWord);
       this.arrayShowWords.push(this.currentWord);
     } else {
       this.countTrueAnsve = 0;
       this.addCountReset();
-      this.arrayWordsAnsweFalse.push(this.currentWord);
+      State.gamesData.wrongAnswers.push(this.currentWord);
       this.arrayShowWords.push(this.currentWord);
     }
     this.writeWordGame();
   };
 
   btnTrueClick = () => {
+    console.log('2');
     this.clickButtonFalse = false;
     this.clickButtonTrue = true;
     this.btnTrueAddActiveStyle();
     this.playAudioError();
     if (this.translateShowTrue) {
       this.countTrueAnsve += 1;
-      if (this.chainTrueAnsve < this.countTrueAnsve) this.chainTrueAnsve = this.countTrueAnsve;
+      if (State.gamesData.series < this.countTrueAnsve) State.gamesData.series = this.countTrueAnsve;
       this.addCountGame();
       this.correctAddCount();
-      this.arrayWordsAnsweTrue.push(this.currentWord);
+      State.gamesData.correctAnswers.push(this.currentWord);
       this.arrayShowWords.push(this.currentWord);
     } else {
-      this.arrayWordsAnsweFalse.push(this.currentWord);
+      State.gamesData.wrongAnswers.push(this.currentWord);
       this.countTrueAnsve = 0;
       this.addCountReset();
       this.arrayShowWords.push(this.currentWord);

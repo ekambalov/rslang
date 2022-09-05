@@ -87,6 +87,10 @@
     transition: transform 0.3s;
     text-decoration: none;
     color: #1c1c1d;
+    &:hover {
+      color:rgb(36, 47, 199);
+      background-color: gold;
+    }
     // margin-left: 20px;
   }
 }

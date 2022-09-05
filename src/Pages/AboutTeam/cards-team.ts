@@ -5,7 +5,11 @@ import linksProps from '../../Settings/link-person-gitHub.json';
 import LinkGitHub from '../../Components/link-GitHub';
 
 const name = ['Никита', 'Светлана', 'Ягор'];
-const work = ['frontend developer', 'frontend developer', 'frontend developer'];
+const work = [
+  'Архитектура приложения, игра "Аудио-вызов", "Статистика - логика"',
+  'Авторизация, игра "Спринт", "Статистика - оформление", главная страница, страница "Команда"',
+  '"Учебник", "Сложные слова"',
+];
 
 export default class CardsTeam extends BaseComponent {
   constructor(private readonly parent: HTMLElement, private readonly services: Services) {

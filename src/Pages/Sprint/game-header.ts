@@ -74,7 +74,7 @@ export default class HeaderGame extends BaseComponent {
   };
 
   addCount = () => {
-    const count = +(this.element.children[3].textContent as string);
+    const count = this.services.sprint.userResult;
     if (this.services.sprint.countTrueAnsve > 3 && this.services.sprint.countTrueAnsve <= 6) {
       this.element.children[3].innerHTML = `${count + 20}`;
       this.services.sprint.userResult += 20;

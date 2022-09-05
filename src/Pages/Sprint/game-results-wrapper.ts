@@ -1,6 +1,7 @@
 import BaseComponent from '../../Abstract/base-component';
 import TableBodyResultsGame from './game-results-table-body';
 import Services from '../../Interfaces/services';
+import State from '../../Model/state';
 
 export default class ResultsWrapper extends BaseComponent<HTMLDivElement> {
   private countWordTrue?: BaseComponent;
@@ -19,17 +20,9 @@ export default class ResultsWrapper extends BaseComponent<HTMLDivElement> {
     this.services.sprint.add('write-results-sprint', this.writeResult);
     this.children = [
       (this.countWordTrue = new BaseComponent('h6', 'results__count')),
-      (this.wordTrueTable = new TableBodyResultsGame(
-        this.element,
-        this.services,
-        this.services.sprint.arrayWordsAnsweTrue
-      )),
+      (this.wordTrueTable = new TableBodyResultsGame(this.element, this.services, State.gamesData.correctAnswers)),
       (this.countWordFalse = new BaseComponent('h6', 'results__count')),
-      (this.wordFalseTable = new TableBodyResultsGame(
-        this.element,
-        this.services,
-        this.services.sprint.arrayWordsAnsweFalse
-      )),
+      (this.wordFalseTable = new TableBodyResultsGame(this.element, this.services, State.gamesData.wrongAnswers)),
     ];
 
     this.element.prepend(this.countWordTrue.element);
@@ -45,20 +38,10 @@ export default class ResultsWrapper extends BaseComponent<HTMLDivElement> {
   };
 
   writeResult = () => {
-    const trueAnswe = this.services.sprint.arrayWordsAnsweTrue.length;
-    const falseAnswe = this.services.sprint.arrayWordsAnsweFalse.length;
+    const trueAnswe = State.gamesData.correctAnswers.length;
+    const falseAnswe = State.gamesData.wrongAnswers.length;
 
     this.element.children[0].innerHTML = `Верно:  ${trueAnswe}`;
     this.element.children[2].innerHTML = `Неверно:  ${falseAnswe}`;
-    // пробрасываем данные статистики:
-    this.services.statistic.chainTrueAnsve = this.services.sprint.chainTrueAnsve; // цепочка
-    for (let i = 0; i < trueAnswe; i += 1) {
-      this.services.statistic.arrayIdWordsAnsweTrue.push(this.services.sprint.arrayWordsAnsweTrue[i].id);
-      // id правильных слов
-    }
-    for (let i = 0; i < falseAnswe; i += 1) {
-      this.services.statistic.arrayIdWordsAnsweFalse.push(this.services.sprint.arrayWordsAnsweFalse[i].id);
-      // id неправильных слов
-    }
   };
 }
