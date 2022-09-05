@@ -61,11 +61,12 @@ export const getRefrechTokkenData = async (id: string, refreshToken: string): Pr
 };
 
 export async function getUserTokken(user: IUserGetToken) {
-  let userInfoTokken: IUserToken; // объявляем локальную переменную tokenData
+  let userInfoTokken: IUserToken;
   if (localStorage.getItem('userInfoTokken') && localStorage.getItem('dateToken')) {
     userInfoTokken = JSON.parse(localStorage.getItem('userInfoTokken') as string);
     const dateTokenTokken = +JSON.parse(localStorage.getItem('dateToken') as string);
-    if (Date.now() >= dateTokenTokken + 60 * 60 * 1000 * 4) {
+    console.log(dateTokenTokken, Date.now());
+    if (Date.now() > dateTokenTokken + 60 * 60 * 1000 * 4) {
       return getRefrechTokkenData(userInfoTokken.userId, userInfoTokken.refreshToken);
     }
     return userInfoTokken;

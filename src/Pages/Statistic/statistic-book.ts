@@ -21,6 +21,7 @@ export default class StatisticBook extends BaseComponent {
   }
 
   render = () => {
+    this.services.statistic.add('write-statistic', this.writeStatistic);
     this.children = [
       (this.containerTitle = new BaseComponent('div', 'book__result-title')),
       (this.containerItem = new BaseComponent('div', 'book__result-item')),
@@ -43,5 +44,21 @@ export default class StatisticBook extends BaseComponent {
 
     this.element.prepend(this.containerTitle.element, this.containerItem.element);
     this.parent.appendChild(this.element);
+  };
+
+  writeStatistic = () => {
+    const newWord = 16;
+    const procent = 0.115;
+    const procents = Math.trunc(procent * 100);
+    const chain = 9;
+
+    this.element.children[1].children[0].innerHTML = `Новые слова:  ${newWord}`;
+    this.element.children[1].children[1].innerHTML = `Верных ответов:  ${procents} %`;
+    this.element.children[1].children[2].innerHTML = `Самая длинная цепочка:  ${chain}`;
+  };
+
+  destroy = () => {
+    this.services.statistic.remove('write-statistic', this.writeStatistic);
+    super.destroy();
   };
 }
