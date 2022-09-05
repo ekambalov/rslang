@@ -9,9 +9,9 @@ export interface IUserID {
   id: string;
 }
 export interface IUserGetToken {
-  date: number;
   email: string;
   password: string;
+  date: number;
 }
 export interface IUserToken {
   message: string;
@@ -19,5 +19,4 @@ export interface IUserToken {
   refreshToken: string;
   userId: string;
   name: string;
-  date: number;
 }

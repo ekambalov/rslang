@@ -16,7 +16,6 @@ export const getTokkenData = async (user: IUserGetToken): Promise<IUserToken | n
   if (response.status === 200) {
     const content: IUserToken = await response.json();
     State.userInfoAutorise = content;
-    State.userInfoAutorise.date = Date.now();
     State.isAutorise = true;
     localStorage.setItem('userInfoTokken', JSON.stringify(State.userInfoAutorise));
     return content;
@@ -54,7 +53,6 @@ export const getRefrechTokkenData = async (id: string, refreshToken: string): Pr
   if (response.status === 200) {
     const content: IUserToken = await response.json();
     State.userInfoAutorise = content;
-    State.userInfoAutorise.date = Date.now();
     State.isAutorise = true;
     localStorage.setItem('userInfoTokken', JSON.stringify(State.userInfoAutorise));
     return content;
@@ -63,14 +61,14 @@ export const getRefrechTokkenData = async (id: string, refreshToken: string): Pr
 };
 
 export async function getUserTokken(user: IUserGetToken) {
-  let tokenData: IUserToken; // объявляем локальную переменную tokenData
-  if (localStorage.getItem('userInfoTokken')) {
-    tokenData = JSON.parse(localStorage.getItem('userInfoTokken') as string);
-    if (Date.now() >= tokenData.date + 60 * 60 * 1000 * 4) {
-      getRefrechTokkenData(tokenData.userId, tokenData.refreshToken);
-    } else {
-      return;
+  let userInfoTokken: IUserToken; // объявляем локальную переменную tokenData
+  if (localStorage.getItem('userInfoTokken') && localStorage.getItem('dateToken')) {
+    userInfoTokken = JSON.parse(localStorage.getItem('userInfoTokken') as string);
+    const dateTokenTokken = +JSON.parse(localStorage.getItem('dateToken') as string);
+    if (Date.now() >= dateTokenTokken + 60 * 60 * 1000 * 4) {
+      return getRefrechTokkenData(userInfoTokken.userId, userInfoTokken.refreshToken);
     }
+    return userInfoTokken;
   }
-  getTokkenData(user); // возвращаем изначальную функцию, но уже с валидным токеном в headers
+  return getTokkenData(user);
 }
