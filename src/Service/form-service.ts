@@ -1,5 +1,5 @@
 import Observer from '../Abstract/observer';
-import { IUser, IUserToken } from '../Interfaces/user-model';
+import { IUser, IUserToken, IUserGetToken } from '../Interfaces/user-model';
 import { createUser, getUserTokken } from '../Model/api-user-autorise';
 import { IFormInputConponent } from '../Interfaces/common';
 import { getStatistics, setStatistics } from '../Model/api-statistic';
@@ -39,7 +39,6 @@ export default class FormService extends Observer {
       this.hideBtnAutorise();
       State.isAutorise = true;
       const statistics = await getStatistics(userId, token);
-      console.log(statistics);
       if (statistics) {
         State.statistics = statistics;
       }
@@ -140,8 +139,9 @@ export default class FormService extends Observer {
   clickEnter = () => {
     this.btnClickAutorise = false;
     this.btnClickEnter = true;
+
     if (this.user.password && this.user.email) {
-      localStorage.setItem('userInfoEnter', JSON.stringify(this.user));
+      // localStorage.setItem('userInfoEnter', JSON.stringify(this.user));
       this.getTokken();
     } else this.showAutoriseError();
   };
@@ -165,10 +165,13 @@ export default class FormService extends Observer {
 
   getTokken = async (): Promise<void> => {
     this.disabledBtnAutorise();
-    const userItem = {
+    const dateToken = Date.now();
+    const userItem: IUserGetToken = {
       email: this.user.email,
       password: this.user.password,
+      date: dateToken,
     };
+    localStorage.setItem('dateToken', `${dateToken}`);
     const answeToken = await getUserTokken(userItem);
     if (typeof answeToken === 'number') {
       this.showAutoriseError();
@@ -176,6 +179,7 @@ export default class FormService extends Observer {
       this.clearInput();
       this.clear();
     } else {
+      window.location.reload();
       this.userInfoAutorise = answeToken;
       State.isAutorise = true;
       // getStatistics(this.userInfoAutorise.userId, this.userInfoAutorise.token); // получаем сатистику
@@ -195,12 +199,12 @@ export default class FormService extends Observer {
   checkAllInput = (): boolean => {
     if (this.user.name && this.user.password && this.user.email) {
       this.fullAllInput = true;
-      localStorage.setItem('userInfoEnter', JSON.stringify(this.user));
+      // localStorage.setItem('userInfoEnter', JSON.stringify(this.user));
       return true;
     }
     if (this.user.password && this.user.email && !this.btnClickEnter) {
       this.fullEnterInput = true;
-      localStorage.setItem('userInfoEnter', JSON.stringify(this.user));
+      // localStorage.setItem('userInfoEnter', JSON.stringify(this.user));
       return true;
     }
     this.fullAllInput = false;

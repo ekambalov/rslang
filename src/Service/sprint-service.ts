@@ -169,6 +169,7 @@ export default class SprintService extends Observer {
     this.upgradeResult();
     this.showResult();
     this.writeResult();
+    this.remoweListener();
   };
 
   timer = (element: HTMLElement) => {
@@ -272,6 +273,14 @@ export default class SprintService extends Observer {
   };
 
   listener = () => {
+    window.addEventListener('keydown', this.listenerArrow);
+  };
+
+  remoweListener = () => {
+    window.removeEventListener('keydown', this.listenerArrow);
+  };
+
+  listenerArrow = () => {
     window.addEventListener('keydown', (event) => {
       const { key: keys } = event;
       switch (keys) {
