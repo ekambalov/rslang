@@ -43,18 +43,14 @@ export default class StatisticSprint extends BaseComponent {
     this.element.prepend(this.containerTitle.element, this.containerItem.element);
     this.parent.appendChild(this.element);
 
-    this.services.statistic.add('write-statistic-sprint', this.writeStatistic);
+    this.services.statistic.add('write-statistic', this.writeStatistic);
   };
 
   writeStatistic = () => {
-    const newWord = this.services.statistic.userStatisticForServer.optional.sprint.newWords;
-    const procent =
-      this.services.statistic.userStatisticForServer.optional.sprint.trueAnsve /
-      (this.services.statistic.userStatisticForServer.optional.sprint.trueAnsve +
-        this.services.statistic.userStatisticForServer.optional.sprint.falseAnsve);
+    const newWord = 16;
+    const procent = 0.25;
     const procents = Math.trunc(procent * 100);
-    // eslint-disable-next-line prefer-destructuring
-    const chain = this.services.statistic.userStatisticForServer.optional.sprint.chain;
+    const chain = 9;
 
     this.element.children[1].children[0].innerHTML = `Новые слова:  ${newWord}`;
     this.element.children[1].children[1].innerHTML = `Верных ответов:  ${procents} %`;
@@ -62,7 +58,7 @@ export default class StatisticSprint extends BaseComponent {
   };
 
   destroy = () => {
-    this.services.statistic.remove('write-statistic-sprint', this.writeStatistic);
+    this.services.statistic.remove('write-statistic', this.writeStatistic);
     super.destroy();
   };
 }

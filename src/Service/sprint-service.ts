@@ -3,7 +3,6 @@ import State from '../Model/state';
 import { Word } from '../Interfaces/word-model';
 import fethWords from '../Model/data-base';
 import { getRandomInteger } from '../Helper/utils';
-import { getStatistics } from '../Model/api-statistic';
 
 export default class SprintService extends Observer {
   private baseUrl = 'https://rs-learn-words.herokuapp.com/';
@@ -131,6 +130,7 @@ export default class SprintService extends Observer {
   };
 
   startGameSprint = () => {
+    State.gamesData.nameGame = 'sprint';
     this.currentPageBook = State.textbook.currentPage;
     this.currentArrayWordsGame = [...State.words];
     this.resetSettingGame();
@@ -140,10 +140,6 @@ export default class SprintService extends Observer {
     this.showFiledGame(); // показываем игровое поле
     this.listener();
     this.dispatch('start-timer'); // запускаем таймер
-    if (localStorage.getItem('userInfoTokken')) {
-      getStatistics(State.userInfoAutorise.userId, State.userInfoAutorise.token);
-      console.log(getStatistics(State.userInfoAutorise.userId, State.userInfoAutorise.token)); //  получаем старую статистику
-    }
   };
 
   resetSettingGame = () => {
@@ -280,20 +276,23 @@ export default class SprintService extends Observer {
     window.removeEventListener('keydown', this.listenerArrow);
   };
 
-  listenerArrow = () => {
-    window.addEventListener('keydown', (event) => {
-      const { key: keys } = event;
-      switch (keys) {
-        case 'ArrowLeft':
-          this.btnFalseClick();
-          break;
-        case 'ArrowRight':
-          this.btnTrueClick();
-          break;
-        default:
-          break;
-      }
-    });
+  listenerArrow = (evt: KeyboardEvent) => {
+    if (evt instanceof KeyboardEvent && evt.key !== 'ArrowLeft' && evt.key !== 'ArrowRight') {
+      return;
+    }
+    evt.preventDefault();
+    if (evt.repeat) return;
+    const { key: keys } = evt;
+    switch (keys) {
+      case 'ArrowLeft':
+        this.btnFalseClick();
+        break;
+      case 'ArrowRight':
+        this.btnTrueClick();
+        break;
+      default:
+        break;
+    }
   };
 
   getUnikNumber = (number: number, from: number, to: number): number => {

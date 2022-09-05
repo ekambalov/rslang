@@ -21,6 +21,7 @@ export default class StatisticAudioCall extends BaseComponent {
   }
 
   render = () => {
+    this.services.statistic.add('write-statistic', this.writeStatistic);
     this.children = [
       (this.containerTitle = new BaseComponent('div', 'audio__result-title')),
       (this.containerItem = new BaseComponent('div', 'audio__result-item')),
@@ -46,7 +47,7 @@ export default class StatisticAudioCall extends BaseComponent {
 
   writeStatistic = () => {
     const newWord = 16;
-    const procent = 15;
+    const procent = 0.6815;
     const procents = Math.trunc(procent * 100);
     const chain = 9;
 
@@ -56,7 +57,7 @@ export default class StatisticAudioCall extends BaseComponent {
   };
 
   destroy = () => {
-    this.services.statistic.remove('write-statistic-sprint', this.writeStatistic);
+    this.services.statistic.remove('write-statistic', this.writeStatistic);
     super.destroy();
   };
 }
