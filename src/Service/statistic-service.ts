@@ -25,8 +25,8 @@ export default class StatisticService extends Observer {
 
   // получаем сегодня=>дату и если она такая же как и на сервере, обновляем данные на сервере
   checkData = (): boolean => {
-    if (State.statistics.optional.data) {
-      const dataFromServer = State.statistics.optional.data;
+    if (State.statistics.optional.date) {
+      const dataFromServer = State.statistics.optional.date;
       const dataNow = getDate();
       return dataFromServer === dataNow;
     }
