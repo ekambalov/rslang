@@ -8,6 +8,7 @@ import SprintPage from '../Pages/Sprint/page-sprint';
 import StatisticPage from '../Pages/Statistic/page-statistic';
 import StatisticInfoPage from '../Pages/Statistic/page-statistic-Info';
 import VocabularyPage from '../Pages/Vocabulary/vocabulary';
+import State from '../Model/state';
 
 type Page =
   | MainPage
@@ -60,6 +61,7 @@ export default class Router {
       currentRout.component.render();
       return;
     }
+    if (path.includes('level-selection')) State.textbook.fromTextbook = false;
     const currentRout = this.routes.find((item) => item.path === path) || this.routes[0];
     currentRout.component.render();
   };

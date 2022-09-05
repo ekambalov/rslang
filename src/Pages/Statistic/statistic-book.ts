@@ -1,5 +1,6 @@
 import Services from '../../Interfaces/services';
 import BaseComponent from '../../Abstract/base-component';
+import State from '../../Model/state';
 
 export default class StatisticBook extends BaseComponent {
   private bookTitle?: BaseComponent;
@@ -43,18 +44,16 @@ export default class StatisticBook extends BaseComponent {
     this.bookImage.element.setAttribute('alt', 'img book logo');
 
     this.element.prepend(this.containerTitle.element, this.containerItem.element);
+    this.writeStatistic();
     this.parent.appendChild(this.element);
   };
 
   writeStatistic = () => {
-    const newWord = 16;
-    const procent = 0.115;
-    const procents = Math.trunc(procent * 100);
-    const chain = 9;
-
-    this.element.children[1].children[0].innerHTML = `Новые слова:  ${newWord}`;
-    this.element.children[1].children[1].innerHTML = `Верных ответов:  ${procents} %`;
-    this.element.children[1].children[2].innerHTML = `Самая длинная цепочка:  ${chain}`;
+    const { sumNewWords, percent } = State.statistics.optional.words;
+    console.log(sumNewWords, percent);
+    this.element.children[1].children[0].innerHTML = `Новые слова:  ${sumNewWords}`;
+    this.element.children[1].children[1].innerHTML = `Верных ответов:  ${percent} %`;
+    this.element.children[1].children[2].innerHTML = `Изученные слова:  ${percent}`;
   };
 
   destroy = () => {

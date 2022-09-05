@@ -1,5 +1,6 @@
 import Services from '../../Interfaces/services';
 import BaseComponent from '../../Abstract/base-component';
+import State from '../../Model/state';
 
 export default class StatisticAudioCall extends BaseComponent {
   private audioTitle?: BaseComponent;
@@ -42,17 +43,17 @@ export default class StatisticAudioCall extends BaseComponent {
     this.audioImage.element.setAttribute('alt', 'img audio logo');
 
     this.element.prepend(this.containerTitle.element, this.containerItem.element);
+    this.writeStatistic();
     this.parent.appendChild(this.element);
   };
 
   writeStatistic = () => {
-    const newWord = 16;
-    const procent = 0.6815;
-    const procents = Math.trunc(procent * 100);
-    const chain = 9;
+    const newWord = State.statistics.optional.audioCall.newWords;
+    const procent = State.statistics.optional.audioCall.percent;
+    const chain = State.statistics.optional.audioCall.series;
 
     this.element.children[1].children[0].innerHTML = `Новые слова:  ${newWord}`;
-    this.element.children[1].children[1].innerHTML = `Верных ответов:  ${procents} %`;
+    this.element.children[1].children[1].innerHTML = `Верных ответов:  ${procent} %`;
     this.element.children[1].children[2].innerHTML = `Самая длинная цепочка:  ${chain}`;
   };
 

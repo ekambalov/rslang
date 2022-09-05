@@ -44,6 +44,7 @@ export default class ResultsGameSprint extends BaseComponent<HTMLDivElement> {
     //   this.element.previousElementSibling.remove();
     // }
     this.element.style.display = 'block';
+    this.services.statistic.updateStats();
   };
 
   upgrade = () => {

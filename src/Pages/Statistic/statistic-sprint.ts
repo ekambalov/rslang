@@ -1,5 +1,6 @@
 import Services from '../../Interfaces/services';
 import BaseComponent from '../../Abstract/base-component';
+import State from '../../Model/state';
 
 export default class StatisticSprint extends BaseComponent {
   private sprintTitle?: BaseComponent;
@@ -41,19 +42,19 @@ export default class StatisticSprint extends BaseComponent {
     this.countTrueFalse.element.innerHTML = 'Верных ответов: 0%';
     this.chain.element.innerHTML = 'Самая длинная цепочка: 1';
     this.element.prepend(this.containerTitle.element, this.containerItem.element);
+    this.writeStatistic();
     this.parent.appendChild(this.element);
 
     this.services.statistic.add('write-statistic', this.writeStatistic);
   };
 
   writeStatistic = () => {
-    const newWord = 16;
-    const procent = 0.25;
-    const procents = Math.trunc(procent * 100);
-    const chain = 9;
+    const newWord = State.statistics.optional.sprint.newWords;
+    const procent = State.statistics.optional.sprint.percent;
+    const chain = State.statistics.optional.sprint.series;
 
     this.element.children[1].children[0].innerHTML = `Новые слова:  ${newWord}`;
-    this.element.children[1].children[1].innerHTML = `Верных ответов:  ${procents} %`;
+    this.element.children[1].children[1].innerHTML = `Верных ответов:  ${procent} %`;
     this.element.children[1].children[2].innerHTML = `Самая длинная цепочка:  ${chain}`;
   };
 
