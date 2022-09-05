@@ -110,3 +110,9 @@
     justify-content: space-around;
   }
 }
+
+@media screen and (max-width: 440px) {
+  .textbook {
+    padding: 10px 0px;
+  }
+}
