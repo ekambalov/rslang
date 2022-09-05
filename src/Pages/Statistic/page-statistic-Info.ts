@@ -1,6 +1,7 @@
 import Services from '../../Interfaces/services';
 import BaseComponent from '../../Abstract/base-component';
 import StatisticContainer from './statistic-container';
+import State from '../../Model/state';
 
 export default class StatisticInfoPage extends BaseComponent {
   private statisticContainer?: StatisticContainer;
@@ -14,6 +15,7 @@ export default class StatisticInfoPage extends BaseComponent {
   }
 
   render = async () => {
+    State.statistics = await this.services.statistic.getStats();
     this.destroy();
     this.parent.innerHTML = '';
     this.children = [
