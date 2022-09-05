@@ -38,6 +38,27 @@ export const getUsersWords = async () => {
   return response;
 };
 
+const updateUserWord = async (wordId: string, word: UserWord) => {
+  const user = localStorage.getItem('userInfoTokken');
+  let userId = '';
+  let token = '';
+
+  if (user) userId = (JSON.parse(user) as IUserToken).userId;
+  if (user) token = (JSON.parse(user) as IUserToken).token;
+
+  const response = fetch(`${baseUrl}users/${userId}/words/${wordId}`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(word),
+  }).then((res) => res.json());
+
+  return response;
+};
+
 const createUserWord = async (wordId: string, word: UserWord) => {
   const user = localStorage.getItem('userInfoTokken');
   let userId = '';
@@ -54,23 +75,32 @@ const createUserWord = async (wordId: string, word: UserWord) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(word),
-  }).then((res) => res.json());
+  }).then((res) => {
+    if (res.status === 417) {
+      return updateUserWord(wordId, word);
+    }
+    return res.json();
+  });
 
   return response;
 };
 
-export const createDifficultUserWord = async (wordId: string) => {
+export const createDifficultUserWord = async (wordId: string, isExist = false) => {
   const word = (await getWord(wordId)) as Word;
   const userWord: UserWord = { difficulty: 'hard', optional: { word } };
+
+  if (isExist) return updateUserWord(wordId, userWord);
 
   const res = await createUserWord(wordId, userWord);
 
   return res;
 };
 
-export const createEasyUserWord = async (wordId: string) => {
+export const createEasyUserWord = async (wordId: string, isExist = false) => {
   const word = (await getWord(wordId)) as Word;
   const userWord: UserWord = { difficulty: 'weak', optional: { word } };
+
+  if (isExist) return updateUserWord(wordId, userWord);
 
   const res = await createUserWord(wordId, userWord);
   return res;
