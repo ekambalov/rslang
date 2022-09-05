@@ -44,4 +44,24 @@ export default class StatisticBook extends BaseComponent {
     this.element.prepend(this.containerTitle.element, this.containerItem.element);
     this.parent.appendChild(this.element);
   };
+
+  writeStatistic = () => {
+    const newWord = this.services.statistic.userStatisticForServer.optional.sprint.newWords;
+    const procent =
+      this.services.statistic.userStatisticForServer.optional.sprint.trueAnsve /
+      (this.services.statistic.userStatisticForServer.optional.sprint.trueAnsve +
+        this.services.statistic.userStatisticForServer.optional.sprint.falseAnsve);
+    const procents = Math.trunc(procent * 100);
+    // eslint-disable-next-line prefer-destructuring
+    const chain = this.services.statistic.userStatisticForServer.optional.sprint.chain;
+
+    this.element.children[1].children[0].innerHTML = `Новые слова:  ${newWord}`;
+    this.element.children[1].children[1].innerHTML = `Верных ответов:  ${procents} %`;
+    this.element.children[1].children[2].innerHTML = `Самая длинная цепочка:  ${chain}`;
+  };
+
+  destroy = () => {
+    this.services.statistic.remove('write-statistic-sprint', this.writeStatistic);
+    super.destroy();
+  };
 }
