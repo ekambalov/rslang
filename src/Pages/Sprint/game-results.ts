@@ -40,6 +40,9 @@ export default class ResultsGameSprint extends BaseComponent<HTMLDivElement> {
   };
 
   showResult = () => {
+    // if (this.element.previousElementSibling) {
+    //   this.element.previousElementSibling.remove();
+    // }
     this.element.style.display = 'block';
   };
 

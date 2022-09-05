@@ -14,3 +14,10 @@ export interface Word {
   textMeaningTranslate: string;
   wordTranslate: string;
 }
+
+export interface UserWord {
+  difficulty: 'weak' | 'hard';
+  optional?: { word: Word };
+  id?: string;
+  wordId?: string;
+}

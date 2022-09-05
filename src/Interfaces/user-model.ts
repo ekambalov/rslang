@@ -11,6 +11,7 @@ export interface IUserID {
 export interface IUserGetToken {
   email: string;
   password: string;
+  date: number;
 }
 export interface IUserToken {
   message: string;

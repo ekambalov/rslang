@@ -3,7 +3,7 @@ import State from '../Model/state';
 import { Word } from '../Interfaces/word-model';
 import fethWords from '../Model/data-base';
 import { getRandomInteger } from '../Helper/utils';
-import { getUserStatistic } from '../Model/api-statistic';
+import { getStatistics } from '../Model/api-statistic';
 
 export default class SprintService extends Observer {
   private baseUrl = 'https://rs-learn-words.herokuapp.com/';
@@ -141,8 +141,8 @@ export default class SprintService extends Observer {
     this.listener();
     this.dispatch('start-timer'); // запускаем таймер
     if (localStorage.getItem('userInfoTokken')) {
-      getUserStatistic(State.userInfoAutorise.userId, State.userInfoAutorise.token);
-      console.log(getUserStatistic(State.userInfoAutorise.userId, State.userInfoAutorise.token)); //  получаем старую статистику
+      getStatistics(State.userInfoAutorise.userId, State.userInfoAutorise.token);
+      console.log(getStatistics(State.userInfoAutorise.userId, State.userInfoAutorise.token)); //  получаем старую статистику
     }
   };
 
@@ -169,6 +169,7 @@ export default class SprintService extends Observer {
     this.upgradeResult();
     this.showResult();
     this.writeResult();
+    this.remoweListener();
   };
 
   timer = (element: HTMLElement) => {
@@ -272,6 +273,14 @@ export default class SprintService extends Observer {
   };
 
   listener = () => {
+    window.addEventListener('keydown', this.listenerArrow);
+  };
+
+  remoweListener = () => {
+    window.removeEventListener('keydown', this.listenerArrow);
+  };
+
+  listenerArrow = () => {
     window.addEventListener('keydown', (event) => {
       const { key: keys } = event;
       switch (keys) {

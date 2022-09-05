@@ -10,19 +10,11 @@ export default class AudioСallService extends Observer {
 
   private selectedAnswer = '';
 
-  amountWords = 0;
-
-  private correctAnswers: Word[] = [];
-
-  private wrongAnswers: Word[] = [];
-
-  private constantWords: Word[] = [];
-
   private words: Word[] = [];
 
   private readonly signalCorrect = new Audio('../assets/audio/correct.mp3');
 
-  private readonly signalWrong = new Audio('../assets/audio/error.mp3');
+  private readonly signalError = new Audio('../assets/audio/error.mp3');
 
   counter = 1;
 
@@ -35,35 +27,17 @@ export default class AudioСallService extends Observer {
     throw new Error();
   }
 
-  getWrongAnswers = () => {
-    if (this.wrongAnswers) {
-      return this.wrongAnswers;
-    }
-    throw new Error();
-  };
-
-  getCorrectAnswers = () => {
-    if (this.correctAnswers) {
-      return this.correctAnswers;
-    }
-    throw new Error();
-  };
-
   setWords() {
     this.words = [...State.words];
-    this.constantWords = [...State.words];
-    this.amountWords = this.words.length;
     this.word = this.words.pop();
   }
 
   setNameGame = () => {
-    State.nameGame = 'audio-call';
+    State.nameGame = 'audioСall';
   };
 
   resetGameData = () => {
     this.counter = 1;
-    this.wrongAnswers = [];
-    this.correctAnswers = [];
   };
 
   nextWord() {
@@ -115,9 +89,9 @@ export default class AudioСallService extends Observer {
       const isCorrect = this.word.wordTranslate === answer;
       this.selectedAnswer = answer;
       if (this.word.wordTranslate === answer) {
-        this.correctAnswers.push(this.word);
+        State.gamesData.correctAnswers.push(this.word);
       } else {
-        this.wrongAnswers.push(this.word);
+        State.gamesData.wrongAnswers.push(this.word);
       }
       if (answer) {
         this.playSignal(isCorrect);
@@ -130,7 +104,7 @@ export default class AudioСallService extends Observer {
     if (answer) {
       this.signalCorrect.play();
     } else {
-      this.signalWrong.play();
+      this.signalError.play();
     }
   }
 
@@ -140,12 +114,16 @@ export default class AudioСallService extends Observer {
     }
     const translateOptions: Set<string> = new Set([this.word.wordTranslate]);
     for (let i = 0; i < this.amountTranslateOptions; ) {
-      const idx = getRandomInteger(0, this.amountWords);
-      if (!translateOptions.has(this.constantWords[idx].wordTranslate)) {
-        translateOptions.add(this.constantWords[idx].wordTranslate);
+      const idx = getRandomInteger(0, State.words.length);
+      if (!translateOptions.has(State.words[idx].wordTranslate)) {
+        translateOptions.add(State.words[idx].wordTranslate);
         i += 1;
       }
     }
     return shuffle<string>(Array.from(translateOptions.values()));
   }
+
+  exitGame = () => {
+    this.dispatch('exit-game');
+  };
 }

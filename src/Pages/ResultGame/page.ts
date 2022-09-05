@@ -1,6 +1,5 @@
 import BaseComponent from '../../Abstract/base-component';
 import Services from '../../Interfaces/services';
-import { Word } from '../../Interfaces/word-model';
 import State from '../../Model/state';
 import ListStatistics from './list';
 
@@ -27,20 +26,9 @@ export default class ResultsGame extends BaseComponent {
     if (this.children.length) {
       this.destroy();
     }
-    let wrongAnswers: Word[] = [];
-    let correctAnswers: Word[] = [];
-    switch (State.nameGame) {
-      case 'audio-call':
-        wrongAnswers = this.services.audioCall.getWrongAnswers();
-        correctAnswers = this.services.audioCall.getCorrectAnswers();
-        break;
-      case 'sprint':
-        // wrongAnswers = this.services.sprint.getWrongAnswers();
-        // correctAnswers = this.services.sprint.getCorrectAnswers();
-        break;
-      default:
-        break;
-    }
+
+    const { wrongAnswers, correctAnswers } = State.gamesData;
+
     this.children = [
       (this.btnPlayAgain = new BaseComponent<HTMLButtonElement>('button', 'game-results__btn-play-again btn')),
       (this.btnExit = new BaseComponent<HTMLButtonElement>('button', 'game-results__btn-exit btn')),

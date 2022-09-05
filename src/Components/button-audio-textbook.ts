@@ -25,6 +25,7 @@ export default class ButtonAudioTextbook extends BaseComponent<HTMLButtonElement
   }
 
   render = () => {
+    this.destroy();
     this.element.addEventListener('click', () => {
       if (State.textbook.isPlayed && this.element.classList.contains('cart__audio--play')) {
         this.stop();
@@ -64,5 +65,9 @@ export default class ButtonAudioTextbook extends BaseComponent<HTMLButtonElement
     State.textbook.isPlayed = true;
     this.element.classList.add('cart__audio--play');
     this.audio.play();
+  }
+
+  destroy() {
+    super.destroy();
   }
 }

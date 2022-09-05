@@ -46,14 +46,10 @@ export default class StatisticBook extends BaseComponent {
   };
 
   writeStatistic = () => {
-    const newWord = this.services.statistic.userStatisticForServer.optional.sprint.newWords;
-    const procent =
-      this.services.statistic.userStatisticForServer.optional.sprint.trueAnsve /
-      (this.services.statistic.userStatisticForServer.optional.sprint.trueAnsve +
-        this.services.statistic.userStatisticForServer.optional.sprint.falseAnsve);
+    const newWord = 16;
+    const procent = 15;
     const procents = Math.trunc(procent * 100);
-    // eslint-disable-next-line prefer-destructuring
-    const chain = this.services.statistic.userStatisticForServer.optional.sprint.chain;
+    const chain = 9;
 
     this.element.children[1].children[0].innerHTML = `Новые слова:  ${newWord}`;
     this.element.children[1].children[1].innerHTML = `Верных ответов:  ${procents} %`;

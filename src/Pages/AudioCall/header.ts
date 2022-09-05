@@ -27,6 +27,7 @@ export default class AudioCallHeader extends BaseComponent {
     this.statusBar.render();
 
     this.btnExit.element.addEventListener('click', () => {
+      this.services.audioCall.exitGame();
       document.location.hash = '#/main';
     });
 

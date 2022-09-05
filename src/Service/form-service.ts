@@ -1,9 +1,9 @@
 import Observer from '../Abstract/observer';
-import { IUser, IUserToken } from '../Interfaces/user-model';
+import { IUser, IUserToken, IUserGetToken } from '../Interfaces/user-model';
 import { createUser, getUserTokken } from '../Model/api-user-autorise';
 import { IFormInputConponent } from '../Interfaces/common';
+import { getStatistics, setStatistics } from '../Model/api-statistic';
 import State from '../Model/state';
-import { getUserStatistic } from '../Model/api-statistic';
 
 export default class FormService extends Observer {
   user: IUser = {
@@ -28,15 +28,26 @@ export default class FormService extends Observer {
 
   fullEnterInput = false;
 
-  loadWindow = () => {
-    if (localStorage.getItem('userInfoTokken')) {
-      State.isAutorise = true;
-      State.userInfoAutorise = JSON.parse(localStorage.getItem('userInfoTokken') as string);
+  loadWindow = async () => {
+    const data = localStorage.getItem('userInfoTokken');
+    if (data) {
+      const userInfoAutorise = JSON.parse(data);
+      State.userInfoAutorise = userInfoAutorise;
+      const { userId, token } = State.userInfoAutorise;
       this.showExitAutorise();
       this.showNameUser();
       this.hideBtnAutorise();
-      getUserStatistic(State.userInfoAutorise.userId, State.userInfoAutorise.token);
+      State.isAutorise = true;
+      const statistics = await getStatistics(userId, token);
+      if (statistics) {
+        State.statistics = statistics;
+      }
     }
+  };
+
+  setStatisticsDefault = async () => {
+    const { userId, token } = State.userInfoAutorise;
+    State.statistics = await setStatistics(userId, token, State.statistics);
   };
 
   clear = (): void => {
@@ -128,8 +139,9 @@ export default class FormService extends Observer {
   clickEnter = () => {
     this.btnClickAutorise = false;
     this.btnClickEnter = true;
+
     if (this.user.password && this.user.email) {
-      localStorage.setItem('userInfoEnter', JSON.stringify(this.user));
+      // localStorage.setItem('userInfoEnter', JSON.stringify(this.user));
       this.getTokken();
     } else this.showAutoriseError();
   };
@@ -145,17 +157,21 @@ export default class FormService extends Observer {
       this.btnClickAutorise = false;
       this.btnClickEnter = false;
     } else {
-      this.getTokken();
+      await this.getTokken();
       this.removeAutoriseError();
+      this.setStatisticsDefault();
     }
   };
 
   getTokken = async (): Promise<void> => {
     this.disabledBtnAutorise();
-    const userItem = {
+    const dateToken = Date.now();
+    const userItem: IUserGetToken = {
       email: this.user.email,
       password: this.user.password,
+      date: dateToken,
     };
+    localStorage.setItem('dateToken', `${dateToken}`);
     const answeToken = await getUserTokken(userItem);
     if (typeof answeToken === 'number') {
       this.showAutoriseError();
@@ -163,9 +179,10 @@ export default class FormService extends Observer {
       this.clearInput();
       this.clear();
     } else {
+      window.location.reload();
       this.userInfoAutorise = answeToken;
       State.isAutorise = true;
-      getUserStatistic(this.userInfoAutorise.userId, this.userInfoAutorise.token); // получаем сатистику
+      // getStatistics(this.userInfoAutorise.userId, this.userInfoAutorise.token); // получаем сатистику
       this.clearInput();
       this.closeAutoriseForm();
       this.closeEnterForm();
@@ -176,19 +193,18 @@ export default class FormService extends Observer {
       this.btnClickAutorise = false;
       this.btnClickEnter = false;
       this.removeAutoriseError();
-      console.log(answeToken);
     }
   };
 
   checkAllInput = (): boolean => {
     if (this.user.name && this.user.password && this.user.email) {
       this.fullAllInput = true;
-      localStorage.setItem('userInfoEnter', JSON.stringify(this.user));
+      // localStorage.setItem('userInfoEnter', JSON.stringify(this.user));
       return true;
     }
     if (this.user.password && this.user.email && !this.btnClickEnter) {
       this.fullEnterInput = true;
-      localStorage.setItem('userInfoEnter', JSON.stringify(this.user));
+      // localStorage.setItem('userInfoEnter', JSON.stringify(this.user));
       return true;
     }
     this.fullAllInput = false;
