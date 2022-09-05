@@ -252,6 +252,7 @@ export default class SprintService extends Observer {
   };
 
   btnTrueClick = () => {
+    console.log(1);
     this.clickButtonFalse = false;
     this.clickButtonTrue = true;
     this.btnTrueAddActiveStyle();

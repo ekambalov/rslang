@@ -39,11 +39,10 @@ export interface IState {
   currentPage: number;
   currentLevel: number;
   statistics: IUserStatistic;
-  nameGame: 'audioСall' | 'sprint';
 }
 
-interface IGameData {
-  nameGame: string;
+export interface IGameData {
+  nameGame: 'audioCall' | 'sprint';
   correctAnswers: Word[];
   wrongAnswers: Word[];
   series: number;
@@ -126,26 +125,30 @@ interface ITextbook {
   fromTextbook: boolean;
 }
 
+export interface IGameStats {
+  percent: number;
+  correct: number;
+  wrong: number;
+  series: number;
+  newWords: number;
+}
+
+export interface IStorageStats {
+  oldWords: string[];
+  learnedWords: string[];
+}
+
 export interface IUserStatistic {
   learnedWords: number;
   optional: {
     date: string;
-    sprint: {
-      corretAnswers: number;
-      wrongAnswers: number;
-      series: number;
-      newWords: number;
-    };
-    audioCall: {
-      corretAnswers: number;
-      wrongAnswers: number;
-      series: number;
-      newWords: number;
-    };
+    sprint: IGameStats;
+    audioCall: IGameStats;
     words: {
-      idOldWords: string[];
-      idLearnedWordsPerDay: string[];
+      sumNewWords: number;
+      percent: number;
     };
+    storage: IStorageStats;
   };
 }
 interface IVocabulary {

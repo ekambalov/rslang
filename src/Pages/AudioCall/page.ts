@@ -12,8 +12,11 @@ export default class AudioCall extends BaseComponent {
   }
 
   render = () => {
-    this.services.audioCall.add('stop-game', this.hideGame);
-    this.services.audioCall.add('stop-game', this.showResults);
+    if (this.children.length) {
+      this.destroy();
+    }
+
+    this.services.audioCall.add('stop-game', this.closeGame);
     this.services.audioCall.add('full-screen', this.makeFullScreen);
     this.services.audioCall.add('default-screen', this.makeDefaultScreen);
     this.services.audioCall.add('exit-game', this.destroy.bind(this));
@@ -22,9 +25,6 @@ export default class AudioCall extends BaseComponent {
     this.services.audioCall.setNameGame();
     this.services.audioCall.playAudio();
 
-    if (this.children.length) {
-      this.destroy();
-    }
     this.parent.innerHTML = '';
     this.children = [
       new AudioCallHeader(this.element, this.services),
@@ -51,8 +51,17 @@ export default class AudioCall extends BaseComponent {
     this.children.forEach((item) => item.render());
   };
 
-  hideGame = () => {
-    this.children.forEach((child) => child.destroy());
+  closeGame = () => {
+    this.children.forEach((item) => item.destroy());
     this.children = [];
+    this.showResults();
   };
+
+  destroy() {
+    this.services.audioCall.remove('stop-game', this.closeGame);
+    this.services.audioCall.remove('full-screen', this.makeFullScreen);
+    this.services.audioCall.remove('default-screen', this.makeDefaultScreen);
+    this.services.audioCall.remove('exit-game', this.destroy.bind(this));
+    super.destroy();
+  }
 }

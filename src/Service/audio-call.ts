@@ -20,6 +20,8 @@ export default class AudioСallService extends Observer {
 
   private word?: Word;
 
+  private series = 0;
+
   getWord() {
     if (this.word) {
       return this.word;
@@ -33,14 +35,20 @@ export default class AudioСallService extends Observer {
   }
 
   setNameGame = () => {
-    State.nameGame = 'audioСall';
+    const { nameGame } = State.gamesData;
+    if (nameGame !== 'audioCall') {
+      State.gamesData.nameGame = 'audioCall';
+    }
   };
 
   resetGameData = () => {
+    State.gamesData.correctAnswers = [];
+    State.gamesData.wrongAnswers = [];
+    State.gamesData.series = 0;
     this.counter = 1;
   };
 
-  nextWord() {
+  nextWord = () => {
     this.word = this.words?.pop();
     if (this.word) {
       this.counter += 1;
@@ -49,7 +57,7 @@ export default class AudioСallService extends Observer {
     } else {
       this.dispatch('stop-game');
     }
-  }
+  };
 
   switchScreenMode = () => {
     if (!document.fullscreenElement) {
@@ -60,9 +68,9 @@ export default class AudioСallService extends Observer {
   };
 
   playAudio = (path = this.word?.audio) => {
-    const audioWord = new Audio(`${this.baseUrl}${path}`);
-    audioWord.addEventListener('ended', this.stopAudio);
-    audioWord.play();
+    const audio = new Audio(`${this.baseUrl}${path}`);
+    audio.addEventListener('ended', this.stopAudio);
+    audio.play().catch((e) => console.log(e));
     this.dispatch('play-audio');
   };
 
@@ -88,7 +96,7 @@ export default class AudioСallService extends Observer {
     if (this.word) {
       const isCorrect = this.word.wordTranslate === answer;
       this.selectedAnswer = answer;
-      if (this.word.wordTranslate === answer) {
+      if (isCorrect) {
         State.gamesData.correctAnswers.push(this.word);
       } else {
         State.gamesData.wrongAnswers.push(this.word);
@@ -97,8 +105,19 @@ export default class AudioСallService extends Observer {
         this.playSignal(isCorrect);
       }
       this.showWordCard();
+      this.setCorrectAnswersSeries(isCorrect);
     }
   }
+
+  setCorrectAnswersSeries = (answer: boolean) => {
+    if (answer) {
+      this.series += 1;
+    } else {
+      this.series = 0;
+    }
+    const bestSeries = State.gamesData.series;
+    State.gamesData.series = this.series > bestSeries ? this.series : bestSeries;
+  };
 
   playSignal(answer: boolean) {
     if (answer) {
