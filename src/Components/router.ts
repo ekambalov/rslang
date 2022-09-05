@@ -62,6 +62,7 @@ export default class Router {
       this.services.statistic.updateStatistic();
       return;
     }
+    if (path.includes('level-selection')) State.textbook.fromTextbook = false;
     const currentRout = this.routes.find((item) => item.path === path) || this.routes[0];
     currentRout.component.render();
   };

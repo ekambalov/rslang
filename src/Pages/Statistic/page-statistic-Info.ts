@@ -13,7 +13,7 @@ export default class StatisticInfoPage extends BaseComponent {
     super('section', 'statistic');
   }
 
-  render = () => {
+  render = async () => {
     this.destroy();
     this.parent.innerHTML = '';
     this.children = [

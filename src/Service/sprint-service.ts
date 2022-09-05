@@ -19,7 +19,7 @@ export default class SprintService extends Observer {
 
   countTrueAnsve = 0; // количество правильных ответов подряд для +20 +30 сбрасывается при неверном ответе
 
-  chainTrueAnsve = 0; // лучшая цепочка ответов подряд
+  // chainTrueAnsve = 0; // лучшая цепочка ответов подряд
 
   userResult = 0; // количество набранных очков
 
@@ -37,9 +37,9 @@ export default class SprintService extends Observer {
 
   arrayShowWords: Word[] = [];
 
-  arrayWordsAnsweTrue: Word[] = [];
+  // arrayWordsAnsweTrue: Word[] = [];
 
-  arrayWordsAnsweFalse: Word[] = [];
+  // arrayWordsAnsweFalse: Word[] = [];
 
   currentWords: Word[] = [];
 
@@ -151,8 +151,10 @@ export default class SprintService extends Observer {
     this.endTimeGame = false;
     this.userResult = 0;
     this.arrayShowWords = [];
-    this.arrayWordsAnsweTrue = [];
-    this.arrayWordsAnsweFalse = [];
+    // this.arrayWordsAnsweTrue = [];
+    State.gamesData.correctAnswers = [];
+    // this.arrayWordsAnsweFalse = [];
+    State.gamesData.wrongAnswers = [];
   };
 
   resetCountGame = () => {
@@ -233,15 +235,17 @@ export default class SprintService extends Observer {
     this.playAudioError();
     if (!this.translateShowTrue) {
       this.countTrueAnsve += 1;
-      if (this.chainTrueAnsve < this.countTrueAnsve) this.chainTrueAnsve = this.countTrueAnsve;
+      if (State.gamesData.series < this.countTrueAnsve) State.gamesData.series = this.countTrueAnsve;
       this.addCountGame();
       this.correctAddCount();
-      this.arrayWordsAnsweTrue.push(this.currentWord);
+      // this.arrayWordsAnsweTrue.push(this.currentWord);
+      State.gamesData.correctAnswers.push(this.currentWord);
       this.arrayShowWords.push(this.currentWord);
     } else {
       this.countTrueAnsve = 0;
       this.addCountReset();
-      this.arrayWordsAnsweFalse.push(this.currentWord);
+      // this.arrayWordsAnsweFalse.push(this.currentWord);
+      State.gamesData.wrongAnswers.push(this.currentWord);
       this.arrayShowWords.push(this.currentWord);
     }
     this.writeWordGame();
@@ -254,13 +258,15 @@ export default class SprintService extends Observer {
     this.playAudioError();
     if (this.translateShowTrue) {
       this.countTrueAnsve += 1;
-      if (this.chainTrueAnsve < this.countTrueAnsve) this.chainTrueAnsve = this.countTrueAnsve;
+      if (State.gamesData.series < this.countTrueAnsve) State.gamesData.series = this.countTrueAnsve;
       this.addCountGame();
       this.correctAddCount();
-      this.arrayWordsAnsweTrue.push(this.currentWord);
+      // this.arrayWordsAnsweTrue.push(this.currentWord);
+      State.gamesData.correctAnswers.push(this.currentWord);
       this.arrayShowWords.push(this.currentWord);
     } else {
-      this.arrayWordsAnsweFalse.push(this.currentWord);
+      // this.arrayWordsAnsweFalse.push(this.currentWord);
+      State.gamesData.wrongAnswers.push(this.currentWord);
       this.countTrueAnsve = 0;
       this.addCountReset();
       this.arrayShowWords.push(this.currentWord);
