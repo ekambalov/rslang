@@ -34,6 +34,8 @@ export default class TextBookCart extends BaseComponent {
     img.alt = this.wordData.word;
     const info = new BaseComponent('div', 'cart__info').element;
     const word = new BaseComponent('p', 'cart__word').element;
+    const level = new BaseComponent('span', `cart__level cart__level--${this.wordData.group + 1}`).element;
+    level.title = `Уровень сложности: ${this.wordData.group + 1}`;
     word.textContent = `${this.wordData.word} – ${this.wordData.transcription}`;
 
     this.children.push(
@@ -44,6 +46,7 @@ export default class TextBookCart extends BaseComponent {
       ])
     );
 
+    word.prepend(level);
     this.children.forEach((item) => {
       item.render();
     });
