@@ -12,39 +12,57 @@ export default class ButtonAudioTextbook extends BaseComponent<HTMLButtonElement
 
   private isPlayed: boolean;
 
+  removeListeners: () => void;
+
   constructor(
     private readonly parent: HTMLElement,
     private readonly service: Services,
-    private readonly src: string[]
+    private readonly src: string[],
+    private readonly id: string
   ) {
     super('div', 'cart__audio');
     this.audio = new Audio(baseUrl + this.src[0]);
     this.audioExample = new Audio(baseUrl + this.src[1]);
     this.audioMeaning = new Audio(baseUrl + this.src[2]);
     this.isPlayed = false;
+    this.removeListeners = () => {};
   }
 
   render = () => {
-    this.destroy();
-    this.element.addEventListener('click', () => {
+    const playStopFunc = () => {
       if (State.textbook.isPlayed && this.element.classList.contains('cart__audio--play')) {
         this.stop();
       } else {
         this.start();
       }
-    });
+    };
+
+    const onAudioEnd = () => {
+      this.audioMeaning.play();
+    };
+
+    const onAudioMeaningEnd = () => {
+      this.audioExample.play();
+    };
+    const onAudioExampleEnd = () => {
+      this.stop();
+    };
+
+    this.removeListeners = () => {
+      this.element.removeEventListener('click', playStopFunc);
+      this.audio.removeEventListener('ended', onAudioEnd);
+      this.audioMeaning.removeEventListener('ended', onAudioMeaningEnd);
+      this.audioExample.removeEventListener('ended', onAudioExampleEnd);
+    };
+
+    this.element.addEventListener('click', playStopFunc);
+
     this.element.append(this.audio, this.audioMeaning, this.audioExample);
     this.parent.appendChild(this.element);
 
-    this.audio.addEventListener('ended', () => {
-      this.audioMeaning.play();
-    });
-    this.audioMeaning.addEventListener('ended', () => {
-      this.audioExample.play();
-    });
-    this.audioExample.addEventListener('ended', () => {
-      this.stop();
-    });
+    this.audio.addEventListener('ended', onAudioEnd);
+    this.audioMeaning.addEventListener('ended', onAudioMeaningEnd);
+    this.audioExample.addEventListener('ended', onAudioExampleEnd);
   };
 
   private stop() {
@@ -67,7 +85,8 @@ export default class ButtonAudioTextbook extends BaseComponent<HTMLButtonElement
     this.audio.play();
   }
 
-  destroy() {
+  destroy(): void {
+    this.removeListeners();
     super.destroy();
   }
 }

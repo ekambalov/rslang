@@ -2,8 +2,9 @@ import Observer from '../Abstract/observer';
 import { IUser, IUserToken, IUserGetToken } from '../Interfaces/user-model';
 import { createUser, getUserTokken } from '../Model/api-user-autorise';
 import { IFormInputConponent } from '../Interfaces/common';
-import { getStatistics, setStatistics } from '../Model/api-statistic';
+import { setStatistics } from '../Model/api-statistic';
 import State from '../Model/state';
+import defaultStat from '../Settings/default-statistics.json';
 
 export default class FormService extends Observer {
   user: IUser = {
@@ -33,21 +34,16 @@ export default class FormService extends Observer {
     if (data) {
       const userInfoAutorise = JSON.parse(data);
       State.userInfoAutorise = userInfoAutorise;
-      const { userId, token } = State.userInfoAutorise;
       this.showExitAutorise();
       this.showNameUser();
       this.hideBtnAutorise();
       State.isAutorise = true;
-      const statistics = await getStatistics(userId, token);
-      if (statistics) {
-        State.statistics = statistics;
-      }
     }
   };
 
   setStatisticsDefault = async () => {
     const { userId, token } = State.userInfoAutorise;
-    State.statistics = await setStatistics(userId, token, State.statistics);
+    State.statistics = await setStatistics(userId, token, defaultStat);
   };
 
   clear = (): void => {
@@ -179,7 +175,6 @@ export default class FormService extends Observer {
       this.clearInput();
       this.clear();
     } else {
-      window.location.reload();
       this.userInfoAutorise = answeToken;
       State.isAutorise = true;
       // getStatistics(this.userInfoAutorise.userId, this.userInfoAutorise.token); // получаем сатистику

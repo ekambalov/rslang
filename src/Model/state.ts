@@ -24,7 +24,7 @@ const State: IState = localStorage.getItem('state')
         fromTextbook: false,
       },
       gamesData: {
-        nameGame: '',
+        nameGame: 'audioCall',
         correctAnswers: [],
         wrongAnswers: [],
         series: 0,
@@ -37,28 +37,7 @@ const State: IState = localStorage.getItem('state')
       words: [],
       currentPage: 0,
       currentLevel: 0,
-      statistics: {
-        learnedWords: 0,
-        optional: {
-          date: ' ',
-          sprint: {
-            corretAnswers: 0,
-            wrongAnswers: 0,
-            series: 0,
-            newWords: 0,
-          },
-          audioCall: {
-            corretAnswers: 0,
-            wrongAnswers: 0,
-            series: 0,
-            newWords: 0,
-          },
-          words: {
-            idOldWords: [],
-            idLearnedWordsPerDay: [],
-          },
-        },
-      },
+      statistics: {},
     };
 
 export default State;

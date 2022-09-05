@@ -27,6 +27,8 @@ export default class ResultsGame extends BaseComponent {
       this.destroy();
     }
 
+    this.services.statistic.updateStats();
+
     const { wrongAnswers, correctAnswers } = State.gamesData;
 
     this.children = [
@@ -52,6 +54,7 @@ export default class ResultsGame extends BaseComponent {
     ];
 
     this.btnExit.element.addEventListener('click', () => {
+      this.destroy();
       document.location.hash = '#/main';
     });
     this.btnPlayAgain.element.addEventListener('click', () => {

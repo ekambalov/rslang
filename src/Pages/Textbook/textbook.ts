@@ -33,10 +33,12 @@ export default class TextbookPage extends BaseComponent {
     const group = State.textbook.currentLevel;
     const res = await getWords(page, group);
     const words = (await res.json()) as Word[];
-    const userWords = await getUsersWords();
+    const userWords = localStorage.getItem('userInfoTokken') ? await getUsersWords() : [];
     const userWordsId = userWords.map((element) => (element.wordId ? element.wordId : ''));
     const container = parent;
     State.words = [...words];
+    (this.children[0] as TextBookSettings).setLinks();
+
     if (container instanceof HTMLElement) container.innerHTML = '';
     words.forEach((word) => {
       if (parent instanceof HTMLElement) {

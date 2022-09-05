@@ -7,7 +7,6 @@ import Services from '../Interfaces/services';
 import SprintPage from '../Pages/Sprint/page-sprint';
 import StatisticPage from '../Pages/Statistic/page-statistic';
 import StatisticInfoPage from '../Pages/Statistic/page-statistic-Info';
-import State from '../Model/state';
 import VocabularyPage from '../Pages/Vocabulary/vocabulary';
 
 type Page =
@@ -59,7 +58,6 @@ export default class Router {
     if (path.includes('statistic') && localStorage.getItem('userInfoTokken')) {
       const currentRout = this.routes.find((item) => item.path === '#/statisticInfo') || this.routes[0];
       currentRout.component.render();
-      this.services.statistic.updateStatistic();
       return;
     }
     if (path.includes('level-selection')) State.textbook.fromTextbook = false;
