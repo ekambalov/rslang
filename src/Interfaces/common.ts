@@ -32,7 +32,9 @@ export interface IState {
   isAutorise: boolean;
   userInfoAutorise: IUserToken;
   deleteUser: string;
-  textbook: TextbookState;
+  textbook: ITextbook;
+  vocabulary: IVocabulary;
+  gamesData: IGameData;
   words: Word[];
   currentPage: number;
   currentLevel: number;
@@ -40,6 +42,12 @@ export interface IState {
   nameGame: 'audioСall' | 'sprint';
 }
 
+interface IGameData {
+  nameGame: string;
+  correctAnswers: Word[];
+  wrongAnswers: Word[];
+  series: number;
+}
 export interface IMenuServise {
   openMenu(): void;
   closeMenu(): void;
@@ -111,7 +119,7 @@ export interface IFormInputConponent {
   removeErrorMessage(): void;
 }
 
-interface TextbookState {
+interface ITextbook {
   isPlayed: boolean;
   currentPage: number;
   currentLevel: number;
@@ -121,21 +129,27 @@ interface TextbookState {
 export interface IUserStatistic {
   learnedWords: number;
   optional: {
-    data: string;
+    date: string;
     sprint: {
-      trueAnsve: number;
-      falseAnsve: number;
-      chain: number;
+      corretAnswers: number;
+      wrongAnswers: number;
+      series: number;
       newWords: number;
     };
     audioCall: {
-      trueAnsve: number;
-      falseAnsve: number;
-      chain: number;
+      corretAnswers: number;
+      wrongAnswers: number;
+      series: number;
       newWords: number;
     };
     words: {
-      oldWords: string[];
+      idOldWords: string[];
+      idLearnedWordsPerDay: string[];
     };
   };
+}
+interface IVocabulary {
+  difficultWords: Word[];
+  learningWords: Word[];
+  deletedWords: Word[];
 }

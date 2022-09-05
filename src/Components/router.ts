@@ -8,6 +8,7 @@ import SprintPage from '../Pages/Sprint/page-sprint';
 import StatisticPage from '../Pages/Statistic/page-statistic';
 import StatisticInfoPage from '../Pages/Statistic/page-statistic-Info';
 import State from '../Model/state';
+import VocabularyPage from '../Pages/Vocabulary/vocabulary';
 
 type Page =
   | MainPage
@@ -17,7 +18,8 @@ type Page =
   | LevelSelection
   | SprintPage
   | StatisticPage
-  | StatisticInfoPage;
+  | StatisticInfoPage
+  | VocabularyPage;
 
 interface RoutesInterface {
   path: string;
@@ -34,6 +36,7 @@ export default class Router {
       { path: '#/level-selection', component: new LevelSelection(this.root, this.services) },
       { path: '#/audio-call', component: new AudioCall(this.root, this.services) },
       { path: '#/sprint', component: new SprintPage(this.root, this.services) },
+      { path: '#/vocabulary', component: new VocabularyPage(this.root, this.services) },
       { path: '#/book', component: new TextbookPage(this.root, this.services) },
       { path: '#/statistic', component: new StatisticPage(this.root, this.services) },
       { path: '#/statisticInfo', component: new StatisticInfoPage(this.root, this.services) },
@@ -48,8 +51,7 @@ export default class Router {
   routing = (): void => {
     const path = document.location.hash.toLowerCase() || '#/main';
     this.services.router.setRouter(path);
-    if (path.includes('book')) {
-      State.textbook.fromTextbook = false;
+    if (path.includes('#/book')) {
       const currentRout = this.routes.find((item) => item.path === '#/book') || this.routes[0];
       currentRout.component.render();
       return;

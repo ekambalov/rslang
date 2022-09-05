@@ -1,6 +1,6 @@
 import BaseComponent from '../Abstract/base-component';
-import { baseUrl } from '../Model/getTextbook';
-import State from '../Model/state';
+import { baseUrl } from '../model/getTextbook';
+import State from '../model/state';
 import Services from '../Interfaces/services';
 
 export default class ButtonAudioTextbook extends BaseComponent<HTMLButtonElement> {
@@ -25,6 +25,8 @@ export default class ButtonAudioTextbook extends BaseComponent<HTMLButtonElement
   }
 
   render = () => {
+    this.destroy();
+
     this.element.addEventListener('click', () => {
       if (State.textbook.isPlayed && this.element.classList.contains('cart__audio--play')) {
         this.stop();

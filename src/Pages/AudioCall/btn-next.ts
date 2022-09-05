@@ -24,9 +24,6 @@ export default class ButtonNext extends BaseComponent<HTMLButtonElement> {
     if (evt instanceof KeyboardEvent && evt.code !== 'Enter') {
       return;
     }
-    if (evt instanceof KeyboardEvent) {
-      evt.preventDefault();
-    }
     const state = this.element.getAttribute('data-state');
     if (state) {
       this.services.audioCall.onClickShowOrNext(state);
