@@ -27,23 +27,30 @@ export default class TextBookCart extends BaseComponent {
   }
 
   render = () => {
-    super.destroy();
+    if (this.children.length) {
+      console.log('got ya');
+      super.destroy();
+    }
 
     const img = new BaseComponent('img', 'cart__image').element as HTMLImageElement;
     img.src = baseUrl + this.wordData.image;
     img.alt = this.wordData.word;
     const info = new BaseComponent('div', 'cart__info').element;
     const word = new BaseComponent('p', 'cart__word').element;
+    const level = new BaseComponent('span', `cart__level cart__level--${this.wordData.group + 1}`).element;
+    level.title = `Уровень сложности: ${this.wordData.group + 1}`;
     word.textContent = `${this.wordData.word} – ${this.wordData.transcription}`;
 
     this.children.push(
-      new ButtonAudioTextbook(word, this.services, [
-        this.wordData.audio,
-        this.wordData.audioExample,
-        this.wordData.audioMeaning,
-      ])
+      new ButtonAudioTextbook(
+        word,
+        this.services,
+        [this.wordData.audio, this.wordData.audioExample, this.wordData.audioMeaning],
+        this.wordData.id
+      )
     );
 
+    word.prepend(level);
     this.children.forEach((item) => {
       item.render();
     });

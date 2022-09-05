@@ -103,6 +103,33 @@
   &__easy {
     background-image: url(./assets/img/book-icon.png);
   }
+  &__level {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    margin-right: 10px;
+    transform: translateY(2px);
+    &--1 {
+      background-color: #4eb35c;
+    }
+    &--2 {
+      background-color: #dad55a;
+    }
+    &--3 {
+      background-color: #daa95a;
+    }
+    &--4 {
+      background-color: #c94141;
+    }
+    &--5 {
+      background-color: #7c1818;
+    }
+    &--6 {
+      background-color: #5d0070;
+    }
+  }
 }
 
 @media screen and (max-width: 1000px) {
@@ -138,6 +165,7 @@
 
 @media screen and (max-width: 440px) {
   .cart {
+    padding: 0;
     &__word {
       font-size: 20px;
     }
@@ -151,6 +179,12 @@
       min-width: 100%;
       object-fit: contain;
       height: fit-content;
+      border-radius: 0;
+      border: none;
+    }
+    &__info {
+      padding: 0 10px;
+      margin: 0;
     }
   }
 }
