@@ -4,6 +4,7 @@ import { Word } from '../Interfaces/word-model';
 import fethWords from '../Model/data-base';
 import { getRandomInteger } from '../Helper/utils';
 
+
 export default class SprintService extends Observer {
   private baseUrl = 'https://rs-learn-words.herokuapp.com/';
 
@@ -210,9 +211,9 @@ export default class SprintService extends Observer {
       (this.translateShowTrue && this.clickButtonTrue && !this.stopAudioError) ||
       (!this.translateShowTrue && this.clickButtonFalse && !this.stopAudioError)
     ) {
-      new Audio(this.srcAudioTrue).play();
+      new Audio(require('../assets/audio/true2.mp3')).play();
     } else {
-      new Audio(this.srcAudioFalse).play();
+      new Audio(require('../assets/audio/error.mp3')).play();
     }
   };
 
