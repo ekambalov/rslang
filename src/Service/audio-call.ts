@@ -12,9 +12,9 @@ export default class AudioСallService extends Observer {
 
   private words: Word[] = [];
 
-  private readonly signalCorrect = new Audio('../assets/audio/correct.mp3');
+  private readonly signalCorrect = new Audio(require('../assets/audio/correct.mp3'));
 
-  private readonly signalError = new Audio('../assets/audio/error.mp3');
+  private readonly signalError = new Audio(require('../assets/audio/error.mp3'));
 
   counter = 1;
 
