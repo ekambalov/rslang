@@ -8,3 +8,9 @@ This programm was writing with next stack of technologies:
 - typescript
 - sass (scss)
 - observer pattern
+
+main commands for npm:
+
+npm start - for running project
+npm run build - for building project
+npm run lint - for cheking project by eslint
